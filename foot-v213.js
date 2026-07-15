@@ -423,7 +423,7 @@ function wizBuild(form, kind) {
       } else if (i.value && i.value.trim()) answers[nm] = i.value.trim();
       else delete answers[nm];
     });
-    try { try{if(window.__dgWizStore===false)throw 0}catch(e0){if(e0===0)return}localStorage.setItem(SAVE_KEY, JSON.stringify({answers: answers, step: current, t: Date.now()})); } catch(e){}
+    try { if(window.__dgWizStore===false) return; localStorage.setItem(SAVE_KEY, JSON.stringify({answers: answers, step: current, t: Date.now()})); } catch(e){}
   }
   /* === WIZ STEP STATE — show/validate exactly one question; preserve values across back/reopen/resize === */
   function showStep(idx) {
