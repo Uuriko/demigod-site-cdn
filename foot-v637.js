@@ -3118,6 +3118,7 @@ var DG_PAGES = {
       '<li><span>06</span><strong>Follow-up</strong><small>Thanks · mutual interest · intro drafts</small></li>' +
       '<li><span>07</span><strong>Debrief → next</strong><small>What worked · recycle partners · next date</small></li>' +
       '</ol>' +
+      '<p class="dg-ev-status" id="dg-ev-status" role="status" aria-live="polite">Cycle status: connecting…</p>' +
       '<h3 class="dg-p-h3">Offer to the night</h3>' +
       '<p class="dg-p-note">Sponsors, venues, and volunteers: tell Events Bot what you can bring. potter@ follows up — no auto-booking.</p>' +
       '<div class="dg-ev-tabs" role="tablist" aria-label="Offer type">' +
@@ -3277,8 +3278,84 @@ function pageCss() {
     '#dg-page .dg-ev-msg.ok{color:#a6ffcb}' +
     '#dg-page .dg-ev-msg.err{color:#ffb4a2}' +
     '#dg-page .dg-ev-counts{font-size:.8rem;color:#A8A29E;margin:.45rem 0 0}' +
+    '#dg-page .dg-ev-status{margin:.35rem 0 1rem;padding:.55rem .75rem;border-radius:10px;border:1px solid rgba(201,168,76,.22);background:rgba(201,168,76,.06);color:#A8A29E;font-size:.86rem;line-height:1.45}' +
+    '#dg-page .dg-ev-cycle>li.is-current{border-color:rgba(201,168,76,.65)!important;background:rgba(201,168,76,.12)!important}' +
+    '#dg-page .dg-ev-cycle>li.is-current strong{color:#C9A84C}' +
     '#dg-page .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}';
   document.head.appendChild(s);
+}
+/* Events Bot — live cycle status from GET /lifecycle */
+function eventsBotCycleMount(root) {
+  var status = root && root.querySelector('#dg-ev-status');
+  var cycle = root && root.querySelector('.dg-ev-cycle');
+  if (!status || status.dataset.dgEvCycle === '1') return;
+  status.dataset.dgEvCycle = '1';
+  var endpoints = [
+    (typeof window !== 'undefined' && window.DG_EVENTS_BOT_API) || '',
+    'http://127.0.0.1:3460/api/events-bot/lifecycle',
+    'http://localhost:3460/api/events-bot/lifecycle',
+  ]
+    .filter(Boolean)
+    .map(function (u) {
+      return u.replace(/\/chat\/?$/, '/lifecycle').replace(/\/offer\/?$/, '/lifecycle');
+    });
+
+  function stageLabel(id) {
+    var map = {
+      ideate: 'Ideate',
+      resource: 'Resource',
+      plan: 'Plan',
+      rsvp: 'RSVP',
+      run: 'Run',
+      followup: 'Follow-up',
+      debrief: 'Debrief → next',
+    };
+    return map[id] || id || 'Ideate';
+  }
+
+  async function load() {
+    for (var i = 0; i < endpoints.length; i++) {
+      var ep = endpoints[i];
+      try {
+        if (typeof dgLocalOk === 'function' && !dgLocalOk(ep)) continue;
+      } catch (e0) {}
+      try {
+        var r = await fetch(ep, { method: 'GET', mode: 'cors', signal: AbortSignal.timeout(2000) });
+        if (!r.ok) continue;
+        var j = await r.json();
+        if (!j || !j.ok) continue;
+        var ae = j.activeEvent || {};
+        var st = ae.stage || 'ideate';
+        var oc = j.offerCounts || {};
+        var title = ae.title ? '“' + ae.title + '” · ' : '';
+        var offers =
+          (oc.sponsor | 0) + ' sponsor · ' + (oc.venue | 0) + ' venue · ' + (oc.volunteer | 0) + ' volunteer';
+        if (ae.id || ae.title) {
+          status.textContent =
+            'In flight: ' + title + 'stage ' + stageLabel(st) + '. Offers on file: ' + offers + '.';
+        } else {
+          status.textContent =
+            'No named event in flight — chat below to ideate one. Stage default: ' +
+            stageLabel(st) +
+            '. Offers on file: ' +
+            offers +
+            '.';
+        }
+        if (cycle) {
+          var items = cycle.querySelectorAll('li');
+          var order = ['ideate', 'resource', 'plan', 'rsvp', 'run', 'followup', 'debrief'];
+          var idx = order.indexOf(st);
+          items.forEach(function (li, n) {
+            li.classList.toggle('is-current', n === idx);
+          });
+        }
+        return;
+      } catch (e) {}
+    }
+    status.textContent =
+      'Cycle API offline — stages above are the playbook. Chat still works as offline guide; offers fall back to email.';
+  }
+  load();
 }
 /* Events Bot offers — sponsor / venue / volunteer (API + mailto fallback) */
 function eventsBotOffersMount(root) {
@@ -3796,6 +3873,7 @@ function openPage(id, push) {
   if (id === 'blog') focusBlogNoteFromHash(root);
   if (id === 'events') {
     try {
+      eventsBotCycleMount(root);
       eventsBotOffersMount(root);
       eventsBotChatMount(root);
       var foc = root.querySelector('#dg-ec-focus');
