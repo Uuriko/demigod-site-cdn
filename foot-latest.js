@@ -3106,12 +3106,12 @@ var DG_PAGES = {
   events: {
     title: 'Events Bot',
     doc: 'Events Bot · Demigod',
-    desc: 'Full-cycle SF Demigod nights — ideate, resource, plan, run, follow-up. Gold Demigod UI. Humans host and send.',
+    desc: 'Full-cycle SF events — fun nights and sponsorable formats. Ideate, resource, plan, run, follow-up. Humans host and send.',
     html:
       '<div class="dg-ev-hero" aria-hidden="true"></div>' +
-      '<p class="dg-p-lead">Events Bot runs the <strong>San Francisco night</strong> from first idea through debrief — format, partners, guests, run-of-show, follow-ups. You stay host.</p>' +
+      '<p class="dg-p-lead"><strong>Events Bot</strong> runs any <strong>San Francisco</strong> night from first idea through debrief — dinners, showcases, parties, salons, and more. Not limited to Demigod-branded events. You stay host.</p>' +
       '<p class="dg-ev-pill" role="note">San Francisco only · in-person</p>' +
-      '<p class="dg-p-note">Drafts only · mutual yes before intros · no ticket marketplace. SMS / calendar / Stripe still <strong>pending</strong>.</p>' +
+      '<p class="dg-p-note">When the bot invents ideas, it prefers <strong>sponsorable</strong> formats (clear audience + fundable needs). Drafts only · no auto-blast. SMS / calendar / Stripe still <strong>pending</strong>.</p>' +
       '<div class="dg-ev-cta-band" role="navigation" aria-label="Events Bot shortcuts">' +
       '<a class="dg-ev-cta-pri" href="#dg-events-chat" id="dg-ec-focus">Talk to Events Bot</a>' +
       '<a class="dg-ev-cta-sec" href="#dg-ev-offers">Offer help</a>' +
@@ -3135,7 +3135,7 @@ var DG_PAGES = {
       '<div class="dg-ec-log" id="dg-ec-log" role="log" aria-live="polite"></div>' +
       '<form class="dg-ec-form" id="dg-ec-form">' +
       '<label class="sr-only" for="dg-ec-input">Message</label>' +
-      '<textarea id="dg-ec-input" class="dg-ec-input" rows="2" maxlength="2000" placeholder="e.g. 8 seats, Thu/Fri, founders + eng, outcome: 3 second meetings" required></textarea>' +
+      '<textarea id="dg-ec-input" class="dg-ec-input" rows="2" maxlength="2000" placeholder="e.g. 40-person SoMa party, need free venue + drink sponsor" required></textarea>' +
       '<button type="submit" class="dg-ec-send" id="dg-ec-send">Send</button>' +
       '</form></div>' +
       '<h3 class="dg-p-h3" id="dg-ev-offers-h">Offer to the night</h3>' +
@@ -3168,7 +3168,7 @@ var DG_PAGES = {
       '<details class="dg-p-det"><summary>Suggest an idea</summary>' +
       '<form class="dg-ev-form dg-ev-mini" id="dg-ev-idea-form">' +
       '<label class="dg-ev-lab" for="dg-ev-idea-seed">Theme or leave blank to invent an SF night</label>' +
-      '<input class="dg-ev-in" id="dg-ev-idea-seed" maxlength="200" placeholder="e.g. founder + eng lightning demos" />' +
+      '<input class="dg-ev-in" id="dg-ev-idea-seed" maxlength="200" placeholder="e.g. rooftop summer party · jazz loft · dinner club" />' +
       '<button type="submit" class="dg-ev-submit" id="dg-ev-idea-go">Share idea</button>' +
       '<p class="dg-ev-msg" id="dg-ev-idea-msg" role="status"></p></form></details>' +
       '<details class="dg-p-det"><summary>Give feedback</summary>' +
@@ -3841,7 +3841,7 @@ function eventsBotChatMount(root) {
 
   addMsg(
     'bot',
-    'I run Demigod SF nights end-to-end — idea, partners, plan, night, follow-up. You approve and send. What are we throwing?',
+    'I run SF nights end-to-end — fun events welcome, not only Demigod-branded. When I invent ideas I lean sponsorable. You approve and send. What are we throwing?',
   );
   probe();
 }
