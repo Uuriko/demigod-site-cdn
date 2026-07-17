@@ -1,14 +1,14 @@
 {
-  "at": "2026-07-17T08:18:02.989Z",
+  "at": "2026-07-17T08:18:56.728Z",
   "port": 3460,
-  "tunnelUrl": "https://during-certified-novels-weight.trycloudflare.com",
-  "apiBase": "https://during-certified-novels-weight.trycloudflare.com/api/events-bot",
-  "kind": "cloudflared",
+  "tunnelUrl": "https://demigod-events-bot.loca.lt",
+  "apiBase": "https://demigod-events-bot.loca.lt/api/events-bot",
+  "kind": "localtunnel",
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
-  "note": "cloudflared quick tunnel",
+  "note": "localtunnel (cloudflared trycloudflare DNS unavailable on this host)",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-17T08:18:05.136Z"
+  "publishedAt": "2026-07-17T08:18:58.599Z"
 }
