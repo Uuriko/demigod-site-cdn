@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-17T22:26:03.859Z",
+  "at": "2026-07-17T22:27:33.562Z",
   "port": 3460,
   "tunnelUrl": "https://crazy-donuts-study.loca.lt",
   "apiBase": "https://crazy-donuts-study.loca.lt/api/events-bot",
@@ -12,5 +12,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-17T22:26:06.036Z"
+  "publishedAt": "2026-07-17T22:27:35.638Z"
 }
