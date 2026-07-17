@@ -2775,10 +2775,19 @@ var DG_PAGES = {
       '<div><strong>Operators</strong><p>Match Circle / community nights with a clean mutual-interest trail.</p></div>' +
       '<div class="dg-p-hi"><strong>Demigod</strong><p>Same privacy bar as hiring: evidence first, both sides opt in.</p></div>' +
       '</div>' +
-      '<details class="dg-p-det" open><summary>How do I start?</summary><p>Email <a href="mailto:potter@trydemigod.com?subject=Events%20Bot%20pilot">potter@trydemigod.com</a> with “Events Bot” in the subject: preferred dates, guest count, and one sentence on the outcome of the night (e.g. “3 founder–engineer conversations worth a second meeting”).</p></details>' +
+      '<details class="dg-p-det"><summary>How do I start?</summary><p>Chat below, or email <a href="mailto:potter@trydemigod.com?subject=Events%20Bot%20pilot">potter@trydemigod.com</a> with preferred dates, guest count, and one sentence on the night’s outcome.</p></details>' +
       '<details class="dg-p-det"><summary>Is this the same as Demigod hiring?</summary><p>Related privacy model, different surface. Hiring is role + 90-day outcome. Events Bot is room + guest chemistry + post-event intros. Placement fee still only applies if a hire starts later — 10% of first-year cash.</p></details>' +
       '<details class="dg-p-det"><summary>Will the bot spam my guests?</summary><p>No auto-DM blasts. Invites and reminders go only to people on a host-approved list. Guests can pass or leave anytime.</p></details>' +
-      '<p class="dg-p-note">Runtime foot v__DG_FOOT_VER__ · questions: <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a></p>',
+      '<div id="dg-events-chat" class="dg-events-chat" aria-label="Events Bot chat">' +
+      '<div class="dg-ec-head"><span class="dg-ec-title">Talk to Events Bot</span><span class="dg-ec-status" id="dg-ec-status">connecting…</span></div>' +
+      '<p class="dg-ec-note">Drafts only — you approve guests and send messages. No auto-DM. AI when the chat API is up; otherwise offline guide.</p>' +
+      '<div class="dg-ec-log" id="dg-ec-log" role="log" aria-live="polite"></div>' +
+      '<form class="dg-ec-form" id="dg-ec-form">' +
+      '<label class="sr-only" for="dg-ec-input">Message</label>' +
+      '<textarea id="dg-ec-input" class="dg-ec-input" rows="2" maxlength="2000" placeholder="e.g. 8 seats, Thu/Fri next week, founders + eng, outcome: 3 real second meetings" required></textarea>' +
+      '<button type="submit" class="dg-ec-send" id="dg-ec-send">Send</button>' +
+      '</form></div>' +
+      '<p class="dg-p-note">Runtime foot v__DG_FOOT_VER__ · <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a></p>',
   },
   notfound: {
     title: 'Page not found',
@@ -2838,8 +2847,141 @@ function pageCss() {
     '@media(prefers-reduced-motion:reduce){#dg-page{animation:none}}' +
     '@media(forced-colors:active){#dg-page{background:Canvas!important;forced-color-adjust:auto}#dg-page .dg-page-card,#dg-page .dg-decision-grid>li,#dg-page .dg-p-grid>div,#dg-page .dg-page-x,#dg-page .dg-page-ctas a{border:1px solid CanvasText!important;background:Canvas!important;color:CanvasText!important;box-shadow:none!important}#dg-page .dg-page-x:focus-visible,#dg-page .dg-page-ctas a:focus-visible,#dg-page summary:focus-visible{outline:2px solid Highlight!important}}' +
     '@media(max-width:639px){#dg-page .dg-decision-grid{grid-template-columns:1fr}}' +
-    '@media(min-width:640px){#dg-page .dg-p-grid{grid-template-columns:1fr 1fr 1fr}}';
+    '@media(min-width:640px){#dg-page .dg-p-grid{grid-template-columns:1fr 1fr 1fr}}' +
+    /* Events Bot chat (frege-night) */
+    '#dg-page .dg-events-chat{margin:1.1rem 0 0;border:1px solid rgba(166,255,203,.28);border-radius:6px;background:rgba(3,20,13,.55);overflow:hidden}' +
+    '#dg-page .dg-ec-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.55rem .75rem;border-bottom:1px solid rgba(166,255,203,.18);font-family:ui-monospace,Menlo,Consolas,monospace}' +
+    '#dg-page .dg-ec-title{color:#a6ffcb;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}' +
+    '#dg-page .dg-ec-status{color:#bdc9bf;font-size:.68rem}' +
+    '#dg-page .dg-ec-note{margin:0;padding:.45rem .75rem;font-size:.78rem;color:#bdc9bf;line-height:1.4;border-bottom:1px solid rgba(166,255,203,.1)}' +
+    '#dg-page .dg-ec-log{max-height:min(42vh,280px);overflow:auto;padding:.65rem .75rem;display:flex;flex-direction:column;gap:.55rem}' +
+    '#dg-page .dg-ec-msg{max-width:95%;padding:.55rem .7rem;border-radius:4px;font-size:.88rem;line-height:1.45;white-space:pre-wrap}' +
+    '#dg-page .dg-ec-msg.bot{align-self:flex-start;background:rgba(8,160,93,.12);border:1px solid rgba(166,255,203,.22);color:#f3f0e7}' +
+    '#dg-page .dg-ec-msg.user{align-self:flex-end;background:rgba(166,255,203,.08);border:1px solid rgba(166,255,203,.28);color:#a6ffcb}' +
+    '#dg-page .dg-ec-form{display:grid;grid-template-columns:1fr auto;gap:.45rem;padding:.65rem .75rem;border-top:1px solid rgba(166,255,203,.18)}' +
+    '#dg-page .dg-ec-input{width:100%;min-height:48px;resize:vertical;background:#03140d;border:1px solid rgba(166,255,203,.28);border-radius:4px;color:#f3f0e7;padding:.55rem .65rem;font-size:16px;font-family:system-ui,sans-serif}' +
+    '#dg-page .dg-ec-input:focus-visible{outline:2px solid #a6ffcb;outline-offset:2px}' +
+    '#dg-page .dg-ec-send{min-height:48px;min-width:5.5rem;padding:0 .9rem;border-radius:4px;border:1px solid rgba(166,255,203,.45);background:rgba(8,160,93,.35);color:#a6ffcb;font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:650;cursor:pointer}' +
+    '#dg-page .dg-ec-send:disabled{opacity:.5;cursor:wait}' +
+    '#dg-page .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}';
   document.head.appendChild(s);
+}
+/* Events Bot conversational chat — API (local Codex-class OpenAI) + offline fallback */
+function eventsBotChatMount(root) {
+  var box = root && root.querySelector('#dg-events-chat');
+  if (!box || box.dataset.dgEc === '1') return;
+  box.dataset.dgEc = '1';
+  var log = box.querySelector('#dg-ec-log');
+  var form = box.querySelector('#dg-ec-form');
+  var input = box.querySelector('#dg-ec-input');
+  var send = box.querySelector('#dg-ec-send');
+  var status = box.querySelector('#dg-ec-status');
+  var history = [];
+  var endpoints = [
+    (typeof window !== 'undefined' && window.DG_EVENTS_BOT_API) || '',
+    'http://127.0.0.1:3460/api/events-bot/chat',
+    'http://localhost:3460/api/events-bot/chat',
+  ].filter(Boolean);
+  var apiBase = '';
+
+  function addMsg(role, text) {
+    if (!log) return;
+    var d = document.createElement('div');
+    d.className = 'dg-ec-msg ' + (role === 'user' ? 'user' : 'bot');
+    d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+  }
+  function setStatus(t) {
+    if (status) status.textContent = t;
+  }
+  function offline(msg) {
+    var last = (msg || '').toLowerCase();
+    if (/date|when|calendar/.test(last))
+      return 'Calendar sync is pending. Share 2–3 date windows and seat count — I will draft a host brief. For live AI, run the Events Bot API locally (see DEMIGOD-EVENTS-BOT.md). Or email potter@trydemigod.com.';
+    if (/guest|invite|who/.test(last))
+      return 'I only draft guest lists; you approve every name. Tell me seats, mix (founders/eng), and constraints.';
+    if (/agenda|run/.test(last))
+      return 'Tight dinner skeleton: arrive → host frame → structured intros → free conversation → close + mutual-interest notes. Duration?';
+    return 'Hi — I draft event legwork (guests, invites, agenda, follow-ups). You stay host; no auto-DM. Try: "8 seats, next Thu/Fri, founders + eng, want 3 second meetings." Live model needs the chat API on :3460.';
+  }
+
+  async function probe() {
+    for (var i = 0; i < endpoints.length; i++) {
+      var ep = endpoints[i];
+      var health = ep.replace(/\/chat\/?$/, '/health').replace(/events-bot\/chat/, 'events-bot/health');
+      if (health === ep) health = 'http://127.0.0.1:3460/api/events-bot/health';
+      try {
+        var r = await fetch(health, { method: 'GET', mode: 'cors', signal: AbortSignal.timeout(1800) });
+        if (r.ok) {
+          apiBase = ep.indexOf('/chat') >= 0 ? ep : 'http://127.0.0.1:3460/api/events-bot/chat';
+          var j = await r.json().catch(function () {
+            return {};
+          });
+          setStatus(j.openai ? 'AI live' : 'API · offline model');
+          return;
+        }
+      } catch (e) {}
+    }
+    apiBase = '';
+    setStatus('offline guide');
+  }
+
+  async function ask(text) {
+    history.push({ role: 'user', content: text });
+    addMsg('user', text);
+    send.disabled = true;
+    setStatus('thinking…');
+    var reply = offline(text);
+    var mock = true;
+    if (apiBase) {
+      try {
+        var r = await fetch(apiBase, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: history }),
+          signal: AbortSignal.timeout(45000),
+        });
+        var j = await r.json();
+        if (j && j.reply) {
+          reply = j.reply;
+          mock = !!j.mock;
+        }
+      } catch (e) {
+        reply = offline(text);
+        mock = true;
+      }
+    }
+    history.push({ role: 'assistant', content: reply });
+    if (history.length > 24) history = history.slice(-24);
+    addMsg('bot', reply);
+    setStatus(mock ? (apiBase ? 'API · draft mode' : 'offline guide') : 'AI live');
+    send.disabled = false;
+    try {
+      input.focus();
+    } catch (e) {}
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var t = (input.value || '').trim();
+    if (!t || send.disabled) return;
+    input.value = '';
+    ask(t);
+  });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  addMsg(
+    'bot',
+    'I help plan Demigod dinners — briefs, guest drafts, agendas, follow-ups. You approve and send. What are you hosting?',
+  );
+  probe();
 }
 function closePage() {
   var el = q('#dg-page');
@@ -2894,8 +3036,8 @@ function pageCtas(id) {
   if (id === 'talent') return '<a class="talent" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Create profile</a>' + hire + back;
   if (id === 'events') {
     return (
-      '<a class="hire" href="mailto:potter@trydemigod.com?subject=Events%20Bot%20pilot">Request Events Bot pilot</a>' +
-      '<a class="talent" href="/?p=how" data-dg-page="how">How matching works</a>' +
+      '<a class="hire" href="#dg-events-chat" id="dg-ec-focus">Chat with bot</a>' +
+      '<a class="talent" href="mailto:potter@trydemigod.com?subject=Events%20Bot%20pilot">Email pilot</a>' +
       back
     );
   }
@@ -3000,6 +3142,11 @@ function openPage(id, push) {
   } catch (e) {}
   // Deep-link Notes cards: /?p=blog#note-{slug} (or #slug) → open Full note + scroll
   if (id === 'blog') focusBlogNoteFromHash(root);
+  if (id === 'events') {
+    try {
+      eventsBotChatMount(root);
+    } catch (e) {}
+  }
 
   // soft focus trap
   root.addEventListener('keydown', function(ev){
