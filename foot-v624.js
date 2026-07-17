@@ -1963,15 +1963,15 @@ function ensureMotion(){
   }
 }
 
-/* v623: Converge symbol (Fable) — dual solid wedges + match core; re-apply when data-v changes */
+/* v624: Matchlight Lantern (Fable Matchlight + Codex Night Beacon → paper lantern) */
 function ensureLogo(){
   try{
-    var mark='<svg class="dg-mark" data-v="623" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="8" fill="#03140d"/><path d="M4 7 L11 16 L4 25 Z" fill="#a6ffcb"/><path d="M28 7 L21 16 L28 25 Z" fill="#10c674"/><circle cx="16" cy="16" r="3" fill="#a6ffcb"/></svg>';
+    var mark='<svg class="dg-mark" data-v="624" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" aria-hidden="true" focusable="false"> <rect width="32" height="32" rx="8" fill="#03140d"/> <rect x="14.5" y="4.5" width="3" height="3.2" rx="0.8" fill="#a6ffcb"/> <ellipse cx="16" cy="9" rx="7" ry="2.2" fill="#a6ffcb"/> <path fill="#10c674" d="M8.2 10.5c0-1.1 3.5-2.3 7.8-2.3s7.8 1.2 7.8 2.3v10.8c0 1.4-3.5 2.8-7.8 2.8s-7.8-1.4-7.8-2.8V10.5z"/> <ellipse cx="16" cy="13.2" rx="6.6" ry="1.1" fill="#03140d" opacity="0.28"/> <ellipse cx="16" cy="17.5" rx="6.6" ry="1.1" fill="#03140d" opacity="0.28"/> <ellipse cx="16" cy="16.8" rx="3.1" ry="3.6" fill="#a6ffcb"/> <ellipse cx="16" cy="24.2" rx="6" ry="2" fill="#a6ffcb"/> <rect x="14.8" y="25.5" width="2.4" height="2.2" rx="0.6" fill="#a6ffcb"/> </svg>';
     qa('a.nav_logo,.nav_logo,a.w-nav-brand,a.logo-link,.logo-link,.w-nav-brand').forEach(function(a){
       if(!a)return;
       a.setAttribute('aria-label','Demigod home');
-      if(a.querySelector('svg.dg-mark[data-v="623"]')){a.dataset.dgMark='623';return;}
-      a.dataset.dgMark='623';
+      if(a.querySelector('svg.dg-mark[data-v="624"]')){a.dataset.dgMark='624';return;}
+      a.dataset.dgMark='624';
       var icon=a.querySelector('.nav_logo-icon');
       if(icon){
         icon.innerHTML=mark;
@@ -1988,10 +1988,10 @@ function ensureLogo(){
       var name=a.querySelector('[data-brand-name],.paragraph_large');
       if(name){name.textContent='Demigod';name.setAttribute('data-brand-name','true');}
     });
-    if(document.documentElement.dataset.dgFav!=='623'){
-      document.documentElement.dataset.dgFav='623';
+    if(document.documentElement.dataset.dgFav!=='624'){
+      document.documentElement.dataset.dgFav='624';
       try{
-        var href='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%2303140d%22/%3E%3Cpath%20d%3D%22M4%207%20L11%2016%20L4%2025%20Z%22%20fill%3D%22%23a6ffcb%22/%3E%3Cpath%20d%3D%22M28%207%20L21%2016%20L28%2025%20Z%22%20fill%3D%22%2310c674%22/%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23a6ffcb%22/%3E%3C/svg%3E';
+        var href='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%2303140d%22/%3E%3Crect%20x%3D%2214.5%22%20y%3D%224.5%22%20width%3D%223%22%20height%3D%223%22%20rx%3D%22.7%22%20fill%3D%22%23a6ffcb%22/%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%229%22%20rx%3D%227%22%20ry%3D%222.2%22%20fill%3D%22%23a6ffcb%22/%3E%3Cpath%20fill%3D%22%2310c674%22%20d%3D%22M8.2%2010.5c0-1.1%203.5-2.3%207.8-2.3s7.8%201.2%207.8%202.3v10.8c0%201.4-3.5%202.8-7.8%202.8s-7.8-1.4-7.8-2.8z%22/%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2216.8%22%20rx%3D%223.1%22%20ry%3D%223.6%22%20fill%3D%22%23a6ffcb%22/%3E%3Cellipse%20cx%3D%2216%22%20cy%3D%2224.2%22%20rx%3D%226%22%20ry%3D%222%22%20fill%3D%22%23a6ffcb%22/%3E%3Crect%20x%3D%2214.8%22%20y%3D%2225.5%22%20width%3D%222.4%22%20height%3D%222.2%22%20rx%3D%22.6%22%20fill%3D%22%23a6ffcb%22/%3E%3C/svg%3E';
         qa('link[rel="icon"],link[rel="shortcut icon"]').forEach(function(l){l.parentNode&&l.parentNode.removeChild(l);});
         var link=document.createElement('link');link.rel='icon';link.type='image/svg+xml';link.href=href;document.head.appendChild(link);
         var apple=document.createElement('link');apple.rel='apple-touch-icon';apple.href=href;document.head.appendChild(apple);
@@ -4995,7 +4995,7 @@ typeof window.addEventListener==='function'&&window.addEventListener('hashchange
   };
 });
 
-window.__dgFootVer='624';console.log('Demigod v623');
+window.__dgFootVer='624';console.log('Demigod v624');
 window.__dgDedupe = dedupeAll;
 window.__dgScrub = scrubStaticLabels;
 
