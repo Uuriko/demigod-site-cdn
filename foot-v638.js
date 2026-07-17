@@ -3167,9 +3167,11 @@ var DG_PAGES = {
       '<input class="dg-ev-in" id="dg-ev-m-amt" required maxlength="200" placeholder="Amount / what you can cover" />' +
       '<button type="submit" class="dg-ev-submit">Pledge intent</button>' +
       '<p class="dg-ev-msg" id="dg-ev-m-msg" role="status"></p></form>' +
+      '<details class="dg-p-det"><summary>Ops: autonomy tick</summary>' +
+      '<p class="dg-p-note">Ops only. Needs :3460; if DEMIGOD_EVENTS_OPS_SECRET is set, pass header via local tools (page tick works when secret unset).</p>' +
       '<button type="button" class="dg-ev-submit" id="dg-ev-tick">Run autonomy tick</button>' +
-      '<p class="dg-ev-msg" id="dg-ev-tick-msg" role="status"></p>' +
-      '<p class="dg-p-note">Autonomy queues outreach with bot identity + feedback link. Mode: draft/semi/auto via server env. Partiful = draft; Luma = API if key set.</p>' +
+      '<p class="dg-ev-msg" id="dg-ev-tick-msg" role="status"></p></details>' +
+      '<p class="dg-p-note">SF only · outreach queues with bot identity (no fake “sent”). Partiful = draft; Luma if key; Stripe money = intent pending.</p>' +
       '</div>' +
       '<h3 class="dg-p-h3">What stays human</h3>' +
       '<ul class="dg-p-list">' +
