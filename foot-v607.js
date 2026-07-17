@@ -3195,6 +3195,9 @@ function closePage() {
       var el = rec[0]; if (!el) return;
       if (rec[1]) el.style.setProperty('display', rec[1], rec[2] || '');
       else el.style.removeProperty('display');
+      /* Only clear OUR marker — hero() legitimately sets data-dg-hidden on sections it collapses
+         (v565), and stripping those would un-collapse the homepage. */
+      if (el.getAttribute('data-dg-hidden') === 'dg-page') el.removeAttribute('data-dg-hidden');
     });
   } catch (e) {}
   dgPageHidden = [];
@@ -3296,6 +3299,10 @@ function openPage(id, push) {
       if (el.id && KEEP.test(el.id)) return;
       dgPageHidden.push([el, el.style.display, el.style.getPropertyPriority('display')]);
       el.style.setProperty('display', 'none', 'important');
+      /* data-dg-hidden is the unhide system's own opt-out (_dgSkipHidden / forceMainVisible).
+         Without it, forceMainVisible re-shows these sections right after boot and the page
+         renders on top of a visible homepage. Reusing the author's hook, not inventing one. */
+      el.setAttribute('data-dg-hidden', 'dg-page');
     });
   } catch (e) {}
   try { window.scrollTo(0, 0); } catch (e) {}
