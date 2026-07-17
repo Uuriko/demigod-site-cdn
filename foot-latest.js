@@ -6729,7 +6729,7 @@ typeof window.addEventListener==='function'&&window.addEventListener('hashchange
     selftest: selftest,
   };
 });
-window.__dgFootVer='665';console.log('Demigod v663');
+window.__dgFootVer='665';console.log('Demigod v665');
 window.__dgDedupe = dedupeAll;
 window.__dgScrub = scrubStaticLabels;
 
