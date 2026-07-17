@@ -3327,7 +3327,10 @@ var DG_PAGES = {
       '<p class="dg-ev-status" id="dg-ev-status" role="status" aria-live="polite">Checking night status…</p>' +
       /* Chat primary — homepage gold, not terminal green */
       '<div id="dg-events-chat" class="dg-events-chat" aria-label="Events Bot chat">' +
-      '<div class="dg-ec-head"><span class="dg-ec-title">Talk to Events Bot</span><span class="dg-ec-status" id="dg-ec-status">Ready</span></div>' +
+      // aria-live: this span is rewritten at :4202 (status.textContent = t) as the bot connects/replies,
+// so without it a screen-reader user never learns the state changed (WCAG 4.1.3 Status Messages, AA).
+// polite matches the 9 other aria-live uses in this file.
+'<div class="dg-ec-head"><span class="dg-ec-title">Talk to Events Bot</span><span class="dg-ec-status" id="dg-ec-status" aria-live="polite">Ready</span></div>' +
       '<p class="dg-ec-note">Tell us your night — we draft the slate; you send every invite.</p>' +
       '<div class="dg-ec-log" id="dg-ec-log" role="log" aria-live="polite"></div>' +
       '<form class="dg-ec-form" id="dg-ec-form">' +
@@ -6586,7 +6589,8 @@ typeof window.addEventListener==='function'&&window.addEventListener('hashchange
     box.innerHTML =
       '<div class="dg-mud" id="dg-mud-shell">' +
       '<div class="dg-mud-head"><span class="dg-mud-title">SF Night District</span>' +
-      '<span class="dg-mud-status" id="dg-mud-status">solo</span></div>' +
+      // aria-live: rewritten by the onStatus callback at :6619 (solo -> connected -> offline).
+'<span class="dg-mud-status" id="dg-mud-status" aria-live="polite">solo</span></div>' +
       '<div class="dg-mud-log" id="dg-mud-log" role="log" aria-live="polite"></div>' +
       '<form class="dg-mud-form" id="dg-mud-form" autocomplete="off">' +
       '<label class="sr-only" for="dg-mud-input">Command</label>' +
