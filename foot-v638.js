@@ -3109,7 +3109,7 @@ var DG_PAGES = {
     desc: 'Demigod Events Bot runs the full event cycle — ideate, resource, plan, RSVP, run, follow-up, debrief — plus sponsor, venue, and volunteer offers. Humans keep host control. SMS/calendar/Stripe pending.',
     html:
       '<p class="dg-p-lead"><strong>Events Bot</strong> organizes a Demigod night from first idea through debrief and into the next cycle: format, partners, guests, run-of-show, follow-ups — host stays host.</p>' +
-      '<p class="dg-p-note">Drafts only · no auto-DM · no public ticket blast · mutual yes before intros. SMS / calendar / Stripe still <strong>pending</strong>.</p>' +
+      '<p class="dg-p-note"><strong>San Francisco only</strong> for now (in-person SF). Drafts · no auto-DM · mutual yes before intros. SMS / calendar / Stripe still <strong>pending</strong>.</p>' +
       '<h3 class="dg-p-h3">Full cycle</h3>' +
       '<ol class="dg-decision-grid dg-ev-cycle" aria-label="Events Bot lifecycle">' +
       '<li><span>01</span><strong>Ideate</strong><small>Type of night · one-sentence outcome · size</small></li>' +
@@ -3138,7 +3138,7 @@ var DG_PAGES = {
       '<label class="dg-ev-lab" for="dg-ev-org" id="dg-ev-org-lab">Org / brand</label>' +
       '<input class="dg-ev-in" id="dg-ev-org" name="org" maxlength="120" />' +
       '<label class="dg-ev-lab" for="dg-ev-city">City</label>' +
-      '<input class="dg-ev-in" id="dg-ev-city" name="city" maxlength="60" value="SF" />' +
+      '<input class="dg-ev-in" id="dg-ev-city" name="city" maxlength="60" value="San Francisco" />' +
       '<label class="dg-ev-lab" for="dg-ev-capacity" id="dg-ev-cap-lab">Capacity (venues)</label>' +
       '<input class="dg-ev-in" id="dg-ev-capacity" name="capacity" type="number" min="1" max="500" inputmode="numeric" placeholder="optional" />' +
       '<label class="dg-ev-lab" for="dg-ev-offer" id="dg-ev-offer-lab">What you can offer</label>' +
@@ -3147,6 +3147,30 @@ var DG_PAGES = {
       '<p class="dg-ev-msg" id="dg-ev-msg" role="status" aria-live="polite"></p>' +
       '</form></div>' +
       '<p class="dg-ev-counts" id="dg-ev-counts" aria-live="polite"></p>' +
+      '<h3 class="dg-p-h3">Ideas · feedback · sponsor money</h3>' +
+      '<div class="dg-ev-extra" id="dg-ev-extra">' +
+      '<form class="dg-ev-form dg-ev-mini" id="dg-ev-idea-form">' +
+      '<label class="dg-ev-lab" for="dg-ev-idea-seed">Suggest an idea or theme (or leave blank to invent)</label>' +
+      '<input class="dg-ev-in" id="dg-ev-idea-seed" maxlength="200" placeholder="e.g. founder + eng lightning demos" />' +
+      '<button type="submit" class="dg-ev-submit" id="dg-ev-idea-go">Generate / save ideas</button>' +
+      '<p class="dg-ev-msg" id="dg-ev-idea-msg" role="status"></p></form>' +
+      '<form class="dg-ev-form dg-ev-mini" id="dg-ev-fb-form">' +
+      '<label class="dg-ev-lab" for="dg-ev-fb">Feedback for Events Bot</label>' +
+      '<textarea class="dg-ev-in dg-ev-ta" id="dg-ev-fb" required maxlength="2000" rows="2" placeholder="What should we change about nights or the bot?"></textarea>' +
+      '<button type="submit" class="dg-ev-submit">Send feedback</button>' +
+      '<p class="dg-ev-msg" id="dg-ev-fb-msg" role="status"></p></form>' +
+      '<form class="dg-ev-form dg-ev-mini" id="dg-ev-money-form">' +
+      '<label class="dg-ev-lab">Sponsor money (intent — Stripe pending)</label>' +
+      '<input class="dg-ev-in" id="dg-ev-m-name" required maxlength="80" placeholder="Name" />' +
+      '<input class="dg-ev-in" id="dg-ev-m-email" type="email" required maxlength="120" placeholder="Email" />' +
+      '<input class="dg-ev-in" id="dg-ev-m-org" maxlength="120" placeholder="Org" />' +
+      '<input class="dg-ev-in" id="dg-ev-m-amt" required maxlength="200" placeholder="Amount / what you can cover" />' +
+      '<button type="submit" class="dg-ev-submit">Pledge intent</button>' +
+      '<p class="dg-ev-msg" id="dg-ev-m-msg" role="status"></p></form>' +
+      '<button type="button" class="dg-ev-submit" id="dg-ev-tick">Run autonomy tick</button>' +
+      '<p class="dg-ev-msg" id="dg-ev-tick-msg" role="status"></p>' +
+      '<p class="dg-p-note">Autonomy queues outreach with bot identity + feedback link. Mode: draft/semi/auto via server env. Partiful = draft; Luma = API if key set.</p>' +
+      '</div>' +
       '<h3 class="dg-p-h3">What stays human</h3>' +
       '<ul class="dg-p-list">' +
       '<li><strong>Final guest list &amp; partners</strong> — bot drafts; host approves.</li>' +
@@ -3283,6 +3307,8 @@ function pageCss() {
     '#dg-page .dg-ev-msg.ok{color:#a6ffcb}' +
     '#dg-page .dg-ev-msg.err{color:#ffb4a2}' +
     '#dg-page .dg-ev-counts{font-size:.8rem;color:#A8A29E;margin:.45rem 0 0}' +
+    '#dg-page .dg-ev-extra{display:grid;gap:.85rem;margin:1rem 0}' +
+    '#dg-page .dg-ev-mini{padding:.85rem;border:1px solid rgba(201,168,76,.18);border-radius:12px;background:rgba(10,10,10,.35)}' +
     '#dg-page .dg-ev-status{margin:.35rem 0 1rem;padding:.55rem .75rem;border-radius:10px;border:1px solid rgba(201,168,76,.22);background:rgba(201,168,76,.06);color:#A8A29E;font-size:.86rem;line-height:1.45}' +
     '#dg-page .dg-ev-cycle>li.is-current{border-color:rgba(201,168,76,.65)!important;background:rgba(201,168,76,.12)!important}' +
     '#dg-page .dg-ev-cycle>li.is-current strong{color:#C9A84C}' +
@@ -3525,6 +3551,137 @@ function eventsBotOffersMount(root) {
 
   setKind('sponsor');
   probe();
+}
+/* Ideas, feedback, money, autonomy tick */
+function eventsBotExtraMount(root) {
+  var base = '';
+  var endpoints = [
+    (typeof window !== 'undefined' && window.DG_EVENTS_BOT_API) || '',
+    'http://127.0.0.1:3460/api/events-bot/chat',
+    'http://localhost:3460/api/events-bot/chat',
+  ].filter(Boolean);
+  function apiRoot() {
+    if (base) return base;
+    for (var i = 0; i < endpoints.length; i++) {
+      var ep = endpoints[i].replace(/\/chat\/?$/, '');
+      base = ep;
+      return base;
+    }
+    return 'http://127.0.0.1:3460/api/events-bot';
+  }
+  async function post(path, body) {
+    var url = apiRoot() + path;
+    var r = await fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {}),
+      signal: AbortSignal.timeout(90000),
+    });
+    return r.json().catch(function () {
+      return { ok: false, error: 'bad json' };
+    });
+  }
+  var ideaForm = root.querySelector('#dg-ev-idea-form');
+  if (ideaForm && ideaForm.dataset.bound !== '1') {
+    ideaForm.dataset.bound = '1';
+    ideaForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var msg = root.querySelector('#dg-ev-idea-msg');
+      var seed = (root.querySelector('#dg-ev-idea-seed') || {}).value || '';
+      if (msg) msg.textContent = 'Thinking…';
+      try {
+        var j = await post('/idea', { generate: true, seed: seed });
+        if (msg)
+          msg.textContent = j.summary
+            ? String(j.summary).slice(0, 400)
+            : j.ok
+              ? 'Ideas saved / generated.'
+              : j.error || 'Failed';
+        msg && msg.classList.add(j.ok !== false ? 'ok' : 'err');
+      } catch (err) {
+        if (msg) {
+          msg.textContent = 'API offline — email potter@ with your idea.';
+          msg.classList.add('err');
+        }
+      }
+    });
+  }
+  var fbForm = root.querySelector('#dg-ev-fb-form');
+  if (fbForm && fbForm.dataset.bound !== '1') {
+    fbForm.dataset.bound = '1';
+    fbForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var msg = root.querySelector('#dg-ev-fb-msg');
+      var text = (root.querySelector('#dg-ev-fb') || {}).value || '';
+      try {
+        var j = await post('/feedback', { text: text, topic: 'general' });
+        if (msg) {
+          msg.textContent = j.ok ? 'Feedback recorded. Thank you.' : j.error || 'Failed';
+          msg.className = 'dg-ev-msg ' + (j.ok ? 'ok' : 'err');
+        }
+        if (j.ok) fbForm.reset();
+      } catch (err) {
+        window.location.href =
+          'mailto:potter@trydemigod.com?subject=' +
+          encodeURIComponent('Events Bot feedback') +
+          '&body=' +
+          encodeURIComponent(text);
+      }
+    });
+  }
+  var mForm = root.querySelector('#dg-ev-money-form');
+  if (mForm && mForm.dataset.bound !== '1') {
+    mForm.dataset.bound = '1';
+    mForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var msg = root.querySelector('#dg-ev-m-msg');
+      var body = {
+        name: (root.querySelector('#dg-ev-m-name') || {}).value || '',
+        email: (root.querySelector('#dg-ev-m-email') || {}).value || '',
+        org: (root.querySelector('#dg-ev-m-org') || {}).value || '',
+        amountNote: (root.querySelector('#dg-ev-m-amt') || {}).value || '',
+      };
+      try {
+        var j = await post('/money', body);
+        if (msg) {
+          msg.textContent = j.message || (j.ok ? 'Intent recorded (Stripe pending).' : j.error || 'Failed');
+          msg.className = 'dg-ev-msg ' + (j.ok ? 'ok' : 'err');
+        }
+        if (j.ok) mForm.reset();
+      } catch (err) {
+        if (msg) {
+          msg.textContent = 'API offline — email potter@ to pledge.';
+          msg.className = 'dg-ev-msg err';
+        }
+      }
+    });
+  }
+  var tick = root.querySelector('#dg-ev-tick');
+  if (tick && tick.dataset.bound !== '1') {
+    tick.dataset.bound = '1';
+    tick.addEventListener('click', async function () {
+      var msg = root.querySelector('#dg-ev-tick-msg');
+      if (msg) msg.textContent = 'Autonomy tick running…';
+      tick.disabled = true;
+      try {
+        var j = await post('/agent/tick', {
+          goal: 'Invent original event ideas, save them, spin up if allowed, draft Partiful, queue proactive venue+sponsor outreach with bot identity.',
+          maxSteps: 5,
+        });
+        if (msg) {
+          msg.textContent = (j.summary || JSON.stringify(j).slice(0, 350)).slice(0, 500);
+          msg.className = 'dg-ev-msg ' + (j.ok ? 'ok' : 'err');
+        }
+      } catch (err) {
+        if (msg) {
+          msg.textContent = 'Tick failed — is :3460 up?';
+          msg.className = 'dg-ev-msg err';
+        }
+      }
+      tick.disabled = false;
+    });
+  }
 }
 /* Events Bot conversational chat — API (local Codex-class OpenAI) + offline fallback */
 function eventsBotChatMount(root) {
@@ -3880,6 +4037,7 @@ function openPage(id, push) {
     try {
       eventsBotCycleMount(root);
       eventsBotOffersMount(root);
+      eventsBotExtraMount(root);
       eventsBotChatMount(root);
       var foc = root.querySelector('#dg-ec-focus');
       if (foc)
