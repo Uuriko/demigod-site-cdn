@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-17T21:28:47.163Z",
+  "at": "2026-07-17T21:39:43.955Z",
   "port": 3460,
   "tunnelUrl": "https://metric-native-drain-banana.trycloudflare.com",
   "apiBase": "https://metric-native-drain-banana.trycloudflare.com/api/events-bot",
@@ -12,5 +12,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-17T21:28:49.205Z"
+  "publishedAt": "2026-07-17T21:39:46.126Z"
 }
