@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T02:26:05.310Z",
+  "at": "2026-07-18T02:31:04.664Z",
   "port": 3460,
-  "tunnelUrl": "https://every-bags-act.loca.lt",
-  "apiBase": "https://every-bags-act.loca.lt/api/events-bot",
+  "tunnelUrl": "https://fluffy-trains-hang.loca.lt",
+  "apiBase": "https://fluffy-trains-hang.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 681028,
+  "tunnelPid": 687603,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T02:26:07.301Z"
+  "publishedAt": "2026-07-18T02:31:06.899Z"
 }
