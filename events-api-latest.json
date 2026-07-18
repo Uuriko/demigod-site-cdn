@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T10:41:26.345Z",
+  "at": "2026-07-18T10:46:26.234Z",
   "port": 3460,
-  "tunnelUrl": "https://two-bats-pay.loca.lt",
-  "apiBase": "https://two-bats-pay.loca.lt/api/events-bot",
+  "tunnelUrl": "https://hip-hats-speak.loca.lt",
+  "apiBase": "https://hip-hats-speak.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1224689,
+  "tunnelPid": 1229544,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T10:41:28.690Z"
+  "publishedAt": "2026-07-18T10:46:28.647Z"
 }
