@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T22:16:48.636Z",
+  "at": "2026-07-18T22:21:47.273Z",
   "port": 3460,
-  "tunnelUrl": "https://purple-chefs-drop.loca.lt",
-  "apiBase": "https://purple-chefs-drop.loca.lt/api/events-bot",
+  "tunnelUrl": "https://rare-planets-relax.loca.lt",
+  "apiBase": "https://rare-planets-relax.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2158849,
+  "tunnelPid": 2165706,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T22:16:50.496Z"
+  "publishedAt": "2026-07-18T22:21:49.482Z"
 }
