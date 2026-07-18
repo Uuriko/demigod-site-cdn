@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T08:01:17.250Z",
+  "at": "2026-07-18T08:06:17.174Z",
   "port": 3460,
-  "tunnelUrl": "https://violet-seals-tan.loca.lt",
-  "apiBase": "https://violet-seals-tan.loca.lt/api/events-bot",
+  "tunnelUrl": "https://cute-islands-doubt.loca.lt",
+  "apiBase": "https://cute-islands-doubt.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1076829,
+  "tunnelPid": 1080088,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T08:01:19.942Z"
+  "publishedAt": "2026-07-18T08:06:19.507Z"
 }
