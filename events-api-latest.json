@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T02:21:04.513Z",
+  "at": "2026-07-18T02:26:05.310Z",
   "port": 3460,
-  "tunnelUrl": "https://quick-knives-sing.loca.lt",
-  "apiBase": "https://quick-knives-sing.loca.lt/api/events-bot",
+  "tunnelUrl": "https://every-bags-act.loca.lt",
+  "apiBase": "https://every-bags-act.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 674173,
+  "tunnelPid": 681028,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T02:21:06.592Z"
+  "publishedAt": "2026-07-18T02:26:07.301Z"
 }
