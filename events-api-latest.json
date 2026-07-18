@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T15:56:39.582Z",
+  "at": "2026-07-18T16:01:43.594Z",
   "port": 3460,
-  "tunnelUrl": "https://stupid-geckos-punch.loca.lt",
-  "apiBase": "https://stupid-geckos-punch.loca.lt/api/events-bot",
+  "tunnelUrl": "https://wide-sides-cheat.loca.lt",
+  "apiBase": "https://wide-sides-cheat.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1540514,
+  "tunnelPid": 1548196,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T15:56:41.681Z"
+  "publishedAt": "2026-07-18T16:01:45.766Z"
 }
