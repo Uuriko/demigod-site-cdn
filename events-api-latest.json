@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T08:21:18.668Z",
+  "at": "2026-07-18T08:26:18.141Z",
   "port": 3460,
-  "tunnelUrl": "https://tall-guests-sniff.loca.lt",
-  "apiBase": "https://tall-guests-sniff.loca.lt/api/events-bot",
+  "tunnelUrl": "https://puny-cameras-obey.loca.lt",
+  "apiBase": "https://puny-cameras-obey.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1093418,
+  "tunnelPid": 1097951,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T08:21:20.898Z"
+  "publishedAt": "2026-07-18T08:26:20.494Z"
 }
