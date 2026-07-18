@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T10:21:25.670Z",
+  "at": "2026-07-18T10:26:25.434Z",
   "port": 3460,
-  "tunnelUrl": "https://rare-mugs-crash.loca.lt",
-  "apiBase": "https://rare-mugs-crash.loca.lt/api/events-bot",
+  "tunnelUrl": "https://beige-days-dream.loca.lt",
+  "apiBase": "https://beige-days-dream.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1208294,
+  "tunnelPid": 1211968,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T10:21:28.488Z"
+  "publishedAt": "2026-07-18T10:26:27.793Z"
 }
