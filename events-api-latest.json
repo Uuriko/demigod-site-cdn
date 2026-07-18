@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T12:16:28.684Z",
+  "at": "2026-07-18T12:21:30.034Z",
   "port": 3460,
-  "tunnelUrl": "https://petite-dingos-lead.loca.lt",
-  "apiBase": "https://petite-dingos-lead.loca.lt/api/events-bot",
+  "tunnelUrl": "https://angry-times-ring.loca.lt",
+  "apiBase": "https://angry-times-ring.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1314303,
+  "tunnelPid": 1319919,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T12:16:31.034Z"
+  "publishedAt": "2026-07-18T12:21:32.674Z"
 }
