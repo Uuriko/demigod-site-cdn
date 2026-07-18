@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T05:46:11.275Z",
+  "at": "2026-07-18T05:51:11.378Z",
   "port": 3460,
-  "tunnelUrl": "https://better-friends-jog.loca.lt",
-  "apiBase": "https://better-friends-jog.loca.lt/api/events-bot",
+  "tunnelUrl": "https://public-laws-divide.loca.lt",
+  "apiBase": "https://public-laws-divide.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 944540,
+  "tunnelPid": 947879,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T05:46:13.562Z"
+  "publishedAt": "2026-07-18T05:51:13.852Z"
 }
