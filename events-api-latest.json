@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T09:46:23.043Z",
+  "at": "2026-07-18T09:51:23.329Z",
   "port": 3460,
-  "tunnelUrl": "https://rotten-pianos-raise.loca.lt",
-  "apiBase": "https://rotten-pianos-raise.loca.lt/api/events-bot",
+  "tunnelUrl": "https://honest-parents-press.loca.lt",
+  "apiBase": "https://honest-parents-press.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1174981,
+  "tunnelPid": 1180053,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T09:46:25.771Z"
+  "publishedAt": "2026-07-18T09:51:25.549Z"
 }
