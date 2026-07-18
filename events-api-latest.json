@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T20:21:46.315Z",
+  "at": "2026-07-18T20:26:48.380Z",
   "port": 3460,
-  "tunnelUrl": "https://four-facts-camp.loca.lt",
-  "apiBase": "https://four-facts-camp.loca.lt/api/events-bot",
+  "tunnelUrl": "https://legal-parrots-check.loca.lt",
+  "apiBase": "https://legal-parrots-check.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 1969939,
+  "tunnelPid": 1979727,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T20:21:48.699Z"
+  "publishedAt": "2026-07-18T20:26:50.763Z"
 }
