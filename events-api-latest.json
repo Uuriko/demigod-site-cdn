@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-18T00:19:54.753Z",
+  "at": "2026-07-18T01:10:31.578Z",
   "port": 3460,
   "tunnelUrl": "https://yummy-lies-hug.loca.lt",
   "apiBase": "https://yummy-lies-hug.loca.lt/api/events-bot",
@@ -12,5 +12,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T00:19:56.900Z"
+  "publishedAt": "2026-07-18T01:10:33.931Z"
 }
