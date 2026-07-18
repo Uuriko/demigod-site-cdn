@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T12:51:32.207Z",
+  "at": "2026-07-18T12:56:32.906Z",
   "port": 3460,
-  "tunnelUrl": "https://slow-dolls-refuse.loca.lt",
-  "apiBase": "https://slow-dolls-refuse.loca.lt/api/events-bot",
+  "tunnelUrl": "https://clean-trams-hear.loca.lt",
+  "apiBase": "https://clean-trams-hear.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1347120,
+  "tunnelPid": 1350613,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T12:51:34.571Z"
+  "publishedAt": "2026-07-18T12:56:35.578Z"
 }
