@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T04:06:08.316Z",
+  "at": "2026-07-18T04:11:07.182Z",
   "port": 3460,
-  "tunnelUrl": "https://eager-hats-sniff.loca.lt",
-  "apiBase": "https://eager-hats-sniff.loca.lt/api/events-bot",
+  "tunnelUrl": "https://shaky-aliens-end.loca.lt",
+  "apiBase": "https://shaky-aliens-end.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 843047,
+  "tunnelPid": 850485,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T04:06:11.092Z"
+  "publishedAt": "2026-07-18T04:11:09.629Z"
 }
