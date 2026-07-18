@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T18:41:43.600Z",
+  "at": "2026-07-18T18:46:42.023Z",
   "port": 3460,
-  "tunnelUrl": "https://lucky-cougars-send.loca.lt",
-  "apiBase": "https://lucky-cougars-send.loca.lt/api/events-bot",
+  "tunnelUrl": "https://brave-sheep-stay.loca.lt",
+  "apiBase": "https://brave-sheep-stay.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 1805571,
+  "tunnelPid": 1811762,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T18:41:45.810Z"
+  "publishedAt": "2026-07-18T18:46:45.246Z"
 }
