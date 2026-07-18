@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T21:21:46.791Z",
+  "at": "2026-07-18T21:26:46.490Z",
   "port": 3460,
-  "tunnelUrl": "https://blue-pigs-boil.loca.lt",
-  "apiBase": "https://blue-pigs-boil.loca.lt/api/events-bot",
+  "tunnelUrl": "https://floppy-rooms-repeat.loca.lt",
+  "apiBase": "https://floppy-rooms-repeat.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2070909,
+  "tunnelPid": 2077917,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T21:21:48.685Z"
+  "publishedAt": "2026-07-18T21:26:48.536Z"
 }
