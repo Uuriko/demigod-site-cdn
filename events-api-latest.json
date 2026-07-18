@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T03:41:05.916Z",
+  "at": "2026-07-18T03:46:07.345Z",
   "port": 3460,
-  "tunnelUrl": "https://witty-tools-raise.loca.lt",
-  "apiBase": "https://witty-tools-raise.loca.lt/api/events-bot",
+  "tunnelUrl": "https://loose-sides-hammer.loca.lt",
+  "apiBase": "https://loose-sides-hammer.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 807798,
+  "tunnelPid": 816580,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T03:41:07.857Z"
+  "publishedAt": "2026-07-18T03:46:10.296Z"
 }
