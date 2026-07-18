@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T23:21:54.764Z",
+  "at": "2026-07-18T23:26:50.930Z",
   "port": 3460,
-  "tunnelUrl": "https://chubby-ads-hunt.loca.lt",
-  "apiBase": "https://chubby-ads-hunt.loca.lt/api/events-bot",
+  "tunnelUrl": "https://rude-roses-retire.loca.lt",
+  "apiBase": "https://rude-roses-retire.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2266668,
+  "tunnelPid": 2272369,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T23:21:57.666Z"
+  "publishedAt": "2026-07-18T23:26:52.839Z"
 }
