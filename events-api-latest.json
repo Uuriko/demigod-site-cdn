@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T13:26:32.803Z",
+  "at": "2026-07-18T13:31:35.758Z",
   "port": 3460,
-  "tunnelUrl": "https://better-rooms-find.loca.lt",
-  "apiBase": "https://better-rooms-find.loca.lt/api/events-bot",
+  "tunnelUrl": "https://cruel-chairs-sell.loca.lt",
+  "apiBase": "https://cruel-chairs-sell.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1378480,
+  "tunnelPid": 1384075,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T13:26:35.429Z"
+  "publishedAt": "2026-07-18T13:31:38.320Z"
 }
