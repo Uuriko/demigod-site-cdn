@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T16:11:40.168Z",
+  "at": "2026-07-18T16:16:40.975Z",
   "port": 3460,
-  "tunnelUrl": "https://slow-trams-grin.loca.lt",
-  "apiBase": "https://slow-trams-grin.loca.lt/api/events-bot",
+  "tunnelUrl": "https://smart-views-pay.loca.lt",
+  "apiBase": "https://smart-views-pay.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1563866,
+  "tunnelPid": 1572748,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T16:11:42.647Z"
+  "publishedAt": "2026-07-18T16:16:43.216Z"
 }
