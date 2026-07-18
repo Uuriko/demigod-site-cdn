@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T17:46:41.873Z",
+  "at": "2026-07-18T17:51:41.586Z",
   "port": 3460,
-  "tunnelUrl": "https://small-suits-melt.loca.lt",
-  "apiBase": "https://small-suits-melt.loca.lt/api/events-bot",
+  "tunnelUrl": "https://icy-teams-melt.loca.lt",
+  "apiBase": "https://icy-teams-melt.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1718448,
+  "tunnelPid": 1726074,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T17:46:44.223Z"
+  "publishedAt": "2026-07-18T17:51:43.829Z"
 }
