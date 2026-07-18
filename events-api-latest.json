@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T13:16:33.393Z",
+  "at": "2026-07-18T13:21:34.352Z",
   "port": 3460,
-  "tunnelUrl": "https://true-birds-stick.loca.lt",
-  "apiBase": "https://true-birds-stick.loca.lt/api/events-bot",
+  "tunnelUrl": "https://eighty-cars-sleep.loca.lt",
+  "apiBase": "https://eighty-cars-sleep.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1370547,
+  "tunnelPid": 1373541,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T13:16:35.988Z"
+  "publishedAt": "2026-07-18T13:21:36.722Z"
 }
