@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T15:11:38.919Z",
+  "at": "2026-07-18T15:16:38.370Z",
   "port": 3460,
-  "tunnelUrl": "https://sad-nails-pump.loca.lt",
-  "apiBase": "https://sad-nails-pump.loca.lt/api/events-bot",
+  "tunnelUrl": "https://real-bushes-try.loca.lt",
+  "apiBase": "https://real-bushes-try.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1474441,
+  "tunnelPid": 1479990,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T15:11:41.430Z"
+  "publishedAt": "2026-07-18T15:16:40.435Z"
 }
