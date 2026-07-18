@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T22:26:47.973Z",
+  "at": "2026-07-18T22:31:48.080Z",
   "port": 3460,
-  "tunnelUrl": "https://shaky-times-relax.loca.lt",
-  "apiBase": "https://shaky-times-relax.loca.lt/api/events-bot",
+  "tunnelUrl": "https://eleven-falcons-argue.loca.lt",
+  "apiBase": "https://eleven-falcons-argue.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2175040,
+  "tunnelPid": 2182902,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T22:26:49.893Z"
+  "publishedAt": "2026-07-18T22:31:49.941Z"
 }
