@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T14:26:37.939Z",
+  "at": "2026-07-18T14:31:37.714Z",
   "port": 3460,
-  "tunnelUrl": "https://olive-insects-heal.loca.lt",
-  "apiBase": "https://olive-insects-heal.loca.lt/api/events-bot",
+  "tunnelUrl": "https://huge-pianos-draw.loca.lt",
+  "apiBase": "https://huge-pianos-draw.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1434499,
+  "tunnelPid": 1437844,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T14:26:40.588Z"
+  "publishedAt": "2026-07-18T14:31:40.655Z"
 }
