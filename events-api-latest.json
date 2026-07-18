@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T15:26:37.409Z",
+  "at": "2026-07-18T15:31:37.798Z",
   "port": 3460,
-  "tunnelUrl": "https://poor-flowers-vanish.loca.lt",
-  "apiBase": "https://poor-flowers-vanish.loca.lt/api/events-bot",
+  "tunnelUrl": "https://wild-bikes-jog.loca.lt",
+  "apiBase": "https://wild-bikes-jog.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1493947,
+  "tunnelPid": 1500958,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T15:26:39.449Z"
+  "publishedAt": "2026-07-18T15:31:39.722Z"
 }
