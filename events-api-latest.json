@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T14:56:37.571Z",
+  "at": "2026-07-18T15:01:38.843Z",
   "port": 3460,
-  "tunnelUrl": "https://three-ghosts-repair.loca.lt",
-  "apiBase": "https://three-ghosts-repair.loca.lt/api/events-bot",
+  "tunnelUrl": "https://loud-berries-turn.loca.lt",
+  "apiBase": "https://loud-berries-turn.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1460768,
+  "tunnelPid": 1465569,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T14:56:40.215Z"
+  "publishedAt": "2026-07-18T15:01:41.322Z"
 }
