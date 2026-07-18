@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T21:46:48.633Z",
+  "at": "2026-07-18T21:51:57.084Z",
   "port": 3460,
-  "tunnelUrl": "https://twenty-carrots-argue.loca.lt",
-  "apiBase": "https://twenty-carrots-argue.loca.lt/api/events-bot",
+  "tunnelUrl": "https://demigod-events-bot.loca.lt",
+  "apiBase": "https://demigod-events-bot.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2113621,
+  "tunnelPid": 2120526,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T21:46:50.566Z"
+  "publishedAt": "2026-07-18T21:51:59.072Z"
 }
