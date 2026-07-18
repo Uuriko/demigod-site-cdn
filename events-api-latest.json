@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T07:26:16.049Z",
+  "at": "2026-07-18T07:31:16.657Z",
   "port": 3460,
-  "tunnelUrl": "https://floppy-symbols-sniff.loca.lt",
-  "apiBase": "https://floppy-symbols-sniff.loca.lt/api/events-bot",
+  "tunnelUrl": "https://curvy-donkeys-make.loca.lt",
+  "apiBase": "https://curvy-donkeys-make.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1043982,
+  "tunnelPid": 1048548,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T07:26:18.744Z"
+  "publishedAt": "2026-07-18T07:31:19.176Z"
 }
