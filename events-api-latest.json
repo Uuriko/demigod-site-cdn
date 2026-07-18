@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T02:11:04.403Z",
+  "at": "2026-07-18T02:16:03.277Z",
   "port": 3460,
-  "tunnelUrl": "https://hip-pugs-repair.loca.lt",
-  "apiBase": "https://hip-pugs-repair.loca.lt/api/events-bot",
+  "tunnelUrl": "https://ten-phones-pump.loca.lt",
+  "apiBase": "https://ten-phones-pump.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 664286,
+  "tunnelPid": 668071,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T02:11:06.529Z"
+  "publishedAt": "2026-07-18T02:16:05.739Z"
 }
