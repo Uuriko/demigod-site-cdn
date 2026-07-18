@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T06:51:15.958Z",
+  "at": "2026-07-18T06:56:16.293Z",
   "port": 3460,
-  "tunnelUrl": "https://upset-numbers-itch.loca.lt",
-  "apiBase": "https://upset-numbers-itch.loca.lt/api/events-bot",
+  "tunnelUrl": "https://calm-birds-create.loca.lt",
+  "apiBase": "https://calm-birds-create.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 4051492,
-  "tunnelPid": 1007872,
+  "tunnelPid": 1014074,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T06:51:18.493Z"
+  "publishedAt": "2026-07-18T06:56:18.802Z"
 }
