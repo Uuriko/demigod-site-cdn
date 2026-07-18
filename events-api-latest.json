@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T19:51:44.368Z",
+  "at": "2026-07-18T19:56:45.483Z",
   "port": 3460,
-  "tunnelUrl": "https://true-steaks-dream.loca.lt",
-  "apiBase": "https://true-steaks-dream.loca.lt/api/events-bot",
+  "tunnelUrl": "https://plenty-terms-rule.loca.lt",
+  "apiBase": "https://plenty-terms-rule.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 1922998,
+  "tunnelPid": 1931461,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T19:51:46.313Z"
+  "publishedAt": "2026-07-18T19:56:49.296Z"
 }
