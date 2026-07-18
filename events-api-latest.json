@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-18T22:56:53.531Z",
+  "at": "2026-07-18T23:01:49.081Z",
   "port": 3460,
-  "tunnelUrl": "https://thick-kings-try.loca.lt",
-  "apiBase": "https://thick-kings-try.loca.lt/api/events-bot",
+  "tunnelUrl": "https://new-turtles-end.loca.lt",
+  "apiBase": "https://new-turtles-end.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2223860,
+  "tunnelPid": 2231538,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-18T22:56:55.456Z"
+  "publishedAt": "2026-07-18T23:01:51.797Z"
 }
