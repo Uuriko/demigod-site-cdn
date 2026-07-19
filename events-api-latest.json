@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-19T23:47:06.544Z",
+  "at": "2026-07-19T23:52:06.995Z",
   "port": 3460,
-  "tunnelUrl": "https://mechanical-wise-cigarettes-pregnant.trycloudflare.com",
-  "apiBase": "https://mechanical-wise-cigarettes-pregnant.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://genes-douglas-bacteria-jennifer.trycloudflare.com",
+  "apiBase": "https://genes-douglas-bacteria-jennifer.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2705221,
+  "tunnelPid": 2712052,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-19T23:47:08.572Z"
+  "publishedAt": "2026-07-19T23:52:08.911Z"
 }
