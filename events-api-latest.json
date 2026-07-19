@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-19T02:06:55.184Z",
+  "at": "2026-07-19T02:11:55.628Z",
   "port": 3460,
-  "tunnelUrl": "https://heavy-candies-admire.loca.lt",
-  "apiBase": "https://heavy-candies-admire.loca.lt/api/events-bot",
+  "tunnelUrl": "https://easy-wings-shake.loca.lt",
+  "apiBase": "https://easy-wings-shake.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2523545,
+  "tunnelPid": 2531225,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-19T02:06:57.104Z"
+  "publishedAt": "2026-07-19T02:12:00.154Z"
 }
