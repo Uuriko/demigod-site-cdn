@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-19T03:11:58.748Z",
+  "at": "2026-07-19T03:16:55.537Z",
   "port": 3460,
-  "tunnelUrl": "https://calm-clocks-chew.loca.lt",
-  "apiBase": "https://calm-clocks-chew.loca.lt/api/events-bot",
+  "tunnelUrl": "https://yellow-tables-do.loca.lt",
+  "apiBase": "https://yellow-tables-do.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2603243,
+  "tunnelPid": 2609278,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-19T03:12:03.278Z"
+  "publishedAt": "2026-07-19T03:16:57.432Z"
 }
