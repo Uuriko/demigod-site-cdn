@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-19T16:53:36.641Z",
+  "at": "2026-07-19T16:58:37.566Z",
   "port": 3460,
-  "tunnelUrl": "https://screw-vanilla-improving-invalid.trycloudflare.com",
-  "apiBase": "https://screw-vanilla-improving-invalid.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://cardiovascular-senators-local-switching.trycloudflare.com",
+  "apiBase": "https://cardiovascular-senators-local-switching.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2632942,
+  "tunnelPid": 2637812,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-19T16:53:38.493Z"
+  "publishedAt": "2026-07-19T16:58:39.420Z"
 }
