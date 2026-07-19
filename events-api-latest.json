@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-19T01:16:52.771Z",
+  "at": "2026-07-19T01:21:52.699Z",
   "port": 3460,
-  "tunnelUrl": "https://brave-bugs-heal.loca.lt",
-  "apiBase": "https://brave-bugs-heal.loca.lt/api/events-bot",
+  "tunnelUrl": "https://wide-adults-serve.loca.lt",
+  "apiBase": "https://wide-adults-serve.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1788978,
-  "tunnelPid": 2444175,
+  "tunnelPid": 2453517,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-19T01:16:54.697Z"
+  "publishedAt": "2026-07-19T01:21:54.540Z"
 }
