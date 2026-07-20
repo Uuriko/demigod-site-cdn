@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T11:44:44.459Z",
+  "at": "2026-07-20T11:50:05.798Z",
   "port": 3460,
-  "tunnelUrl": "https://publishers-ice-spray-angela.trycloudflare.com",
-  "apiBase": "https://publishers-ice-spray-angela.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://garden-annual-wondering-message.trycloudflare.com",
+  "apiBase": "https://garden-annual-wondering-message.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3316752,
+  "tunnelPid": 3322671,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T11:44:46.532Z"
+  "publishedAt": "2026-07-20T11:50:07.951Z"
 }
