@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T06:24:41.651Z",
+  "at": "2026-07-20T06:29:36.894Z",
   "port": 3460,
-  "tunnelUrl": "https://shaggy-olives-travel.loca.lt",
-  "apiBase": "https://shaggy-olives-travel.loca.lt/api/events-bot",
+  "tunnelUrl": "https://arthur-offices-excluded-sterling.trycloudflare.com",
+  "apiBase": "https://arthur-offices-excluded-sterling.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2956853,
+  "tunnelPid": 2961805,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T06:24:44.229Z"
+  "publishedAt": "2026-07-20T06:29:38.939Z"
 }
