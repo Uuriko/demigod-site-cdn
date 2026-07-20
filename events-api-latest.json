@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T12:43:16.160Z",
+  "at": "2026-07-20T12:48:46.966Z",
   "port": 3460,
-  "tunnelUrl": "https://calcium-oecd-among-equal.trycloudflare.com",
-  "apiBase": "https://calcium-oecd-among-equal.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://pro-vault-herb-constitutional.trycloudflare.com",
+  "apiBase": "https://pro-vault-herb-constitutional.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
-  "appPid": 2598089,
-  "tunnelPid": 3357571,
+  "appPid": null,
+  "tunnelPid": null,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T12:43:18.428Z"
+  "publishedAt": "2026-07-20T12:48:49.216Z"
 }
