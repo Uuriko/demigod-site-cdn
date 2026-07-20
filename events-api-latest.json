@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T21:20:51.004Z",
+  "at": "2026-07-20T21:26:16.319Z",
   "port": 3460,
-  "tunnelUrl": "https://tangy-worlds-allow.loca.lt",
-  "apiBase": "https://tangy-worlds-allow.loca.lt/api/events-bot",
+  "tunnelUrl": "https://lucas-violin-timer-used.trycloudflare.com",
+  "apiBase": "https://lucas-violin-timer-used.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3675300,
+  "tunnelPid": 3680854,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T21:20:53.163Z"
+  "publishedAt": "2026-07-20T21:26:18.378Z"
 }
