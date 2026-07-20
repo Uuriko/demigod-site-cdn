@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T08:34:39.265Z",
+  "at": "2026-07-20T08:39:39.206Z",
   "port": 3460,
-  "tunnelUrl": "https://dressing-kingdom-tech-demonstrated.trycloudflare.com",
-  "apiBase": "https://dressing-kingdom-tech-demonstrated.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://afford-plaintiff-nyc-nsw.trycloudflare.com",
+  "apiBase": "https://afford-plaintiff-nyc-nsw.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3100195,
+  "tunnelPid": 3105218,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T08:34:41.240Z"
+  "publishedAt": "2026-07-20T08:39:41.311Z"
 }
