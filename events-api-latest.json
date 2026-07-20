@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T19:30:52.068Z",
+  "at": "2026-07-20T19:36:16.691Z",
   "port": 3460,
-  "tunnelUrl": "https://slimy-moose-nail.loca.lt",
-  "apiBase": "https://slimy-moose-nail.loca.lt/api/events-bot",
+  "tunnelUrl": "https://plans-truck-many-cement.trycloudflare.com",
+  "apiBase": "https://plans-truck-many-cement.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3611307,
+  "tunnelPid": 3613803,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T19:30:54.396Z"
+  "publishedAt": "2026-07-20T19:36:18.605Z"
 }
