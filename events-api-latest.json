@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T06:29:36.894Z",
+  "at": "2026-07-20T06:34:38.820Z",
   "port": 3460,
-  "tunnelUrl": "https://arthur-offices-excluded-sterling.trycloudflare.com",
-  "apiBase": "https://arthur-offices-excluded-sterling.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://spanking-listing-creative-miniature.trycloudflare.com",
+  "apiBase": "https://spanking-listing-creative-miniature.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2961805,
+  "tunnelPid": 2967675,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T06:29:38.939Z"
+  "publishedAt": "2026-07-20T06:34:41.407Z"
 }
