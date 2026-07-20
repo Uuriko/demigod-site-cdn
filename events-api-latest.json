@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T06:14:36.358Z",
+  "at": "2026-07-20T06:19:36.674Z",
   "port": 3460,
-  "tunnelUrl": "https://paper-univ-accurate-patches.trycloudflare.com",
-  "apiBase": "https://paper-univ-accurate-patches.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://vintage-fabrics-depot-eos.trycloudflare.com",
+  "apiBase": "https://vintage-fabrics-depot-eos.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2945023,
+  "tunnelPid": 2950940,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T06:14:39.082Z"
+  "publishedAt": "2026-07-20T06:19:39.429Z"
 }
