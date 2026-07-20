@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T01:27:10.376Z",
+  "at": "2026-07-20T01:32:10.606Z",
   "port": 3460,
-  "tunnelUrl": "https://calgary-tourist-kidney-folder.trycloudflare.com",
-  "apiBase": "https://calgary-tourist-kidney-folder.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://shadows-college-powell-pharmacies.trycloudflare.com",
+  "apiBase": "https://shadows-college-powell-pharmacies.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 2820364,
+  "tunnelPid": 2826306,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T01:27:12.277Z"
+  "publishedAt": "2026-07-20T01:32:12.851Z"
 }
