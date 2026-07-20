@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T21:09:51.644Z",
+  "at": "2026-07-20T21:15:24.698Z",
   "port": 3460,
-  "tunnelUrl": "https://silver-ducks-build.loca.lt",
-  "apiBase": "https://silver-ducks-build.loca.lt/api/events-bot",
+  "tunnelUrl": "https://witty-baths-give.loca.lt",
+  "apiBase": "https://witty-baths-give.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3666566,
+  "tunnelPid": 3671595,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T21:09:53.967Z"
+  "publishedAt": "2026-07-20T21:15:26.831Z"
 }
