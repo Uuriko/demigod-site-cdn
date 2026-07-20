@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T12:59:50.615Z",
+  "at": "2026-07-20T13:05:23.792Z",
   "port": 3460,
-  "tunnelUrl": "https://purple-wombats-tan.loca.lt",
-  "apiBase": "https://purple-wombats-tan.loca.lt/api/events-bot",
+  "tunnelUrl": "https://proud-bottles-say.loca.lt",
+  "apiBase": "https://proud-bottles-say.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3364495,
+  "tunnelPid": 3370176,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T12:59:52.915Z"
+  "publishedAt": "2026-07-20T13:05:26.502Z"
 }
