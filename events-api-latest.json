@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T19:47:20.643Z",
+  "at": "2026-07-20T19:52:46.142Z",
   "port": 3460,
-  "tunnelUrl": "https://clean-moles-sleep.loca.lt",
-  "apiBase": "https://clean-moles-sleep.loca.lt/api/events-bot",
+  "tunnelUrl": "https://household-freebsd-least-garage.trycloudflare.com",
+  "apiBase": "https://household-freebsd-least-garage.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3621211,
+  "tunnelPid": 3623146,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T19:47:22.945Z"
+  "publishedAt": "2026-07-20T19:52:48.413Z"
 }
