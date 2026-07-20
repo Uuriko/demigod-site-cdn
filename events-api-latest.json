@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-20T08:59:39.544Z",
+  "at": "2026-07-20T09:04:40.179Z",
   "port": 3460,
-  "tunnelUrl": "https://root-fully-spy-change.trycloudflare.com",
-  "apiBase": "https://root-fully-spy-change.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://frame-feet-recognize-steady.trycloudflare.com",
+  "apiBase": "https://frame-feet-recognize-steady.trycloudflare.com/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 2598089,
-  "tunnelPid": 3131487,
+  "tunnelPid": 3136119,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-20T08:59:41.403Z"
+  "publishedAt": "2026-07-20T09:04:42.248Z"
 }
