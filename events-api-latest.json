@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-21T03:19:35.562Z",
+  "at": "2026-07-21T03:21:29.285Z",
   "port": 3460,
   "tunnelUrl": "https://cartoons-dietary-saved-excessive.trycloudflare.com",
   "apiBase": "https://cartoons-dietary-saved-excessive.trycloudflare.com/api/events-bot",
@@ -12,5 +12,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-21T03:19:37.818Z"
+  "publishedAt": "2026-07-21T03:21:31.483Z"
 }
