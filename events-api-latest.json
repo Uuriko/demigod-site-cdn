@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-21T01:55:28.022Z",
+  "at": "2026-07-21T02:00:42.064Z",
   "port": 3460,
-  "tunnelUrl": "https://clean-years-joke.loca.lt",
-  "apiBase": "https://clean-years-joke.loca.lt/api/events-bot",
+  "tunnelUrl": "https://long-dodos-sip.loca.lt",
+  "apiBase": "https://long-dodos-sip.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 3777986,
-  "tunnelPid": 3922753,
+  "tunnelPid": 3935605,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-21T01:55:30.096Z"
+  "publishedAt": "2026-07-21T02:00:44.478Z"
 }
