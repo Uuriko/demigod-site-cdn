@@ -1,13 +1,15 @@
 {
-  "schema": "demigod.sf-startup-map/1",
-  "generatedAt": "2026-07-22T11:57:30.733Z",
+  "schema": "demigod.sf-startup-map/2",
+  "generatedAt": "2026-07-22T12:09:57.816Z",
   "coverage": {
     "total": 1761,
     "mapped": 1725,
     "unmapped": 36,
     "neighborhoods": 38,
+    "namedCompanies": 55,
+    "ycIndependentlyEvidenced": 47,
     "definition": "Active San Francisco technology business locations with a business start date on or after January 1, 2020, using selected self-reported software, computing, electronics, pharmaceutical, and R&D NAICS groups.",
-    "caveat": "This is an open-data proxy for startup activity, not a startup census. Registrations can include consultants, established firms, and home-based businesses; counts are neighborhood aggregates, never address pins."
+    "caveat": "This is an open-data proxy for startup activity, not a startup census. Registrations can include consultants, established firms, and home-based businesses; counts are neighborhood aggregates, never address pins. Named-company facts come from CC0 Wikidata and may be stale; current operating status is not independently verified."
   },
   "method": {
     "since": "2020-01-01",
@@ -28,14 +30,20 @@
     {
       "name": "DataSF Registered Business Locations — San Francisco",
       "url": "https://data.sfgov.org/Economy-and-Community/Registered-Business-Locations-San-Francisco/g8m3-pdis",
-      "retrievedAt": "2026-07-22T11:57:30.733Z",
+      "retrievedAt": "2026-07-22T12:09:57.816Z",
       "license": "PDDL-1.0"
     },
     {
       "name": "DataSF Analysis Neighborhoods",
       "url": "https://data.sfgov.org/resource/j2bu-swwd.geojson?$limit=50",
-      "retrievedAt": "2026-07-22T11:57:30.733Z",
+      "retrievedAt": "2026-07-22T12:09:57.816Z",
       "license": "PDDL-1.0"
+    },
+    {
+      "name": "Wikidata",
+      "url": "https://www.wikidata.org/",
+      "retrievedAt": "2026-07-22T12:09:57.816Z",
+      "license": "CC0-1.0"
     }
   ],
   "bounds": {
@@ -23657,6 +23665,834 @@
           ]
         ]
       }
+    }
+  ],
+  "companies": [
+    {
+      "id": "wd:Q4546003",
+      "name": "1000Memories",
+      "website": "http://1000memories.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q4546003",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q63327",
+      "name": "Airbnb",
+      "website": "https://www.airbnb.com/",
+      "inceptionYear": 2008,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q63327",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q16970586",
+      "name": "Airware",
+      "website": "https://www.airware.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16970586",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q137176743",
+      "name": "AiSDR Inc.",
+      "website": "https://aisdr.com/",
+      "inceptionYear": 2023,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q137176743",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q135683783",
+      "name": "Anysphere, Inc.",
+      "website": "https://anysphere.inc/",
+      "inceptionYear": 2022,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q135683783",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q4839031",
+      "name": "BackType",
+      "website": "http://www.backtype.com/",
+      "inceptionYear": 2008,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q4839031",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q749851",
+      "name": "Bitnami",
+      "website": "https://bitnami.com/",
+      "inceptionYear": 2011,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q749851",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q60741065",
+      "name": "Brex",
+      "website": "http://brex.com/",
+      "inceptionYear": 2017,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q60741065",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q140167229",
+      "name": "CamelAI",
+      "website": "https://camelai.com/",
+      "inceptionYear": null,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q140167229",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q5135748",
+      "name": "Cloudkick",
+      "website": "http://www.cloudkick.com/",
+      "inceptionYear": 2009,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q5135748",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q16247865",
+      "name": "Clustrix",
+      "website": "http://www.clustrix.com/",
+      "inceptionYear": 2006,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16247865",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q25024981",
+      "name": "CodeCombat",
+      "website": "http://codecombat.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q25024981",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q16972754",
+      "name": "Coinbase",
+      "website": "https://www.coinbase.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q16972754",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q19866696",
+      "name": "CrowdMed",
+      "website": "https://www.crowdmed.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19866696",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q42377899",
+      "name": "Cruise",
+      "website": "https://getcruise.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q42377899",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20714323",
+      "name": "DoorDash",
+      "website": "https://www.doordash.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20714323",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q107477693",
+      "name": "EdgeDB Inc.",
+      "website": null,
+      "inceptionYear": 2019,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q107477693",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q130482422",
+      "name": "FirstQuadrant",
+      "website": "https://firstquadrant.ai/",
+      "inceptionYear": null,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q130482422",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q23016856",
+      "name": "Flexport",
+      "website": "https://www.flexport.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q23016856",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q134837709",
+      "name": "FunRoutine, Inc.",
+      "website": null,
+      "inceptionYear": null,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q134837709",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q18151294",
+      "name": "FutureAdvisor",
+      "website": "https://www.futureadvisor.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18151294",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q2350702",
+      "name": "Heroku",
+      "website": "https://www.heroku.com/",
+      "inceptionYear": 2007,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q2350702",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q267427",
+      "name": "Humble Bundle, Inc.",
+      "website": "https://www.humblebundle.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q267427",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q105550837",
+      "name": "Insight Data Science Fellows Program",
+      "website": "https://insightfellows.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q105550837",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q22909236",
+      "name": "Instacart",
+      "website": "https://instacart.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q22909236",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q33127602",
+      "name": "Legalist",
+      "website": "http://www.legalist.com/",
+      "inceptionYear": 2016,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q33127602",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q17031378",
+      "name": "LendUp",
+      "website": "https://www.lendup.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17031378",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q139239188",
+      "name": "Lumari",
+      "website": "https://lumari.ai/",
+      "inceptionYear": 2025,
+      "tags": [
+        "yc",
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q139239188",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q22095813",
+      "name": "MailTime",
+      "website": "http://mailtime.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q22095813",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q124331113",
+      "name": "MapJam",
+      "website": null,
+      "inceptionYear": 2012,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q124331113",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q25048114",
+      "name": "Mixpanel",
+      "website": "http://mixpanel.com/",
+      "inceptionYear": 2009,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q25048114",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q30592095",
+      "name": "Modal Commerce",
+      "website": "http://modalup.com/",
+      "inceptionYear": 2015,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q30592095",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20714611",
+      "name": "Open Listings",
+      "website": "http://www.openlistings.com/",
+      "inceptionYear": 2014,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20714611",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q17073302",
+      "name": "Optimizely",
+      "website": "https://www.optimizely.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17073302",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20714657",
+      "name": "OrderAhead",
+      "website": "https://www.orderaheadapp.com/",
+      "inceptionYear": null,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20714657",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q48989804",
+      "name": "PagerDuty",
+      "website": "http://www.pagerduty.com/",
+      "inceptionYear": 2009,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q48989804",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20072371",
+      "name": "Petcube",
+      "website": "http://petcube.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20072371",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q7200860",
+      "name": "PlanGrid",
+      "website": "http://plangrid.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7200860",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q386957",
+      "name": "Prezi",
+      "website": "https://www.prezi.com/",
+      "inceptionYear": 2009,
+      "tags": [
+        "wikidata-startup"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q386957",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q1136",
+      "name": "Reddit",
+      "website": "https://www.reddit.com/",
+      "inceptionYear": 2005,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1136",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q60768699",
+      "name": "Replit",
+      "website": "https://replit.com/",
+      "inceptionYear": null,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q60768699",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q1467888",
+      "name": "Scribd",
+      "website": "https://www.scribd.com/",
+      "inceptionYear": 2006,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q1467888",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q7624104",
+      "name": "Stripe",
+      "website": "https://stripe.com/",
+      "inceptionYear": 2010,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7624104",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q17089237",
+      "name": "Survata",
+      "website": "http://www.survata.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q17089237",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q18386897",
+      "name": "Swiftype",
+      "website": "http://swiftype.com/",
+      "inceptionYear": 2012,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18386897",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q39087006",
+      "name": "The Athletic",
+      "website": "https://theathletic.com/",
+      "inceptionYear": 2016,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q39087006",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q19604596",
+      "name": "True Link",
+      "website": "https://www.truelinkfinancial.com/",
+      "inceptionYear": null,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q19604596",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q7858039",
+      "name": "Twilio",
+      "website": "http://www.authy.com/",
+      "inceptionYear": 2008,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7858039",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q98081129",
+      "name": "Twitch Interactive",
+      "website": "https://www.twitch.tv/p/",
+      "inceptionYear": 2006,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q98081129",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q28033164",
+      "name": "Verbling",
+      "website": "http://verbling.com/",
+      "inceptionYear": 2011,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q28033164",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q7960890",
+      "name": "WakeMate",
+      "website": "http://www.wakemate.com/",
+      "inceptionYear": 2009,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7960890",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20160951",
+      "name": "Webflow",
+      "website": "https://webflow.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20160951",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q8044873",
+      "name": "Xobni",
+      "website": "https://xobni.com/",
+      "inceptionYear": 2006,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q8044873",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q20155991",
+      "name": "Zenefits",
+      "website": "http://www.zenefits.com/",
+      "inceptionYear": 2013,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q20155991",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
+    },
+    {
+      "id": "wd:Q18390971",
+      "name": "ZeroCater",
+      "website": "http://zerocater.com/",
+      "inceptionYear": 2011,
+      "tags": [
+        "yc"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "source": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/wiki/Q18390971",
+      "sourceLicense": "CC0-1.0",
+      "retrievedAt": "2026-07-22T12:09:57.784Z"
     }
   ]
 }
