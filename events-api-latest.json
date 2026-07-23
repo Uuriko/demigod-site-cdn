@@ -1,16 +1,16 @@
 {
-  "at": "2026-07-23T19:14:32.356Z",
+  "at": "2026-07-23T19:16:38.758Z",
   "port": 3460,
-  "tunnelUrl": "https://vast-dots-hunt.loca.lt",
-  "apiBase": "https://vast-dots-hunt.loca.lt/api/events-bot",
+  "tunnelUrl": "https://demigod-events-bot.loca.lt",
+  "apiBase": "https://demigod-events-bot.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "appPid": 1630842,
-  "tunnelPid": 1976525,
+  "tunnelPid": 1986659,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-23T19:14:35.073Z"
+  "publishedAt": "2026-07-23T19:16:41.582Z"
 }
