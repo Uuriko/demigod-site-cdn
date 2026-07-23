@@ -1,12 +1,13 @@
 {
-  "schema": "demigod.sf-startup-map/2",
-  "generatedAt": "2026-07-22T12:09:57.816Z",
+  "schema": "demigod.sf-startup-map/3",
+  "generatedAt": "2026-07-23T00:42:54.652Z",
   "coverage": {
     "total": 1761,
     "mapped": 1725,
     "unmapped": 36,
     "neighborhoods": 38,
     "namedCompanies": 55,
+    "venueLeads": 10,
     "ycIndependentlyEvidenced": 47,
     "definition": "Active San Francisco technology business locations with a business start date on or after January 1, 2020, using selected self-reported software, computing, electronics, pharmaceutical, and R&D NAICS groups.",
     "caveat": "This is an open-data proxy for startup activity, not a startup census. Registrations can include consultants, established firms, and home-based businesses; counts are neighborhood aggregates, never address pins. Named-company facts come from CC0 Wikidata and may be stale; current operating status is not independently verified."
@@ -30,19 +31,19 @@
     {
       "name": "DataSF Registered Business Locations — San Francisco",
       "url": "https://data.sfgov.org/Economy-and-Community/Registered-Business-Locations-San-Francisco/g8m3-pdis",
-      "retrievedAt": "2026-07-22T12:09:57.816Z",
+      "retrievedAt": "2026-07-23T00:42:54.652Z",
       "license": "PDDL-1.0"
     },
     {
       "name": "DataSF Analysis Neighborhoods",
       "url": "https://data.sfgov.org/resource/j2bu-swwd.geojson?$limit=50",
-      "retrievedAt": "2026-07-22T12:09:57.816Z",
+      "retrievedAt": "2026-07-23T00:42:54.652Z",
       "license": "PDDL-1.0"
     },
     {
       "name": "Wikidata",
       "url": "https://www.wikidata.org/",
-      "retrievedAt": "2026-07-22T12:09:57.816Z",
+      "retrievedAt": "2026-07-23T00:42:54.652Z",
       "license": "CC0-1.0"
     }
   ],
@@ -23671,6 +23672,7 @@
     {
       "id": "wd:Q4546003",
       "name": "1000Memories",
+      "description": "company",
       "website": "http://1000memories.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -23681,11 +23683,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q4546003",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q63327",
       "name": "Airbnb",
+      "description": "American online platform for rental accommodations",
       "website": "https://www.airbnb.com/",
       "inceptionYear": 2008,
       "tags": [
@@ -23696,11 +23699,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q63327",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q16970586",
       "name": "Airware",
+      "description": "American startup that offers a development platform for commercial Unmanned aerial vehicles",
       "website": "https://www.airware.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -23711,11 +23715,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q16970586",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q137176743",
       "name": "AiSDR Inc.",
+      "description": "San Francisco–based SaaS startup offering an AI sales agent for deeply researched & high-converting automated omni-channel outreach that feels human.",
       "website": "https://aisdr.com/",
       "inceptionYear": 2023,
       "tags": [
@@ -23726,11 +23731,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q137176743",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q135683783",
       "name": "Anysphere, Inc.",
+      "description": "American artificial intelligence software company known for the AI-native code editor, Cursor",
       "website": "https://anysphere.inc/",
       "inceptionYear": 2022,
       "tags": [
@@ -23741,11 +23747,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q135683783",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q4839031",
       "name": "BackType",
+      "description": "company",
       "website": "http://www.backtype.com/",
       "inceptionYear": 2008,
       "tags": [
@@ -23756,11 +23763,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q4839031",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q749851",
       "name": "Bitnami",
+      "description": "library of installers or software packages for web applications and development stacks as well as virtual appliances",
       "website": "https://bitnami.com/",
       "inceptionYear": 2011,
       "tags": [
@@ -23771,11 +23779,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q749851",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q60741065",
       "name": "Brex",
+      "description": "finance and technology company",
       "website": "http://brex.com/",
       "inceptionYear": 2017,
       "tags": [
@@ -23786,11 +23795,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q60741065",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q140167229",
       "name": "CamelAI",
+      "description": "American open-source AI software company",
       "website": "https://camelai.com/",
       "inceptionYear": null,
       "tags": [
@@ -23801,11 +23811,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q140167229",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q5135748",
       "name": "Cloudkick",
+      "description": null,
       "website": "http://www.cloudkick.com/",
       "inceptionYear": 2009,
       "tags": [
@@ -23816,11 +23827,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q5135748",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q16247865",
       "name": "Clustrix",
+      "description": "company",
       "website": "http://www.clustrix.com/",
       "inceptionYear": 2006,
       "tags": [
@@ -23831,11 +23843,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q16247865",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q25024981",
       "name": "CodeCombat",
+      "description": "company that produces programming games",
       "website": "http://codecombat.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -23846,11 +23859,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q25024981",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q16972754",
       "name": "Coinbase",
+      "description": "American company that operates a cryptocurrency exchange platform",
       "website": "https://www.coinbase.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -23861,11 +23875,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q16972754",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q19866696",
       "name": "CrowdMed",
+      "description": "company",
       "website": "https://www.crowdmed.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -23876,11 +23891,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q19866696",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q42377899",
       "name": "Cruise",
+      "description": "self-driving car company",
       "website": "https://getcruise.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -23891,11 +23907,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q42377899",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20714323",
       "name": "DoorDash",
+      "description": "American food delivery company",
       "website": "https://www.doordash.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -23906,11 +23923,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20714323",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q107477693",
       "name": "EdgeDB Inc.",
+      "description": "developer of EdgeDB",
       "website": null,
       "inceptionYear": 2019,
       "tags": [
@@ -23921,11 +23939,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q107477693",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q130482422",
       "name": "FirstQuadrant",
+      "description": "AI sales platform startup",
       "website": "https://firstquadrant.ai/",
       "inceptionYear": null,
       "tags": [
@@ -23936,11 +23955,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q130482422",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q23016856",
       "name": "Flexport",
+      "description": "US internet-based freight forwarding company",
       "website": "https://www.flexport.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -23951,11 +23971,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q23016856",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q134837709",
       "name": "FunRoutine, Inc.",
+      "description": "software company that develops the Workflowy outliner",
       "website": null,
       "inceptionYear": null,
       "tags": [
@@ -23966,11 +23987,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q134837709",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q18151294",
       "name": "FutureAdvisor",
+      "description": "asset management website",
       "website": "https://www.futureadvisor.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -23981,11 +24003,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q18151294",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q2350702",
       "name": "Heroku",
+      "description": "cloud platform as a service",
       "website": "https://www.heroku.com/",
       "inceptionYear": 2007,
       "tags": [
@@ -23996,11 +24019,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q2350702",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q267427",
       "name": "Humble Bundle, Inc.",
+      "description": "digital storefront company selling video games and books",
       "website": "https://www.humblebundle.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -24011,11 +24035,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q267427",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q105550837",
       "name": "Insight Data Science Fellows Program",
+      "description": "job training fellowship program based in San Francisco, CA",
       "website": "https://insightfellows.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24026,11 +24051,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q105550837",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q22909236",
       "name": "Instacart",
+      "description": "Internet-based grocery delivery service",
       "website": "https://instacart.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24041,11 +24067,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q22909236",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q33127602",
       "name": "Legalist",
+      "description": "American litigation finance company",
       "website": "http://www.legalist.com/",
       "inceptionYear": 2016,
       "tags": [
@@ -24056,11 +24083,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q33127602",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q17031378",
       "name": "LendUp",
+      "description": "financial technology company",
       "website": "https://www.lendup.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24071,11 +24099,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q17031378",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q139239188",
       "name": "Lumari",
+      "description": "American AI procurement and supply chain software company",
       "website": "https://lumari.ai/",
       "inceptionYear": 2025,
       "tags": [
@@ -24087,11 +24116,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q139239188",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q22095813",
       "name": "MailTime",
+      "description": "mobile messenger application",
       "website": "http://mailtime.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -24102,11 +24132,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q22095813",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q124331113",
       "name": "MapJam",
+      "description": "former GIS company",
       "website": null,
       "inceptionYear": 2012,
       "tags": [
@@ -24117,11 +24148,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q124331113",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q25048114",
       "name": "Mixpanel",
+      "description": "business analytics company",
       "website": "http://mixpanel.com/",
       "inceptionYear": 2009,
       "tags": [
@@ -24132,11 +24164,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q25048114",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q30592095",
       "name": "Modal Commerce",
+      "description": "American software company",
       "website": "http://modalup.com/",
       "inceptionYear": 2015,
       "tags": [
@@ -24147,11 +24180,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q30592095",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20714611",
       "name": "Open Listings",
+      "description": "company",
       "website": "http://www.openlistings.com/",
       "inceptionYear": 2014,
       "tags": [
@@ -24162,11 +24196,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20714611",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q17073302",
       "name": "Optimizely",
+      "description": "American multinational Internet and technology corporation",
       "website": "https://www.optimizely.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -24177,11 +24212,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q17073302",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20714657",
       "name": "OrderAhead",
+      "description": "company",
       "website": "https://www.orderaheadapp.com/",
       "inceptionYear": null,
       "tags": [
@@ -24192,11 +24228,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20714657",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q48989804",
       "name": "PagerDuty",
+      "description": "company",
       "website": "http://www.pagerduty.com/",
       "inceptionYear": 2009,
       "tags": [
@@ -24207,11 +24244,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q48989804",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20072371",
       "name": "Petcube",
+      "description": "company",
       "website": "http://petcube.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -24222,11 +24260,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20072371",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q7200860",
       "name": "PlanGrid",
+      "description": "company",
       "website": "http://plangrid.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24237,11 +24276,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q7200860",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q386957",
       "name": "Prezi",
+      "description": "cloud-based presentation software based on a software as a service model",
       "website": "https://www.prezi.com/",
       "inceptionYear": 2009,
       "tags": [
@@ -24252,11 +24292,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q386957",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q1136",
       "name": "Reddit",
+      "description": "American social news aggregation website and discussion portal",
       "website": "https://www.reddit.com/",
       "inceptionYear": 2005,
       "tags": [
@@ -24267,11 +24308,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q1136",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q60768699",
       "name": "Replit",
+      "description": "Online IDE",
       "website": "https://replit.com/",
       "inceptionYear": null,
       "tags": [
@@ -24282,11 +24324,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q60768699",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q1467888",
       "name": "Scribd",
+      "description": "digital library",
       "website": "https://www.scribd.com/",
       "inceptionYear": 2006,
       "tags": [
@@ -24297,11 +24340,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q1467888",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q7624104",
       "name": "Stripe",
+      "description": "Irish-American payment technology company",
       "website": "https://stripe.com/",
       "inceptionYear": 2010,
       "tags": [
@@ -24312,11 +24356,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q7624104",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q17089237",
       "name": "Survata",
+      "description": "online survey research company",
       "website": "http://www.survata.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24327,11 +24372,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q17089237",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q18386897",
       "name": "Swiftype",
+      "description": "company",
       "website": "http://swiftype.com/",
       "inceptionYear": 2012,
       "tags": [
@@ -24342,11 +24388,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q18386897",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q39087006",
       "name": "The Athletic",
+      "description": "subscription-based sports news website",
       "website": "https://theathletic.com/",
       "inceptionYear": 2016,
       "tags": [
@@ -24357,11 +24404,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q39087006",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q19604596",
       "name": "True Link",
+      "description": "company",
       "website": "https://www.truelinkfinancial.com/",
       "inceptionYear": null,
       "tags": [
@@ -24372,11 +24420,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q19604596",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q7858039",
       "name": "Twilio",
+      "description": "US technology company",
       "website": "http://www.authy.com/",
       "inceptionYear": 2008,
       "tags": [
@@ -24387,11 +24436,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q7858039",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q98081129",
       "name": "Twitch Interactive",
+      "description": "Amazon subsidiary company that operates Twitch.tv",
       "website": "https://www.twitch.tv/p/",
       "inceptionYear": 2006,
       "tags": [
@@ -24402,11 +24452,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q98081129",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q28033164",
       "name": "Verbling",
+      "description": "company",
       "website": "http://verbling.com/",
       "inceptionYear": 2011,
       "tags": [
@@ -24417,11 +24468,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q28033164",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q7960890",
       "name": "WakeMate",
+      "description": "company",
       "website": "http://www.wakemate.com/",
       "inceptionYear": 2009,
       "tags": [
@@ -24432,11 +24484,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q7960890",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20160951",
       "name": "Webflow",
+      "description": "website development tool",
       "website": "https://webflow.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -24447,11 +24500,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20160951",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q8044873",
       "name": "Xobni",
+      "description": "company",
       "website": "https://xobni.com/",
       "inceptionYear": 2006,
       "tags": [
@@ -24462,11 +24516,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q8044873",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q20155991",
       "name": "Zenefits",
+      "description": "American human resources company",
       "website": "http://www.zenefits.com/",
       "inceptionYear": 2013,
       "tags": [
@@ -24477,11 +24532,12 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q20155991",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
     },
     {
       "id": "wd:Q18390971",
       "name": "ZeroCater",
+      "description": "catering start-up",
       "website": "http://zerocater.com/",
       "inceptionYear": 2011,
       "tags": [
@@ -24492,7 +24548,211 @@
       "source": "Wikidata",
       "sourceUrl": "https://www.wikidata.org/wiki/Q18390971",
       "sourceLicense": "CC0-1.0",
-      "retrievedAt": "2026-07-22T12:09:57.784Z"
+      "retrievedAt": "2026-07-23T00:42:54.594Z"
+    }
+  ],
+  "venues": [
+    {
+      "id": "v_mission_library",
+      "name": "Mission Branch Library meeting room",
+      "area": "Mission",
+      "capacity": 20,
+      "cost": "free (reserve)",
+      "notes": "SFPL room request; good for talks/salons",
+      "tags": [
+        "salon",
+        "talk",
+        "indoor"
+      ],
+      "lat": 37.751969,
+      "lng": -122.419826,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_main_library",
+      "name": "SF Main Library / Civic Center meeting room",
+      "area": "Civic Center",
+      "capacity": 30,
+      "cost": "free (reserve)",
+      "notes": "SFPL Main Library rooms; talks/salons; reserve via SFPL",
+      "tags": [
+        "salon",
+        "talk",
+        "indoor",
+        "library"
+      ],
+      "lat": 37.779082,
+      "lng": -122.416152,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_soma_parklet",
+      "name": "South Park lawn / parklet hang",
+      "area": "SoMa",
+      "capacity": 25,
+      "cost": "free public",
+      "notes": "Weather-dependent; soft social / picnic",
+      "tags": [
+        "social",
+        "outdoor",
+        "picnic"
+      ],
+      "lat": 37.78159,
+      "lng": -122.39397,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_yerba_buena",
+      "name": "Yerba Buena Gardens edge meetup",
+      "area": "SoMa",
+      "capacity": 35,
+      "cost": "free public",
+      "notes": "Soft outdoor hang near Moscone; no exclusive use",
+      "tags": [
+        "outdoor",
+        "social",
+        "meetup"
+      ],
+      "lat": 37.78487,
+      "lng": -122.40215,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_embarcadero_bench",
+      "name": "Embarcadero promenade meetup point",
+      "area": "Embarcadero",
+      "capacity": 40,
+      "cost": "free public",
+      "notes": "Walk-and-talk start; no exclusive use",
+      "tags": [
+        "walk",
+        "outdoor",
+        "networking"
+      ],
+      "lat": 37.79546,
+      "lng": -122.39361,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_hayes_green",
+      "name": "Patricia's Green / Hayes Valley open space",
+      "area": "Hayes Valley",
+      "capacity": 30,
+      "cost": "free public",
+      "notes": "Daytime preferred; loud evenings",
+      "tags": [
+        "outdoor",
+        "daytime"
+      ],
+      "lat": 37.776227,
+      "lng": -122.424422,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_dolores",
+      "name": "Mission Dolores Park edge meetup",
+      "area": "Mission",
+      "capacity": 50,
+      "cost": "free public",
+      "notes": "Large soft hang; bring blankets",
+      "tags": [
+        "outdoor",
+        "party",
+        "picnic"
+      ],
+      "lat": 37.759576,
+      "lng": -122.426868,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_ferry_arcade",
+      "name": "Ferry Building arcade / plaza edge",
+      "area": "Embarcadero",
+      "capacity": 20,
+      "cost": "free public (no exclusive)",
+      "notes": "Short meetups; food nearby for sponsor tab",
+      "tags": [
+        "meetup",
+        "food",
+        "outdoor"
+      ],
+      "lat": 37.795464,
+      "lng": -122.393614,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_crissy",
+      "name": "Crissy Field / Marina Green meetup",
+      "area": "Marina / Presidio",
+      "capacity": 40,
+      "cost": "free public",
+      "notes": "Walk-and-talk start; weather-dependent; no exclusive use",
+      "tags": [
+        "walk",
+        "outdoor",
+        "meetup",
+        "networking"
+      ],
+      "lat": 37.806,
+      "lng": -122.4457,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
+    },
+    {
+      "id": "v_salesforce_park",
+      "name": "Salesforce Park / Transit Center roof garden edge",
+      "area": "SoMa",
+      "capacity": 30,
+      "cost": "free public",
+      "notes": "Elevated soft hang near Salesforce Tower; hours vary; no exclusive use",
+      "tags": [
+        "outdoor",
+        "social",
+        "meetup",
+        "daytime"
+      ],
+      "lat": 37.7897,
+      "lng": -122.396,
+      "availability": "not verified",
+      "source": "Demigod venue research seed",
+      "sourceUrl": null,
+      "sourceLicense": null,
+      "retrievedAt": "2026-07-23T00:42:54.613Z"
     }
   ]
 }
