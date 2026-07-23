@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-23T19:05:04.922Z",
+  "at": "2026-07-23T19:05:31.050Z",
   "port": 3460,
   "tunnelUrl": "https://dry-birds-tease.loca.lt",
   "apiBase": "https://dry-birds-tease.loca.lt/api/events-bot",
@@ -12,5 +12,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-23T19:05:07.634Z"
+  "publishedAt": "2026-07-23T19:05:33.631Z"
 }
