@@ -557,10 +557,8 @@ body{background-color:var(--dg-cool)!important;background-image:radial-gradient(
 #dg-path-pills a{ letter-spacing:.01em; }
 .badge-text,.eyebrow{ letter-spacing:.16em !important; }
 
-/* v204 home-minimal FOUC: hide below-fold essay walls until foot loads */
+/* v831 keeps only named legacy/runtime blocks hidden; the authored process and pricing stay native-visible. */
 #demigod-trust-block,#dg-faq,#dg-proof-strip,#dg-pipeline-note,#dg-contact-strip,#dg-hero-trust,#insights-section,.insights-section{display:none!important}
-main > section:not(.hero-section):not(.header){display:none!important}
-body > section:not(.hero-section):not(.header):not([id*=modal]):not(#startup-modal):not(#jobseeker-modal){display:none!important}
 .hero-actions a.premium-btn,.hero-actions a.button{border-radius:12px!important;min-height:48px!important}
 /* Never reveal an unclassified canvas CTA. foot-core adds data-dg-cta only
    after it has replaced legacy HIRE/FIND/JOIN labels with the canonical pair. */
