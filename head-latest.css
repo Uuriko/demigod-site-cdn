@@ -1,7 +1,7 @@
 /* demigod-head-styles.css — CANONICAL head CSS (CDN linked from demigod-head-minimal.html)
  * Brand tokens, hero, WIZ chrome, modals, mobile bar, FOUC guards.
  * Layers accumulate with foot versions (v150+ … v204+ annotations in selectors).
- * Ship: demigod-head-css-publish.mjs → patch link in head-minimal → cm6 head paste.
+ * Ship: demigod-foot-cdn-publish.mjs site bundle → patch link in head-minimal → cm6 head paste.
  * NEVER: MutationObserver style thrash (see foot v187 postmortem).
  */
 /* v421 readiness guard: keep Webflow's legacy CTA labels out of first paint.
