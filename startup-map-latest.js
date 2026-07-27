@@ -182,7 +182,7 @@
     var count = root.querySelector('.dg-dir-count');
     // Search-driven render: with ~2k companies, only paint matching rows (capped) instead of the
     // whole list — keeps the DOM light and the page fast. Search covers ALL companies.
-    var CAP = 50;
+    var CAP = 20;
     function renderRows() {
       var q = searchEl.value.trim().toLowerCase();
       var h = hiringEl.value;
