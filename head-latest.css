@@ -1456,7 +1456,6 @@ html,body{
   max-width:18ch!important;
   min-height:2.55em!important;
   height:2.55em!important;
-  overflow:hidden!important;
   margin:.2rem 0 1rem!important;
   color:var(--dg-phosphor)!important;
   font-family:var(--dg-cyber)!important;
