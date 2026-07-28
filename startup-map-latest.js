@@ -119,6 +119,8 @@
     if (company.inceptionYear) bits.push('founded ' + esc(company.inceptionYear));
     if (community && company.neighborhood) bits.push(esc(company.neighborhood) + ' (descriptive)');
     if (openRoles) bits.push('US-posted roles as of ' + esc(company.openRolesAt || ''));
+    // Role-truth signal: how many open roles have been posted 90+ days ago (per the board's own date).
+    if (openRoles && typeof company.agingRoles === 'number' && company.agingRoles > 0) bits.push(esc(company.agingRoles) + ' posted 90+ days ago');
     var nameHtml = website
       ? '<a class="dg-dir-name" href="' + esc(website) + '" target="_blank" rel="' + (community ? 'noopener noreferrer ugc nofollow' : 'noopener noreferrer') + '">' + esc(company.name) + '</a>'
       : '<span class="dg-dir-name is-plain">' + esc(company.name) + '</span>';
