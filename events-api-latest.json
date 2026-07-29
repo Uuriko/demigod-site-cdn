@@ -1,5 +1,5 @@
 {
-  "at": "2026-07-29T19:53:43.918Z",
+  "at": "2026-07-29T19:55:36.777Z",
   "port": 3460,
   "tunnelUrl": "https://big-ads-win.loca.lt",
   "apiBase": "https://big-ads-win.loca.lt/api/events-bot",
@@ -14,5 +14,5 @@
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-29T19:53:46.451Z"
+  "publishedAt": "2026-07-29T19:55:39.682Z"
 }
