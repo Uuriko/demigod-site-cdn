@@ -1,18 +1,18 @@
 {
-  "at": "2026-07-28T15:04:45.867Z",
+  "at": "2026-07-29T03:28:14.875Z",
   "port": 3460,
-  "tunnelUrl": "https://respond-carries-phillips-uploaded.trycloudflare.com",
-  "apiBase": "https://respond-carries-phillips-uploaded.trycloudflare.com/api/events-bot",
+  "tunnelUrl": "https://fast-papers-shout.loca.lt",
+  "apiBase": "https://fast-papers-shout.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "preferredTunnelMatch": false,
-  "preferredTunnelNote": "Cloudflare quick tunnels assign random *.trycloudflare.com hostnames; preferredSubdomain \"demigod-events-bot\" is for loca.lt sticky only. Match false is expected until a named CF tunnel + custom domain is configured.",
-  "appPid": 3482727,
-  "tunnelPid": 2832985,
+  "preferredTunnelNote": "Sticky loca preferred is demigod-events-bot.loca.lt; live host is fast-papers-shout.loca.lt",
+  "appPid": 6609,
+  "tunnelPid": 6073,
   "publicConfigUrls": [
     "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
     "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-07-28T15:04:48.355Z"
+  "publishedAt": "2026-07-29T03:28:17.897Z"
 }
