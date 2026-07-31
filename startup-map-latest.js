@@ -27,7 +27,7 @@
   // recognised is dropped rather than echoed.
   var DG_SORTS = ['roles', 'fresh', 'stale', 'name'];
   var DG_HIRING = ['yes', 'no', 'unknown'];
-  var DG_FUNCS = ['engineering', 'ai/data', 'design', 'product', 'sales', 'marketing', 'operations'];
+  var DG_FUNCS = ['engineering', 'ai/data', 'design', 'product', 'sales', 'marketing', 'operations', 'people', 'finance/legal'];
 
   function dgParseFilterHash(hash, providers) {
     var out = { query: '', hiring: '', func: '', provider: '', sort: 'roles' };
@@ -98,6 +98,21 @@
       .slice(0, n);
   }
 
+  function dgActivitySummary(feed, view) {
+    var counts = feed && feed.counts;
+    var fields = ['inWindow', 'companiesInWindow', 'closedInWindow', 'companiesClosedInWindow', 'observationSpanDays', 'closureObservationSpanDays'];
+    if ((view && (view.func || view.companies)) || !feed || feed.schema !== 'demigod.roles-feed/8' ||
+        !Number.isSafeInteger(feed.windowDays) || feed.windowDays < 1 || !counts ||
+        fields.some(function (key) { return !Number.isSafeInteger(counts[key]) || counts[key] < 0; })) return '';
+    var n = function (value, noun, plural) { return value + ' ' + (value === 1 ? noun : plural); };
+    return 'Latest ' + feed.windowDays + '-day window: Demigod first observed ' +
+      n(counts.inWindow, 'role', 'roles') + ' across ' + n(counts.companiesInWindow, 'company', 'companies') + '; ' +
+      n(counts.closedInWindow, 'role', 'roles') + ' left polled boards across ' +
+      n(counts.companiesClosedInWindow, 'company', 'companies') + '. A role leaving a board does not mean filled or hired. ' +
+      'Observation history spans ' + n(counts.observationSpanDays, 'day', 'days') + '; closure history spans ' +
+      n(counts.closureObservationSpanDays, 'day', 'days') + '. These are board observations, not a hiring rate.';
+  }
+
   function dgOrderByMedian(direction) {
     var newestFirst = direction === 'fresh';
     return function (aMed, bMed, aName, bName) {
@@ -109,6 +124,17 @@
       if (a === b) return String(aName).localeCompare(String(bName));
       return newestFirst ? a - b : b - a;
     };
+  }
+
+  function dgRoleMixSummary(mix) {
+    if (!mix || typeof mix !== 'object' || Array.isArray(mix)) return '';
+    return Object.keys(mix)
+      .filter(function (fn) { return fn !== 'other' && Number.isSafeInteger(mix[fn]) && mix[fn] > 0; })
+      .map(function (fn) { return { fn: fn, n: mix[fn] }; })
+      .sort(function (a, b) { return b.n - a.n || a.fn.localeCompare(b.fn); })
+      .slice(0, 5)
+      .map(function (row) { return row.fn + ' ' + row.n.toLocaleString('en-US'); })
+      .join(' · ');
   }
 
   var state = {
@@ -296,10 +322,12 @@
     // Must clear, not just return: the section may already be showing rows from a wider view.
     if (!rows.length) { host.hidden = true; host.innerHTML = ''; return; }
     var days = (typeof feed.windowDays === 'number' && feed.windowDays > 0) ? feed.windowDays : null;
+    var activity = dgActivitySummary(feed, view);
     host.innerHTML =
       '<h2 class="dg-fresh-h">Recently observed roles</h2>' +
+      (activity ? '<p class="dg-dir-pulse"><strong>Observed hiring activity:</strong> ' + esc(activity) + '</p>' : '') +
       '<p class="dg-fresh-note">Roles we first saw on a company\'s own public job board' +
-      (days ? ' in the last ' + days + ' days' : '') +
+      (days ? ' in the last ' + days + ' day' + (days === 1 ? '' : 's') : '') +
       '. <strong>First observed</strong> is our timestamp, not the employer\'s posting date — most ' +
       'boards do not expose one, so this says when we noticed a role, never how long it has existed. ' +
       // Measured: 40 of 200 feed rows are non-US (Remote Canada/Spain/Poland, São Paulo). The
@@ -370,6 +398,7 @@
     var hiringYc = companies.filter(function (c) { return c.jobsSource === 'YC'; }).length;
     var trackedOpen = companies.filter(function (c) { return typeof c.oldestObservedDays === 'number' && c.oldestObservedDays > 0; }).length;
     var postedAging = companies.filter(function (c) { return typeof c.agingRoles === 'number' && c.agingRoles > 0; }).length;
+    var roleMixSummary = dgRoleMixSummary(map.coverage && map.coverage.roleMix);
     var pulseBits = [];
     if (hiringNow) pulseBits.push(hiringNow + ' boards with verified US open roles');
     if (trackedOpen) pulseBits.push(trackedOpen + ' with observed open-age (our first seen)');
@@ -382,13 +411,16 @@
           (map.coverage && map.coverage.roleAgingAt ? ' · aging as of ' + esc(map.coverage.roleAgingAt) : '') +
           '</p>'
         : '') +
+      (roleMixSummary
+        ? '<p class="dg-dir-pulse"><strong>Open-role title mix:</strong> ' + esc(roleMixSummary) + '. Public-board, title-heuristic counts — not a ranking or demand score.</p>'
+        : '') +
       '<div class="dg-dir-tools"><input class="dg-dir-search" type="search" aria-label="Search startups" placeholder="Search startups…" autocomplete="off" value="' + esc(state.query) + '">' +
       '<select class="dg-dir-hiring" aria-label="Filter by hiring status"><option value="">All</option>' +
       '<option value="yes"' + (state.hiring === 'yes' ? ' selected' : '') + '>Hiring / open roles</option>' +
       '<option value="unknown"' + (state.hiring === 'unknown' ? ' selected' : '') + '>Hiring unknown</option>' +
       '<option value="no"' + (state.hiring === 'no' ? ' selected' : '') + '>Not hiring reported</option></select>' +
       '<select class="dg-dir-func" aria-label="Filter by role function"><option value="">Any role</option>' +
-      ['engineering', 'ai/data', 'design', 'product', 'sales', 'marketing', 'operations'].map(function (f) {
+      DG_FUNCS.map(function (f) {
         return '<option value="' + f + '"' + (state.func === f ? ' selected' : '') + '>' + f.charAt(0).toUpperCase() + f.slice(1) + '</option>';
       }).join('') + '</select>' +
       '<select class="dg-dir-provider" aria-label="Filter by ATS provider"><option value="">Any job board</option>' +
