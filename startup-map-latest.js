@@ -194,9 +194,10 @@
       '.dg-dir-tools{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0}' +
       '.dg-dir-search,.dg-dir-hiring,.dg-dir-func,.dg-dir-provider,.dg-dir-sort{min-height:44px;border:1px solid rgba(166,255,203,.3);border-radius:9px;background:#07150f;color:#f3f0e7;padding:.55rem .7rem;font:inherit}' +
       '.dg-dir-search{flex:1 1 18rem;width:min(100%,28rem)}' +
-      '.dg-dir-search:focus-visible,.dg-dir-hiring:focus-visible,.dg-dir-func:focus-visible,.dg-dir-provider:focus-visible,.dg-dir-sort:focus-visible,.dg-dir-row a:focus-visible,.dg-dir-toggle:focus-visible{outline:2px solid #a6ffcb;outline-offset:2px}' +
+      '.dg-dir-search:focus-visible,.dg-dir-hiring:focus-visible,.dg-dir-func:focus-visible,.dg-dir-provider:focus-visible,.dg-dir-sort:focus-visible,.dg-dir-row a:focus-visible,button.dg-dir-rolechip:focus-visible,.dg-dir-toggle:focus-visible{outline:2px solid #a6ffcb;outline-offset:2px}' +
       '.dg-dir-roles{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}' +
       '.dg-dir-rolechip{color:#9fb8a8;font-size:.68rem;border:1px solid rgba(166,255,203,.18);border-radius:999px;padding:.02rem .45rem;white-space:nowrap}' +
+      'button.dg-dir-rolechip{display:inline-flex;align-items:center;min-height:44px;background:transparent;font:inherit;font-size:.68rem;cursor:pointer}button.dg-dir-rolechip:hover{text-decoration:underline}' +
       '.dg-dir-count{color:#a8a29e;font-size:.8rem;margin:.2rem 0 .8rem}' +
       '.dg-dir-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(166,255,203,.12)}' +
       '.dg-dir-row{border-bottom:1px solid rgba(166,255,203,.1);padding:.5rem .1rem}' +
@@ -211,7 +212,7 @@
       '.dg-dir-pulse{margin:.35rem 0 .55rem;color:#9fb8a8;font-size:.78rem;line-height:1.35}' +
       '.dg-dir-desc{color:#c9c6bf;font-size:.82rem;line-height:1.5;margin:.25rem 0 0}' +
       '.dg-dir-links{margin:.25rem 0 0;font-size:.76rem}' +
-      '.dg-dir-links a{color:#a6ffcb;text-decoration:none;margin-right:.8rem}.dg-dir-links a:hover{text-decoration:underline}' +
+      '.dg-dir-links a{display:inline-flex;align-items:center;min-height:44px;color:#a6ffcb;text-decoration:none;margin-right:.8rem}.dg-dir-links a:hover{text-decoration:underline}' +
       '.dg-dir-empty{color:#a8a29e;padding:.9rem 0}' +
       '.dg-dir-fresh{margin:1.4rem 0 0;padding-top:1rem;border-top:1px solid rgba(166,255,203,.12)}' +
       '.dg-dir-fresh[hidden]{display:none}' +
@@ -302,7 +303,13 @@
     var roleMixHtml = '';
     if (company.roleMix) {
       var mix = Object.keys(company.roleMix).map(function (k) { return { k: k, n: company.roleMix[k] }; }).sort(function (a, b) { return b.n - a.n; }).slice(0, 5);
-      roleMixHtml = '<p class="dg-dir-roles">' + mix.map(function (m) { return '<span class="dg-dir-rolechip">' + esc(m.k) + ' ' + m.n + '</span>'; }).join('') + '</p>';
+      // Only keys accepted by the shared filter become controls; "other" stays evidence, not a dead button.
+      roleMixHtml = '<p class="dg-dir-roles">' + mix.map(function (m) {
+        var label = esc(m.k) + ' ' + esc(m.n);
+        return DG_FUNCS.indexOf(m.k) >= 0
+          ? '<button type="button" class="dg-dir-rolechip" data-fn="' + esc(m.k) + '">' + label + '</button>'
+          : '<span class="dg-dir-rolechip">' + label + '</span>';
+      }).join('') + '</p>';
     }
     return '<li class="dg-dir-row" data-i="' + index + '">' +
       '<div class="dg-dir-line">' + nameHtml +
@@ -509,6 +516,14 @@
     funcEl.addEventListener('change', renderRows);
     providerEl.addEventListener('change', renderRows);
     if (sortEl) sortEl.addEventListener('change', renderRows);
+    list.addEventListener('click', function (event) {
+      var chip = event.target.closest && event.target.closest('button.dg-dir-rolechip[data-fn]');
+      var picked = chip && chip.getAttribute('data-fn');
+      if (!picked || DG_FUNCS.indexOf(picked) < 0) return;
+      funcEl.value = picked;
+      renderRows();
+      funcEl.focus();
+    });
     renderRows();
   }
 
