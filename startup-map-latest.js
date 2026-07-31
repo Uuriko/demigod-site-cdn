@@ -194,12 +194,13 @@
       '.dg-dir-tools{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.9rem 0}' +
       '.dg-dir-search,.dg-dir-hiring,.dg-dir-func,.dg-dir-provider,.dg-dir-sort{min-height:44px;border:1px solid rgba(166,255,203,.3);border-radius:9px;background:#07150f;color:#f3f0e7;padding:.55rem .7rem;font:inherit}' +
       '.dg-dir-search{flex:1 1 18rem;width:min(100%,28rem)}' +
-      '.dg-dir-search:focus-visible,.dg-dir-hiring:focus-visible,.dg-dir-func:focus-visible,.dg-dir-provider:focus-visible,.dg-dir-sort:focus-visible,.dg-dir-row a:focus-visible,button.dg-dir-rolechip:focus-visible,.dg-dir-toggle:focus-visible{outline:2px solid #a6ffcb;outline-offset:2px}' +
+      '.dg-dir-search:focus-visible,.dg-dir-hiring:focus-visible,.dg-dir-func:focus-visible,.dg-dir-provider:focus-visible,.dg-dir-sort:focus-visible,.dg-dir-row a:focus-visible,button.dg-dir-rolechip:focus-visible,.dg-dir-more:focus-visible,.dg-dir-toggle:focus-visible{outline:2px solid #a6ffcb;outline-offset:2px}' +
       '.dg-dir-roles{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}' +
       '.dg-dir-rolechip{color:#9fb8a8;font-size:.68rem;border:1px solid rgba(166,255,203,.18);border-radius:999px;padding:.02rem .45rem;white-space:nowrap}' +
       'button.dg-dir-rolechip{display:inline-flex;align-items:center;min-height:44px;background:transparent;font:inherit;font-size:.68rem;cursor:pointer}button.dg-dir-rolechip:hover{text-decoration:underline}' +
       '.dg-dir-count{color:#a8a29e;font-size:.8rem;margin:.2rem 0 .8rem}' +
       '.dg-dir-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(166,255,203,.12)}' +
+      '.dg-dir-more{min-height:44px;margin:.8rem 0 0;border:1px solid rgba(166,255,203,.4);border-radius:9px;background:#07150f;color:#a6ffcb;padding:.55rem .8rem;font:inherit;cursor:pointer}' +
       '.dg-dir-row{border-bottom:1px solid rgba(166,255,203,.1);padding:.5rem .1rem}' +
       '.dg-dir-row[hidden]{display:none}' +
       '.dg-dir-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .6rem}' +
@@ -443,6 +444,7 @@
       '</select></div>' +
       '<p class="dg-dir-count" role="status" aria-live="polite">' + companies.length + ' companies · loading job coverage…</p>' +
       '<ul class="dg-dir-list"></ul>' +
+      '<button type="button" class="dg-dir-more" hidden>Load more startups</button>' +
       '<section class="dg-dir-fresh" hidden></section>' +
       '<p class="dg-dir-foot"><strong>Definition:</strong> ' + esc(map.coverage.definition || 'Companies with a public SF headquarters listing.') +
       '<br><strong>Important:</strong> ' + esc(map.coverage.caveat || 'City-level only; current status is not verified.') +
@@ -455,11 +457,14 @@
     var providerEl = root.querySelector('.dg-dir-provider');
     var sortEl = root.querySelector('.dg-dir-sort');
     var list = root.querySelector('.dg-dir-list');
+    var more = root.querySelector('.dg-dir-more');
     var count = root.querySelector('.dg-dir-count');
-    // Search-driven render: with ~2k companies, only paint matching rows (capped) instead of the
-    // whole list — keeps the DOM light and the page fast. Search covers ALL companies.
+    // Paint in 20-row batches instead of the whole list — keeps the DOM light while still letting
+    // visitors browse every match. Search covers ALL companies.
     var CAP = 20;
-    function renderRows() {
+    var shown = CAP;
+    function renderRows(loadMore) {
+      if (loadMore !== true) shown = CAP;
       var q = searchEl.value.trim().toLowerCase();
       var h = hiringEl.value;
       var fn = funcEl.value;
@@ -495,7 +500,7 @@
       } else if (!q) {
         matches.sort(function (a, b) { return (companies[b].openRoles || (state.hiringOf[b] === 'yes' ? 1 : 0)) - (companies[a].openRoles || (state.hiringOf[a] === 'yes' ? 1 : 0)); });
       }
-      var slice = matches.slice(0, CAP);
+      var slice = matches.slice(0, shown);
       // Keep the roles panel in the same view as the rows. null = no filter active, so do not
       // narrow; building a 2,735-name Set on every keystroke of an unfiltered page is pure waste.
       var narrowed = (q || h || fn || provider) ? new Set(matches.map(function (i) { return String(companies[i].name || '').toLowerCase(); })) : null;
@@ -503,11 +508,12 @@
       list.innerHTML = slice.length
         ? slice.map(function (i) { return companyRow(companies[i], i); }).join('')
         : '<li class="dg-dir-empty">' + ((h || fn || provider) ? 'No companies match those filters.' : 'No companies match that search.') + '</li>';
+      more.hidden = matches.length <= shown;
       count.textContent = matches.length
         ? matches.length + ' of ' + companies.length + ' compan' + (matches.length === 1 ? 'y' : 'ies') +
           (fn ? ' hiring in ' + fn : '') +
           (provider ? ' on ' + provider : '') +
-          (matches.length > CAP ? ' — showing first ' + CAP + ', narrow your search' : '') +
+          (matches.length > shown ? ' — showing ' + shown : '') +
           (!q && !h && !fn && !provider ? ' · ' + (hiringNow + hiringYc) + ' with job links: ' + hiringNow + ' with live US-posted open roles, ' + hiringYc + ' more hiring per YC' : '')
         : ((h || fn || provider) ? 'No companies match those filters.' : 'No companies match that search.');
     }
@@ -516,6 +522,10 @@
     funcEl.addEventListener('change', renderRows);
     providerEl.addEventListener('change', renderRows);
     if (sortEl) sortEl.addEventListener('change', renderRows);
+    more.addEventListener('click', function () {
+      shown += CAP;
+      renderRows(true);
+    });
     list.addEventListener('click', function (event) {
       var chip = event.target.closest && event.target.closest('button.dg-dir-rolechip[data-fn]');
       var picked = chip && chip.getAttribute('data-fn');
