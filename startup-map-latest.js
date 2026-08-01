@@ -198,9 +198,11 @@
       '.dg-dir-roles{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0 0}' +
       '.dg-dir-rolechip{color:#9fb8a8;font-size:.68rem;border:1px solid rgba(166,255,203,.18);border-radius:999px;padding:.02rem .45rem;white-space:nowrap}' +
       'button.dg-dir-rolechip{display:inline-flex;align-items:center;min-height:44px;background:transparent;font:inherit;font-size:.68rem;cursor:pointer}button.dg-dir-rolechip:hover{text-decoration:underline}' +
-      '.dg-dir-count{color:#a8a29e;font-size:.8rem;margin:.2rem 0 .8rem}' +
+      '.dg-dir-topics{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem;margin:.2rem 0 0}.dg-dir-topic-label{color:#a8a29e;font-size:.68rem}' +
+      '.dg-dir-topic{border:1px solid rgba(166,255,203,.18);border-radius:999px;color:#9fb8a8;padding:.08rem .45rem;font-size:.68rem}' +
+      '.dg-dir-count{color:#a8a29e;font-size:.8rem;margin:.2rem 0 .8rem}.dg-dir-count:focus{outline:2px solid #a6ffcb;outline-offset:2px}' +
       '.dg-dir-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(166,255,203,.12)}' +
-      '.dg-dir-more{min-height:44px;margin:.8rem 0 0;border:1px solid rgba(166,255,203,.4);border-radius:9px;background:#07150f;color:#a6ffcb;padding:.55rem .8rem;font:inherit;cursor:pointer}' +
+      '.dg-dir-more{min-height:44px;margin:.8rem 0 0;border:1px solid rgba(166,255,203,.4);border-radius:9px;background:#07150f;color:#a6ffcb;padding:.55rem .8rem;font:inherit;cursor:pointer}.dg-dir-more:hover{text-decoration:underline}' +
       '.dg-dir-row{border-bottom:1px solid rgba(166,255,203,.1);padding:.5rem .1rem}' +
       '.dg-dir-row[hidden]{display:none}' +
       '.dg-dir-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem .6rem}' +
@@ -243,6 +245,7 @@
     // Counts are US-posted (or Remote) board rows only — see jobs enrich openRolesScope.
     var rolesLabel = openRoles ? openRoles + ' US open role' + (openRoles === 1 ? '' : 's') : '';
     var hn = company.sourceLicense === 'HN-public' || company.source === 'Hacker News (Who is Hiring)';
+    var yc = company.sourceLicense === 'YC-public' || company.source === 'Y Combinator';
     var hiring = openRoles ? rolesLabel
       : company.hiring === 'yes'
         ? (community ? 'Hiring reported' : hn ? 'Hiring (per HN post)' : 'Hiring (per YC)')
@@ -251,7 +254,7 @@
           : 'Hiring not verified';
     var flagClass = (openRoles || company.hiring === 'yes') ? ' is-hiring' : '';
     // Provenance label follows sourceLicense/source — YC-public/HN-public are not CC0 evidence.
-    var kind = company.sourceLicense === 'YC-public' || company.source === 'Y Combinator'
+    var kind = yc
       ? 'YC · public directory'
       : hn
         ? 'Hacker News · Who is Hiring'
@@ -261,7 +264,13 @@
             ? 'Wikidata · CC0'
             : (company.source || 'Public record');
     var bits = [kind];
-    if (company.inceptionYear) bits.push('founded ' + esc(company.inceptionYear));
+    if (company.inceptionYear) bits.push((yc ? 'launched ' : 'founded ') + esc(company.inceptionYear));
+    var selfReported = [];
+    if (yc && ['Early', 'Growth'].includes(company.stage)) selfReported.push(esc(company.stage) + ' stage');
+    if (yc && Number.isSafeInteger(company.teamSize) && company.teamSize > 0 && company.teamSize <= 100000) {
+      selfReported.push('team size listed ' + esc(company.teamSize));
+    }
+    if (selfReported.length) bits.push('YC directory: ' + selfReported.join(' · '));
     if (community && company.neighborhood) bits.push(esc(company.neighborhood) + ' (descriptive)');
     if (openRoles) bits.push('US-posted roles as of ' + esc(company.openRolesAt || ''));
     // Observed open age — days since Demigod first saw the role on the public ATS board (not a ghost verdict).
@@ -299,7 +308,7 @@
         : 'careers';
       links.push('<a href="' + esc(jobsUrl) + '" target="_blank" rel="noopener noreferrer">' + jobsText + '</a>');
     }
-    if (sourceUrl) links.push('<a href="' + esc(sourceUrl) + '" target="_blank" rel="noopener noreferrer">' + (community ? 'submission' : hn ? 'HN post' : 'CC0 source') + '</a>');
+    if (sourceUrl) links.push('<a href="' + esc(sourceUrl) + '" target="_blank" rel="noopener noreferrer">' + (community ? 'submission' : hn ? 'HN post' : yc ? 'YC profile' : 'CC0 source') + '</a>');
     if (!website) links.push('<span class="dg-dir-meta">no verified website on record</span>');
     var roleMixHtml = '';
     if (company.roleMix) {
@@ -312,11 +321,20 @@
           : '<span class="dg-dir-rolechip">' + label + '</span>';
       }).join('') + '</p>';
     }
+    var topics = yc && Array.isArray(company.tags)
+      ? company.tags.filter(function (tag) { return tag !== 'yc' && tag !== 'hn-hiring' && !/^YC\s/i.test(tag); }).slice(0, 3)
+      : [];
+    var topicHtml = topics.length
+      ? '<p class="dg-dir-topics"><span class="dg-dir-topic-label">YC directory topics:</span>' + topics.map(function (topic) {
+          return '<span class="dg-dir-topic">' + esc(topic) + '</span>';
+        }).join('') + '</p>'
+      : '';
     return '<li class="dg-dir-row" data-i="' + index + '">' +
       '<div class="dg-dir-line">' + nameHtml +
       '<span class="dg-dir-flag' + flagClass + '">' + hiring + '</span>' +
       '<span class="dg-dir-meta">' + bits.join(' · ') + '</span></div>' +
       (company.description ? '<p class="dg-dir-desc">' + esc(company.description) + '</p>' : '') +
+      topicHtml +
       roleMixHtml +
       (links.length ? '<div class="dg-dir-links">' + links.join('') + '</div>' : '') +
       '</li>';
@@ -333,7 +351,7 @@
     var activity = dgActivitySummary(feed, view);
     host.innerHTML =
       '<h2 class="dg-fresh-h">Recently observed roles</h2>' +
-      (activity ? '<p class="dg-dir-pulse"><strong>Observed hiring activity:</strong> ' + esc(activity) + '</p>' : '') +
+      (activity ? '<p class="dg-dir-pulse"><strong>Board observations:</strong> ' + esc(activity) + '</p>' : '') +
       '<p class="dg-fresh-note">Roles we first saw on a company\'s own public job board' +
       (days ? ' in the last ' + days + ' day' + (days === 1 ? '' : 's') : '') +
       '. <strong>First observed</strong> is our timestamp, not the employer\'s posting date — most ' +
@@ -411,16 +429,16 @@
     if (hiringNow) pulseBits.push(hiringNow + ' boards with verified US open roles');
     if (trackedOpen) pulseBits.push(trackedOpen + ' with observed open-age (our first seen)');
     if (postedAging) pulseBits.push(postedAging + ' with a role posted 90–365d (board date)');
-    if (hiringYc) pulseBits.push(hiringYc + ' YC self-reported careers links');
+    if (hiringYc) pulseBits.push(hiringYc + ' YC directory careers links');
     root.innerHTML =
-      '<p class="dg-dir-intro">A plain directory of San Francisco startups from public open data, plus operator-reviewed community submissions. City-level only — these are companies with a listed SF headquarters, not verified offices or current status. Open-role counts come from each company\'s own public job board (Greenhouse/Lever/Ashby), count only US-posted or Remote listings when the board exposes location, and are point-in-time. Where we track a board over time, we also show how long a role has been open <em>by our first observation</em> (not a score, not a ghost-job verdict). Board posting dates appear only when the ATS exposes a real post date.</p>' +
+      '<p class="dg-dir-intro">A plain directory of San Francisco Bay Area startups from public open data, plus operator-reviewed community submissions. City-level only — these companies have a listed Bay Area location or headquarters, not a verified office or current status. Open-role counts come from each company\'s own public job board (Greenhouse/Lever/Ashby), count only US-posted or Remote listings when the board exposes location, and are point-in-time. Where we track a board over time, we also show how long a role has been open <em>by our first observation</em> (not a score, not a ghost-job verdict). Board posting dates appear only when the ATS exposes a real post date.</p>' +
       (pulseBits.length
         ? '<p class="dg-dir-pulse" role="status">' + pulseBits.map(esc).join(' · ') +
           (map.coverage && map.coverage.roleAgingAt ? ' · aging as of ' + esc(map.coverage.roleAgingAt) : '') +
           '</p>'
         : '') +
       (roleMixSummary
-        ? '<p class="dg-dir-pulse"><strong>Open-role title mix:</strong> ' + esc(roleMixSummary) + '. Public-board, title-heuristic counts — not a ranking or demand score.</p>'
+        ? '<p class="dg-dir-pulse"><strong>Largest open-role title buckets:</strong> ' + esc(roleMixSummary) + '. Top five public-board, title-heuristic counts — not a ranking or demand score.</p>'
         : '') +
       '<div class="dg-dir-tools"><input class="dg-dir-search" type="search" aria-label="Search startups" placeholder="Search startups…" autocomplete="off" value="' + esc(state.query) + '">' +
       '<select class="dg-dir-hiring" aria-label="Filter by hiring status"><option value="">All</option>' +
@@ -442,10 +460,10 @@
         '<option value="stale"' + (state.sort === 'stale' ? ' selected' : '') + '>Longest-posted</option>' +
         '<option value="name"' + (state.sort === 'name' ? ' selected' : '') + '>Name A–Z</option>' +
       '</select></div>' +
-      '<p class="dg-dir-count" role="status" aria-live="polite">' + companies.length + ' companies · loading job coverage…</p>' +
+      '<p class="dg-dir-count" role="status" aria-live="polite" tabindex="-1">' + companies.length + ' companies · loading job coverage…</p>' +
       '<ul class="dg-dir-list"></ul>' +
       '<button type="button" class="dg-dir-more" hidden>Load more startups</button>' +
-      '<section class="dg-dir-fresh" hidden></section>' +
+      '<section class="dg-dir-fresh" role="status" aria-live="polite" hidden></section>' +
       '<p class="dg-dir-foot"><strong>Definition:</strong> ' + esc(map.coverage.definition || 'Companies with a public SF headquarters listing.') +
       '<br><strong>Important:</strong> ' + esc(map.coverage.caveat || 'City-level only; current status is not verified.') +
       (sources ? '<br>Sources: ' + sources + '.' : '') +
@@ -497,7 +515,7 @@
         matches.sort(function (a, b) {
           return order(companies[a].medianPostedDays, companies[b].medianPostedDays, companies[a].name, companies[b].name);
         });
-      } else if (!q) {
+      } else {
         matches.sort(function (a, b) { return (companies[b].openRoles || (state.hiringOf[b] === 'yes' ? 1 : 0)) - (companies[a].openRoles || (state.hiringOf[a] === 'yes' ? 1 : 0)); });
       }
       var slice = matches.slice(0, shown);
@@ -525,6 +543,7 @@
     more.addEventListener('click', function () {
       shown += CAP;
       renderRows(true);
+      if (more.hidden) count.focus();
     });
     list.addEventListener('click', function (event) {
       var chip = event.target.closest && event.target.closest('button.dg-dir-rolechip[data-fn]');
