@@ -286,7 +286,7 @@ a:hover, button:hover { opacity:.95; }
   box-shadow: 0 0 0 1px rgba(201,168,76,.25), 0 8px 28px rgba(0,0,0,.35);
 }
 .dg-wiz-q { letter-spacing: -0.01em; }
-/* 90-day outcome field emphasis (high-signal matching) */
+/* First-result field emphasis (high-signal matching) */
 #startup-modal [name="90day-outcome"], #startup-modal textarea[name*="90day"],
 #jobseeker-modal [name="90day-outcome"], #jobseeker-modal textarea[name*="90day"] {
   border-color: rgba(201,168,76,.55) !important;
