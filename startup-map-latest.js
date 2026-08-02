@@ -1,8 +1,7 @@
 (function () {
   'use strict';
-  // Minimal, text-first SF startup directory ("think Craigslist"): a dense, searchable
-  // list of real companies. No SVG map, no radius search, no venue layer — the startup
-  // page is startups only; event venues live on the separate events page.
+  // Minimal, text-first SF tech company directory ("think Craigslist"): a dense,
+  // searchable list. No SVG map, no radius search, no venue layer; events stay separate.
   // Preserves the public API (mount/addCommunityStartups), schema/3 validation, the
   // community-submission merge, and every honesty label from the prior atlas.
   var source = document.currentScript && document.currentScript.src;
@@ -431,7 +430,7 @@
     if (postedAging) pulseBits.push(postedAging + ' with a role posted 90–365d (board date)');
     if (hiringYc) pulseBits.push(hiringYc + ' YC directory careers links');
     root.innerHTML =
-      '<p class="dg-dir-intro">A plain directory of San Francisco Bay Area startups from public open data, plus operator-reviewed community submissions. City-level only — these companies have a listed Bay Area location or headquarters, not a verified office or current status. Open-role counts come from each company\'s own public job board (Greenhouse/Lever/Ashby), count only US-posted or Remote listings when the board exposes location, and are point-in-time. Where we track a board over time, we also show how long a role has been open <em>by our first observation</em> (not a score, not a ghost-job verdict). Board posting dates appear only when the ATS exposes a real post date.</p>' +
+      '<p class="dg-dir-intro">A plain directory of San Francisco Bay Area tech companies from public open data, plus operator-reviewed startup submissions. City-level only — these companies have a listed Bay Area location or headquarters, not a verified office or current status. Open-role counts come from each company\'s own public job board (Greenhouse/Lever/Ashby), count only US-posted or Remote listings when the board exposes location, and are point-in-time. Where we track a board over time, we also show how long a role has been open <em>by our first observation</em> (not a score, not a ghost-job verdict). Board posting dates appear only when the ATS exposes a real post date.</p>' +
       (pulseBits.length
         ? '<p class="dg-dir-pulse" role="status">' + pulseBits.map(esc).join(' · ') +
           (map.coverage && map.coverage.roleAgingAt ? ' · aging as of ' + esc(map.coverage.roleAgingAt) : '') +
@@ -440,7 +439,7 @@
       (roleMixSummary
         ? '<p class="dg-dir-pulse"><strong>Largest open-role title buckets:</strong> ' + esc(roleMixSummary) + '. Top five public-board, title-heuristic counts — not a ranking or demand score.</p>'
         : '') +
-      '<div class="dg-dir-tools"><input class="dg-dir-search" type="search" aria-label="Search startups" placeholder="Search startups…" autocomplete="off" value="' + esc(state.query) + '">' +
+      '<div class="dg-dir-tools"><input class="dg-dir-search" type="search" aria-label="Search companies" placeholder="Search companies…" autocomplete="off" value="' + esc(state.query) + '">' +
       '<select class="dg-dir-hiring" aria-label="Filter by hiring status"><option value="">All</option>' +
       '<option value="yes"' + (state.hiring === 'yes' ? ' selected' : '') + '>Hiring / open roles</option>' +
       '<option value="unknown"' + (state.hiring === 'unknown' ? ' selected' : '') + '>Hiring unknown</option>' +
@@ -462,7 +461,7 @@
       '</select></div>' +
       '<p class="dg-dir-count" role="status" aria-live="polite" tabindex="-1">' + companies.length + ' companies · loading job coverage…</p>' +
       '<ul class="dg-dir-list"></ul>' +
-      '<button type="button" class="dg-dir-more" hidden>Load more startups</button>' +
+      '<button type="button" class="dg-dir-more" hidden>Load more companies</button>' +
       '<section class="dg-dir-fresh" role="status" aria-live="polite" hidden></section>' +
       '<p class="dg-dir-foot"><strong>Definition:</strong> ' + esc(map.coverage.definition || 'Companies with a public SF headquarters listing.') +
       '<br><strong>Important:</strong> ' + esc(map.coverage.caveat || 'City-level only; current status is not verified.') +
@@ -560,7 +559,7 @@
     if (!root) return;
     css();
     root.setAttribute('aria-busy', 'true');
-    root.innerHTML = '<p class="dg-dir-intro">Loading the SF startup directory…</p>';
+    root.innerHTML = '<p class="dg-dir-intro">Loading the SF tech company directory…</p>';
     fetch(dataUrl, { cache: 'force-cache', credentials: 'omit' })
       .then(function (r) { if (!r.ok) throw new Error('Map data HTTP ' + r.status); return r.json(); })
       .then(function (map) {
@@ -569,7 +568,7 @@
         render(root, withCommunityStartups(map));
       })
       .catch(function () {
-        root.innerHTML = '<div class="dg-dir-error" role="alert">The startup directory could not load.<br><button type="button" class="dg-dir-retry">Try again</button></div>';
+        root.innerHTML = '<div class="dg-dir-error" role="alert">The tech company directory could not load.<br><button type="button" class="dg-dir-retry">Try again</button></div>';
         root.querySelector('.dg-dir-retry').addEventListener('click', function () { mount(root); });
       })
       .finally(function () { root.removeAttribute('aria-busy'); });
