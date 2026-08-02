@@ -425,7 +425,7 @@
     var postedAging = companies.filter(function (c) { return typeof c.agingRoles === 'number' && c.agingRoles > 0; }).length;
     var roleMixSummary = dgRoleMixSummary(map.coverage && map.coverage.roleMix);
     var pulseBits = [];
-    if (hiringNow) pulseBits.push(hiringNow + ' boards with verified US open roles');
+    if (hiringNow) pulseBits.push(hiringNow + ' companies with observed US-posted or remote roles');
     if (trackedOpen) pulseBits.push(trackedOpen + ' with observed open-age (our first seen)');
     if (postedAging) pulseBits.push(postedAging + ' with a role posted 90–365d (board date)');
     if (hiringYc) pulseBits.push(hiringYc + ' YC directory careers links');
@@ -531,7 +531,7 @@
           (fn ? ' hiring in ' + fn : '') +
           (provider ? ' on ' + provider : '') +
           (matches.length > shown ? ' — showing ' + shown : '') +
-          (!q && !h && !fn && !provider ? ' · ' + (hiringNow + hiringYc) + ' with job links: ' + hiringNow + ' with live US-posted open roles, ' + hiringYc + ' more hiring per YC' : '')
+          (!q && !h && !fn && !provider ? ' · ' + (hiringNow + hiringYc) + ' with job links: ' + hiringNow + ' with observed US-posted or remote roles, ' + hiringYc + ' more hiring per YC' : '')
         : ((h || fn || provider) ? 'No companies match those filters.' : 'No companies match that search.');
     }
     searchEl.addEventListener('input', renderRows);
