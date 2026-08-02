@@ -1,18 +1,17 @@
 {
-  "at": "2026-08-02T04:49:51.049Z",
+  "at": "2026-08-02T04:55:02.045Z",
   "port": 3460,
-  "tunnelUrl": "https://khaki-ghosts-argue.loca.lt",
-  "apiBase": "https://khaki-ghosts-argue.loca.lt/api/events-bot",
+  "tunnelUrl": "https://old-turtles-like.loca.lt",
+  "apiBase": "https://old-turtles-like.loca.lt/api/events-bot",
   "preferredSubdomain": "demigod-events-bot",
   "preferredTunnelMatch": false,
-  "preferredTunnelNote": "Sticky loca preferred is demigod-events-bot.loca.lt; live host is khaki-ghosts-argue.loca.lt",
+  "preferredTunnelNote": "Sticky loca preferred is demigod-events-bot.loca.lt; live host is old-turtles-like.loca.lt",
   "appPid": 3077,
-  "tunnelPid": 1308011,
+  "tunnelPid": 1319971,
   "publicConfigUrls": [
-    "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json",
-    "https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@main/events-api-latest.json"
+    "https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/events-api-latest.json"
   ],
   "note": "Events Bot public API. Foot fetches publicConfigUrls then probes apiBase. Keep bin/dg-events-online up (or systemd-user demigod-events-*).",
   "schema": "demigod.events-api/1",
-  "publishedAt": "2026-08-02T04:49:53.251Z"
+  "publishedAt": "2026-08-02T04:55:04.134Z"
 }
