@@ -2691,3 +2691,34 @@ section:has(.steps-grid) .step-card{
   letter-spacing:-.02em!important;
   text-transform:none!important;
 }
+
+/* ==== design-track 2026-08-05ai: WIZ Enter hint stack + pricing pad ====
+   .dg-wiz-next is display:flex (row) so ::after "Enter" smashed into label.
+   Column stack; quieter pricing section vertical rhythm. */
+#startup-modal .dg-wiz-next[data-enter-hint],
+#jobseeker-modal .dg-wiz-next[data-enter-hint]{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.18rem!important;
+  line-height:1.2!important;
+  text-align:center!important;
+}
+#startup-modal .dg-wiz-next[data-enter-hint]::after,
+#jobseeker-modal .dg-wiz-next[data-enter-hint]::after{
+  content:attr(data-enter-hint)!important;
+  display:block!important;
+  font-size:.62rem!important;
+  font-weight:500!important;
+  opacity:.55!important;
+  letter-spacing:.04em!important;
+  margin:0!important;
+  line-height:1!important;
+  font-family:var(--dg-sans,Manrope,system-ui,sans-serif)!important;
+}
+section:has(.pricing-grid),
+#demigod-pricing{
+  padding-top:clamp(2.75rem,6vh,4.25rem)!important;
+  padding-bottom:clamp(3rem,7vh,5rem)!important;
+}
