@@ -1,0 +1,48 @@
+name: ingest-site-bundle
+on:
+  workflow_dispatch:
+    inputs:
+      ver:
+        description: foot version number
+        required: true
+        default: '942'
+      foot_url:
+        required: true
+        type: string
+      mapjs_url:
+        required: true
+        type: string
+      map_url:
+        required: true
+        type: string
+      head_url:
+        required: true
+        type: string
+      feed_url:
+        required: true
+        type: string
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download bundle
+        run: |
+          set -euo pipefail
+          curl -fsSL "${{ inputs.foot_url }}" -o foot-latest.js
+          cp foot-latest.js "foot-v${{ inputs.ver }}.js"
+          curl -fsSL "${{ inputs.mapjs_url }}" -o startup-map-latest.js
+          curl -fsSL "${{ inputs.map_url }}" -o sf-startup-map.json
+          curl -fsSL "${{ inputs.head_url }}" -o head-latest.css
+          curl -fsSL "${{ inputs.feed_url }}" -o roles-feed.json
+          wc -c foot-latest.js startup-map-latest.js sf-startup-map.json head-latest.css roles-feed.json
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          git config user.name demigod-cdn
+          git config user.email demigod-cdn@local
+          git add foot-latest.js "foot-v${{ inputs.ver }}.js" startup-map-latest.js sf-startup-map.json head-latest.css roles-feed.json
+          git commit -m "site v${{ inputs.ver }} bundle" || echo "no changes"
+          git push origin HEAD:main
