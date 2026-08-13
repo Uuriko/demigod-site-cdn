@@ -1,33 +1,7 @@
 {
   "name": "demigod bounties",
-  "schema": "dasha-bounties-feed/v1",
-  "note": "Declared USDC. We don't hold it.",
+  "schema": "demigod-bounties-feed/v1",
+  "note": "Declared USDC. We don't hold it. Demigod listings only — not extraSeed/dasha-desk.",
   "url": "https://www.trydemigod.com/?p=bounties",
-  "listings": [
-    {
-      "kind": "item",
-      "name": "docs: add CONTRIBUTING screenshot of GitHub web edit flow",
-      "repo": "Uuriko/dasha-desk",
-      "itemUrl": "https://github.com/Uuriko/dasha-desk/issues/8",
-      "amount": 25,
-      "currency": "USDC",
-      "payTo": "",
-      "chain": "",
-      "createdAt": "2026-08-13T00:00:00.000Z",
-      "outcomes": []
-    },
-    {
-      "kind": "project",
-      "name": "dasha desk",
-      "repo": "Uuriko/dasha-desk",
-      "itemUrl": null,
-      "amount": 50,
-      "currency": "USDC",
-      "payTo": "",
-      "chain": "",
-      "pool": { "amount": 50, "currency": "USDC" },
-      "createdAt": "2026-08-13T00:00:00.000Z",
-      "outcomes": []
-    }
-  ]
+  "listings": []
 }
