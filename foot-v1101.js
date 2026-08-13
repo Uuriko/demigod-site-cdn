@@ -1,4 +1,5 @@
 /*dg-foot-v1101-core*/
+/* Webflow paste: one SHA for preload + CSS + execute. See WEBFLOW-PIN.md. Never mix 309f4b700e1f preload with a different execute SHA. */
 window.dgFootVersion = 'v1101'; console.log('[demigod] foot v1101-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
@@ -4842,8 +4843,26 @@ function bountyPayHref(it) {
   }
   return '';
 }
+function bountyIsDashaDesk(item) {
+  var repo = String((item && item.repo) || '').toLowerCase();
+  var url = String((item && item.itemUrl) || '').toLowerCase();
+  var name = String((item && item.name) || '').toLowerCase();
+  var src = String((item && item.source) || '').toLowerCase();
+  if (src === 'dasha') return true;
+  if (repo.indexOf('dasha-desk') !== -1) return true;
+  if (url.indexOf('dasha-desk') !== -1 || url.indexOf('getdasha.com') !== -1) return true;
+  if (name.indexOf('dasha desk') !== -1) return true;
+  return false;
+}
+function bountyOwnListings(j) {
+  if (!j || typeof j !== 'object') return [];
+  if (/dasha-bounties-feed/i.test(String(j.schema || ''))) return [];
+  var list = Array.isArray(j.listings) ? j.listings : [];
+  return list.filter(function (it) { return !bountyIsDashaDesk(it); });
+}
 function bountyNormalize(item, source) {
   if (!item || typeof item !== 'object') return null;
+  if (bountyIsDashaDesk(item) || source === 'dasha') return null;
   var name = String(item.name || '').trim();
   var repo = String(item.repo || '').trim();
   if (!name && !repo) return null;
@@ -4861,10 +4880,8 @@ function bountyNormalize(item, source) {
     source: source || ''
   };
 }
-var DG_BOUNTY_SEED = [
-  {kind:'item',name:'docs: add CONTRIBUTING screenshot of GitHub web edit flow',repo:'Uuriko/dasha-desk',itemUrl:'https://github.com/Uuriko/dasha-desk/issues/8',amount:25,currency:'USDC',payTo:'',chain:''},
-  {kind:'project',name:'dasha desk',repo:'Uuriko/dasha-desk',itemUrl:null,amount:50,currency:'USDC',payTo:'',chain:''}
-];
+var DG_BOUNTY_SEED = [];
+var DG_BOUNTY_FEED = 'https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/bounties-feed.json';
 function bountyGhUser() {
   try {
     var j = JSON.parse(sessionStorage.getItem(DG_BOUNTY_GH_KEY) || 'null');
@@ -5036,35 +5053,27 @@ function bountyRender(root, listings) {
   });
 }
 function bountyLoadFeeds(root) {
-  bountyRender(root, DG_BOUNTY_SEED.map(function (it) { return bountyNormalize(it, 'demigod'); }).filter(Boolean));
+  var seed = DG_BOUNTY_SEED.map(function (it) { return bountyNormalize(it, 'demigod'); }).filter(Boolean);
+  bountyRender(root, seed);
   var bust = '?t=' + Math.floor(Date.now() / 60000);
-  var urls = [
-    { src: 'demigod', url: 'https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/bounties-feed.json' },
-    { src: 'dasha', url: 'https://raw.githubusercontent.com/Uuriko/dasha-desk/main/bounties/feed.json' }
-  ];
-  Promise.all(urls.map(function (u) {
-    return fetch(u.url + bust, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(4000) })
-      .then(function (r) { if (!r.ok) throw new Error('n'); return r.json(); })
-      .then(function (j) { return { src: u.src, json: j }; })
-      .catch(function () { return { src: u.src, json: null }; });
-  })).then(function (parts) {
-    var seen = {};
-    var out = [];
-    function add(item, src) {
-      var n = bountyNormalize(item, src);
-      if (!n) return;
-      var k = bountyListingKey(n);
-      if (!k || seen[k]) return;
-      seen[k] = 1;
-      out.push(n);
-    }
-    DG_BOUNTY_SEED.forEach(function (it) { add(it, 'demigod'); });
-    parts.forEach(function (p) {
-      var list = p.json && Array.isArray(p.json.listings) ? p.json.listings : [];
-      list.forEach(function (it) { add(it, p.src); });
-    });
-    bountyRender(root, out);
-  });
+  fetch(DG_BOUNTY_FEED + bust, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(4000) })
+    .then(function (r) { if (!r.ok) throw new Error('n'); return r.json(); })
+    .then(function (j) {
+      var seen = {};
+      var out = [];
+      function add(item, src) {
+        var n = bountyNormalize(item, src);
+        if (!n || bountyIsDashaDesk(n)) return;
+        var k = bountyListingKey(n);
+        if (!k || seen[k]) return;
+        seen[k] = 1;
+        out.push(n);
+      }
+      seed.forEach(function (it) { add(it, 'demigod'); });
+      bountyOwnListings(j).forEach(function (it) { add(it, 'demigod'); });
+      bountyRender(root, out);
+    })
+    .catch(function () { bountyRender(root, seed); });
 }
 
 function bountyFormMount(root) {
