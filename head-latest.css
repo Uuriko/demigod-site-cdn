@@ -2762,3 +2762,35 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
   letter-spacing:-.02em!important;
   text-transform:none!important;
 }
+
+/* leftover QA 2026-08-13: hire/pricing card was rgba(phosphor,.04) — reads as disabled.
+   Solid phosphor CTA on ink, paper labels, 12% card fill. WCAG body 4.5:1 vs #03140d. */
+.pricing-card{
+  background:rgba(166,255,203,.12)!important;
+  border:1px solid rgba(166,255,203,.55)!important;
+}
+.pricing-card h3,
+.pricing-card h3 + div + div,
+.pricing-card .step-desc{
+  color:var(--dg-paper,#f3f0e7)!important;
+}
+.pricing-card a.premium-btn,
+.pricing-card a.button,
+.pricing-card a.is-talent,
+.pricing-card a.on-inverse,
+.pricing-card a.w-button,
+.pricing-card a[data-dg-cta],
+.pricing-card a[data-dg-cta="hire"]{
+  background:var(--g,#10c674)!important;
+  color:#03140d!important;
+  -webkit-text-fill-color:#03140d!important;
+  border:1px solid #10c674!important;
+  font-weight:700!important;
+  filter:none!important;
+  opacity:1!important;
+}
+.pricing-card a.premium-btn:hover,
+.pricing-card a[data-dg-cta]:hover{
+  filter:brightness(1.05)!important;
+  box-shadow:0 8px 22px rgba(16,198,116,.28)!important;
+}
