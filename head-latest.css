@@ -22,6 +22,31 @@
   --line:rgba(16,198,116,.22);
   --glow:0 0 40px rgba(16,198,116,.12);
 }
+/* leftover QA 2026-08-14b: first-paint kill. Pin 5b4d79d hid only descendant
+   .hero-title .title-accent-gold and remapped color. Live Webflow still ships
+   <span class="title-accent-gold">SF Startup Talent.</span> with a hardcoded
+   linear-gradient(#e5c158,#aa8c2c) clip, and early cascade keeps
+   h1:has(.title-accent-gold){visibility:visible}. Hide the leftover nodes
+   themselves as soon as this sheet parses — do not wait for foot JS. */
+.title-accent-gold,
+[class*="title-accent-gold"],
+.hero-title>.title-accent-red,
+.hero-title>.title-accent-blue,
+.hero-section h1>.title-accent-red,
+.hero-section h1>.title-accent-blue,
+.header h1>.title-accent-red,
+.header h1>.title-accent-blue,
+.statue-frame,
+.statue-svg,
+.statue-wrapper,
+.statue-coordinates,
+.statue-border-gold,
+.hero-content-right,
+header.hero-section .hero-content-right,
+header.hero-section [class*="statue"]{
+  display:none!important;
+  visibility:hidden!important;
+}
 /* demigod-head-styles.css — CANONICAL head CSS (CDN linked from demigod-head-minimal.html)
  * Brand tokens, hero, WIZ chrome, modals, mobile bar, FOUC guards.
  * Layers accumulate with foot versions (v150+ … v204+ annotations in selectors).
@@ -2803,7 +2828,7 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
 :root{
   --brand-gold:var(--dg-signal,#10c674);
   --brand-gold-dark:var(--dg-night,#03140d);
-  --_colors---brand-gold:var(--dg-signal,#10c674);
+  --_colors---brand-gold:var(--dg-night,#03140d);
   --_colors---brand-gold-dark:var(--dg-night,#03140d);
 }
 /* Live canvas (2026-08-13): <span class="title-accent-gold">SF Startup Talent.</span>
@@ -2825,14 +2850,18 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
 }
 .title-accent-gold,
 [class*="title-accent-gold"]{
-  color:var(--dg-paper,#f3f0e7)!important;
-  -webkit-text-fill-color:var(--dg-paper,#f3f0e7)!important;
+  display:none!important;
+  visibility:hidden!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
   background:none!important;
   background-image:none!important;
   -webkit-background-clip:border-box!important;
   background-clip:border-box!important;
   text-shadow:none!important;
   filter:none!important;
+  font-size:0!important;
+  line-height:0!important;
   font-family:var(--dg-sans,system-ui,sans-serif)!important;
   letter-spacing:-.02em!important;
   text-transform:none!important;
@@ -2846,6 +2875,16 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
   background-image:none!important;
   text-shadow:none!important;
 }
+header.hero-section .hero-content-right,
+header.hero-section .statue-frame,
+header.hero-section .statue-wrapper,
+header.hero-section .statue-svg,
+header.hero-section .statue-border-gold,
+header.hero-section .statue-coordinates,
+.hero-section .hero-content-right,
+.hero-section .statue-frame,
+.hero-section .statue-wrapper,
+.hero-section .statue-svg,
 .statue-frame,
 .statue-svg,
 .statue-wrapper,
@@ -2856,6 +2895,43 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
 .hero-content-right{
   display:none!important;
   visibility:hidden!important;
+  width:0!important;
+  height:0!important;
+  overflow:hidden!important;
+  pointer-events:none!important;
+}
+/* If descendant display:none loses, zero the leftover H1 box and paint the
+   same Demigod word #4 already intended — first paint, no new brand copy. */
+.hero-section h1:not([data-dg-hero-h1]):has(.title-accent-gold),
+.header h1:not([data-dg-hero-h1]):has(.title-accent-gold),
+h1.hero-title:not([data-dg-hero-h1]):has(.title-accent-gold){
+  font-size:0!important;
+  line-height:0!important;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent!important;
+  background:none!important;
+  background-image:none!important;
+}
+.hero-section h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,
+.header h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,
+h1.hero-title:not([data-dg-hero-h1]):has(.title-accent-gold)::before{
+  content:"Demigod";
+  display:block!important;
+  visibility:visible!important;
+  font-size:clamp(2.6rem,8vw,4.8rem)!important;
+  line-height:1.08!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
+  background:none!important;
+  background-image:none!important;
+  font-family:var(--dg-sans,system-ui,sans-serif)!important;
+  font-weight:650!important;
+  letter-spacing:-.02em!important;
+  text-transform:none!important;
+}
+:root{
+  --_colors---brand-gold:var(--dg-night,#03140d);
+  --_colors---brand-gold-dark:var(--dg-night,#03140d);
 }
 .roles-header,
 .roles-grid,

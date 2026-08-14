@@ -2334,6 +2334,15 @@ function killGoldTheater(){
   qa('.statue-frame,.statue-svg,.statue-wrapper,.statue-coordinates,.statue-border-gold,.hero-content-right,[class*="statue"]').forEach(function(el){
     try{el.remove()}catch(e){}
   });
+  qa('.title-accent-gold,[class*="title-accent-gold"]').forEach(function(el){
+    try{el.remove()}catch(e){}
+  });
+  qa('.hero-section h1,.hero-title,.header h1').forEach(function(el){
+    var t=(el.textContent||'').replace(/\s+/g,' ').trim();
+    if(/SF Startup Talent/i.test(t)||/Tech\s*Matched/i.test(t)){
+      try{paintHeroBrandH1(el)}catch(e){try{el.textContent='Demigod'}catch(_e){}}
+    }
+  });
   qa('.roles-header,.roles-grid,.role-card').forEach(function(el){
     try{el.remove()}catch(e){}
   });
@@ -2432,7 +2441,7 @@ function ensureLogo(){
 }
 function brandAssets(){if(q('#dg-brand-assets'))return;var s=document.createElement('style');s.id='dg-brand-assets';s.textContent=
 /* v618 Frege-night — large translucent art stage + left scrim; dual-path CTAs primary */
-":root{--dg-deep:#06271a;--dg-field:#075f3a;--dg-green:#08a05d;--dg-ink:#071d13;--dg-rule-paper:rgba(3,20,13,.2);--dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--dg-serif:Georgia,'Iowan Old Style','Times New Roman',serif;--brand-gold:var(--dg-signal,#10c674);--brand-gold-dark:var(--dg-night,#03140d);--_colors---brand-gold:var(--dg-signal,#10c674);--_colors---brand-gold-dark:var(--dg-night,#03140d)}"
+":root{--dg-deep:#06271a;--dg-field:#075f3a;--dg-green:#08a05d;--dg-ink:#071d13;--dg-rule-paper:rgba(3,20,13,.2);--dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--dg-serif:Georgia,'Iowan Old Style','Times New Roman',serif;--brand-gold:var(--dg-signal,#10c674);--brand-gold-dark:var(--dg-night,#03140d);--_colors---brand-gold:var(--dg-night,#03140d);--_colors---brand-gold-dark:var(--dg-night,#03140d)}"
 /* static CSS grain — no remote litter fuse, no infinite composite thrash (Fable #3) */
 +"body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:.055;background-image:radial-gradient(rgba(166,255,203,.11) .6px,transparent .6px),radial-gradient(rgba(243,240,231,.05) .5px,transparent .5px);background-size:3px 3px,5px 5px;background-position:0 0,1px 2px;mix-blend-mode:screen}"
 +"@keyframes dgGrain{0%,100%{transform:translate(0,0)}25%{transform:translate(-1%,1%)}50%{transform:translate(1%,-1%)}75%{transform:translate(-1%,-1%)}}"
@@ -2503,8 +2512,10 @@ function brandAssets(){if(q('#dg-brand-assets'))return;var s=document.createElem
 +".hero-content-left,.hero-section>.container,.hero-container{max-width:min(48rem,100%)!important}"
 +".hero-section h1,.header h1,.hero-title{text-shadow:0 2px 28px rgba(3,20,13,.55)!important}"
 +".hero-section h1 em,.hero-title em,.dg-em{font-style:italic!important;color:rgba(243,240,231,.88)!important;font-weight:400!important}"
-+".title-accent-gold,.title-accent-cream,.title-accent-red,.title-accent-blue,.hero-section h1 span,.header h1 span{color:var(--dg-paper)!important;background:none!important;background-image:none!important;-webkit-text-fill-color:var(--dg-paper)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;text-shadow:none!important;filter:none!important;font-family:var(--dg-sans)!important}"
-+".statue-frame,.statue-svg,.statue-wrapper,.statue-coordinates,.statue-border-gold,.hero-content-right,[class*=statue],[class*=brand-gold]{display:none!important;visibility:hidden!important}"
++".title-accent-gold,[class*=title-accent-gold],.hero-title>.title-accent-red,.hero-title>.title-accent-blue,.hero-section h1>.title-accent-red,.hero-section h1>.title-accent-blue{display:none!important;visibility:hidden!important;font-size:0!important;color:transparent!important;background:none!important;background-image:none!important;-webkit-text-fill-color:transparent!important}"
++".title-accent-cream,.hero-section h1 span.dg-cyber-ch,.header h1 span.dg-cyber-ch{color:var(--dg-paper)!important;background:none!important;background-image:none!important;-webkit-text-fill-color:var(--dg-paper)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;text-shadow:none!important;filter:none!important;font-family:var(--dg-sans)!important}"
++".statue-frame,.statue-svg,.statue-wrapper,.statue-coordinates,.statue-border-gold,.hero-content-right,header.hero-section .hero-content-right,header.hero-section [class*=statue],[class*=statue],[class*=brand-gold]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;overflow:hidden!important}"
++".hero-section h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,.header h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,h1.hero-title:not([data-dg-hero-h1]):has(.title-accent-gold)::before{content:'Demigod';display:block!important;visibility:visible!important;font-size:clamp(2.6rem,8vw,4.8rem)!important;line-height:1.08!important;color:var(--dg-phosphor,#a6ffcb)!important;-webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;background:none!important;font-family:var(--dg-sans)!important;text-transform:none!important}"
 +".roles-header,.roles-grid,.role-card,[data-dg-hidden=roles-simplify]{display:none!important}"
 +"#dg-contact-strip,#insights-section,.insights-section,[class*=get-in-touch],[class*=contact-us]{display:none!important}"
 +"#startup-modal .modal-title,#jobseeker-modal .modal-title,.modal-title{color:var(--dg-paper)!important;font-family:var(--dg-sans)!important;letter-spacing:-.02em!important;text-transform:none!important;font-weight:650!important}"
