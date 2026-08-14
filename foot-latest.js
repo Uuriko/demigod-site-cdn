@@ -1,6 +1,7 @@
 /*dg-foot-v1101-core*/
 /* Webflow paste: one SHA for preload + CSS + execute. See WEBFLOW-PIN.md. Never mix 309f4b700e1f preload with a different execute SHA. */
 /* 2026-08-14: kill Webflow gold "SF Startup Talent" clip + statue/fake-role/contact theater. Frege-night only. */
+/* 2026-08-14: bounties honest empty — pin-SHA feed (never @main), no payTo:"", unused USDC rail ≠ 10% on hire. */
 window.dgFootVersion = 'v1101'; console.log('[demigod] foot v1101-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
@@ -1708,7 +1709,7 @@ function nav(){
   var right=q('.nav_container .nav_right');
   if(right&&!q('#dg-nav-directory')){
     var menu=document.createElement('details');menu.id='dg-nav-directory';
-    menu.innerHTML='<summary>Explore</summary><div class="dg-nav-panel"><p class="dg-nav-group">Start</p><a href="/how-it-works" data-dg-page="how">How it works</a><a href="/pricing" data-dg-page="pricing">Pricing</a><a href="/sample" data-dg-page="sample">Sample match</a><a href="/?p=bounties" data-dg-page="bounties">Bounties</a><a href="/hire" data-dg-page="hire">Hire guide</a><a href="/talent" data-dg-page="talent">Talent guide</a><p class="dg-nav-group">More</p><a href="/startups" data-dg-page="map">SF directory</a><a href="/blog" data-dg-page="blog">Notes</a><a href="/faq" data-dg-page="faq">FAQ</a><a href="/about" data-dg-page="about">About</a><a href="/contact" data-dg-page="contact">Contact</a><a href="/legal" data-dg-page="legal">Privacy & terms</a></div>';
+    menu.innerHTML='<summary>Explore</summary><div class="dg-nav-panel"><p class="dg-nav-group">Start</p><a href="/how-it-works" data-dg-page="how">How it works</a><a href="/pricing" data-dg-page="pricing">Pricing</a><a href="/sample" data-dg-page="sample">Sample match</a><a href="/bounties" data-dg-page="bounties">Bounties</a><a href="/hire" data-dg-page="hire">Hire guide</a><a href="/talent" data-dg-page="talent">Talent guide</a><p class="dg-nav-group">More</p><a href="/startups" data-dg-page="map">SF directory</a><a href="/blog" data-dg-page="blog">Notes</a><a href="/faq" data-dg-page="faq">FAQ</a><a href="/about" data-dg-page="about">About</a><a href="/contact" data-dg-page="contact">Contact</a><a href="/legal" data-dg-page="legal">Privacy & terms</a></div>';
     qa('a',menu).forEach(function(a){a.style.setProperty('visibility','visible','important');a.style.setProperty('opacity','1','important')});
     menu.addEventListener('click',function(e){if(e.target.closest('a'))menu.removeAttribute('open')});right.prepend(menu);
     menu.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.open){e.preventDefault();menu.removeAttribute('open');menu.querySelector('summary').focus()}});
@@ -1737,7 +1738,7 @@ function foot(){
           '<a href="/hire" data-dg-page="hire">Hire talent guide</a>'+
           '<a href="/talent" data-dg-page="talent">Talent guide</a>'+
           '<a href="/sample" data-dg-page="sample">Sample match</a>'+
-          '<a href="/?p=bounties" data-dg-page="bounties">Bounties</a>'+
+          '<a href="/bounties" data-dg-page="bounties">Bounties</a>'+
           '<a href="/blog" data-dg-page="blog">Notes</a>'+
           '<a href="/faq" data-dg-page="faq">FAQ</a>'+
         '</div>'+
@@ -3698,21 +3699,15 @@ var DG_PAGES = {
   bounties: {
     title: 'Bounties',
     doc: 'Bounties · Demigod',
-    desc: "Declared USDC bounties. We don't hold it.",
+    desc: "No Demigod listings yet. We don't hold USDC. 10% on hire is matching — declared USDC is an unused bounty rail. potter@trydemigod.com",
     html:
-      '<div class="dg-bounty-id" id="dg-bounty-id"></div>' +
-      '<div id="dg-bounty-live"></div>' +
-      '<form id="dg-bounty-form" class="dg-bounty-form">' +
-      '<label class="dg-bounty-lab" for="dg-bounty-repo">GitHub</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-repo" name="repo" type="url" required placeholder="https://github.com/owner/repo" autocomplete="off" />' +
-      '<label class="dg-bounty-lab" for="dg-bounty-amount">USDC</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-amount" name="amount" inputmode="decimal" required placeholder="25" />' +
-      '<label class="dg-bounty-lab" for="dg-bounty-payto">Wallet</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-payto" name="payTo" placeholder="Solana address" autocomplete="off" spellcheck="false" />' +
-      '<button type="submit" class="dg-bounty-submit">List</button>' +
-      '<p class="dg-bounty-msg" id="dg-bounty-msg" role="status" aria-live="polite"></p>' +
-      '</form>' +
-      "<p class=\"dg-p-note\">We don't hold it.</p>",
+      '<div id="dg-bounty-empty" class="dg-bounty-empty">' +
+      '<p class="dg-p-lead">There are no Demigod listings yet.</p>' +
+      '<p>Demigod is a hiring site. Startups pay <strong>10% of first-year base when a hire starts</strong> — that is matching, not a bounty.</p>' +
+      '<p><strong>Declared USDC</strong> is a separate bounty rail. We don\'t hold USDC. The rail is unused.</p>' +
+      '<p class="dg-p-note">Questions or a future listing: <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>.</p>' +
+      '</div>' +
+      '<div id="dg-bounty-live" hidden></div>',
   },
   map: {
     title: 'SF tech company directory',
@@ -3851,6 +3846,9 @@ function pageCss() {
     '@media(prefers-reduced-motion:reduce){#dg-page{animation:none}}' +
     '@media(forced-colors:active){#dg-page{background:Canvas!important;forced-color-adjust:auto}#dg-page .dg-page-card,#dg-page .dg-page-x,#dg-page .dg-page-ctas a{border:1px solid CanvasText!important;background:Canvas!important;color:CanvasText!important;box-shadow:none!important}#dg-page .dg-page-x:focus-visible,#dg-page .dg-page-ctas a:focus-visible,#dg-page summary:focus-visible{outline:2px solid Highlight!important}}' +
     '#dg-page.dg-page-bounties{background:#03140D!important;font-family:Manrope,system-ui,sans-serif;color:#F3F0E7}' +'#dg-page.dg-page-bounties .dg-page-card{max-width:min(40rem,100%);margin:1.25rem auto;background:transparent;border:none;box-shadow:none;border-radius:0;padding:1.15rem;color:#F3F0E7}' +'#dg-page.dg-page-bounties .dg-page-x,#dg-page.dg-page-bounties .dg-page-ctas{display:none!important}' +'#dg-page.dg-page-bounties h1{font-family:Manrope,system-ui,sans-serif!important;color:#A6FFCB!important;font-weight:700;letter-spacing:-.02em}' +'#dg-page.dg-page-bounties .dg-p-note{color:#8A8A9E;font-size:.9rem}' +'#dg-page.dg-page-bounties a{color:#10C674}' +'#dg-page.dg-page-bounties .dg-bounty-id{display:flex;align-items:center;gap:.55rem;margin:0 0 .85rem}' +'#dg-page.dg-page-bounties .dg-bounty-av{width:28px;height:28px;border-radius:999px;border:1px solid rgba(166,255,203,.35);background:rgba(166,255,203,.08)}' +'#dg-page.dg-page-bounties .dg-bounty-handle{color:#A6FFCB;font-weight:650;text-decoration:none;font-size:.92rem}' +'#dg-page.dg-page-bounties .dg-bounty-gh{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem 1rem;border-radius:12px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif;border:0;background:#A6FFCB;color:#03140D}' +'#dg-page.dg-page-bounties .dg-bounty-x{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem .9rem;border-radius:12px;font-weight:600;cursor:pointer;font-family:Manrope,system-ui,sans-serif;background:transparent;color:#A6FFCB;border:1px solid rgba(166,255,203,.35)}' +'#dg-page.dg-page-bounties .dg-bounty-rows{list-style:none;margin:0 0 1.15rem;padding:0;display:grid;gap:.5rem}' +'#dg-page.dg-page-bounties .dg-bounty-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.65rem;align-items:center;padding:.7rem .85rem;background:rgba(166,255,203,.08);border:1px solid rgba(166,255,203,.22);border-radius:12px}' +'#dg-page.dg-page-bounties .dg-bounty-amt{font-weight:700;color:#A6FFCB;white-space:nowrap}' +'#dg-page.dg-page-bounties .dg-bounty-title{color:#F3F0E7;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +'#dg-page.dg-page-bounties .dg-bounty-title:hover{color:#10C674}' +'#dg-page.dg-page-bounties .dg-bounty-pay{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem 1rem;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer;border:0;background:#A6FFCB;color:#03140D;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-form{display:grid;gap:.35rem;margin:0 0 .75rem}' +'#dg-page.dg-page-bounties .dg-bounty-lab{font-size:.78rem;color:#8A8A9E;margin-top:.3rem}' +'#dg-page.dg-page-bounties .dg-bounty-in{width:100%;min-height:48px;padding:.6rem .75rem;border-radius:12px;border:1px solid rgba(166,255,203,.22);background:rgba(166,255,203,.08);color:#F3F0E7;font-size:16px;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-in:focus-visible{outline:2px solid #A6FFCB;outline-offset:3px}' +'#dg-page.dg-page-bounties .dg-bounty-submit{min-height:48px;margin-top:.55rem;border-radius:12px;border:0;background:#A6FFCB;color:#03140D;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-msg{min-height:1.2rem;font-size:.84rem;color:#8A8A9E;margin:.35rem 0 0}' +'#dg-page.dg-page-bounties .dg-bounty-note{margin:0;font-size:.9rem;color:#8A8A9E;font-weight:500}' +
+    '#dg-page.dg-page-bounties .dg-bounty-empty{margin:0 0 1rem}' +
+    '#dg-page.dg-page-bounties .dg-bounty-empty .dg-p-lead{margin:0 0 .75rem;color:#F3F0E7}' +
+    '#dg-page.dg-page-bounties .dg-bounty-empty p{margin:0 0 .75rem;line-height:1.55}' +
         /* Events Bot — gold Demigod system (FOCUS: never phosphor MUD green) */
     '#dg-page.dg-page-events{background:radial-gradient(120% 80% at 80% 0%,rgba(201,168,76,.09),transparent 55%),#060606!important}' +
     '#dg-page.dg-page-events .dg-page-card{max-width:min(44rem,96vw);border-color:rgba(201,168,76,.38);' +
@@ -4725,7 +4723,7 @@ function openPage(id, push) {
   } catch (e) {}
   try {
     /* Prefer hard path (/events) over /?p= when we own a clean route. */
-    var preferred = { how:'/how', pricing:'/pricing', hire:'/hire', talent:'/talent', faq:'/faq', legal:'/legal', refer:'/refer', about:'/about', events:'/events', map:'/startups', contact:'/contact', blog:'/blog', sample:'/sample', bounties:'/?p=bounties', press:'/press', private:'/private', notfound:'/' };
+    var preferred = { how:'/how', pricing:'/pricing', hire:'/hire', talent:'/talent', faq:'/faq', legal:'/legal', refer:'/refer', about:'/about', events:'/events', map:'/startups', contact:'/contact', blog:'/blog', sample:'/sample', bounties:'/bounties', press:'/press', private:'/private', notfound:'/' };
     var pathNow = (location.pathname || '/').replace(/\/+$/, '') || '/';
     /* v860: an ALIAS must not claim canonical for itself. DG_PAGE_PATHS declares 36 paths across ~19
        routes, so /referral, /referrals and /partners are all route 'refer', and /press-kit and
@@ -4900,20 +4898,45 @@ function bountyNormalize(item, source) {
   if (!name && !repo) return null;
   var cur = String(item.currency || 'USDC').trim().toUpperCase();
   if (cur === 'USD') cur = 'USDC';
-  return {
+  var out = {
     kind: item.kind === 'project' ? 'project' : 'item',
     name: name || repo,
     repo: repo,
     itemUrl: item.itemUrl || null,
     amount: item.amount,
     currency: 'USDC',
-    payTo: String(item.payTo || '').trim(),
     chain: String(item.chain || '').trim().toLowerCase(),
     source: source || ''
   };
+  var payTo = String(item.payTo || '').trim();
+  if (payTo) out.payTo = payTo;
+  return out;
 }
 var DG_BOUNTY_SEED = [];
-var DG_BOUNTY_FEED = 'https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/bounties-feed.json';
+function dgBountiesFeedUrl() {
+  function pinFrom(href) {
+    var s = String(href || '');
+    if (!s || /@main(?:\/|[?#]|$)/i.test(s)) return '';
+    if (/\/main\/bounties-feed\.json/i.test(s)) return '';
+    var m = s.match(/^(https:\/\/cdn\.jsdelivr\.net\/gh\/Uuriko\/demigod-site-cdn@[a-f0-9]{7,40}\/)(?:foot-latest\.js|bounties-feed\.json)(?:[?#]|$)/i);
+    return m ? (m[1] + 'bounties-feed.json') : '';
+  }
+  var meta = q('meta[name="dg-bounties-feed"]');
+  var fromMeta = pinFrom(meta && meta.content);
+  if (fromMeta) return fromMeta;
+  var loader = q('#demigod-foot-cdn-loader');
+  var fromLoader = pinFrom(loader && loader.src);
+  if (fromLoader) return fromLoader;
+  var preload = q('link[data-dg-foot-preload],link[rel="preload"][href*="foot-latest.js"]');
+  var fromPreload = pinFrom(preload && (preload.href || preload.getAttribute('href')));
+  if (fromPreload) return fromPreload;
+  var scripts = document.getElementsByTagName('script');
+  for (var i = 0; i < scripts.length; i++) {
+    var fromScript = pinFrom(scripts[i] && scripts[i].src);
+    if (fromScript) return fromScript;
+  }
+  return '';
+}
 function bountyGhUser() {
   try {
     var j = JSON.parse(sessionStorage.getItem(DG_BOUNTY_GH_KEY) || 'null');
@@ -5060,35 +5083,40 @@ function bountyCopyPay(amount) {
   } catch (e) {}
 }
 function bountyRender(root, listings) {
+  var empty = root && root.querySelector('#dg-bounty-empty');
   var host = root && root.querySelector('#dg-bounty-live');
-  if (!host) return;
   if (!listings.length) {
-    host.innerHTML = '<p class="dg-p-note">None yet.</p>';
+    if (empty) empty.hidden = false;
+    if (host) {
+      host.innerHTML = '';
+      host.hidden = true;
+    }
     return;
   }
+  if (!host) return;
+  if (empty) empty.hidden = true;
+  host.hidden = false;
   host.innerHTML = '<ul class="dg-bounty-rows">' + listings.map(function (it) {
     var href = it.itemUrl || (it.repo ? ('https://github.com/' + it.repo) : '');
     var amt = (it.amount != null && it.amount !== '') ? (esc(String(it.amount)) + ' USDC') : '';
     var title = href ? ('<a class="dg-bounty-title" href="' + esc(href) + '" rel="noopener" target="_blank">' + esc(it.name) + '</a>') : ('<span class="dg-bounty-title">' + esc(it.name) + '</span>');
     var payHref = bountyPayHref(it);
-    var pay = payHref
-      ? ('<a class="dg-bounty-pay" href="' + esc(payHref) + '" data-dg-bounty-pay="1">Pay</a>')
-      : ('<button type="button" class="dg-bounty-pay" data-dg-bounty-copy="' + esc(String(it.amount || '')) + '">Pay</button>');
+    var pay = payHref ? ('<a class="dg-bounty-pay" href="' + esc(payHref) + '" data-dg-bounty-pay="1">Pay</a>') : '';
     return '<li class="dg-bounty-row"><span class="dg-bounty-amt">' + amt + '</span>' + title + pay + '</li>';
   }).join('') + '</ul>';
-  host.querySelectorAll('[data-dg-bounty-pay],[data-dg-bounty-copy]').forEach(function (el) {
+  host.querySelectorAll('[data-dg-bounty-pay]').forEach(function (el) {
     el.addEventListener('click', function (ev) {
-      if (!bountyGhUser()) { ev.preventDefault(); bountyGhStart(root); return; }
-      var copyAmt = el.getAttribute('data-dg-bounty-copy');
-      if (copyAmt != null && copyAmt !== '') bountyCopyPay(copyAmt);
+      if (!bountyGhUser()) { ev.preventDefault(); bountyGhStart(root); }
     });
   });
 }
 function bountyLoadFeeds(root) {
   var seed = DG_BOUNTY_SEED.map(function (it) { return bountyNormalize(it, 'demigod'); }).filter(Boolean);
   bountyRender(root, seed);
-  var bust = '?t=' + Math.floor(Date.now() / 60000);
-  fetch(DG_BOUNTY_FEED + bust, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(4000) })
+  var url = dgBountiesFeedUrl();
+  if (!url || /@main(?:\/|[?#]|$)/i.test(url) || /\/main\/bounties-feed\.json/i.test(url)) return;
+  var bust = (url.indexOf('?') >= 0 ? '&' : '?') + 't=' + Math.floor(Date.now() / 60000);
+  fetch(url + bust, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(4000) })
     .then(function (r) { if (!r.ok) throw new Error('n'); return r.json(); })
     .then(function (j) {
       var seen = {};
@@ -5110,35 +5138,6 @@ function bountyLoadFeeds(root) {
 
 function bountyFormMount(root) {
   try { bountyLoadFeeds(root); } catch (e0) {}
-  try { bountyRenderId(root); } catch (e1) {}
-  try { bountyConsumeOauth(root); } catch (e2) {}
-  var form = root && root.querySelector('#dg-bounty-form');
-  if (!form || form.dataset.dgBounty === '1') return;
-  form.dataset.dgBounty = '1';
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var gh = bountyGhUser();
-    if (!gh) { bountyGhStart(root); return; }
-    var repo = String((root.querySelector('#dg-bounty-repo') || {}).value || '').trim();
-    var amount = String((root.querySelector('#dg-bounty-amount') || {}).value || '').trim();
-    var payTo = String((root.querySelector('#dg-bounty-payto') || {}).value || '').trim();
-    var msg = root.querySelector('#dg-bounty-msg');
-    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+/i.test(repo)) {
-      if (msg) msg.textContent = 'GitHub URL';
-      return;
-    }
-    if (!amount) {
-      if (msg) msg.textContent = 'USDC';
-      return;
-    }
-    var body = [
-      'Repo: ' + repo,
-      'Amount: ' + amount + ' USDC',
-      'PayTo: ' + (payTo || ''),
-      'GitHub: ' + gh.login
-    ].join('\n');
-    location.href = 'mailto:potter@trydemigod.com?subject=' + encodeURIComponent('Demigod bounty: ' + repo) + '&body=' + encodeURIComponent(body);
-  });
 }
 
 function blogPageMount(root) {
