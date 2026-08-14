@@ -1,5 +1,6 @@
 /*dg-foot-v1101-core*/
 /* Webflow paste: one SHA for preload + CSS + execute. See WEBFLOW-PIN.md. Never mix 309f4b700e1f preload with a different execute SHA. */
+/* 2026-08-14: kill Webflow gold "SF Startup Talent" clip + statue/fake-role/contact theater. Frege-night only. */
 window.dgFootVersion = 'v1101'; console.log('[demigod] foot v1101-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
@@ -1491,7 +1492,7 @@ if(!en.querySelector('#dg-privacy')){var p=document.createElement('p');p.id='dg-
 qa('input,select,textarea', document).forEach(function(i){ if(!i.id) return; var l = document.querySelector('label[for="'+i.id+'"]'); if(l) l.setAttribute('for', i.id); });
 }
 /* === COPY INJECTION — runtime marketing strings from COPY; honesty scrub separate === */
-function copy(){qa(S+' h2').forEach(function(e){e.textContent=COPY.startupH2});qa(J+' h2').forEach(function(e){e.textContent=COPY.engineerH2});qa(S+' p,'+J+' p').forEach(function(e){var t=e.textContent||'';if(t.length>240||e.closest('form,.w-form'))return;e.textContent=e.closest(J)?COPY.engineerBody:COPY.startupBody});var jm=q(J);if(jm)qa('*',jm).forEach(function(e){if(e.children.length||e.closest('form,.w-form'))return;var t=(e.textContent||'').trim();if(/^ENGINEER APPLICATION$|^CANDIDATE APPLICATION$/i.test(t))e.textContent='SF STARTUP ROLES'})}
+function copy(){qa(S+' h2').forEach(function(e){e.textContent=COPY.startupH2});qa(J+' h2').forEach(function(e){e.textContent=COPY.engineerH2});qa(S+' p,'+J+' p').forEach(function(e){var t=e.textContent||'';if(t.length>240||e.closest('form,.w-form'))return;e.textContent=e.closest(J)?COPY.engineerBody:COPY.startupBody});var jm=q(J);if(jm)qa('*',jm).forEach(function(e){if(e.children.length||e.closest('form,.w-form'))return;var t=(e.textContent||'').trim();if(/^ENGINEER APPLICATION$|^CANDIDATE APPLICATION$|^SF STARTUP ROLES$/i.test(t))e.textContent=COPY.engineerH2})}
 /** Cyber wordmark: split letters for motion. Pure DOM paint.
  *  inline-block letter spans make AT/innerText read "D E M I G O D" — host aria-label +
  *  aria-hidden visual keep the spoken/accessible name as one word. */
@@ -2415,7 +2416,7 @@ function ensureLogo(){
 }
 function brandAssets(){if(q('#dg-brand-assets'))return;var s=document.createElement('style');s.id='dg-brand-assets';s.textContent=
 /* v618 Frege-night — large translucent art stage + left scrim; dual-path CTAs primary */
-":root{--dg-deep:#06271a;--dg-field:#075f3a;--dg-green:#08a05d;--dg-ink:#071d13;--dg-rule-paper:rgba(3,20,13,.2);--dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--dg-serif:Georgia,'Iowan Old Style','Times New Roman',serif}"
+":root{--dg-deep:#06271a;--dg-field:#075f3a;--dg-green:#08a05d;--dg-ink:#071d13;--dg-rule-paper:rgba(3,20,13,.2);--dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--dg-serif:Georgia,'Iowan Old Style','Times New Roman',serif;--_colors---brand-gold:var(--dg-signal,#10c674);--_colors---brand-gold-dark:var(--dg-night,#03140d)}"
 /* static CSS grain — no remote litter fuse, no infinite composite thrash (Fable #3) */
 +"body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9997;opacity:.055;background-image:radial-gradient(rgba(166,255,203,.11) .6px,transparent .6px),radial-gradient(rgba(243,240,231,.05) .5px,transparent .5px);background-size:3px 3px,5px 5px;background-position:0 0,1px 2px;mix-blend-mode:screen}"
 +"@keyframes dgGrain{0%,100%{transform:translate(0,0)}25%{transform:translate(-1%,1%)}50%{transform:translate(1%,-1%)}75%{transform:translate(-1%,-1%)}}"
@@ -2486,7 +2487,12 @@ function brandAssets(){if(q('#dg-brand-assets'))return;var s=document.createElem
 +".hero-content-left,.hero-section>.container,.hero-container{max-width:min(48rem,100%)!important}"
 +".hero-section h1,.header h1,.hero-title{text-shadow:0 2px 28px rgba(3,20,13,.55)!important}"
 +".hero-section h1 em,.hero-title em,.dg-em{font-style:italic!important;color:rgba(243,240,231,.88)!important;font-weight:400!important}"
-+".title-accent-gold,.title-accent-cream,.title-accent-red,.title-accent-blue,.hero-section h1 span{color:var(--dg-paper)!important;background:none!important;-webkit-text-fill-color:var(--dg-paper)!important}"
++".title-accent-gold,.title-accent-cream,.title-accent-red,.title-accent-blue,.hero-section h1 span,.header h1 span{color:var(--dg-paper)!important;background:none!important;background-image:none!important;-webkit-text-fill-color:var(--dg-paper)!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;text-shadow:none!important;filter:none!important;font-family:var(--dg-sans)!important}"
++".statue-frame,.statue-svg,.statue-wrapper,.statue-coordinates,.statue-border-gold,.hero-content-right{display:none!important}"
++".roles-header,.roles-grid,.role-card,[data-dg-hidden=roles-simplify]{display:none!important}"
++"#dg-contact-strip,#insights-section,.insights-section,[class*=get-in-touch],[class*=contact-us]{display:none!important}"
++"#startup-modal .modal-title,#jobseeker-modal .modal-title,.modal-title{color:var(--dg-paper)!important;font-family:var(--dg-sans)!important;letter-spacing:-.02em!important;text-transform:none!important;font-weight:650!important}"
++"#startup-modal .modal-subtitle,#jobseeker-modal .modal-subtitle,.modal-subtitle{color:var(--dg-paper-mute)!important;font-family:var(--dg-sans)!important;letter-spacing:.02em!important;text-transform:none!important;font-weight:500!important}"
 +".hero-section p,.header p,.subheading{position:relative;z-index:2;max-width:42ch!important;font-size:1.05rem!important;line-height:1.6!important;color:var(--dg-paper-mute)!important;margin:0 0 1.15rem!important;font-family:var(--dg-sans)!important}"
 /* pass32: drop redundant lead under outcome — dual-path is the next mass */
 +".hero-section .hero-description,.header .hero-description{display:none!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;visibility:hidden!important}"
@@ -2529,7 +2535,7 @@ function brandAssets(){if(q('#dg-brand-assets'))return;var s=document.createElem
 +"section.trust-section,section:has(.steps-grid),section:has(.pricing-grid){display:block!important;visibility:visible!important;opacity:1!important;color:var(--dg-paper)!important;background-image:none!important;border-top:1px solid var(--dg-rule)!important}"
 +"section.trust-section,section:has(.steps-grid){background:linear-gradient(180deg,rgba(166,255,203,.03) 0%,var(--dg-night) 28%)!important;padding:clamp(1.85rem,4vh,2.75rem) 1.25rem clamp(2.25rem,5.5vh,3.5rem)!important}"
 +"section:has(.pricing-grid){background:var(--dg-night)!important;padding:clamp(2rem,4.5vh,3rem) 1.25rem clamp(2.15rem,5vh,3.25rem)!important}"
-+".roles-header,.roles-grid,[data-dg-hidden=roles-simplify]{display:none!important}"
++".roles-header,.roles-grid,.role-card,[data-dg-hidden=roles-simplify]{display:none!important}"
 +".trust-header,.pricing-grid{max-width:56rem!important;margin-left:auto!important;margin-right:auto!important}"
 +".trust-header{box-sizing:border-box!important;display:block!important;width:100%!important;max-width:56rem!important;margin:0 auto 1.35rem!important;text-align:left!important}"
 +".trust-header h2,section:has(.steps-grid) h2,section.trust-section h2{color:var(--dg-paper)!important;font-family:var(--dg-serif)!important;font-size:clamp(1.85rem,3.8vw,2.6rem)!important;font-weight:480!important;letter-spacing:-.03em!important;line-height:1.12!important;margin:0 0 .75rem!important;text-align:left!important;text-transform:none!important;max-width:min(28ch,100%)!important}"
@@ -3827,8 +3833,7 @@ function pageCss() {
     '#dg-page.dg-page-events .dg-p-lead{color:#D6D3D1}' +
     '#dg-page.dg-page-events .dg-p-lead strong{color:#E8D5A3}' +
     '#dg-page.dg-page-events .dg-page-x{border-color:rgba(201,168,76,.5);color:#C9A84C}' +
-    /* kill any leaked phosphor on events page only */
-    '#dg-page.dg-page-events,#dg-page.dg-page-events *{--dg-phosphor:#C9A84C;--dg-signal:#E8D5A3}' +
+    /* do not remap --dg-phosphor/--dg-signal to gold — that cascaded gold over frege-night */
     '#dg-page.dg-page-events a:not(.dg-ev-cta-pri):not(.dg-page-ctas a):not(.dg-p-actions a){color:#E8D5A3}' +
     '#dg-page .dg-ev-hero{position:relative;height:8.25rem;margin:-.35rem 0 1.1rem;border-radius:14px;border:1px solid rgba(201,168,76,.3);' +
     'background:linear-gradient(115deg,#0A0A0A 0%,#14110c 42%,rgba(201,168,76,.16) 100%),' +

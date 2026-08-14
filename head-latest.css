@@ -2794,3 +2794,86 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
   filter:brightness(1.05)!important;
   box-shadow:0 8px 22px rgba(16,198,116,.28)!important;
 }
+
+/* leftover QA 2026-08-14: Webflow .title-accent-gold is a gold gradient clip
+   (linear-gradient(#e5c158,#aa8c2c) + -webkit-text-fill-color:transparent).
+   Color-only remaps lose, so "SF Startup Talent." paints gold over frege-night.
+   Neutralize the clip, remap Designer gold vars, hide statue / fake-role /
+   contact theater. Hire-card contrast above is unchanged. */
+:root{
+  --_colors---brand-gold:var(--dg-signal,#10c674);
+  --_colors---brand-gold-dark:var(--dg-night,#03140d);
+}
+.title-accent-gold,
+.hero-title .title-accent-gold,
+.hero-section .title-accent-gold,
+.header .title-accent-gold,
+.hero-section h1 .title-accent-gold,
+.header h1 .title-accent-gold{
+  color:var(--dg-paper,#f3f0e7)!important;
+  -webkit-text-fill-color:var(--dg-paper,#f3f0e7)!important;
+  background:none!important;
+  background-image:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  text-shadow:none!important;
+  filter:none!important;
+  font-family:var(--dg-sans,system-ui,sans-serif)!important;
+  letter-spacing:-.02em!important;
+  text-transform:none!important;
+}
+.title-accent-red,
+.title-accent-blue,
+.title-accent-cream,
+.hero-title .title-accent-red,
+.hero-title .title-accent-blue,
+.hero-section h1 span,
+.header h1 span{
+  color:var(--dg-paper-mute,#bdc9bf)!important;
+  -webkit-text-fill-color:var(--dg-paper-mute,#bdc9bf)!important;
+  background:none!important;
+  background-image:none!important;
+  text-shadow:none!important;
+  font-family:var(--dg-sans,system-ui,sans-serif)!important;
+}
+.statue-frame,
+.statue-svg,
+.statue-wrapper,
+.statue-coordinates,
+.statue-border-gold,
+.hero-content-right{
+  display:none!important;
+}
+.roles-header,
+.roles-grid,
+.role-card,
+[data-dg-hidden="roles-simplify"]{
+  display:none!important;
+}
+#dg-contact-strip,
+#insights-section,
+.insights-section,
+[class*="get-in-touch"],
+[class*="contact-us"],
+section:has([class*="get-in-touch"]),
+section:has([class*="contact-us"]){
+  display:none!important;
+}
+#startup-modal .modal-title,
+#jobseeker-modal .modal-title,
+.modal-title{
+  color:var(--dg-paper,#f3f0e7)!important;
+  font-family:var(--dg-sans,system-ui,sans-serif)!important;
+  letter-spacing:-.02em!important;
+  text-transform:none!important;
+  font-weight:650!important;
+}
+#startup-modal .modal-subtitle,
+#jobseeker-modal .modal-subtitle,
+.modal-subtitle{
+  color:var(--dg-paper-mute,#bdc9bf)!important;
+  font-family:var(--dg-sans,system-ui,sans-serif)!important;
+  letter-spacing:.02em!important;
+  text-transform:none!important;
+  font-weight:500!important;
+}
