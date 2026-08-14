@@ -348,10 +348,21 @@
         : 'typical for tracked boards';
       bits.push('median posting ' + esc(company.medianPostedDays) + 'd — ' + band);
     }
-    var nameHtml = website
-      ? '<a class="dg-dir-name" href="' + esc(website) + '" target="_blank" rel="' + (community ? 'noopener noreferrer ugc nofollow' : 'noopener noreferrer') + '">' + esc(company.name) + '</a>'
-      : '<span class="dg-dir-name is-plain">' + esc(company.name) + '</span>';
+    // Name opens the internal company page when we have an id. Website stays a
+    // secondary link so the external site is not lost. No id → prior website-on-name.
+    var companyId = String(company.id || '').trim();
+    var companyPath = companyId ? '/c/' + encodeURIComponent(companyId) : '';
+    var websiteRel = community ? 'noopener noreferrer ugc nofollow' : 'noopener noreferrer';
+    var nameHtml = companyPath
+      ? '<a class="dg-dir-name" href="' + esc(companyPath) + '">' + esc(company.name) + '</a>'
+      : website
+        ? '<a class="dg-dir-name" href="' + esc(website) + '" target="_blank" rel="' + websiteRel + '">' + esc(company.name) + '</a>'
+        : '<span class="dg-dir-name is-plain">' + esc(company.name) + '</span>';
     var links = [];
+    if (companyPath) links.push('<a href="' + esc(companyPath) + '">Company</a>');
+    if (website && companyPath) {
+      links.push('<a href="' + esc(website) + '" target="_blank" rel="' + websiteRel + '">website</a>');
+    }
     if (jobsUrl) {
       var jobsText = openRoles ? rolesLabel + ' on ' + esc(company.atsSource)
         : company.jobsSource === 'YC' ? 'Open jobs on Y Combinator'
