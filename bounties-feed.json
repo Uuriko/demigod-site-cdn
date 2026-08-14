@@ -1,7 +1,7 @@
 {
   "name": "demigod bounties",
   "schema": "demigod-bounties-feed/v1",
-  "note": "Declared USDC. We don't hold it. Demigod listings only — not extraSeed/dasha-desk.",
-  "url": "https://www.trydemigod.com/?p=bounties",
+  "note": "Declared USDC. We don't hold it. Unused bounty rail — not the 10% on-hire matching fee. Demigod listings only — not extraSeed/dasha-desk.",
+  "url": "https://www.trydemigod.com/bounties",
   "listings": []
 }

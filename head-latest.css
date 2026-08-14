@@ -2966,3 +2966,16 @@ section:has([class*="contact-us"]){
   text-transform:none!important;
   font-weight:500!important;
 }
+/* /bounties Webflow shell (data-wf-page 6a7e0d218c0fdcade58240b3): no-JS empty state.
+   Visible without foot JS. Hidden once #dg-page mounts or the route splash is up. */
+html[data-wf-page="6a7e0d218c0fdcade58240b3"]:not(.dg-route-boot) body:not(.dg-page-on)::before{
+  content:"Bounties. There are no Demigod listings yet. We don't hold USDC. Declared USDC is an unused bounty rail — not the 10% on-hire matching fee. Contact potter@trydemigod.com.";
+  display:block;
+  box-sizing:border-box;
+  max-width:40rem;
+  margin:1.25rem auto;
+  padding:1.15rem;
+  color:#f3f0e7;
+  background:#03140d;
+  font:500 1rem/1.55 var(--dg-sans,system-ui,sans-serif);
+}
