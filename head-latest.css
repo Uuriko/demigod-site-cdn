@@ -2801,15 +2801,30 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
    Neutralize the clip, remap Designer gold vars, hide statue / fake-role /
    contact theater. Hire-card contrast above is unchanged. */
 :root{
+  --brand-gold:var(--dg-signal,#10c674);
+  --brand-gold-dark:var(--dg-night,#03140d);
   --_colors---brand-gold:var(--dg-signal,#10c674);
   --_colors---brand-gold-dark:var(--dg-night,#03140d);
 }
-.title-accent-gold,
+/* Live canvas (2026-08-13): <span class="title-accent-gold">SF Startup Talent.</span>
+   Hide the shout — do not restyle it gold or let the clip paint. JS replaces H1 with Demigod. */
 .hero-title .title-accent-gold,
-.hero-section .title-accent-gold,
-.header .title-accent-gold,
+.hero-title .title-accent-red,
+.hero-title .title-accent-blue,
 .hero-section h1 .title-accent-gold,
-.header h1 .title-accent-gold{
+.hero-section h1 .title-accent-red,
+.hero-section h1 .title-accent-blue,
+.header h1 .title-accent-gold,
+.header h1 .title-accent-red,
+.header h1 .title-accent-blue{
+  display:none!important;
+  color:var(--dg-paper,#f3f0e7)!important;
+  -webkit-text-fill-color:var(--dg-paper,#f3f0e7)!important;
+  background:none!important;
+  background-image:none!important;
+}
+.title-accent-gold,
+[class*="title-accent-gold"]{
   color:var(--dg-paper,#f3f0e7)!important;
   -webkit-text-fill-color:var(--dg-paper,#f3f0e7)!important;
   background:none!important;
@@ -2824,25 +2839,23 @@ section h2:not(.dg-p-h3):not(.dg-wiz-q){
 }
 .title-accent-red,
 .title-accent-blue,
-.title-accent-cream,
-.hero-title .title-accent-red,
-.hero-title .title-accent-blue,
-.hero-section h1 span,
-.header h1 span{
+.title-accent-cream{
   color:var(--dg-paper-mute,#bdc9bf)!important;
   -webkit-text-fill-color:var(--dg-paper-mute,#bdc9bf)!important;
   background:none!important;
   background-image:none!important;
   text-shadow:none!important;
-  font-family:var(--dg-sans,system-ui,sans-serif)!important;
 }
 .statue-frame,
 .statue-svg,
 .statue-wrapper,
 .statue-coordinates,
 .statue-border-gold,
+[class*="statue"],
+[class*="brand-gold"],
 .hero-content-right{
   display:none!important;
+  visibility:hidden!important;
 }
 .roles-header,
 .roles-grid,
