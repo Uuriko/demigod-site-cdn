@@ -2639,7 +2639,102 @@ function dgIdle(fn,ms){ms=ms||2000;try{if(window.requestIdleCallback){requestIdl
 /* design-track v912: calmer WIZ type */
 function ensureWizCalmCss(){if(q('#dg-wiz-calm-css'))return;var s=document.createElement('style');s.id='dg-wiz-calm-css';s.textContent='#startup-modal .dg-wiz-q,#jobseeker-modal .dg-wiz-q{font-family:var(--dg-sans)!important;font-size:clamp(1.25rem,2.8vw,1.65rem)!important;font-weight:600!important;letter-spacing:-.02em!important;text-transform:none!important;color:var(--dg-paper)!important;line-height:1.25!important;text-shadow:none!important}#startup-modal .dg-wiz-hint,#jobseeker-modal .dg-wiz-hint{font-size:.92rem!important;line-height:1.45!important;color:var(--dg-paper-mute)!important}#startup-modal .dg-wiz-next,#jobseeker-modal .dg-wiz-next,#startup-modal .dg-wiz-start,#jobseeker-modal .dg-wiz-start{border-radius:12px!important;min-height:48px!important;font-family:var(--dg-sans)!important;font-weight:700!important;background:#a6ffcb!important;color:#03140d!important;border:0!important}#startup-modal .w-form,#jobseeker-modal .w-form{border-radius:18px!important;padding:1.15rem 1.2rem 1.35rem!important;max-width:min(32rem,100%)!important;margin:0 auto!important}#startup-modal .dg-wiz-bar>i,#jobseeker-modal .dg-wiz-bar>i{background:var(--dg-signal)!important;box-shadow:none!important}#startup-modal .dg-wiz-next[data-enter-hint],#jobseeker-modal .dg-wiz-next[data-enter-hint]{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:.18rem!important;line-height:1.2!important;text-align:center!important}#startup-modal .dg-wiz-next[data-enter-hint]::after,#jobseeker-modal .dg-wiz-next[data-enter-hint]::after{content:attr(data-enter-hint);display:block!important;font-size:.62rem!important;font-weight:500!important;opacity:.55!important;letter-spacing:.04em!important;margin:0!important;line-height:1!important}';document.head.appendChild(s);}
 
-/* Observed public ATS roles — not matching inventory (not DEMIGOD-BOARD seeds). */
+/* Public-roles overlay (demigod.public-roles/1). May include curated X-week
+   rows — not matching inventory, not DEMIGOD-BOARD seeds, and not ATS
+   first-observation unless provider is a real board (Greenhouse/Okta). */
+function dgPublicRolesUrl(){
+  function pinFrom(href){
+    var s=String(href||'');
+    if(!s||/@main(?:\/|[?#]|$)/i.test(s))return '';
+    if(/\/main\/public-roles\.json/i.test(s))return '';
+    var m=s.match(/^(https:\/\/cdn\.jsdelivr\.net\/gh\/Uuriko\/demigod-site-cdn@[a-f0-9]{7,40}\/)(?:foot-latest\.js|public-roles\.json)(?:[?#]|$)/i);
+    return m?(m[1]+'public-roles.json'):'';
+  }
+  var meta=q('meta[name="dg-public-roles"]');
+  var fromMeta=pinFrom(meta&&meta.content);
+  if(fromMeta)return fromMeta;
+  var loader=q('#demigod-foot-cdn-loader');
+  var fromLoader=pinFrom(loader&&loader.src);
+  if(fromLoader)return fromLoader;
+  var preload=q('link[data-dg-foot-preload],link[rel="preload"][href*="foot-latest.js"]');
+  var fromPreload=pinFrom(preload&&(preload.href||preload.getAttribute('href')));
+  if(fromPreload)return fromPreload;
+  var scripts=document.getElementsByTagName('script');
+  for(var i=0;i<scripts.length;i++){
+    var src=scripts[i]&&scripts[i].src;
+    var fromScript=pinFrom(src);
+    if(fromScript)return fromScript;
+    // Directory-shaped sibling (jsDelivr / local). Catbox is an opaque single file.
+    if(src&&/\/foot-latest\.js(?:[?#]|$)/.test(src)&&!/catbox/i.test(src)){
+      try{return new URL('public-roles.json',src).href;}catch(e){}
+    }
+  }
+  return '';
+}
+function renderObservedRoles(data){
+  if(!data||data.schema!=='demigod.public-roles/1'||!Array.isArray(data.roles)||!data.roles.length)return;
+  var host=q('#dg-observed-roles');
+  if(!host){
+    host=document.createElement('section');
+    host.id='dg-observed-roles';
+    host.setAttribute('aria-labelledby','dg-observed-roles-h');
+    var anchor=q('#demigod-pricing')||q('.pricing-section')||q('footer')||document.body;
+    if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(host,anchor);
+    else document.body.appendChild(host);
+  }
+  var esc=function(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');};
+  var items=data.roles.slice(0,24).map(function(r){
+    var url=String(r.url||'');
+    if(!/^https:\/\//i.test(url))return '';
+    var metaBits=[];
+    var fmtObsDay=function(iso){
+      var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso||''));
+      if(!m)return String(iso||'');
+      var t=Date.UTC(+m[1],+m[2]-1,+m[3]);
+      var n=new Date();
+      var today=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());
+      var days=Math.round((today-t)/864e5);
+      if(days<=0)return 'today';
+      if(days===1)return '1d ago';
+      if(days<14)return days+'d ago';
+      return m[0];
+    };
+    var posted=r.postedAt&&/^\d{4}-\d{2}-\d{2}$/.test(String(r.postedAt).slice(0,10))?String(r.postedAt).slice(0,10):'';
+    var seen=r.firstObservedAt&&/^\d{4}-\d{2}-\d{2}$/.test(String(r.firstObservedAt).slice(0,10))?String(r.firstObservedAt).slice(0,10):'';
+    // Prefer employer postedAt only when we actually have one. Overlay rows stay null.
+    if(posted)metaBits.push('<time class="dg-obs-posted" datetime="'+esc(posted)+'">Posted '+esc(fmtObsDay(posted))+'</time>');
+    else if(seen)metaBits.push('<time datetime="'+esc(seen)+'">First seen '+esc(fmtObsDay(seen))+'</time>');
+    var place=r.employerOffice?String(r.employerOffice).trim():(r.location?String(r.location).trim():'');
+    if(place)metaBits.push('<span class="dg-obs-loc">'+esc(place.slice(0,80))+'</span>');
+    var wt=r.workplaceType?String(r.workplaceType).trim():'';
+    if(wt&&!/^(on\s*site|onsite|full\s*time)$/i.test(wt))metaBits.push('<span class="dg-obs-work">'+esc(wt.slice(0,40))+'</span>');
+    var et=r.employmentType?String(r.employmentType).trim():'';
+    if(et&&!/^(full[\s-]?time|fulltime)$/i.test(et))metaBits.push('<span class="dg-obs-emp">'+esc(et.slice(0,40))+'</span>');
+    var prov=r.provider?String(r.provider).trim():'';
+    if(prov)metaBits.push('<span class="dg-obs-prov">'+esc(prov.slice(0,40))+'</span>');
+    var tweet=r.sourceTweet?String(r.sourceTweet).trim():'';
+    if(tweet&&/^https:\/\//i.test(tweet)&&tweet!==url)metaBits.push('<a class="dg-obs-via" href="'+esc(tweet)+'" rel="nofollow noopener" target="_blank">via X</a>');
+    var meta=metaBits.length?'<p class="dg-obs-meta">'+metaBits.join(' · ')+'</p>':'';
+    return '<li><a href="'+esc(url)+'" rel="nofollow noopener" target="_blank">'+
+      '<span class="dg-obs-co">'+esc(r.company)+'</span>'+
+      '<span class="dg-obs-role">'+esc(r.title)+'</span>'+
+      '<span class="dg-obs-go" aria-hidden="true">&#8599;</span></a>'+meta+'</li>';
+  }).filter(Boolean).join('');
+  if(!items)return;
+  var hasX=data.roles.some(function(r){return r&&String(r.provider||'')==='X';});
+  var note=data.note
+    ?String(data.note)
+    :(hasX
+      ?'Weekly X job feed overlay (@nazzari) — tweet-only rows are not ATS first-observation. Not Demigod matches.'
+      :'Public employer ATS postings we observe — not Demigod matches, not engaged searches. Hire through us via a brief.');
+  host.innerHTML=
+    '<div class="dg-obs-inner">'+
+    '<h2 id="dg-observed-roles-h">Open roles</h2>'+
+    '<p class="dg-obs-note">'+esc(note)+'</p>'+
+    '<ul class="dg-obs-list">'+items+'</ul>'+
+    '<p class="dg-obs-more"><a href="/startups" data-dg-page="map">Browse SF startup directory →</a> · <a href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a></p>'+
+    '</div>';
+}
 function injectObservedRoles(){
   try{
     // Product shells (#dg-page) own the primary H1. Idle inject after openPage was
@@ -2650,63 +2745,20 @@ function injectObservedRoles(){
       return;
     }
     var data=window.__dgPublicRoles;
-    if(!data||data.schema!=='demigod.public-roles/1'||!Array.isArray(data.roles)||!data.roles.length)return;
-    var host=q('#dg-observed-roles');
-    if(!host){
-      host=document.createElement('section');
-      host.id='dg-observed-roles';
-      host.setAttribute('aria-labelledby','dg-observed-roles-h');
-      var anchor=q('#demigod-pricing')||q('.pricing-section')||q('footer')||document.body;
-      if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(host,anchor);
-      else document.body.appendChild(host);
+    if(data&&data.schema==='demigod.public-roles/1'&&Array.isArray(data.roles)&&data.roles.length){
+      renderObservedRoles(data);
+      return;
     }
-    var esc=function(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');};
-    var items=data.roles.slice(0,8).map(function(r){
-      var url=String(r.url||'');
-      if(!/^https:\/\//i.test(url))return '';
-      // Meta line: observation day + optional public employer fields from Clay enrich payload.
-      var metaBits=[];
-      // One date + place + non-default work mode. Prefer employer postedAt; else our first-seen.
-      // Relative labels for recent days (datetime stays ISO). Skip FullTime/OnSite noise.
-      var fmtObsDay=function(iso){
-        var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso||''));
-        if(!m)return String(iso||'');
-        var t=Date.UTC(+m[1],+m[2]-1,+m[3]);
-        var n=new Date();
-        var today=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());
-        var days=Math.round((today-t)/864e5);
-        if(days<=0)return 'today';
-        if(days===1)return '1d ago';
-        if(days<14)return days+'d ago';
-        return m[0];
-      };
-      var posted=r.postedAt&&/^\d{4}-\d{2}-\d{2}$/.test(String(r.postedAt).slice(0,10))?String(r.postedAt).slice(0,10):'';
-      var seen=r.firstObservedAt&&/^\d{4}-\d{2}-\d{2}$/.test(String(r.firstObservedAt).slice(0,10))?String(r.firstObservedAt).slice(0,10):'';
-      if(posted)metaBits.push('<time class="dg-obs-posted" datetime="'+esc(posted)+'">Posted '+esc(fmtObsDay(posted))+'</time>');
-      else if(seen)metaBits.push('<time datetime="'+esc(seen)+'">First seen '+esc(fmtObsDay(seen))+'</time>');
-      var place=r.employerOffice?String(r.employerOffice).trim():(r.location?String(r.location).trim():'');
-      if(place)metaBits.push('<span class="dg-obs-loc">'+esc(place.slice(0,80))+'</span>');
-      var wt=r.workplaceType?String(r.workplaceType).trim():'';
-      if(wt&&!/^(on\s*site|onsite|full\s*time)$/i.test(wt))metaBits.push('<span class="dg-obs-work">'+esc(wt.slice(0,40))+'</span>');
-      var et=r.employmentType?String(r.employmentType).trim():'';
-      if(et&&!/^(full[\s-]?time|fulltime)$/i.test(et))metaBits.push('<span class="dg-obs-emp">'+esc(et.slice(0,40))+'</span>');
-      var meta=metaBits.length?'<p class="dg-obs-meta">'+metaBits.join(' · ')+'</p>':'';
-      return '<li><a href="'+esc(url)+'" rel="nofollow noopener" target="_blank">'+
-        '<span class="dg-obs-co">'+esc(r.company)+'</span>'+
-        '<span class="dg-obs-role">'+esc(r.title)+'</span>'+
-        '<span class="dg-obs-go" aria-hidden="true">&#8599;</span></a>'+meta+'</li>';
-    }).filter(Boolean).join('');
-    if(!items)return;
-    host.innerHTML=
-      '<div class="dg-obs-inner">'+
-      /* Title is "Open roles" (user: no "recently observed roles" label). Inventory honesty
-         stays in a short note; outbound ↗ marks employer boards. Sample-title scrub skips
-         #dg-observed-roles so exact "Open roles" is not rewritten to "Example roles". */
-      '<h2 id="dg-observed-roles-h">Open roles</h2>'+
-      '<p class="dg-obs-note">Public employer ATS postings we observe — not Demigod matches, not engaged searches. Hire through us via a brief.</p>'+
-      '<ul class="dg-obs-list">'+items+'</ul>'+
-      '<p class="dg-obs-more"><a href="/startups" data-dg-page="map">Browse SF startup directory →</a> · <a href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a></p>'+
-      '</div>';
+    var url=dgPublicRolesUrl();
+    if(!url)return;
+    fetch(url,{mode:'cors',cache:'force-cache',credentials:'omit'})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(j){
+        if(!j||j.schema!=='demigod.public-roles/1'||!Array.isArray(j.roles)||!j.roles.length)return;
+        window.__dgPublicRoles=j;
+        renderObservedRoles(j);
+      })
+      .catch(function(){});
   }catch(e){}
 }
 
