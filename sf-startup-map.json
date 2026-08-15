@@ -1,6 +1,8 @@
 {
   "schema": "demigod.sf-startup-map/3",
   "generatedAt": "2026-08-14T15:20:31.483Z",
+  "patchedAt": "2026-08-15T02:38:07.000Z",
+  "patchNote": "ElevenLabs Ashby board added from X 2088209055785615822",
   "coverage": {
     "total": 1850,
     "mapped": 1813,
@@ -15,7 +17,7 @@
     "companiesWithSectorTags": 2051,
     "definition": "Active San Francisco technology business locations with a business start date on or after January 1, 2020, using selected self-reported software, computing, electronics, pharmaceutical, and R&D NAICS groups.",
     "caveat": "This is an open-data proxy for startup activity, not a startup census. Registrations can include consultants, established firms, and home-based businesses; counts are neighborhood aggregates, never address pins. Named-company facts come from the public YC company directory, CC0 Wikidata, and companies’ public Hacker News Who is Hiring posts; current operating status is not independently verified.",
-    "companiesWithOpenRoles": 339,
+    "companiesWithOpenRoles": 340,
     "companiesWithYcJobsLink": 634,
     "roleMix": {
       "product": 400,
@@ -8780,6 +8782,38 @@
         "engineering": 2,
         "other": 2,
         "design": 1
+      }
+    },
+    {
+      "id": "ashby:elevenlabs",
+      "name": "ElevenLabs",
+      "description": "AI audio research and product company (voice, agents, creative, API)",
+      "website": "https://elevenlabs.io/",
+      "inceptionYear": 2022,
+      "tags": [
+        "x-sourced",
+        "ashby"
+      ],
+      "locationPrecision": "city",
+      "neighborhood": null,
+      "hiring": "yes",
+      "hiringEvidenceAt": "2026-08-14",
+      "source": "X",
+      "sourceUrl": "https://x.com/suraj_sharma14/status/2088209055785615822",
+      "sourceLicense": "public-x",
+      "retrievedAt": "2026-08-15T02:38:07.000Z",
+      "jobsUrl": "https://jobs.ashbyhq.com/elevenlabs",
+      "jobsSource": "Ashby",
+      "openRoles": 242,
+      "atsSource": "Ashby",
+      "openRolesAt": "2026-08-14",
+      "ledgerOpenRoles": 242,
+      "roleMix": {
+        "sales": 98,
+        "engineering": 77,
+        "ai/data": 1,
+        "operations": 27,
+        "marketing": 39
       }
     },
     {
