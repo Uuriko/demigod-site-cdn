@@ -1,51 +1,6 @@
-/* frege-night — one canonical :root. Forest/mint. No gold remap, no Dasha palette. */
+/* design-track 2026-08-05m: frege tokens FIRST (kill gold FOUC before legacy rules) */
 :root{
-  --dg-night:#03140d;
-  --dg-ink:#02100a;
-  --dg-phosphor:#a6ffcb;
-  --dg-signal:#10c674;
-  --dg-paper:#f3f0e7;
-  --dg-paper-mute:#bdc9bf;
-  --dg-rule:rgba(166,255,203,.18);
-  --dg-sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --dg-serif:Georgia,"Times New Roman",serif;
-  --dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --dg-cyber:ui-sans-serif,system-ui,sans-serif;
-  --g:#10c674;
-  --gl:#a6ffcb;
-  --yl:#a6ffcb;
-  --cr:#f3f0e7;
-  --dk:#03140d;
-  --mu:#bdc9bf;
   --dim:#8aa193;
-  --card:rgba(3,20,13,.92);
-  --line:rgba(16,198,116,.22);
-  --glow:0 0 40px rgba(16,198,116,.12);
-}
-/* leftover QA 2026-08-14b: first-paint kill. Pin 5b4d79d hid only descendant
-   .hero-title .title-accent-gold and remapped color. Live Webflow still ships
-   <span class="title-accent-gold">SF Startup Talent.</span> with a hardcoded
-   linear-gradient(#e5c158,#aa8c2c) clip, and early cascade keeps
-   h1:has(.title-accent-gold){visibility:visible}. Hide the leftover nodes
-   themselves as soon as this sheet parses — do not wait for foot JS. */
-.title-accent-gold,
-[class*="title-accent-gold"],
-.hero-title>.title-accent-red,
-.hero-title>.title-accent-blue,
-.hero-section h1>.title-accent-red,
-.hero-section h1>.title-accent-blue,
-.header h1>.title-accent-red,
-.header h1>.title-accent-blue,
-.statue-frame,
-.statue-svg,
-.statue-wrapper,
-.statue-coordinates,
-.statue-border-gold,
-.hero-content-right,
-header.hero-section .hero-content-right,
-header.hero-section [class*="statue"]{
-  display:none!important;
-  visibility:hidden!important;
 }
 /* demigod-head-styles.css — CANONICAL head CSS (CDN linked from demigod-head-minimal.html)
  * Brand tokens, hero, WIZ chrome, modals, mobile bar, FOUC guards.
@@ -117,11 +72,11 @@ nav.w-nav,.w-nav{display:flex!important;visibility:visible!important}
 #demigod-partners-teaser .dg-pt-intro{color:var(--mu)!important;max-width:42ch;margin:0 0 1.35rem!important;line-height:1.55;font-size:1rem}
 #demigod-partners-teaser .dg-pt-actions{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:min(44rem,100%);justify-content:stretch}
 #demigod-partners-teaser .dg-pt-actions a{min-height:5rem;padding:1.05rem 1.2rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.28rem;border-radius:14px;text-decoration:none;font-family:var(--dg-sans),Manrope,system-ui,sans-serif;text-align:left}
-#demigod-partners-teaser .dg-pt-actions a:first-child{background:var(--dg-signal,#10c674);color:#03140d;border:1px solid var(--dg-signal,#10c674);font-weight:700}
-#demigod-partners-teaser .dg-pt-actions a:last-child{background:transparent;color:var(--dg-phosphor,#a6ffcb);border:1px solid var(--dg-phosphor,#a6ffcb);font-weight:600}
+#demigod-partners-teaser .dg-pt-actions a:first-child{background:linear-gradient(180deg,#34d399,#10c674);color:#03140d;border:1px solid rgba(16,198,116,.9);font-weight:700}
+#demigod-partners-teaser .dg-pt-actions a:last-child{background:rgba(166,255,203,.1);color:var(--dg-paper,#f3f0e7);border:1px solid rgba(166,255,203,.55);font-weight:600}
 @media(max-width:560px){#demigod-partners-teaser .dg-pt-actions{grid-template-columns:1fr}}
 #demigod-trust-block,#demigod-pricing{scroll-margin-top:4.5rem}.dg-sample-match{margin-top:1rem!important;min-height:48px!important;padding:.7rem 1.05rem!important;display:inline-flex!important;align-items:center!important;background:rgba(166,255,203,.08)!important;color:var(--dg-phosphor,#a6ffcb)!important;border:1px solid rgba(166,255,203,.5)!important;border-radius:12px!important;font:600 .9rem/1.25 var(--dg-sans),Manrope,system-ui,sans-serif!important;letter-spacing:-.01em!important}
-/* Fable v150 wizard chrome: progress, question, nav, review */
+/* Fable v150 wizard chrome (Stripe-grade one-Q): progress, Cinzel q, nav, review */
 .dg-wiz-bar{background:rgba(16,198,116,.2);margin-bottom:.35rem}
 .dg-wiz-bar i{transition:width .2s ease}
 .dg-wiz-hint{color:#A8A29E;font-size:.78rem;margin:0 0 .4rem}
@@ -157,7 +112,8 @@ nav.w-nav,.w-nav{display:flex!important;visibility:visible!important}
 .dg-wiz-review div{gap:1rem;padding:.3rem 0;font-size:.85rem}
 .dg-wiz-review em{overflow:hidden;text-overflow:ellipsis}
 
-/* Frege-night chrome — signal/phosphor on night (legacy gold-era block deleted, not remapped) */
+/* THOROUGH GOLD/YELLOW HEAVY REDESIGN - Fable led, older style preferred */
+/* Stronger gold/yellow theme: dominant golds, yellow highlights, elegant luxury */
 .hero-section h1, .header h1 { color: var(--g) !important; text-shadow: 0 2px 12px rgba(16,198,116,.3); }
 .title-accent-gold { font-weight: 700; }
 .title-accent-cream { color: var(--gl) !important; }
@@ -182,7 +138,7 @@ nav.w-nav,.w-nav{display:flex!important;visibility:visible!important}
 .dg-wiz-review div { border-bottom: 1px solid rgba(16,198,116,.1); padding: .4rem 0; font-size: .9rem; }
 .dg-wiz-review em { font-weight: 500; }
 
-/* Inputs: signal focus, mobile friendly */
+/* Inputs elegant gold focus, mobile friendly */
 #startup-modal .w-input, #jobseeker-modal .w-input, #startup-modal .w-select, #jobseeker-modal .w-select, #startup-modal textarea, #jobseeker-modal textarea {
   border: 1px solid rgba(16,198,116,.25) !important;
   background: rgba(10,10,10,.95) !important;
@@ -197,8 +153,9 @@ nav.w-nav,.w-nav{display:flex!important;visibility:visible!important}
 }
 .dg-wiz-show .w-form-label { color: var(--mu); font-size: .85rem; margin-bottom: .2rem; }
 
-@keyframes dg-rise { from { transform: translateY(8px); } }
-.dg-step, .dg-row, .dg-cand, .dg-wiz-show { animation: dg-rise .4s ease forwards; }
+/* Animations new subtle gold theme */
+@keyframes dg-gold-rise { from { transform: translateY(8px); } }
+.dg-step, .dg-row, .dg-cand, .dg-wiz-show { animation: dg-gold-rise .4s ease forwards; }
 .premium-btn:hover { box-shadow: 0 6px 25px rgba(16,198,116,.35); }
 
 /* Mobile + desktop perfect */
@@ -218,32 +175,33 @@ nav.w-nav,.w-nav{display:flex!important;visibility:visible!important}
 #demigod-trust-block .dg-cand p { line-height: 1.4; }
 footer .text-color_secondary ~ .text-color_secondary { display: none; }
 
-/* Pricing */
+/* Pricing clean, gold heavy */
 #demigod-pricing h3, .dg-pricing-note { color: var(--g) !important; font-size: 1.5rem; }
 #demigod-pricing .w-button { background: var(--g) !important; }
 
-/* WIZ + CTA chrome — signal fill is Hire/primary only; talent stays outline */
+/* ========== EXTREMELY THOROUGH GOLD/YELLOW REDESIGN + PERFECT TYPEFORM WIZ + ALL BUTTONS + MOBILE/DESKTOP + NEW ANIMS ========== */
+/* Stronger dominant gold/yellow (older style user loves) on deep dark luxury base */
 body { background:var(--dk)!important; color:var(--cr)!important; }
-.hero-section, .header { background:var(--dg-night,#03140d) !important; }
+.hero-section, .header { background:#0A0A0A !important; }
 .hero-section h1, .header h1, .hero-section .title-accent-gold { color:var(--dg-phosphor,#a6ffcb)!important; text-shadow:0 2px 16px rgba(16,198,116,.25); font-family:var(--dg-sans,system-ui,sans-serif)!important; }
 .title-accent-gold { color:var(--g)!important; }
 .badge, .badge-text, .eyebrow, .hero-badge { color:var(--g)!important; }
 .badge-dot { background:var(--g)!important; box-shadow:0 0 14px rgba(16,198,116,.6); }
 
-/* Hire / primary: filled signal on night. Do not paint .is-job. */
-.button.on-inverse, .premium-btn.is-talent, #dg-nav-hire, .dg-wiz-next, .dg-wiz-start {
+/* Buttons: always great looking, clickable, gold primary with yellow hover lift */
+.premium-btn, .button.on-inverse, .w-button, #dg-nav-hire, .dg-wiz-next, .dg-wiz-start {
   background:var(--g)!important; color:var(--dk)!important; border:1px solid rgba(16,198,116,.85)!important;
   font-weight:600!important; border-radius:10px!important; cursor:pointer!important;
   min-height:48px!important; padding:.55rem 1.15rem!important; font-size:.875rem!important;
   letter-spacing:.01em; transition:transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s, filter .18s, background .18s;
   box-shadow:0 4px 18px rgba(16,198,116,.12);
 }
-.button.on-inverse:hover, .premium-btn.is-talent:hover, #dg-nav-hire:hover, .dg-wiz-next:hover, .dg-wiz-start:hover {
+.premium-btn:hover, .button.on-inverse:hover, .w-button:hover, #dg-nav-hire:hover, .dg-wiz-next:hover, .dg-wiz-start:hover {
   background:var(--gl)!important; transform:translateY(-1px); box-shadow:0 8px 22px rgba(16,198,116,.22); filter:brightness(1.03);
 }
 .premium-btn:active, .dg-wiz-next:active { transform:translateY(0); }
 
-/* Inputs: signal focus */
+/* Gold inputs focus, elegant */
 #startup-modal .w-input, #jobseeker-modal .w-input, #startup-modal .w-select, #jobseeker-modal .w-select, #startup-modal textarea, #jobseeker-modal textarea,
 .dg-field-wrap input, .dg-field-wrap select, .dg-field-wrap textarea {
   background:rgba(10,10,10,.96)!important; border:1px solid rgba(16,198,116,.28)!important; color:var(--cr)!important; border-radius:8px!important;
@@ -253,13 +211,13 @@ body { background:var(--dk)!important; color:var(--cr)!important; }
   border-color:var(--g)!important; box-shadow:0 0 0 4px rgba(16,198,116,.12)!important; outline:none!important;
 }
 
-/* Modal chrome */
+/* Modal chrome full gold takeover */
 #startup-modal, #jobseeker-modal { background:rgba(6,6,6,.96)!important; }
 #startup-modal > div, #jobseeker-modal > div { border:1px solid rgba(16,198,116,.38)!important; border-radius:16px!important; }
 #startup-modal.dg-wiz-active, #jobseeker-modal.dg-wiz-active { background:rgba(4,4,4,.98)!important; }
 #startup-modal .w-form, #jobseeker-modal .w-form { max-height:none!important; overflow:visible!important; }
 
-/* Typeform WIZ — one Q, clickable, review, mobile/desktop */
+/* PERFECT Typeform WIZ - one Q, beautiful gold, clickable everywhere, review, mobile/desktop */
 .dg-wiz-on { position:relative; }
 .dg-wiz-on .dg-field-wrap:not(.dg-wiz-show),
 .dg-wiz-on .w-input:not(.dg-wiz-show),
@@ -281,15 +239,16 @@ body { background:var(--dk)!important; color:var(--cr)!important; }
 .dg-wiz-show { animation:dg-wiz-in .22s ease forwards; }
 @keyframes dg-wiz-in { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:none; } }
 
-@keyframes dg-signal-glow { 0%,100% { box-shadow:0 0 0 0 rgba(16,198,116,.0); } 50% { box-shadow:0 0 0 6px rgba(16,198,116,.08); } }
+/* New subtle gold animations + stagger for trust/ledger/process */
+@keyframes dg-gold-glow { 0%,100% { box-shadow:0 0 0 0 rgba(16,198,116,.0); } 50% { box-shadow:0 0 0 6px rgba(16,198,116,.08); } }
 .dg-step, .dg-cand, .dg-row { transition: transform .2s ease, border-color .2s, box-shadow .2s; }
 .dg-step:hover, .dg-cand:hover, .dg-row:hover { transform:translateY(-2px); border-color:rgba(16,198,116,.45); box-shadow:0 6px 20px rgba(0,0,0,.3); }
-.dg-anim { animation: dg-rise .45s ease forwards; }
-@keyframes dg-rise { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:none; } }
+.dg-anim { animation: dg-gold-rise .45s ease forwards; }
+@keyframes dg-gold-rise { from { opacity:0; transform:translateY(7px); } to { opacity:1; transform:none; } }
 /* v316: no infinite CTA glow — calmer */ .premium-btn, .dg-wiz-next, .dg-wiz-start { animation:none; }
 @media (prefers-reduced-motion: reduce) { .dg-anim, .dg-wiz-show, .premium-btn, .dg-wiz-next { animation:none !important; transition:none !important; } }
 
-/* Trust / process / ledger */
+/* Trust / process / ledger gold polish */
 #demigod-trust-block h2 { color:var(--dg-paper)!important; font-family:var(--dg-serif,Georgia,serif)!important; }
 #demigod-trust-block .dg-step { border-color:rgba(16,198,116,.28); background:var(--card); }
 #demigod-trust-block .dg-step strong { color:var(--g); }
@@ -316,7 +275,7 @@ body { background:var(--dk)!important; color:var(--cr)!important; }
 a, button, .w-button, [data-demigod-modal], .dg-wiz-next, .dg-wiz-back { cursor:pointer !important; }
 a:hover, button:hover { opacity:.95; }
 
-/* Followup in thanks */
+/* Followup in thanks gold border */
 .dg-followup { border-color:rgba(16,198,116,.35)!important; }
 
 /* Design polish: keyboard focus + WIZ primary CTA presence (freeze-safe CSS) */
@@ -335,10 +294,10 @@ a:hover, button:hover { opacity:.95; }
   min-height: 96px !important;
 }
 
-/* Sample match + accents */
+/* Sample match + other gold accents */
 .dg-sample-match { border-color:rgba(16,198,116,.5)!important; color:var(--g)!important; }
 
-/* Footer */
+/* Footer + misc gold */
 #footer-email, #dg-footer-legal a { color:var(--g)!important; }
 
 /* Process block (no inline styles) */
@@ -346,7 +305,7 @@ a:hover, button:hover { opacity:.95; }
 #demigod-trust-block .dg-process h3 { font-family:var(--dg-serif,Georgia,serif); color:var(--dg-paper); font-size:1rem; margin:0 0 .5rem; }
 #demigod-trust-block .dg-process-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:.75rem; font-size:.85rem; color:var(--mu); }
 
-/* End WIZ overhaul */
+/* End of thorough gold + WIZ overhaul */
 /* dg-design-polish-2026-07 — hierarchy, trust, CTA breathing room */
 .hero-section, .header { padding-bottom: clamp(1.5rem, 4vw, 3rem) !important; }
 .hero-section p, .header p { max-width: 36rem; line-height: 1.55 !important; color: var(--cr) !important; opacity: 0.92; }
@@ -374,7 +333,7 @@ a:hover, button:hover { opacity:.95; }
 }
 #dg-faq summary::-webkit-details-marker { display: none; }
 #dg-faq details[open] summary { color: var(--g) !important; }
-/* Primary Hire CTAs: slightly more weight on hover */
+/* Primary gold CTAs slightly more weight on hover */
 .premium-btn, a.button.w-button, .dg-wiz-next, .dg-wiz-start {
   transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease !important;
 }
@@ -391,7 +350,12 @@ a:hover, button:hover { opacity:.95; }
   }
 }
 
-/* dg-design-cool-197 — frege-night surfaces */
+/* dg-design-cool-197 — frege-night (was gold charcoal; remapped 2026-08-05) */
+:root{
+  --card:rgba(12,12,16,.88);
+  --line:rgba(16,198,116,.22);
+  --glow:0 0 40px rgba(16,198,116,.12);
+}
 body{
   background:
     radial-gradient(1200px 600px at 80% -10%, rgba(16,198,116,.08), transparent 55%),
@@ -415,9 +379,9 @@ body{
   color:rgba(247,244,238,.78)!important;
   line-height:1.6!important;
 }
-/* Premium CTAs — Hire filled signal; talent phosphor outline */
+/* Premium CTAs — Mercury calm + gold charge */
 .premium-btn.is-talent,.button.on-inverse,nav .button.on-inverse{
-  color:var(--dg-night,#03140d)!important;
+  color:#0A0A0A!important;
   border:none!important;
   border-radius:999px!important;
   padding:.85rem 1.5rem!important;
@@ -473,7 +437,7 @@ nav.w-nav,.w-nav,.nav_container,#dg-top-nav{
 .dg-wiz-next,.dg-wiz-start{
   border-radius:999px!important;
   background:linear-gradient(180deg,rgba(16,198,116,.95),rgba(8,160,93,.9))!important;
-  color:var(--dg-night,#03140d)!important;
+  color:#0A0A0A!important;
   font-weight:700!important;
   border:none!important;
 }
@@ -563,7 +527,8 @@ section h2:not(#demigod-trust-block h2){
   .hero-section,.header{min-height:min(880px,calc(100svh - 52px))!important}
 }
 
-/* v198: night + phosphor only */
+/* v198 → frege (pass50): no cool-black / gold wash mid-file — night + phosphor only */
+:root{--dg-cool:#03140d;--dg-steel:#bdc9bf;--dg-gold:#10c674}
 body{background-color:var(--dg-night,#03140d)!important;background-image:radial-gradient(circle at 12% 0,rgba(16,198,116,.06),transparent 28rem),radial-gradient(circle at 90% 32%,rgba(166,255,203,.04),transparent 26rem)!important}
 .hero-section h1,.header h1{font-family:Manrope,ui-sans-serif,system-ui,sans-serif!important;font-weight:650!important;letter-spacing:-.055em!important;line-height:.96!important;text-wrap:balance}
 .brand-mark,.nav_logo-text,.footer_logo-text{letter-spacing:.04em}
@@ -835,7 +800,7 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
 @media(max-width:767px){
   .premium-btn,.button.on-inverse,.hero-actions a{min-height:48px!important;max-width:100%!important}
 }
-/* quiet glow on scroll-in */
+/* soft gold glow on scroll-in */
 .dg-reveal-in{transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1),box-shadow .6s!important}
 #demigod-trust-block .dg-step.dg-reveal-in,#demigod-trust-block .dg-cand.dg-reveal-in{
   box-shadow:0 8px 32px rgba(0,0,0,.2);
@@ -1188,11 +1153,11 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
 
 /* cycle 51064: keep WIZ progress crisp when the visitor asks interfaces to
    reduce transparency. The status remains visually grouped without relying on
-   translucent washes, backdrop blending, or progress glow. */
+   translucent gold washes, backdrop blending, or progress glow. */
 @media(prefers-reduced-transparency:reduce){
   #startup-modal .dg-wiz-head,
   #jobseeker-modal .dg-wiz-head{
-    background:var(--dk,#03140d)!important;
+    background:var(--dk,#0A0A0A)!important;
     backdrop-filter:none!important;
   }
   #startup-modal .dg-wiz-count,
@@ -1227,7 +1192,7 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
   }
   #dg-hero-chips .dg-chip{
     color:var(--cr,#F5F0E6)!important;
-    background:var(--dk,#03140d)!important;
+    background:var(--dk,#0A0A0A)!important;
   }
   .hero-actions a[data-dg-cta]:focus-visible,
   #dg-nav-hire:focus-visible,
@@ -1370,7 +1335,7 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
   right:0;
   width:10px;
   height:10px;
-  border:2px solid var(--dk,#03140d);
+  border:2px solid var(--dk,#0A0A0A);
   border-radius:50%;
   background:var(--dg-phosphor,#a6ffcb);
   box-shadow:0 0 0 2px rgba(166,255,203,.28),0 0 10px rgba(16,198,116,.45);
@@ -1395,6 +1360,10 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
 }
 
 /* dg-critical-hero-geometry — first paint must match the late foot-core hero. */
+:root{
+  --dg-rule:rgba(166,255,203,.28);
+  --dg-cyber:ui-sans-serif,system-ui,sans-serif;
+}
 .nav_container{
   position:sticky!important;
   top:0!important;
@@ -1455,7 +1424,9 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
   line-height:1.6!important;
 }
 
-/* Dual-path hero CTAs: Hire is primary (filled signal); talent is phosphor outline. */
+/* ==== design-track 2026-08-05: equal dual-path hero CTAs (final cascade) ====
+   Foot builds .hero-actions.dg-path-pair with two .dg-cta-wrap > a.premium-btn.is-talent|is-job.
+   Earlier cascade forced ALL .premium-btn gold, so "looking" lost equal weight. Fix: equal cards. */
 .hero-actions.dg-path-pair,
 #dg-hero-actions.dg-path-pair,
 .hero-actions.dg-path-pair{
@@ -1491,25 +1462,27 @@ body:not(.dg-ready):not([data-dg-ready="1"]) [class*="pricing-section"]{visibili
   text-decoration:none!important;
   line-height:1.25!important;
   transition:transform var(--dg-motion-ui,200ms ease), border-color .18s, background .18s, box-shadow .18s!important;
+  /* equal weight: both surface-level cards, not primary-fill vs ghost */
+  background:rgba(166,255,203,.06)!important;
+  color:var(--dg-paper,#f3f0e7)!important;
+  border:1px solid rgba(166,255,203,.32)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
   font-weight:600!important;
   letter-spacing:.01em!important;
+  backdrop-filter:blur(8px);
 }
 .hero-actions.dg-path-pair a.premium-btn.is-talent,
 .hero-actions.dg-path-pair a[data-dg-cta="hire"]{
-  background:var(--dg-signal,#10c674)!important;
-  border:1px solid var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-  box-shadow:0 8px 22px rgba(16,198,116,.22)!important;
-  font-weight:700!important;
+  /* hire: slightly stronger fill — still a peer card, not a monopoly CTA */
+  background:linear-gradient(180deg,rgba(16,198,116,.22),rgba(16,198,116,.10))!important;
+  border-color:rgba(16,198,116,.55)!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
 }
 .hero-actions.dg-path-pair a.premium-btn.is-job,
 .hero-actions.dg-path-pair a[data-dg-cta="talent"]{
-  background:transparent!important;
-  border:1px solid var(--dg-phosphor,#a6ffcb)!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
-  box-shadow:none!important;
+  background:rgba(243,240,231,.04)!important;
+  border-color:rgba(243,240,231,.28)!important;
+  color:var(--dg-paper,#f3f0e7)!important;
 }
 .hero-actions.dg-path-pair a.premium-btn:hover,
 .hero-actions.dg-path-pair a[data-dg-cta]:hover{
@@ -1674,12 +1647,12 @@ section:has(.pricing-grid){
 }
 .trust-header{margin:0 auto 2.25rem!important}
 .trust-header h2,section:has(.steps-grid) h2,section.trust-section h2{
-  font-family:var(--dg-serif,Georgia,serif)!important;
+  font-family:var(--dg-serif,Cinzel,serif)!important;
   margin:0 0 .65rem!important;
 }
 section:has(.pricing-grid) h2{
   color:var(--dg-paper,#f3f0e7)!important;
-  font-family:var(--dg-serif,Georgia,serif)!important;
+  font-family:var(--dg-serif,Cinzel,serif)!important;
   font-size:clamp(1.65rem,3.2vw,2.25rem)!important;
   text-align:center!important;
   text-transform:none!important;
@@ -1706,14 +1679,14 @@ section:has(.pricing-grid) h2{
   font-weight:500!important;
   letter-spacing:-.04em!important;
   line-height:1!important;
-  font-family:var(--dg-serif,Georgia,serif)!important;
+  font-family:var(--dg-serif,Cinzel,serif)!important;
   margin:0 0 .85rem!important;
 }
 .step-title{
   font-size:1.12rem!important;
   font-weight:600!important;
   color:var(--dg-paper,#f3f0e7)!important;
-  font-family:var(--dg-serif,Georgia,serif)!important;
+  font-family:var(--dg-serif,Cinzel,serif)!important;
   letter-spacing:-.02em!important;
   margin:0 0 .45rem!important;
   text-transform:none!important;
@@ -1733,7 +1706,7 @@ section:has(.pricing-grid) h2{
   animation:none!important;
 }
 .pricing-card .pricing-amount,.pricing-card .price{
-  font-family:var(--dg-serif,Georgia,serif)!important;
+  font-family:var(--dg-serif,Cinzel,serif)!important;
 }
 @media (max-width:767px){
   .steps-grid{grid-template-columns:1fr!important;gap:1.5rem!important}
@@ -1784,10 +1757,9 @@ body[data-dg-ready="1"] .hero-actions .dg-cta-wrap.dg-in a[data-dg-cta=hire] .dg
   padding:1.15rem 1.25rem!important;
 }
 .dg-footer-actions a:first-child{
-  background:var(--dg-signal,#10c674)!important;
-  border-color:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
+  background:linear-gradient(180deg,rgba(16,198,116,.22),rgba(16,198,116,.10))!important;
+  border-color:rgba(16,198,116,.55)!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
 }
 @media (max-width:767px){
   .hero-actions.dg-path-pair,
@@ -1811,19 +1783,15 @@ body[data-dg-ready="1"] .hero-actions .dg-cta-wrap.dg-in a[data-dg-cta=hire] .dg
     border-radius:12px!important;
     font-family:var(--dg-sans,system-ui,sans-serif)!important;
   }
-  #dg-bar a.dg-h,
-  #dg-bar a[data-dg-cta="hire"]{
-    background:var(--dg-signal,#10c674)!important;
-    color:var(--dg-night,#03140d)!important;
-    -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-    border:1px solid var(--dg-signal,#10c674)!important;
-  }
-  #dg-bar a.dg-j,
-  #dg-bar a[data-dg-cta="talent"]{
-    background:transparent!important;
+  #dg-bar a.dg-h{
+    background:linear-gradient(180deg,rgba(16,198,116,.28),rgba(16,198,116,.12))!important;
     color:var(--dg-phosphor,#a6ffcb)!important;
-    -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
-    border:1px solid var(--dg-phosphor,#a6ffcb)!important;
+    border:1px solid rgba(16,198,116,.5)!important;
+  }
+  #dg-bar a.dg-j{
+    background:rgba(243,240,231,.05)!important;
+    color:var(--dg-paper,#f3f0e7)!important;
+    border:1px solid rgba(243,240,231,.28)!important;
   }
 }
 
@@ -1866,18 +1834,17 @@ body[data-dg-ready="1"] .hero-actions .dg-cta-wrap.dg-in a[data-dg-cta=hire] .dg
   letter-spacing:-.02em!important;
 }
 #dg-page .dg-page-ctas a.hire{
-  background:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-  border:1px solid var(--dg-signal,#10c674)!important;
+  background:linear-gradient(180deg,rgba(16,198,116,.28),rgba(16,198,116,.14))!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  border:1px solid rgba(16,198,116,.55)!important;
 }
 #dg-page .dg-page-ctas a.talent{
-  background:transparent!important;
-  border:1px solid var(--dg-phosphor,#a6ffcb)!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
+  background:rgba(243,240,231,.04)!important;
+  border:1px solid rgba(243,240,231,.28)!important;
+  color:var(--dg-paper,#f3f0e7)!important;
 }
 #dg-page a:not(.hire):not(.talent):not(.back){color:var(--dg-phosphor,#a6ffcb)!important}
+/* events keeps intentional gold system via foot pageCss .dg-page-events overrides */
 
 /* ==== design-track 2026-08-05j: nav type hierarchy (frege night) ==== */
 nav.w-nav,.w-nav,.nav_container{
@@ -1894,7 +1861,7 @@ a.nav_logo,a.w-nav-brand{
   color:var(--dg-paper,#f3f0e7)!important;
 }
 .nav_logo-icon,.logo-link svg{color:var(--dg-phosphor,#a6ffcb)!important}
-/* Primary nav links: quiet secondary */
+/* Primary nav links: quiet secondary, not gold shout */
 nav.w-nav a:not(.button):not(.premium-btn):not(.w-nav-brand),
 .w-nav a:not(.button):not(.premium-btn):not(.w-nav-brand),
 .nav_menu a,.nav_menu-list-item a,.nav_right a:not(.button){
@@ -1925,13 +1892,36 @@ a.nav_logo:focus-visible{
   outline-offset:3px!important;
   border-radius:4px!important;
 }
-/* Skip link: signal on night */
+/* Skip link match frege, not gold */
 #dg-skip:focus,#dg-skip:focus-visible{
   background:var(--dg-signal,#10c674)!important;
   color:#03140d!important;
 }
 
-/* Solid H1 — do not wait for missing .title-accent-gold */
+/* ==== design-track 2026-08-05k: FOUC frege tokens + solid H1 ====
+   Early cascade still defines gold --g/--dk charcoal SaaS. Final remap so
+   first meaningful paint matches frege dual-path (no gold flash). Also
+   cancel the title-accent-gold H1 visibility trap that blanks Demigod. */
+:root{
+  --g:#10c674;
+  --gl:#a6ffcb;
+  --yl:#a6ffcb;
+  --cr:#f3f0e7;
+  --dk:#03140d;
+  --mu:#bdc9bf;
+  --dim:#8a9a8e;
+  --card:rgba(3,20,13,.92);
+  --dg-night:#03140d;
+  --dg-ink:#02100a;
+  --dg-phosphor:#a6ffcb;
+  --dg-signal:#10c674;
+  --dg-paper:#f3f0e7;
+  --dg-paper-mute:#bdc9bf;
+  --dg-rule:rgba(166,255,203,.18);
+  --dg-sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --dg-serif:Georgia,"Times New Roman",serif;
+  --dg-mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
 html,body{
   background:var(--dg-night)!important;
   color:var(--dg-paper)!important;
@@ -1945,6 +1935,7 @@ html,body{
   font-family:var(--dg-sans)!important;
   text-transform:none!important;
 }
+/* Early gold nav/button flash → frege */
 nav,.w-nav,.nav_container{
   background:rgba(3,20,13,.9)!important;
   border-bottom:1px solid var(--dg-rule)!important;
@@ -1952,16 +1943,16 @@ nav,.w-nav,.nav_container{
 .nav_logo-icon,.logo-link svg{color:var(--dg-phosphor)!important}
 .premium-btn.is-talent:not(.hero-actions a),
 .button.on-inverse:not(.hero-actions a){
-  background:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  border-color:var(--dg-signal,#10c674)!important;
+  background:linear-gradient(180deg,rgba(16,198,116,.95),rgba(8,160,93,.9))!important;
+  color:#03140d!important;
+  border-color:rgba(16,198,116,.55)!important;
 }
 .premium-btn.is-job:not(.hero-actions a){
   background:transparent!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  border:1px solid var(--dg-phosphor,#a6ffcb)!important;
+  color:var(--dg-paper)!important;
+  border:1px solid rgba(243,240,231,.28)!important;
 }
-/* Section titles: Georgia, paper, not uppercase shout */
+/* Section titles: calm paper, not gold uppercase Cinzel shout */
 section h2{
   color:var(--dg-paper)!important;
   text-transform:none!important;
@@ -1971,8 +1962,10 @@ section h2{
 section h3{color:var(--dg-paper)!important;font-family:var(--dg-serif)!important}
 .eyebrow,.eyebrow_block,.badge,[class*="badge"]{color:var(--dg-signal)!important}
 .badge-dot{background:var(--dg-signal)!important;box-shadow:0 0 10px rgba(16,198,116,.35)}
+/* ==== design-track 2026-08-05n: neutralize mid-file gold :root ====
+/* Mid-file legacy :root no longer reasserts gold; frege tokens hold. */
 
-/* Hero type mass */
+/* ==== design-track 2026-08-05o: hero type mass + no Cinzel flash ==== */
 .hero-section h1,.header h1,.hero-title,
 .hero-section h1.dg-cyber-host,.header h1.dg-cyber-host{
   font-family:var(--dg-sans,system-ui,sans-serif)!important;
@@ -2244,26 +2237,26 @@ section:has(.steps-grid) .heading_tertiary{
   min-height:3.25rem!important;
 }
 
-/* Pricing Hire CTA: filled signal on night (primary, not phosphor-on-glass) */
+/* ==== design-track 2026-08-05v: pricing CTA frege peer ==== */
 .pricing-card a.premium-btn,
 .pricing-card a.button,
 .pricing-card a.is-talent,
 .pricing-card a.on-inverse,
 .pricing-card a.w-button,
 .pricing-card a[data-dg-cta]{
-  background:var(--dg-signal,#10c674)!important;
-  border:1px solid var(--dg-signal,#10c674)!important;
+  background:linear-gradient(180deg,rgba(16,198,116,.28),rgba(16,198,116,.12))!important;
+  border:1px solid rgba(16,198,116,.5)!important;
   border-radius:14px!important;
   font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  font-weight:700!important;
+  font-weight:650!important;
   min-height:48px!important;
   width:100%!important;
   text-shadow:none!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
 }
 
-/* Pricing Hire: keep copy; filled signal beats nested Webflow type */
+/* ==== design-track 2026-08-05w: hire CTA copy stay + pricing phosphor ====
+   Honesty scrub demoted "Hire talent"→"start a hiring brief"; mid-cascade
+   .premium-btn.is-talent {color:var(--dk)} still beats frege on pricing. */
 .pricing-card a.premium-btn,
 .pricing-card a.premium-btn.is-talent,
 .pricing-card a.premium-btn.on-inverse,
@@ -2272,13 +2265,13 @@ section:has(.steps-grid) .heading_tertiary{
 .pricing-card a.is-talent,
 .pricing-card a[data-dg-cta="hire"],
 .pricing-card a[data-dg-cta]{
-  background:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-  border:1px solid var(--dg-signal,#10c674)!important;
+  background:linear-gradient(180deg,rgba(16,198,116,.28),rgba(16,198,116,.12))!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
+  border:1px solid rgba(16,198,116,.5)!important;
   border-radius:14px!important;
   font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  font-weight:700!important;
+  font-weight:650!important;
   min-height:3.25rem!important;
   width:100%!important;
   text-shadow:none!important;
@@ -2286,10 +2279,9 @@ section:has(.steps-grid) .heading_tertiary{
 }
 .pricing-card a.premium-btn:hover,
 .pricing-card a[data-dg-cta]:hover{
-  border-color:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-  filter:brightness(1.03);
+  border-color:rgba(166,255,203,.55)!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
 }
 .dg-footer-actions a strong,
 .dg-footer-actions a[data-dg-cta="hire"] strong{
@@ -2446,7 +2438,11 @@ section:has(.pricing-grid) .heading_tertiary{
   opacity:.75!important;
 }
 
-/* Dual-path label / hint hierarchy */
+/* ==== design-track 2026-08-05ab: kill mid-file cool-197 gold ====
+   Mid-file :root reasserted --g:#D4AF37 / gold glows on dual-path + WIZ shells
+   after frege tokens at top — FOUC gold SaaS under blur. Remapped to frege night. */
+
+/* ==== design-track 2026-08-05ac: dual-path label / hint hierarchy ==== */
 .hero-actions a[data-dg-cta] .dg-cta-label{
   display:block!important;
   font-size:1.08rem!important;
@@ -2563,8 +2559,8 @@ section:has(.steps-grid) .step-card{
   font-family:var(--dg-sans,Manrope,system-ui,sans-serif)!important;
   letter-spacing:-.01em!important;
   text-transform:none!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
 }
 
 /* ==== design-track 2026-08-05ah: pricing CTA nested Cinzel kill + WIZ title frege ====
@@ -2576,8 +2572,8 @@ section:has(.steps-grid) .step-card{
 .pricing-card a .btn-label,
 .pricing-card a span{
   font-family:var(--dg-sans,Manrope,system-ui,sans-serif)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
+  color:var(--dg-phosphor,#a6ffcb)!important;
+  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
   letter-spacing:-.01em!important;
   text-transform:none!important;
   font-weight:650!important;
@@ -2623,20 +2619,21 @@ section:has(.pricing-grid),
   padding-bottom:clamp(3rem,7vh,5rem)!important;
 }
 
-/* Talent path: phosphor outline. Hire stays filled signal (not equal-weight glass). */
+/* ==== design-track 2026-08-05aj: dual-path peer frege + pricing H2 editorial ====
+   Talent path was paper-ghost vs hire phosphor — master prompt wants equal weight.
+   Pricing H2 left with process spine (not centered SaaS shout). */
 .hero-actions a[data-dg-cta="talent"],
 .hero-actions a.is-job,
 .hero-actions.dg-path-pair a.premium-btn.is-job{
-  background:transparent!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
-  border:1px solid var(--dg-phosphor,#a6ffcb)!important;
-  box-shadow:none!important;
+  background:rgba(166,255,203,.035)!important;
+  color:var(--dg-paper,#f3f0e7)!important;
+  border:1px solid rgba(166,255,203,.42)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important;
 }
 .hero-actions a[data-dg-cta="talent"]:hover,
 .hero-actions a.is-job:hover{
-  border-color:var(--dg-phosphor,#a6ffcb)!important;
-  background:rgba(166,255,203,.08)!important;
+  border-color:rgba(166,255,203,.55)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.28)!important;
 }
 section:has(.pricing-grid) h2{
   text-align:left!important;
@@ -2706,72 +2703,33 @@ section:has(.steps-grid){
 }
 .dg-atlas-radius{min-height:48px!important;display:flex!important;align-items:center!important}
 
-/* Hire = filled signal on night. Talent = phosphor outline. High specificity so Hire is never the dimmer card. */
-.hero-actions.dg-path-pair a.premium-btn.is-talent,
-.hero-actions.dg-path-pair a[data-dg-cta="hire"],
-.hero-actions a.premium-btn.is-talent,
-.hero-actions a[data-dg-cta="hire"],
+/* KEEP_WORKING dual-path lock — 2026-08-07 */
 .premium-btn.is-talent,
 .button.on-inverse,
-a[data-dg-cta="hire"].premium-btn,
-#dg-nav-hire,
-#dg-bar a.dg-h,
-#dg-bar a[data-dg-cta="hire"],
-.pricing-card a.premium-btn.is-talent,
-.pricing-card a[data-dg-cta="hire"],
-#demigod-partners-teaser .dg-pt-actions a:first-child,
-.dg-footer-actions a:first-child,
-.dg-footer-actions a[data-dg-cta="hire"],
-#dg-page .dg-page-ctas a.hire{
-  background:var(--dg-signal,#10c674)!important;
-  color:var(--dg-night,#03140d)!important;
-  -webkit-text-fill-color:var(--dg-night,#03140d)!important;
-  border:1px solid var(--dg-signal,#10c674)!important;
-  font-weight:700!important;
+a[data-dg-cta="hire"].premium-btn{
+  background:var(--g,#10c674)!important;
+  color:var(--dk,#0A0A0A)!important;
+  border:1px solid rgba(16,198,116,.85)!important;
 }
-.hero-actions.dg-path-pair a.premium-btn.is-job,
-.hero-actions.dg-path-pair a[data-dg-cta="talent"],
-.hero-actions a.premium-btn.is-job,
-.hero-actions a[data-dg-cta="talent"],
 .premium-btn.is-job,
 a[data-dg-cta="talent"].premium-btn,
-a.premium-btn.is-job,
-#dg-nav-talent,
-#dg-bar a.dg-j,
-#dg-bar a[data-dg-cta="talent"],
-#demigod-partners-teaser .dg-pt-actions a:last-child,
-#dg-page .dg-page-ctas a.talent{
-  background:transparent!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
-  border:1px solid var(--dg-phosphor,#a6ffcb)!important;
-  box-shadow:none!important;
-  font-weight:600!important;
-}
-.hero-actions.dg-path-pair a.premium-btn.is-talent .dg-cta-label,
-.hero-actions.dg-path-pair a.premium-btn.is-talent .dg-cta-hint,
-.hero-actions a[data-dg-cta="hire"] .dg-cta-label,
-.hero-actions a[data-dg-cta="hire"] .dg-cta-hint,
-.pricing-card a[data-dg-cta="hire"] span,
-.pricing-card a.is-talent span{
-  color:inherit!important;
-  -webkit-text-fill-color:inherit!important;
+a.premium-btn.is-job{
+  background:rgba(166,255,203,.04)!important;
+  color:var(--dg-paper,#f3f0e7)!important;
+  border:1px solid rgba(166,255,203,.42)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03)!important;
 }
 .premium-btn.is-job:hover,
 a[data-dg-cta="talent"].premium-btn:hover,
-a.premium-btn.is-job:hover,
-.hero-actions a[data-dg-cta="talent"]:hover{
-  background:rgba(166,255,203,.08)!important;
-  border-color:var(--dg-phosphor,#a6ffcb)!important;
+a.premium-btn.is-job:hover{
+  background:rgba(16,198,116,.08)!important;
+  border-color:rgba(166,255,203,.55)!important;
+  box-shadow:0 8px 24px rgba(0,0,0,.28)!important;
   filter:none!important;
 }
 .premium-btn.is-talent:hover,
 .button.on-inverse:hover,
-a[data-dg-cta="hire"].premium-btn:hover,
-.hero-actions a[data-dg-cta="hire"]:hover,
-.hero-actions.dg-path-pair a.premium-btn.is-talent:hover{
-  background:var(--dg-signal,#10c674)!important;
-  border-color:var(--dg-signal,#10c674)!important;
+a[data-dg-cta="hire"].premium-btn:hover{
   box-shadow:0 8px 22px rgba(16,198,116,.22)!important;
   filter:brightness(1.03);
 }
@@ -2786,196 +2744,4 @@ a[data-dg-cta="hire"].premium-btn:hover,
 section h2:not(.dg-p-h3):not(.dg-wiz-q){
   letter-spacing:-.02em!important;
   text-transform:none!important;
-}
-
-/* leftover QA 2026-08-13: hire/pricing card was rgba(phosphor,.04) — reads as disabled.
-   Solid phosphor CTA on ink, paper labels, 12% card fill. WCAG body 4.5:1 vs #03140d. */
-.pricing-card{
-  background:rgba(166,255,203,.12)!important;
-  border:1px solid rgba(166,255,203,.55)!important;
-}
-.pricing-card h3,
-.pricing-card h3 + div + div,
-.pricing-card .step-desc{
-  color:var(--dg-paper,#f3f0e7)!important;
-}
-.pricing-card a.premium-btn,
-.pricing-card a.button,
-.pricing-card a.is-talent,
-.pricing-card a.on-inverse,
-.pricing-card a.w-button,
-.pricing-card a[data-dg-cta],
-.pricing-card a[data-dg-cta="hire"]{
-  background:var(--g,#10c674)!important;
-  color:#03140d!important;
-  -webkit-text-fill-color:#03140d!important;
-  border:1px solid #10c674!important;
-  font-weight:700!important;
-  filter:none!important;
-  opacity:1!important;
-}
-.pricing-card a.premium-btn:hover,
-.pricing-card a[data-dg-cta]:hover{
-  filter:brightness(1.05)!important;
-  box-shadow:0 8px 22px rgba(16,198,116,.28)!important;
-}
-
-/* leftover QA 2026-08-14: Webflow .title-accent-gold is a gold gradient clip
-   (linear-gradient(#e5c158,#aa8c2c) + -webkit-text-fill-color:transparent).
-   Color-only remaps lose, so "SF Startup Talent." paints gold over frege-night.
-   Neutralize the clip, remap Designer gold vars, hide statue / fake-role /
-   contact theater. Hire-card contrast above is unchanged. */
-:root{
-  --brand-gold:var(--dg-signal,#10c674);
-  --brand-gold-dark:var(--dg-night,#03140d);
-  --_colors---brand-gold:var(--dg-night,#03140d);
-  --_colors---brand-gold-dark:var(--dg-night,#03140d);
-}
-/* Live canvas (2026-08-13): <span class="title-accent-gold">SF Startup Talent.</span>
-   Hide the shout — do not restyle it gold or let the clip paint. JS replaces H1 with Demigod. */
-.hero-title .title-accent-gold,
-.hero-title .title-accent-red,
-.hero-title .title-accent-blue,
-.hero-section h1 .title-accent-gold,
-.hero-section h1 .title-accent-red,
-.hero-section h1 .title-accent-blue,
-.header h1 .title-accent-gold,
-.header h1 .title-accent-red,
-.header h1 .title-accent-blue{
-  display:none!important;
-  color:var(--dg-paper,#f3f0e7)!important;
-  -webkit-text-fill-color:var(--dg-paper,#f3f0e7)!important;
-  background:none!important;
-  background-image:none!important;
-}
-.title-accent-gold,
-[class*="title-accent-gold"]{
-  display:none!important;
-  visibility:hidden!important;
-  color:transparent!important;
-  -webkit-text-fill-color:transparent!important;
-  background:none!important;
-  background-image:none!important;
-  -webkit-background-clip:border-box!important;
-  background-clip:border-box!important;
-  text-shadow:none!important;
-  filter:none!important;
-  font-size:0!important;
-  line-height:0!important;
-  font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  letter-spacing:-.02em!important;
-  text-transform:none!important;
-}
-.title-accent-red,
-.title-accent-blue,
-.title-accent-cream{
-  color:var(--dg-paper-mute,#bdc9bf)!important;
-  -webkit-text-fill-color:var(--dg-paper-mute,#bdc9bf)!important;
-  background:none!important;
-  background-image:none!important;
-  text-shadow:none!important;
-}
-header.hero-section .hero-content-right,
-header.hero-section .statue-frame,
-header.hero-section .statue-wrapper,
-header.hero-section .statue-svg,
-header.hero-section .statue-border-gold,
-header.hero-section .statue-coordinates,
-.hero-section .hero-content-right,
-.hero-section .statue-frame,
-.hero-section .statue-wrapper,
-.hero-section .statue-svg,
-.statue-frame,
-.statue-svg,
-.statue-wrapper,
-.statue-coordinates,
-.statue-border-gold,
-[class*="statue"],
-[class*="brand-gold"],
-.hero-content-right{
-  display:none!important;
-  visibility:hidden!important;
-  width:0!important;
-  height:0!important;
-  overflow:hidden!important;
-  pointer-events:none!important;
-}
-/* If descendant display:none loses, zero the leftover H1 box and paint the
-   same Demigod word #4 already intended — first paint, no new brand copy. */
-.hero-section h1:not([data-dg-hero-h1]):has(.title-accent-gold),
-.header h1:not([data-dg-hero-h1]):has(.title-accent-gold),
-h1.hero-title:not([data-dg-hero-h1]):has(.title-accent-gold){
-  font-size:0!important;
-  line-height:0!important;
-  color:transparent!important;
-  -webkit-text-fill-color:transparent!important;
-  background:none!important;
-  background-image:none!important;
-}
-.hero-section h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,
-.header h1:not([data-dg-hero-h1]):has(.title-accent-gold)::before,
-h1.hero-title:not([data-dg-hero-h1]):has(.title-accent-gold)::before{
-  content:"Demigod";
-  display:block!important;
-  visibility:visible!important;
-  font-size:clamp(2.6rem,8vw,4.8rem)!important;
-  line-height:1.08!important;
-  color:var(--dg-phosphor,#a6ffcb)!important;
-  -webkit-text-fill-color:var(--dg-phosphor,#a6ffcb)!important;
-  background:none!important;
-  background-image:none!important;
-  font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  font-weight:650!important;
-  letter-spacing:-.02em!important;
-  text-transform:none!important;
-}
-:root{
-  --_colors---brand-gold:var(--dg-night,#03140d);
-  --_colors---brand-gold-dark:var(--dg-night,#03140d);
-}
-.roles-header,
-.roles-grid,
-.role-card,
-[data-dg-hidden="roles-simplify"]{
-  display:none!important;
-}
-#dg-contact-strip,
-#insights-section,
-.insights-section,
-[class*="get-in-touch"],
-[class*="contact-us"],
-section:has([class*="get-in-touch"]),
-section:has([class*="contact-us"]){
-  display:none!important;
-}
-#startup-modal .modal-title,
-#jobseeker-modal .modal-title,
-.modal-title{
-  color:var(--dg-paper,#f3f0e7)!important;
-  font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  letter-spacing:-.02em!important;
-  text-transform:none!important;
-  font-weight:650!important;
-}
-#startup-modal .modal-subtitle,
-#jobseeker-modal .modal-subtitle,
-.modal-subtitle{
-  color:var(--dg-paper-mute,#bdc9bf)!important;
-  font-family:var(--dg-sans,system-ui,sans-serif)!important;
-  letter-spacing:.02em!important;
-  text-transform:none!important;
-  font-weight:500!important;
-}
-/* /bounties Webflow shell (data-wf-page 6a7e0d218c0fdcade58240b3): no-JS empty state.
-   Visible without foot JS. Hidden once #dg-page mounts or the route splash is up. */
-html[data-wf-page="6a7e0d218c0fdcade58240b3"]:not(.dg-route-boot) body:not(.dg-page-on)::before{
-  content:"Bounties. There are no Demigod listings yet. We don't hold USDC. Declared USDC is an unused bounty rail — not the 10% on-hire matching fee. Contact potter@trydemigod.com.";
-  display:block;
-  box-sizing:border-box;
-  max-width:40rem;
-  margin:1.25rem auto;
-  padding:1.15rem;
-  color:#f3f0e7;
-  background:#03140d;
-  font:500 1rem/1.55 var(--dg-sans,system-ui,sans-serif);
 }
