@@ -1,5 +1,5 @@
-/*dg-foot-v1107-core*/
-window.dgFootVersion = 'v1107'; console.log('[demigod] foot v1107-core loaded');
+/*dg-foot-v1108-core*/
+window.dgFootVersion = 'v1108'; console.log('[demigod] foot v1108-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
 /* Use product route (same-origin /?p=) — never raw catbox .html (text/plain MIME) */
@@ -493,7 +493,7 @@ try {
   setTimeout(forceMobileDesktopWIZ, 800);
 } catch(e){}
 
-/* COMPLETE robust Typeform-style WIZ stepper (one question at a time). 
+/* COMPLETE robust Typeform-style WIZ stepper (one question at a time).
    Uses WIZ_CFG / WIZ_Q. Works with forms() injected .dg-field-wraps.
    Full keyboard (Enter next, Esc back/close), review, validation, mobile safe.
    Buttons always clickable. Gold chrome via classes.
@@ -837,8 +837,8 @@ function wizBuild(form, kind) {
       }
     }
         if (key === '__submit__' || key.includes('review')) {
-      qa('.dg-wiz-review, .dg-review', form).forEach(function(r){ 
-        r.style.removeProperty('display'); r.style.display = ''; r.classList.add('dg-wiz-show'); 
+      qa('.dg-wiz-review, .dg-review', form).forEach(function(r){
+        r.style.removeProperty('display'); r.style.display = ''; r.classList.add('dg-wiz-show');
         if (window.innerWidth < 768) {
           r.style.setProperty('flex-direction','column','important');
         }
@@ -1641,11 +1641,11 @@ function hero(){
     qa('div,li,p,span',card).forEach(function(el){
       if(el.children&&el.children.length)return;
       var tx=(el.textContent||'').trim();
-      if(/^10%$/.test(tx)){
+      if(/^(?:10%|\$0)$/.test(tx)){
         el.classList.add('pricing-amount');
         el.textContent='10%';
       }
-      if(/^OF FIRST-YEAR/i.test(tx)||/PLACEMENT FEE/i.test(tx)) el.textContent='of first-year base salary';
+      if(/^OF FIRST-YEAR/i.test(tx)||/PLACEMENT FEE/i.test(tx)) el.textContent='of first-year base salary (USD)';
       /* pass34: match Webflow leaf strings — prior regexes missed Human-reviewed thrash */
       if(/^Human-reviewed talent profiles$/i.test(tx)||/^Access to pre-vetted/i.test(tx)||/pre-vetted SF/i.test(tx))
         el.textContent='Human-reviewed SF Bay fits — no volume promise';
@@ -1709,7 +1709,7 @@ function nav(){
   var right=q('.nav_container .nav_right');
   if(right&&!q('#dg-nav-directory')){
     var menu=document.createElement('details');menu.id='dg-nav-directory';
-    menu.innerHTML='<summary>Explore</summary><div class="dg-nav-panel"><p class="dg-nav-group">Start</p><a href="/" data-dg-page="how">How it works</a><a href="/" data-dg-page="pricing">Pricing</a><a href="/" data-dg-page="sample">Sample match</a><a href="/?p=bounties" data-dg-page="bounties">Bounties</a><a href="/" data-dg-page="hire">Hire guide</a><a href="/" data-dg-page="talent">Talent guide</a><p class="dg-nav-group">More</p><a href="/companies">SF directory</a><a href="/weekly">Weekly</a><a href="/" data-dg-page="blog">Notes</a><a href="/" data-dg-page="faq">FAQ</a><a href="/" data-dg-page="about">About</a><a href="/contact">Contact</a><a href="/legal">Privacy & terms</a><a href="/app" id="dg-nav-login">Your hiring</a></div>';
+    menu.innerHTML='<summary>Explore</summary><div class="dg-nav-panel"><p class="dg-nav-group">Start</p><a href="/how" data-dg-page="how">How it works</a><a href="/pricing" data-dg-page="pricing">Pricing</a><a href="/sample" data-dg-page="sample">Sample match</a><a href="/hire" data-dg-page="hire">Hire guide</a><a href="/talent" data-dg-page="talent">Talent guide</a><p class="dg-nav-group">More</p><a href="/companies">SF directory</a><a href="/weekly">Weekly</a><a href="/blog" data-dg-page="blog">Notes</a><a href="/faq" data-dg-page="faq">FAQ</a><a href="/about" data-dg-page="about">About</a><a href="/contact">Contact</a><a href="/legal">Privacy & terms</a><a href="/app" id="dg-nav-login">Your hiring</a></div>';
     qa('a',menu).forEach(function(a){a.style.setProperty('visibility','visible','important');a.style.setProperty('opacity','1','important')});
     menu.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;menu.removeAttribute('open');var page=a.getAttribute('data-dg-page');if(page){e.preventDefault();openPage(page,true)}});right.prepend(menu);
     menu.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.open){e.preventDefault();menu.removeAttribute('open');menu.querySelector('summary').focus()}});
@@ -1743,22 +1743,28 @@ function foot(){
       '<nav id="dg-legal-links" aria-label="Footer navigation">'+
         '<div class="dg-footer-group" role="group" aria-labelledby="dg-footer-product">'+
           '<p class="dg-footer-heading" id="dg-footer-product">Product</p>'+
-          '<a href="/" data-dg-page="how">How it works</a>'+
-          '<a href="/" data-dg-page="pricing">Pricing</a>'+
-          '<a href="/" data-dg-page="hire">Hire talent guide</a>'+
-          '<a href="/" data-dg-page="talent">Talent guide</a>'+
-          '<a href="/" data-dg-page="sample">Sample match</a>'+
-          '<a href="/?p=bounties" data-dg-page="bounties">Bounties</a>'+
-          '<a href="/" data-dg-page="blog">Notes</a>'+
-          '<a href="/" data-dg-page="faq">FAQ</a>'+
+          '<a href="/how" data-dg-page="how">How it works</a>'+
+          '<a href="/pricing" data-dg-page="pricing">Pricing</a>'+
+          '<a href="/hire" data-dg-page="hire">Hire talent guide</a>'+
+          '<a href="/talent" data-dg-page="talent">Talent guide</a>'+
+          '<a href="/sample" data-dg-page="sample">Sample match</a>'+
+          '<a href="/blog" data-dg-page="blog">Notes</a>'+
+          '<a href="/faq" data-dg-page="faq">FAQ</a>'+
         '</div>'+
         '<div class="dg-footer-group" role="group" aria-labelledby="dg-footer-company">'+
           '<p class="dg-footer-heading" id="dg-footer-company">Company</p>'+
-          '<a href="/" data-dg-page="about">About</a>'+
+          '<a href="/about" data-dg-page="about">About</a>'+
           '<a href="/companies">SF directory</a>'+
           '<a href="/weekly">Weekly</a>'+
           '<a href="/contact">Contact</a>'+
-          '<a href="/legal">Privacy &amp; terms</a>'+
+          '<a href="/legal#terms">Terms</a>'+
+          '<a href="/legal#privacy">Privacy</a>'+
+          '<a href="/legal#refunds">Refunds &amp; disputes</a>'+
+          '<a href="/legal#cancellation">Cancellation</a>'+
+          '<a href="/legal#fulfillment">Fulfillment</a>'+
+          '<a href="/legal#referrals">Referral terms</a>'+
+          '<a href="/legal#cookies">Cookies</a>'+
+          '<a href="/legal#security">Security</a>'+
           '<a href="/app" id="dg-footer-login">Your hiring</a>'+
           '<a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>'+
         '</div>'+
@@ -3533,9 +3539,9 @@ var DG_PAGES = {
   pricing: {
     title: 'Pricing',
     doc: 'Pricing · Demigod',
-    desc: 'Nothing until a hire starts. 10% of first-year base salary for startups; talent always free. No retainer or subscription.',
+    desc: 'Nothing until a hire starts. Startups pay 10% of first-year base salary in USD; talent is always free. No retainer or subscription.',
     html:
-      '<p class="dg-p-lead"><strong>Nothing until a hire starts.</strong> Startups pay <strong>10%</strong> of first-year base salary when someone starts — not to post a role. Talent is always free.</p>' +
+      '<p class="dg-p-lead"><strong>Nothing until a hire starts.</strong> Startups pay <strong>10%</strong> of first-year base salary in United States dollars (USD) when someone starts — not to post a role. Talent is always free.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
       '<ul class="dg-p-list">' +
       '<li><strong>No subscription or retainer.</strong> Submitting a role brief is free. Nothing is due while we review or introduce.</li>' +
@@ -3544,7 +3550,8 @@ var DG_PAGES = {
       '<li><strong>Written confirmation.</strong> Commercial details come by email from potter@trydemigod.com before any fee is owed.</li>' +
       '<li><strong>Talent path is free.</strong> Candidates never pay; fee is only charged to the hiring company when a hire starts.</li>' +
       '</ul>' +
-      '<p class="dg-p-note"><a href="/how" data-dg-page="how">How matching works →</a> · <a href="/sample" data-dg-page="sample">Sample match note →</a> · <a href="/faq" data-dg-page="faq">FAQ →</a></p>',
+      '<p class="dg-p-note"><strong>Invoices.</strong> After a verified start, the hiring company receives a one-time invoice stating the amount, USD currency, due date, and available payment methods. No physical goods are sold.</p>' +
+      '<p class="dg-p-note"><a href="/how" data-dg-page="how">How matching works →</a> · <a href="/sample" data-dg-page="sample">Sample match note →</a> · <a href="/faq" data-dg-page="faq">FAQ →</a> · <a href="/legal#terms">Terms</a> · <a href="/legal#refunds">Refunds &amp; invoice disputes</a> · <a href="/legal#cancellation">Cancellation &amp; fulfillment</a></p>',
   },
   faq: {
     title: 'FAQ',
@@ -3562,7 +3569,7 @@ var DG_PAGES = {
       '<details class="dg-p-det"><summary>What is a concrete first result?</summary><p>One measurable result the hire should own first. We match against that, not a keyword soup or generic JD.</p></details>' +
       '<details class="dg-p-det"><summary>Who do you work with?</summary><p>SF Bay Area startups (and builders open to those companies). Seed through growth, product and eng-heavy roles first. Remote talent is fine when the company is Bay-focused.</p></details>' +
       '<details class="dg-p-det"><summary>How long does it take?</summary><p>No SLA clock. Timing depends on role difficulty and response pace. Every brief gets careful human review - potter@trydemigod.com follows up.</p></details>' +
-      '<details class="dg-p-det"><summary>Are payments and SMS live?</summary><p>Not yet. Commercial confirmations and follow-ups are by email (potter@trydemigod.com). Stripe and Twilio are pending - we say so honestly on the site.</p></details>' +
+      '<details class="dg-p-det"><summary>How are payments and service messages handled?</summary><p>Commercial terms and service follow-ups are confirmed by email at potter@trydemigod.com. After a verified start, the hiring company receives a one-time invoice in USD. Available payment methods appear on the invoice; Demigod never charges candidates.</p></details>' +
       '<details class="dg-p-det"><summary>Do you auto-message founders or candidates?</summary><p>No auto-DM blasts. Humans send outreach. The site is for inbound briefs, profiles, and transparent product pages.</p></details>' +
       '<details class="dg-p-det"><summary>What if a match is not right?</summary><p>Pass privately. No pressure, no public rejection trail. If evidence is thin, we say so instead of manufacturing a shortlist.</p></details>' +
       '<details class="dg-p-det"><summary>Can I partner or refer talent?</summary><p>Yes. Demigod charges startups 10% of first-year base when a hire starts. Approved individual referrers can earn 20% of that fee (never the candidate’s salary) after a referred hire completes 90 days and the related client fee is paid and retained. Approved hiring partners receive company credits, not personal cash. Written terms apply; payout tooling is pending.</p></details>' +
@@ -3649,30 +3656,63 @@ var DG_PAGES = {
     doc: 'Contact · Demigod',
     desc: 'Reach Demigod at potter@trydemigod.com. A human replies about SF startup talent matching — no bots or automated outreach.',
     html:
-      '<p class="dg-p-lead">Email <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>. A human replies — no bots, no auto-DM, no SLA clock.</p>' +
+      '<p class="dg-p-lead">Email <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>. A human replies about matching, privacy, security, billing, or invoice questions — no bots or auto-DMs.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
       '<ul class="dg-p-list">' +
       '<li><strong>Hiring one SF Bay role?</strong> Use the brief form — role, must-haves, cash band, and first result land structured for human review.</li>' +
       '<li><strong>Open to the right startup?</strong> Share privately — free, not a public profile; you approve every intro.</li>' +
-      '<li><strong>Press, partners, or something else?</strong> Email with a clear subject; potter@trydemigod.com is the only channel.</li>' +
+      '<li><strong>Billing or invoice question?</strong> Email with “Invoice” in the subject and include the company name and invoice number; never send full card or bank credentials.</li>' +
+      '<li><strong>Press, partners, or something else?</strong> Email with a clear subject. Demigod is based in San Francisco, California.</li>' +
       '</ul>' +
       '<p class="dg-p-note">Matching stays private until both sides approve. <a href="/legal" data-dg-page="legal">Privacy →</a> · <a href="/private" data-dg-page="private">Why private →</a> · <a href="/pricing" data-dg-page="pricing">Pricing →</a></p>',
   },
   legal: {
-    title: 'Privacy & Terms',
+    title: 'Privacy, Terms & Service Policies',
     doc: 'Legal · Demigod',
-    desc: 'Demigod\'s plain-language privacy policy and terms for SF startup and talent matching: what we collect, how intros work, and how to reach us with questions.',
+    desc: 'Terms, pricing, cancellation, fulfillment, refund, privacy, referral, security, and contact policies for Demigod\'s recruiting service.',
     html:
-      '<p class="dg-p-lead">Plain-language privacy and terms. Submissions stay for matching; no public profiles.</p>' +
-      '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
-      '<h2 class="dg-p-h3">Privacy</h2>' +
-      '<p><strong>Effective July 20, 2026.</strong> We collect the contact details, company or work background, location and availability, work evidence, and résumé file or link you choose to submit. We use them for human review, matching, mutual-intro decisions, service messages, and service protection.</p>' +
-      '<p>Demigod, Webflow, and our email provider process submissions. After a startup requests an intro, we may privately show its company identity and role facts to the candidate. Candidate identity, contact details, résumé, and work links are not shared with the startup until the candidate approves that exact role. We do not sell contact lists or use submissions for unrelated marketing.</p>' +
-      '<p>A <a href="/refer" data-dg-page="refer">referral link</a> carries an opaque attribution code. The person or company that shared it may receive a financial benefit if an eligible referral leads to a retained hire. Referral status does not change candidate evaluation or candidate cost.</p>' +
-      '<p>A temporary same-tab draft is kept in your browser session and cleared after confirmed submission.</p>' +
-      '<p>We retain submissions while providing matching, handling an introduction, and meeting legitimate operational or recordkeeping needs, then delete or de-identify data when it is no longer needed. Shareable résumé links remain subject to the storage provider you chose.</p>' +
-      '<p>Request access, correction, or deletion at <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>. We will confirm the action and any data we must retain for legal or transaction records.</p>' +
-      '<h2 class="dg-p-h3">Terms</h2><p>Demigod introduces parties; employment decisions are yours. A person picks better candidates. Placement fee is 10% of first-year base salary when a hire starts. Commercial confirmations arrive by email.</p>',
+      '<p class="dg-p-lead"><strong>Effective August 28, 2026.</strong> Demigod is a private recruiting and talent-matching service operated by Demigod Labs, Inc. in San Francisco, California. Demigod provides recruiting services only; it does not offer cryptocurrency, investment, exchange, custody, or other financial services.</p>' +
+      '<p class="dg-p-note">These policies apply to trydemigod.com and Demigod\'s matching service. Any signed agreement or written commercial confirmation for a specific engagement controls if it conflicts with this page.</p>' +
+      '<p class="dg-p-actions"><a href="#terms">Terms</a><a class="dg-p-actions-sec" href="#privacy">Privacy</a><a class="dg-p-actions-sec" href="#refunds">Refunds</a></p>' +
+      '<section id="terms"><h2 class="dg-p-h3">Terms of use</h2>' +
+      '<p>Companies may submit a role brief, and candidates may submit a private profile. Demigod reviews that information, compares role and candidate facts, decides what to propose, and facilitates introductions only after both sides approve.</p>' +
+      '<p>Before an introduction, a candidate sees the company, specific role, work arrangement, and base-salary range. Candidate identity and contact details are shared with that company only after the candidate approves that specific introduction and the company has also approved it.</p>' +
+      '<p>Demigod does not promise a particular candidate, a minimum number of introductions, a response time, an interview, an offer, a hire, a start date, or any duration of employment. Demigod is not the employer and is not a party to any employment agreement. Hiring companies and candidates make their own interview, hiring, employment, and acceptance decisions.</p>' +
+      '<p>Information submitted to Demigod must be accurate, lawful, and yours to provide. Do not submit another person\'s résumé, contact details, or other personal information without permission. Do not use the service to scrape information, build contact lists, send unsolicited messages, impersonate someone, interfere with the site, or violate another person\'s privacy or legal rights.</p></section>' +
+      '<section id="payments"><h2 class="dg-p-h3">Pricing and payment</h2>' +
+      '<p>Submitting a role brief is free. There is no upfront fee, retainer, subscription, job-posting fee, or charge for an introduction. Candidates never pay Demigod.</p>' +
+      '<p>If a hiring company hires a candidate introduced through Demigod and that person starts work, the company\'s placement fee is <strong>10% of the hire\'s first-year base salary in United States dollars (USD)</strong>, excluding equity, bonuses, benefits, and other compensation, unless Demigod and the company agree otherwise in writing.</p>' +
+      '<p>Commercial details are confirmed in writing before a fee is owed. Demigod invoices the hiring company after the start is verified. The invoice states its due date, amount, currency, and available payment methods.</p>' +
+      '<p>When Demigod uses a Stripe-hosted invoice, payment credentials are submitted directly to Stripe. Demigod receives transaction and payment-status information but does not receive or store complete card or bank-account credentials.</p></section>' +
+      '<section id="cancellation"><h2 class="dg-p-h3">Cancellation</h2>' +
+      '<p>Submitting a brief or profile does not create a purchase. A hiring company may pause or cancel an active search by emailing <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a>. There is no subscription or search-cancellation charge. A candidate may withdraw a profile or decline an introduction at any time without charge.</p>' +
+      '<p>If a company later hires a candidate introduced through Demigod, any obligation that continues after a search is paused or canceled is limited to what Demigod and the company previously confirmed in writing.</p></section>' +
+      '<section id="fulfillment"><h2 class="dg-p-h3">Service fulfillment</h2>' +
+      '<p>Demigod provides a professional recruiting and introduction service. It does not sell or ship physical goods, so shipping, delivery, and merchandise-return policies do not apply.</p>' +
+      '<p>The service is performed through human review of submitted information, private match proposals, mutual approval, introductions, and related follow-up. Timing varies by role, candidate availability, and the parties\' decisions. A completed search or hire is not guaranteed.</p></section>' +
+      '<section id="refunds"><h2 class="dg-p-h3">Refunds and invoice disputes</h2>' +
+      '<p>Because Demigod charges no placement fee unless a hire starts, no refund is required when a search ends without a fee-triggering hire.</p>' +
+      '<p>If an invoice contains an error or the stated start did not occur, email <a href="mailto:potter@trydemigod.com?subject=Invoice%20question">potter@trydemigod.com</a> promptly with the relevant facts. Demigod will review the matter and cancel or correct an erroneous invoice, or refund an amount confirmed to have been paid in error.</p>' +
+      '<p>Any other refund, credit, replacement service, or fee adjustment is available only if stated in the applicable written engagement terms. This policy does not limit rights that cannot legally be waived.</p></section>' +
+      '<section id="privacy"><h2 class="dg-p-h3">Privacy notice</h2>' +
+      '<h3>Information we collect</h3><p>Demigod collects information you choose to provide. For hiring companies, this can include contact details, company and role information, work location, compensation range, required skills, hiring constraints, and expected outcomes. For candidates, this can include contact details, work preferences, location, compensation range, skills, experience, availability, and any résumé or work links you choose to provide.</p>' +
+      '<p>For referrals and communications, we may collect referral attribution, referrer contact and context, messages, requests, and support correspondence. For invoicing, we may collect company billing details, invoice amounts, payment status, and transaction identifiers. Do not submit Social Security numbers, complete payment credentials, medical records, immigration documents, or other highly sensitive information through a general website form or ordinary email.</p>' +
+      '<p>The site uses limited browser storage for functions such as temporary same-session form progress and referral attribution. Website, hosting, security, forms, email, file-delivery, invoicing, and payment providers may process routine request or service information needed to provide and protect the site. Public community submissions may publish approved factual startup or event details; submitter email addresses are used for review and are not intentionally published.</p>' +
+      '<h3>How we use information</h3><p>Demigod uses information to review submissions, compare possible matches, decide what to propose, obtain mutual approval, make introductions, communicate about the service, administer approved referrals, issue and reconcile invoices, protect the service, keep required records, enforce agreements, and comply with law. Demigod does not sell contact lists or use candidate and company submissions for unrelated advertising.</p>' +
+      '<h3>How information is shared</h3><p>Demigod may share company and role facts with a candidate before that candidate decides whether to approve an introduction; share candidate information with a hiring company after both sides approve that specific introduction; share information with providers that support the service only as needed for their functions; and disclose information when reasonably necessary to comply with law, protect rights or safety, investigate abuse, or handle a corporate transaction.</p>' +
+      '<p>A referral link may contain an opaque attribution code. A person who shared the link may be eligible for a financial benefit if the referral results in a qualifying hire. Referral attribution does not change candidate evaluation, candidate compensation, or candidate cost.</p>' +
+      '<h3>Retention and choices</h3><p>Demigod retains information while it is reasonably needed for matching, an introduction, payment and dispute records, security, and legal or operational recordkeeping. Information is then deleted or de-identified when it is no longer needed. A résumé or work link hosted by another provider also remains subject to that provider\'s practices.</p>' +
+      '<p>To request access, correction, deletion, withdrawal from matching, or removal of referral attribution, email <a href="mailto:potter@trydemigod.com?subject=Privacy%20request">potter@trydemigod.com</a>. Demigod may retain information required for invoices, completed transactions, fraud prevention, disputes, or legal obligations.</p>' +
+      '<p>Some browsers send a “Do Not Track” signal. Because there is no uniform industry standard for that signal, the site does not currently change its behavior solely in response to it. Where applicable law requires recognition of an opt-out preference signal, Demigod will honor it. Demigod may update this notice as the service changes; the effective date above will be updated when changes are published.</p></section>' +
+      '<section id="cookies"><h2 class="dg-p-h3">Cookies and browser storage</h2><p>The site may use limited browser storage and essential cookies for same-session form progress, referral attribution, authentication, fraud prevention, and security. Hosting, forms, and security providers may set essential cookies needed to provide those functions. Demigod does not use information submitted for matching to build unrelated advertising profiles.</p><p>You can remove browser storage through your browser settings, although doing so may clear an unfinished form or sign you out of an authenticated service.</p></section>' +
+      '<section id="referrals"><h2 class="dg-p-h3">Referral terms</h2>' +
+      '<p>Submitting a referral request does not approve a referrer or create a right to payment. Only an approved referral link and written referral terms can create reward eligibility. Referrers must share links personally and honestly. Scraped or purchased lists, résumé uploads on another person\'s behalf, impersonation, spam, self-referrals, misleading claims, and multi-level referral arrangements are not permitted.</p>' +
+      '<p>Anyone who may receive a reward must clearly disclose that fact. Suggested disclosure: “I may receive a referral reward if this leads to a successful Demigod hire. It comes from Demigod\'s fee, not your pay, and does not affect how you are evaluated.”</p>' +
+      '<p>For currently advertised approved individual talent referrals, the potential reward is 20% of Demigod\'s net placement fee after the referred hire completes 90 days and the related client fee is paid and retained. A click, submission, match proposal, or introduction does not earn a reward. Written referral terms control eligibility, duplicate or invalid referrals, and payment. Any reward comes from Demigod\'s fee, never from candidate compensation. <a href="/refer" data-dg-page="refer">Referral details →</a></p></section>' +
+      '<section id="security"><h2 class="dg-p-h3">Security</h2>' +
+      '<p>Demigod uses HTTPS and reputable service providers to transmit and process information. Operational access is limited to people and providers that need it to deliver the service. No internet system is completely secure, so avoid sending unnecessary sensitive information.</p>' +
+      '<p>When Stripe-hosted invoices are used, Stripe processes payment credentials directly. To report a suspected security issue, email <a href="mailto:potter@trydemigod.com?subject=Security">potter@trydemigod.com</a> with “Security” in the subject line.</p></section>' +
+      '<section id="contact"><h2 class="dg-p-h3">Contact</h2><p><strong>Demigod Labs, Inc.</strong><br>San Francisco, California, United States<br>Email: <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a><br><a href="/contact" data-dg-page="contact">Contact page →</a></p><p>The applicable business mailing address appears on formal invoices and engagement documents.</p></section>',
   },
   refer: {
     title: 'Make one strong introduction',
@@ -3711,25 +3751,6 @@ var DG_PAGES = {
       '<p class="dg-p-note"><a href="/?wiz=startup" data-demigod-modal="startup">Start a hiring brief</a> · <a href="/how" data-dg-page="how">How it works →</a> · <a href="/pricing" data-dg-page="pricing">Fee →</a> · <a href="/private" data-dg-page="private">Why private →</a> · <a href="/legal" data-dg-page="legal">Privacy →</a> · <a href="/press" data-dg-page="press">Press kit →</a></p>',
   },
 
-  bounties: {
-    title: 'Bounties',
-    doc: 'Bounties · Demigod',
-    desc: "Declared USDC bounties. We don't hold it.",
-    html:
-      '<div class="dg-bounty-id" id="dg-bounty-id"></div>' +
-      '<div id="dg-bounty-live"></div>' +
-      '<form id="dg-bounty-form" class="dg-bounty-form">' +
-      '<label class="dg-bounty-lab" for="dg-bounty-repo">GitHub</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-repo" name="repo" type="url" required placeholder="https://github.com/owner/repo" autocomplete="off" />' +
-      '<label class="dg-bounty-lab" for="dg-bounty-amount">USDC</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-amount" name="amount" inputmode="decimal" required placeholder="25" />' +
-      '<label class="dg-bounty-lab" for="dg-bounty-payto">Wallet</label>' +
-      '<input class="dg-bounty-in" id="dg-bounty-payto" name="payTo" placeholder="Solana address" autocomplete="off" spellcheck="false" />' +
-      '<button type="submit" class="dg-bounty-submit">List</button>' +
-      '<p class="dg-bounty-msg" id="dg-bounty-msg" role="status" aria-live="polite"></p>' +
-      '</form>' +
-      "<p class=\"dg-p-note\">We don't hold it.</p>",
-  },
   map: {
     title: 'SF tech company directory',
     doc: 'SF tech company directory · Demigod',
@@ -3866,7 +3887,6 @@ function pageCss() {
     '@keyframes dg-page-in{from{opacity:0}to{opacity:1}}' +
     '@media(prefers-reduced-motion:reduce){#dg-page{animation:none}}' +
     '@media(forced-colors:active){#dg-page{background:Canvas!important;forced-color-adjust:auto}#dg-page .dg-page-card,#dg-page .dg-page-x,#dg-page .dg-page-ctas a{border:1px solid CanvasText!important;background:Canvas!important;color:CanvasText!important;box-shadow:none!important}#dg-page .dg-page-x:focus-visible,#dg-page .dg-page-ctas a:focus-visible,#dg-page summary:focus-visible{outline:2px solid Highlight!important}}' +
-    '#dg-page.dg-page-bounties{background:#03140D!important;font-family:Manrope,system-ui,sans-serif;color:#F3F0E7}' +'#dg-page.dg-page-bounties .dg-page-card{max-width:min(40rem,100%);margin:1.25rem auto;background:transparent;border:none;box-shadow:none;border-radius:0;padding:1.15rem;color:#F3F0E7}' +'#dg-page.dg-page-bounties .dg-page-x,#dg-page.dg-page-bounties .dg-page-ctas{display:none!important}' +'#dg-page.dg-page-bounties h1{font-family:Manrope,system-ui,sans-serif!important;color:#A6FFCB!important;font-weight:700;letter-spacing:-.02em}' +'#dg-page.dg-page-bounties .dg-p-note{color:#8A8A9E;font-size:.9rem}' +'#dg-page.dg-page-bounties a{color:#10C674}' +'#dg-page.dg-page-bounties .dg-bounty-id{display:flex;align-items:center;gap:.55rem;margin:0 0 .85rem}' +'#dg-page.dg-page-bounties .dg-bounty-av{width:28px;height:28px;border-radius:999px;border:1px solid rgba(166,255,203,.35);background:rgba(166,255,203,.08)}' +'#dg-page.dg-page-bounties .dg-bounty-handle{color:#A6FFCB;font-weight:650;text-decoration:none;font-size:.92rem}' +'#dg-page.dg-page-bounties .dg-bounty-gh{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem 1rem;border-radius:12px;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif;border:0;background:#A6FFCB;color:#03140D}' +'#dg-page.dg-page-bounties .dg-bounty-x{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem .9rem;border-radius:12px;font-weight:600;cursor:pointer;font-family:Manrope,system-ui,sans-serif;background:transparent;color:#A6FFCB;border:1px solid rgba(166,255,203,.35)}' +'#dg-page.dg-page-bounties .dg-bounty-rows{list-style:none;margin:0 0 1.15rem;padding:0;display:grid;gap:.5rem}' +'#dg-page.dg-page-bounties .dg-bounty-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.65rem;align-items:center;padding:.7rem .85rem;background:rgba(166,255,203,.08);border:1px solid rgba(166,255,203,.22);border-radius:12px}' +'#dg-page.dg-page-bounties .dg-bounty-amt{font-weight:700;color:#A6FFCB;white-space:nowrap}' +'#dg-page.dg-page-bounties .dg-bounty-title{color:#F3F0E7;text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +'#dg-page.dg-page-bounties .dg-bounty-title:hover{color:#10C674}' +'#dg-page.dg-page-bounties .dg-bounty-pay{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:.4rem 1rem;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer;border:0;background:#A6FFCB;color:#03140D;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-form{display:grid;gap:.35rem;margin:0 0 .75rem}' +'#dg-page.dg-page-bounties .dg-bounty-lab{font-size:.78rem;color:#8A8A9E;margin-top:.3rem}' +'#dg-page.dg-page-bounties .dg-bounty-in{width:100%;min-height:48px;padding:.6rem .75rem;border-radius:12px;border:1px solid rgba(166,255,203,.22);background:rgba(166,255,203,.08);color:#F3F0E7;font-size:16px;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-in:focus-visible{outline:2px solid #A6FFCB;outline-offset:3px}' +'#dg-page.dg-page-bounties .dg-bounty-submit{min-height:48px;margin-top:.55rem;border-radius:12px;border:0;background:#A6FFCB;color:#03140D;font-weight:700;cursor:pointer;font-family:Manrope,system-ui,sans-serif}' +'#dg-page.dg-page-bounties .dg-bounty-msg{min-height:1.2rem;font-size:.84rem;color:#8A8A9E;margin:.35rem 0 0}' +'#dg-page.dg-page-bounties .dg-bounty-note{margin:0;font-size:.9rem;color:#8A8A9E;font-weight:500}' +
         /* Events Bot — gold Demigod system (FOCUS: never phosphor MUD green) */
     '#dg-page.dg-page-events{background:radial-gradient(120% 80% at 80% 0%,rgba(201,168,76,.09),transparent 55%),#060606!important}' +
     '#dg-page.dg-page-events .dg-page-card{max-width:min(44rem,96vw);border-color:rgba(201,168,76,.38);' +
@@ -4593,7 +4613,6 @@ function pageCtas(id) {
   var back = '<a class="back" href="/" id="dg-page-back">← Home</a>';
   if (id === 'hire') return '<a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief</a>' + talent + back;
   if (id === 'talent') return talent + hire + back;
-  if (id === 'bounties') return '';
   if (id === 'events' || id === 'map' || id === 'refer') return back;
   return hire + talent + back;
 }
@@ -4660,7 +4679,6 @@ function openPage(id, push) {
   if (id === 'events') root.classList.add('dg-page-events');
   if (id === 'event') root.classList.add('dg-page-events');
   if (id === 'map') root.classList.add('dg-page-map');
-  if (id === 'bounties') root.classList.add('dg-page-bounties');
   root.innerHTML =
     '<div class="dg-page-card"><div class="dg-page-top"><h1>' +
     meta.title +
@@ -4756,7 +4774,7 @@ function openPage(id, push) {
   } catch (e) {}
   try {
     /* Prefer hard path (/events) over /?p= when we own a clean route. */
-    var preferred = { how:'/how', pricing:'/pricing', hire:'/hire', talent:'/talent', faq:'/faq', legal:'/legal', refer:'/refer', about:'/about', events:'/events', map:'/startups', contact:'/contact', blog:'/blog', sample:'/sample', bounties:'/?p=bounties', press:'/press', private:'/private', 'posting-age':'/posting-age', notfound:'/' };
+    var preferred = { how:'/how', pricing:'/pricing', hire:'/hire', talent:'/talent', faq:'/faq', legal:'/legal', refer:'/refer', about:'/about', events:'/events', map:'/startups', contact:'/contact', blog:'/blog', sample:'/sample', press:'/press', private:'/private', 'posting-age':'/posting-age', notfound:'/' };
     var pathNow = (location.pathname || '/').replace(/\/+$/, '') || '/';
     /* v860: an ALIAS must not claim canonical for itself. DG_PAGE_PATHS declares 36 paths across ~19
        routes, so /referral, /referrals and /partners are all route 'refer', and /press-kit and
@@ -4845,6 +4863,20 @@ function openPage(id, push) {
     if (dgH) { dgH.setAttribute('tabindex', '-1'); dgH.focus({ preventScroll: true }); }
     else root.querySelector('.dg-page-x').focus();
   } catch (e) {}
+  try {
+    /* Policy links use durable, crawlable anchors. The policy DOM is injected after the browser's
+       native hash-scroll moment, so perform that scroll once the legal page exists. */
+    if (id === 'legal' && location.hash) {
+      var policyId = location.hash.replace(/^#/, '').toLowerCase();
+      var policyTarget = root.querySelector('#' + policyId);
+      if (policyTarget) {
+        var policyHeading = policyTarget.querySelector('h2,h3') || policyTarget;
+        policyHeading.setAttribute('tabindex', '-1');
+        policyHeading.focus({ preventScroll: true });
+        policyTarget.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }
+    }
+  } catch (e) {}
   // Atlas directory only on /?p=map (events has no #dg-startup-map host).
   if (id === 'map') {
     try { startupMapMount(root); } catch (eMap) {}
@@ -4863,9 +4895,6 @@ function openPage(id, push) {
   if (id === 'blog') {
     try { blogPageMount(root); focusBlogNoteFromHash(root); } catch (e) {}
   }
-  if (id === 'bounties') {
-    try { bountyFormMount(root); } catch (e) {}
-  }
   // soft focus trap
   root.addEventListener('keydown', function(ev){
     if(ev.key!=='Tab') return;
@@ -4882,292 +4911,6 @@ function blogBodyHtml(body) {
     return '<p>' + esc(p.replace(/\n/g, ' ').trim()) + '</p>';
   }).join('');
 }
-function bountyListingKey(item) {
-  return String(item.itemUrl || '').toLowerCase() || (String(item.repo || '') + '|' + String(item.name || '')).toLowerCase();
-}
-var DG_USDC_SOL = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v';
-var DG_USDC_BASE = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
-var DG_BOUNTY_GH_KEY = 'dgBountyGh';
-var DG_BOUNTY_X_KEY = 'dgBountyX';
-function bountyIsSolana(addr) {
-  var a = String(addr || '').trim();
-  return /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a) && !/^0x/i.test(a);
-}
-function bountyIsEvm(addr) {
-  return /^0x[a-fA-F0-9]{40}$/.test(String(addr || '').trim());
-}
-function bountyPayHref(it) {
-  var to = String(it.payTo || '').trim();
-  var amt = it.amount;
-  if (!to || amt == null || amt === '') return '';
-  if (String(it.chain || '').toLowerCase() === 'base' && bountyIsEvm(to)) {
-    var units = String(Math.round(Number(amt) * 1e6));
-    if (!/^\d+$/.test(units)) return '';
-    return 'ethereum:' + DG_USDC_BASE + '@8453/transfer?address=' + encodeURIComponent(to) + '&uint256=' + units;
-  }
-  if (bountyIsSolana(to)) {
-    return 'solana:' + to + '?amount=' + encodeURIComponent(String(amt)) + '&spl-token=' + DG_USDC_SOL;
-  }
-  return '';
-}
-function bountyNormalize(item, source) {
-  if (!item || typeof item !== 'object') return null;
-  var name = String(item.name || '').trim();
-  var repo = String(item.repo || '').trim();
-  if (!name && !repo) return null;
-  var cur = String(item.currency || 'USDC').trim().toUpperCase();
-  if (cur === 'USD') cur = 'USDC';
-  return {
-    kind: item.kind === 'project' ? 'project' : 'item',
-    name: name || repo,
-    repo: repo,
-    itemUrl: item.itemUrl || null,
-    amount: item.amount,
-    currency: 'USDC',
-    payTo: String(item.payTo || '').trim(),
-    chain: String(item.chain || '').trim().toLowerCase(),
-    source: source || ''
-  };
-}
-var DG_BOUNTY_SEED = [
-  {kind:'item',name:'docs: add CONTRIBUTING screenshot of GitHub web edit flow',repo:'Uuriko/dasha-desk',itemUrl:'https://github.com/Uuriko/dasha-desk/issues/8',amount:25,currency:'USDC',payTo:'',chain:''},
-  {kind:'project',name:'dasha desk',repo:'Uuriko/dasha-desk',itemUrl:null,amount:50,currency:'USDC',payTo:'',chain:''}
-];
-function bountyGhUser() {
-  try {
-    var j = JSON.parse(sessionStorage.getItem(DG_BOUNTY_GH_KEY) || 'null');
-    if (j && j.login && j.token) return j;
-  } catch (e) {}
-  return null;
-}
-function bountyXUser() {
-  try {
-    var j = JSON.parse(sessionStorage.getItem(DG_BOUNTY_X_KEY) || 'null');
-    if (j && j.handle && j.token) return j;
-  } catch (e) {}
-  return null;
-}
-function bountyAuthBase() {
-  var bases = [];
-  try { bases = dgEventsBotBases() || []; } catch (e) {}
-  return bases[0] || '';
-}
-function bountyOauth(path, opts) {
-  function send(base) {
-    if (!base) return Promise.reject(new Error('no_api'));
-    return dgEventsBotFetch(base + path, opts || {});
-  }
-  if (typeof dgEventsBotPickBase === 'function') {
-    return dgEventsBotPickBase(4000).then(function (hit) {
-      return send((hit && hit.base) || bountyAuthBase());
-    });
-  }
-  return send(bountyAuthBase());
-}
-function bountyOauthFlags(j) {
-  return {
-    github: Boolean(j && (j.github === true || j.configured === true)),
-    x: Boolean(j && j.x)
-  };
-}
-function bountyShowUnconfigured(root) {
-  var host = root && root.querySelector('#dg-bounty-id');
-  if (host) host.innerHTML = '<p class="dg-bounty-note">GitHub link not configured</p>';
-  var msg = root && root.querySelector('#dg-bounty-msg');
-  if (msg) msg.textContent = 'GitHub link not configured';
-}
-function bountyPaintId(root, cfg) {
-  var host = root && root.querySelector('#dg-bounty-id');
-  if (!host) return;
-  var gh = bountyGhUser();
-  var x = bountyXUser();
-  var githubOn = Boolean(cfg && cfg.github);
-  var xOn = Boolean(cfg && cfg.x);
-  var html = '';
-  if (gh && gh.login && gh.token) {
-    var av = /^https:\/\//i.test(String(gh.avatarUrl || ''))
-      ? ('<img class="dg-bounty-av" src="' + esc(gh.avatarUrl) + '" alt="" width="28" height="28" referrerpolicy="no-referrer" />')
-      : '';
-    html += av + '<a class="dg-bounty-handle" href="' + esc(gh.htmlUrl || ('https://github.com/' + gh.login)) + '" rel="noopener" target="_blank">' + esc(gh.login) + '</a>';
-    if (x && x.handle) {
-      html += '<a class="dg-bounty-handle" href="' + esc(x.htmlUrl || ('https://x.com/' + x.handle)) + '" rel="noopener" target="_blank">@' + esc(x.handle) + '</a>';
-    } else if (xOn) {
-      html += '<button type="button" class="dg-bounty-x" id="dg-bounty-x">X</button>';
-    }
-  } else if (githubOn) {
-    html += '<button type="button" class="dg-bounty-gh" id="dg-bounty-gh">GitHub</button>';
-    if (xOn) html += '<button type="button" class="dg-bounty-x" id="dg-bounty-x">X</button>';
-  } else {
-    html = '<p class="dg-bounty-note">GitHub link not configured</p>';
-  }
-  host.innerHTML = html;
-  var ghBtn = host.querySelector('#dg-bounty-gh');
-  if (ghBtn) ghBtn.addEventListener('click', function () { bountyGhStart(root); });
-  var xBtn = host.querySelector('#dg-bounty-x');
-  if (xBtn) xBtn.addEventListener('click', function () { bountyXStart(); });
-}
-function bountyRenderId(root) {
-  var host = root && root.querySelector('#dg-bounty-id');
-  if (!host) return;
-  if (bountyGhUser()) bountyPaintId(root, { github: true, x: false });
-  bountyOauth('/oauth/github/status').then(function (r) { return r.json(); }).then(function (j) {
-    bountyPaintId(root, bountyOauthFlags(j));
-  }).catch(function () {
-    if (!bountyGhUser()) bountyShowUnconfigured(root);
-  });
-}
-function bountyGhStart(root) {
-  bountyOauth('/oauth/github/start').then(function (r) { return r.json(); }).then(function (j) {
-    if (j && j.authorizeUrl) {
-      try { sessionStorage.setItem('dgBountyGhState', j.state || ''); } catch (e) {}
-      location.href = j.authorizeUrl;
-      return;
-    }
-    bountyShowUnconfigured(root);
-  }).catch(function () { bountyShowUnconfigured(root); });
-}
-function bountyXStart() {
-  bountyOauth('/oauth/x/start').then(function (r) { return r.json(); }).then(function (j) {
-    if (j && j.authorizeUrl) {
-      try {
-        sessionStorage.setItem('dgBountyXState', j.state || '');
-        sessionStorage.setItem('dgBountyXVerifier', j.verifier || '');
-      } catch (e) {}
-      location.href = j.authorizeUrl;
-    }
-  }).catch(function () {});
-}
-function bountyConsumeOauth(root) {
-  try {
-    var u = new URL(location.href);
-    var code = u.searchParams.get('code');
-    var state = u.searchParams.get('state');
-    if (!code || !state) return;
-    u.searchParams.delete('code');
-    u.searchParams.delete('state');
-    try { history.replaceState({}, '', u.pathname + u.search + u.hash); } catch (e0) {}
-    var ghState = '';
-    var xState = '';
-    try { ghState = sessionStorage.getItem('dgBountyGhState') || ''; xState = sessionStorage.getItem('dgBountyXState') || ''; } catch (e1) {}
-    if (xState && state === xState) {
-      var verifier = '';
-      try { verifier = sessionStorage.getItem('dgBountyXVerifier') || ''; } catch (e2) {}
-      bountyOauth('/oauth/x/exchange', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code, state: state, verifier: verifier }) })
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          if (j && j.ok && j.token && j.handle) {
-            try { sessionStorage.setItem(DG_BOUNTY_X_KEY, JSON.stringify({ token: j.token, handle: j.handle, avatarUrl: j.avatarUrl, htmlUrl: j.htmlUrl })); } catch (e3) {}
-          }
-          bountyRenderId(root);
-        }).catch(function () {});
-      return;
-    }
-    bountyOauth('/oauth/github/exchange', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code, state: state }) })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (j && j.ok && j.token && j.login) {
-          try { sessionStorage.setItem(DG_BOUNTY_GH_KEY, JSON.stringify({ token: j.token, login: j.login, avatarUrl: j.avatarUrl, htmlUrl: j.htmlUrl })); } catch (e4) {}
-        }
-        bountyRenderId(root);
-      }).catch(function () {});
-  } catch (e) {}
-}
-function bountyCopyPay(amount) {
-  var text = String(amount) + ' USDC';
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text);
-  } catch (e) {}
-}
-function bountyRender(root, listings) {
-  var host = root && root.querySelector('#dg-bounty-live');
-  if (!host) return;
-  if (!listings.length) {
-    host.innerHTML = '<p class="dg-p-note">None yet.</p>';
-    return;
-  }
-  host.innerHTML = '<ul class="dg-bounty-rows">' + listings.map(function (it) {
-    var href = it.itemUrl || (it.repo ? ('https://github.com/' + it.repo) : '');
-    var amt = (it.amount != null && it.amount !== '') ? (esc(String(it.amount)) + ' USDC') : '';
-    var title = href ? ('<a class="dg-bounty-title" href="' + esc(href) + '" rel="noopener" target="_blank">' + esc(it.name) + '</a>') : ('<span class="dg-bounty-title">' + esc(it.name) + '</span>');
-    var payHref = bountyPayHref(it);
-    var pay = payHref
-      ? ('<a class="dg-bounty-pay" href="' + esc(payHref) + '" data-dg-bounty-pay="1">Pay</a>')
-      : ('<button type="button" class="dg-bounty-pay" data-dg-bounty-copy="' + esc(String(it.amount || '')) + '">Pay</button>');
-    return '<li class="dg-bounty-row"><span class="dg-bounty-amt">' + amt + '</span>' + title + pay + '</li>';
-  }).join('') + '</ul>';
-  host.querySelectorAll('[data-dg-bounty-pay],[data-dg-bounty-copy]').forEach(function (el) {
-    el.addEventListener('click', function (ev) {
-      if (!bountyGhUser()) { ev.preventDefault(); bountyGhStart(root); return; }
-      var copyAmt = el.getAttribute('data-dg-bounty-copy');
-      if (copyAmt != null && copyAmt !== '') bountyCopyPay(copyAmt);
-    });
-  });
-}
-function bountyLoadFeeds(root) {
-  bountyRender(root, DG_BOUNTY_SEED.map(function (it) { return bountyNormalize(it, 'demigod'); }).filter(Boolean));
-  var bust = '?t=' + Math.floor(Date.now() / 60000);
-  var urls = [
-    { src: 'demigod', url: 'https://raw.githubusercontent.com/Uuriko/demigod-site-cdn/main/bounties-feed.json' },
-    { src: 'dasha', url: 'https://raw.githubusercontent.com/Uuriko/dasha-desk/main/bounties/feed.json' }
-  ];
-  Promise.all(urls.map(function (u) {
-    return fetch(u.url + bust, { mode: 'cors', cache: 'no-store', signal: AbortSignal.timeout(4000) })
-      .then(function (r) { if (!r.ok) throw new Error('n'); return r.json(); })
-      .then(function (j) { return { src: u.src, json: j }; })
-      .catch(function () { return { src: u.src, json: null }; });
-  })).then(function (parts) {
-    var seen = {};
-    var out = [];
-    function add(item, src) {
-      var n = bountyNormalize(item, src);
-      if (!n) return;
-      var k = bountyListingKey(n);
-      if (!k || seen[k]) return;
-      seen[k] = 1;
-      out.push(n);
-    }
-    DG_BOUNTY_SEED.forEach(function (it) { add(it, 'demigod'); });
-    parts.forEach(function (p) {
-      var list = p.json && Array.isArray(p.json.listings) ? p.json.listings : [];
-      list.forEach(function (it) { add(it, p.src); });
-    });
-    bountyRender(root, out);
-  });
-}
-
-function bountyFormMount(root) {
-  try { bountyLoadFeeds(root); } catch (e0) {}
-  try { bountyRenderId(root); } catch (e1) {}
-  try { bountyConsumeOauth(root); } catch (e2) {}
-  var form = root && root.querySelector('#dg-bounty-form');
-  if (!form || form.dataset.dgBounty === '1') return;
-  form.dataset.dgBounty = '1';
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var gh = bountyGhUser();
-    if (!gh) { bountyGhStart(root); return; }
-    var repo = String((root.querySelector('#dg-bounty-repo') || {}).value || '').trim();
-    var amount = String((root.querySelector('#dg-bounty-amount') || {}).value || '').trim();
-    var payTo = String((root.querySelector('#dg-bounty-payto') || {}).value || '').trim();
-    var msg = root.querySelector('#dg-bounty-msg');
-    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+/i.test(repo)) {
-      if (msg) msg.textContent = 'GitHub URL';
-      return;
-    }
-    if (!amount) {
-      if (msg) msg.textContent = 'USDC';
-      return;
-    }
-    var body = [
-      'Repo: ' + repo,
-      'Amount: ' + amount + ' USDC',
-      'PayTo: ' + (payTo || ''),
-      'GitHub: ' + gh.login
-    ].join('\n');
-    location.href = 'mailto:potter@trydemigod.com?subject=' + encodeURIComponent('Demigod bounty: ' + repo) + '&body=' + encodeURIComponent(body);
-  });
-}
-
 function blogPageMount(root) {
   var grid = root && root.querySelector('#dg-blog-grid');
   if (!grid || grid.dataset.dgBlog === '1') return;
@@ -5209,13 +4952,10 @@ var DG_PAGE_PATHS = {
   '/contact': 'contact',
   '/legal': 'legal',
   '/privacy': 'legal',
-  '/bounties': 'bounties',
-  '/tryouts': 'bounties',
-  // '/tryout' (singular) was declared here and is not a published Webflow page, so it served a 404
-  // to anyone who followed it while route-audit counted it as a route we offer. A declared route
-  // that does not resolve is worse than no alias: it is a promise the site cannot keep. The
-  // `#tryout` hash below still works, because that one never depended on a page existing.
-
+  '/refund': 'legal',
+  '/refunds': 'legal',
+  '/cancellation': 'legal',
+  '/fulfillment': 'legal',
   '/posting-age': 'posting-age',
   '/posting-age-index': 'posting-age',
   '/data': 'posting-age',
@@ -5277,8 +5017,7 @@ function deepLink(){
     var w=(p.get('wiz')||p.get('hire')||p.get('modal')||'').toLowerCase();
     var h=(location.hash||'').replace(/^#/,'').toLowerCase();
     if(!w&&/^(startup|founder|hire|engineer|talent|join|jobseeker)$/.test(h))w=h;
-    if(h==='legal'||h==='privacy'||h==='terms'){ openPage('legal',false); window.__dgDeepLinked=1; return; }
-    if(h==='bounties'||h==='tryouts'||h==='tryout'){ openPage('bounties',false); window.__dgDeepLinked=1; return; }
+    if(/^(legal|privacy|terms|payments|cancellation|fulfillment|refunds|referrals|cookies|security|contact)$/.test(h)){ openPage('legal',false); window.__dgDeepLinked=1; return; }
     if(h==='partnerships'||h==='partners'){ openPage('refer',false); window.__dgDeepLinked=1; return; }
     if(/^note-/.test(h)||/^(epicurus-garden-hacker-houses)$/.test(h)){ openPage('blog',false); focusBlogNoteFromHash(q('#dg-page')); window.__dgDeepLinked=1; return; }
     if(!w)return;
@@ -5377,7 +5116,7 @@ else if(k==='jobseeker'||h===J||h==='#jobseeker-modal'){if(!q(J))return;e.preven
 document.addEventListener('input',function(e){if(OPEN&&e.target&&e.target.closest&&e.target.closest(S+','+J)){/*dg-wiz-err-clear*/try{var f=e.target.closest('form');var er=f&&f.querySelector('.dg-wiz-err,.dg-wiz-req-err'),eid=er&&er.id;if(er)er.remove();e.target.style.borderColor='';e.target.removeAttribute('aria-invalid');if(eid){var ids=(e.target.getAttribute('aria-describedby')||'').split(/\s+/).filter(function(id){return id&&id!==eid});if(ids.length)e.target.setAttribute('aria-describedby',ids.join(' '));else e.target.removeAttribute('aria-describedby')}}catch(err){}}},true);
 document.addEventListener('keydown',function(e){if(e.defaultPrevented)return;if(e.key==='Escape'&&q('#dg-page')){closePage();return}if(e.key==='Escape'&&OPEN){OPEN=null;hide(true)}});
 typeof window.addEventListener==='function'&&window.addEventListener('popstate',function(){/*dg-page-popstate*/ try{ if(!routePages()) closePage(); }catch(e){} });
-window.__dgFootVer='1107';console.log('Demigod v1107');
+window.__dgFootVer='1108';console.log('Demigod v1108');
 window.__dgDedupe = dedupeAll;
 window.__dgScrub = scrubStaticLabels;
 
