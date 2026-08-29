@@ -1,5 +1,5 @@
-/*dg-foot-v1108-core*/
-window.dgFootVersion = 'v1108'; console.log('[demigod] foot v1108-core loaded');
+/*dg-foot-v1109-core*/
+window.dgFootVersion = 'v1109'; console.log('[demigod] foot v1109-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
 /* Use product route (same-origin /?p=) — never raw catbox .html (text/plain MIME) */
@@ -1762,7 +1762,6 @@ function foot(){
           '<a href="/legal#refunds">Refunds &amp; disputes</a>'+
           '<a href="/legal#cancellation">Cancellation</a>'+
           '<a href="/legal#fulfillment">Fulfillment</a>'+
-          '<a href="/legal#referrals">Referral terms</a>'+
           '<a href="/legal#cookies">Cookies</a>'+
           '<a href="/legal#security">Security</a>'+
           '<a href="/app" id="dg-footer-login">Your hiring</a>'+
@@ -3572,7 +3571,7 @@ var DG_PAGES = {
       '<details class="dg-p-det"><summary>How are payments and service messages handled?</summary><p>Commercial terms and service follow-ups are confirmed by email at potter@trydemigod.com. After a verified start, the hiring company receives a one-time invoice in USD. Available payment methods appear on the invoice; Demigod never charges candidates.</p></details>' +
       '<details class="dg-p-det"><summary>Do you auto-message founders or candidates?</summary><p>No auto-DM blasts. Humans send outreach. The site is for inbound briefs, profiles, and transparent product pages.</p></details>' +
       '<details class="dg-p-det"><summary>What if a match is not right?</summary><p>Pass privately. No pressure, no public rejection trail. If evidence is thin, we say so instead of manufacturing a shortlist.</p></details>' +
-      '<details class="dg-p-det"><summary>Can I partner or refer talent?</summary><p>Yes. Demigod charges startups 10% of first-year base when a hire starts. Approved individual referrers can earn 20% of that fee (never the candidate’s salary) after a referred hire completes 90 days and the related client fee is paid and retained. Approved hiring partners receive company credits, not personal cash. Written terms apply; payout tooling is pending.</p></details>' +
+      '<details class="dg-p-det"><summary>Can I introduce someone?</summary><p>Yes, with their permission. Email potter@trydemigod.com with context, but do not send another person’s résumé or private information without permission. Demigod does not currently operate or advertise a public referral-reward program.</p></details>' +
       '<details class="dg-p-det"><summary>What roles do you cover first?</summary><p>Product, engineering, design, and GTM for SF Bay startups. Other roles case-by-case when the first result is clear.</p></details>' +
       '<details class="dg-p-det"><summary>What do I need to submit as a founder?</summary><p>Work email, company, stage, role, must-haves, work arrangement, base cash band, and one concrete first result. Comp bands keep matching honest. No urgency clock or retainer to start.</p></details>' +
       '<details class="dg-p-det"><summary>What do I need as talent?</summary><p>Name, email, the work you want next, work highlights, Bay Area openness, availability, and base cash band. A resume or work link is optional. Free forever - outreach only on real fits.</p></details>' +
@@ -3669,9 +3668,9 @@ var DG_PAGES = {
   legal: {
     title: 'Privacy, Terms & Service Policies',
     doc: 'Legal · Demigod',
-    desc: 'Terms, pricing, cancellation, fulfillment, refund, privacy, referral, security, and contact policies for Demigod\'s recruiting service.',
+    desc: 'Terms, pricing, cancellation, fulfillment, refund, privacy, security, and contact policies for Demigod\'s recruiting service.',
     html:
-      '<p class="dg-p-lead"><strong>Effective August 28, 2026.</strong> Demigod is a private recruiting and talent-matching service operated by Demigod Labs, Inc. in San Francisco, California. Demigod provides recruiting services only; it does not offer cryptocurrency, investment, exchange, custody, or other financial services.</p>' +
+      '<p class="dg-p-lead"><strong>Effective August 29, 2026.</strong> Demigod is a private recruiting and talent-matching service based in San Francisco, California. It provides recruiting and introductions for permanent roles.</p>' +
       '<p class="dg-p-note">These policies apply to trydemigod.com and Demigod\'s matching service. Any signed agreement or written commercial confirmation for a specific engagement controls if it conflicts with this page.</p>' +
       '<p class="dg-p-actions"><a href="#terms">Terms</a><a class="dg-p-actions-sec" href="#privacy">Privacy</a><a class="dg-p-actions-sec" href="#refunds">Refunds</a></p>' +
       '<section id="terms"><h2 class="dg-p-h3">Terms of use</h2>' +
@@ -3696,44 +3695,28 @@ var DG_PAGES = {
       '<p>Any other refund, credit, replacement service, or fee adjustment is available only if stated in the applicable written engagement terms. This policy does not limit rights that cannot legally be waived.</p></section>' +
       '<section id="privacy"><h2 class="dg-p-h3">Privacy notice</h2>' +
       '<h3>Information we collect</h3><p>Demigod collects information you choose to provide. For hiring companies, this can include contact details, company and role information, work location, compensation range, required skills, hiring constraints, and expected outcomes. For candidates, this can include contact details, work preferences, location, compensation range, skills, experience, availability, and any résumé or work links you choose to provide.</p>' +
-      '<p>For referrals and communications, we may collect referral attribution, referrer contact and context, messages, requests, and support correspondence. For invoicing, we may collect company billing details, invoice amounts, payment status, and transaction identifiers. Do not submit Social Security numbers, complete payment credentials, medical records, immigration documents, or other highly sensitive information through a general website form or ordinary email.</p>' +
-      '<p>The site uses limited browser storage for functions such as temporary same-session form progress and referral attribution. Website, hosting, security, forms, email, file-delivery, invoicing, and payment providers may process routine request or service information needed to provide and protect the site. Public community submissions may publish approved factual startup or event details; submitter email addresses are used for review and are not intentionally published.</p>' +
-      '<h3>How we use information</h3><p>Demigod uses information to review submissions, compare possible matches, decide what to propose, obtain mutual approval, make introductions, communicate about the service, administer approved referrals, issue and reconcile invoices, protect the service, keep required records, enforce agreements, and comply with law. Demigod does not sell contact lists or use candidate and company submissions for unrelated advertising.</p>' +
+      '<p>For communications, we may collect messages, requests, and support correspondence. For invoicing, we may collect company billing details, invoice amounts, payment status, and transaction identifiers. Do not submit Social Security numbers, complete payment credentials, medical records, immigration documents, or other highly sensitive information through a general website form or ordinary email.</p>' +
+      '<p>The site uses limited browser storage for functions such as temporary same-session form progress. Website, hosting, security, forms, email, file-delivery, invoicing, and payment providers may process routine request or service information needed to provide and protect the site. Public community submissions may publish approved factual startup or event details; submitter email addresses are used for review and are not intentionally published.</p>' +
+      '<h3>How we use information</h3><p>Demigod uses information to review submissions, compare possible matches, decide what to propose, obtain mutual approval, make introductions, communicate about the service, issue and reconcile invoices, protect the service, keep required records, enforce agreements, and comply with law. Demigod does not sell contact lists or use candidate and company submissions for unrelated advertising.</p>' +
       '<h3>How information is shared</h3><p>Demigod may share company and role facts with a candidate before that candidate decides whether to approve an introduction; share candidate information with a hiring company after both sides approve that specific introduction; share information with providers that support the service only as needed for their functions; and disclose information when reasonably necessary to comply with law, protect rights or safety, investigate abuse, or handle a corporate transaction.</p>' +
-      '<p>A referral link may contain an opaque attribution code. A person who shared the link may be eligible for a financial benefit if the referral results in a qualifying hire. Referral attribution does not change candidate evaluation, candidate compensation, or candidate cost.</p>' +
       '<h3>Retention and choices</h3><p>Demigod retains information while it is reasonably needed for matching, an introduction, payment and dispute records, security, and legal or operational recordkeeping. Information is then deleted or de-identified when it is no longer needed. A résumé or work link hosted by another provider also remains subject to that provider\'s practices.</p>' +
-      '<p>To request access, correction, deletion, withdrawal from matching, or removal of referral attribution, email <a href="mailto:potter@trydemigod.com?subject=Privacy%20request">potter@trydemigod.com</a>. Demigod may retain information required for invoices, completed transactions, fraud prevention, disputes, or legal obligations.</p>' +
+      '<p>To request access, correction, deletion, or withdrawal from matching, email <a href="mailto:potter@trydemigod.com?subject=Privacy%20request">potter@trydemigod.com</a>. Demigod may retain information required for invoices, completed transactions, fraud prevention, disputes, or legal obligations.</p>' +
       '<p>Some browsers send a “Do Not Track” signal. Because there is no uniform industry standard for that signal, the site does not currently change its behavior solely in response to it. Where applicable law requires recognition of an opt-out preference signal, Demigod will honor it. Demigod may update this notice as the service changes; the effective date above will be updated when changes are published.</p></section>' +
-      '<section id="cookies"><h2 class="dg-p-h3">Cookies and browser storage</h2><p>The site may use limited browser storage and essential cookies for same-session form progress, referral attribution, authentication, fraud prevention, and security. Hosting, forms, and security providers may set essential cookies needed to provide those functions. Demigod does not use information submitted for matching to build unrelated advertising profiles.</p><p>You can remove browser storage through your browser settings, although doing so may clear an unfinished form or sign you out of an authenticated service.</p></section>' +
-      '<section id="referrals"><h2 class="dg-p-h3">Referral terms</h2>' +
-      '<p>Submitting a referral request does not approve a referrer or create a right to payment. Only an approved referral link and written referral terms can create reward eligibility. Referrers must share links personally and honestly. Scraped or purchased lists, résumé uploads on another person\'s behalf, impersonation, spam, self-referrals, misleading claims, and multi-level referral arrangements are not permitted.</p>' +
-      '<p>Anyone who may receive a reward must clearly disclose that fact. Suggested disclosure: “I may receive a referral reward if this leads to a successful Demigod hire. It comes from Demigod\'s fee, not your pay, and does not affect how you are evaluated.”</p>' +
-      '<p>For currently advertised approved individual talent referrals, the potential reward is 20% of Demigod\'s net placement fee after the referred hire completes 90 days and the related client fee is paid and retained. A click, submission, match proposal, or introduction does not earn a reward. Written referral terms control eligibility, duplicate or invalid referrals, and payment. Any reward comes from Demigod\'s fee, never from candidate compensation. <a href="/refer" data-dg-page="refer">Referral details →</a></p></section>' +
+      '<section id="cookies"><h2 class="dg-p-h3">Cookies and browser storage</h2><p>The site may use limited browser storage and essential cookies for same-session form progress, authentication, fraud prevention, and security. Hosting, forms, and security providers may set essential cookies needed to provide those functions. Demigod does not use information submitted for matching to build unrelated advertising profiles.</p><p>You can remove browser storage through your browser settings, although doing so may clear an unfinished form or sign you out of an authenticated service.</p></section>' +
       '<section id="security"><h2 class="dg-p-h3">Security</h2>' +
       '<p>Demigod uses HTTPS and reputable service providers to transmit and process information. Operational access is limited to people and providers that need it to deliver the service. No internet system is completely secure, so avoid sending unnecessary sensitive information.</p>' +
       '<p>When Stripe-hosted invoices are used, Stripe processes payment credentials directly. To report a suspected security issue, email <a href="mailto:potter@trydemigod.com?subject=Security">potter@trydemigod.com</a> with “Security” in the subject line.</p></section>' +
-      '<section id="contact"><h2 class="dg-p-h3">Contact</h2><p><strong>Demigod Labs, Inc.</strong><br>San Francisco, California, United States<br>Email: <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a><br><a href="/contact" data-dg-page="contact">Contact page →</a></p><p>The applicable business mailing address appears on formal invoices and engagement documents.</p></section>',
+      '<section id="contact"><h2 class="dg-p-h3">Contact</h2><p><strong>Demigod</strong><br>San Francisco, California, United States<br>Email: <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a><br><a href="/contact" data-dg-page="contact">Contact page →</a></p><p>The applicable business mailing address appears on formal invoices and engagement documents.</p></section>',
   },
   refer: {
     title: 'Make one strong introduction',
     doc: 'Referrals · Demigod',
-    desc: 'Give someone a private, free path to SF startup roles. Approved referrers may earn a share of Demigod\'s fee after a durable paid hire.',
+    desc: 'Introduce someone to Demigod only with their permission. No public referral-reward program is currently offered.',
     html:
-      '<p class="dg-p-lead">Know someone who could thrive at an SF Bay startup? Give them a private, free way to be considered. They submit their own profile (resume optional), nothing is shared until they approve an intro, and any reward comes from Demigod\'s fee - not their pay.</p>' +
-      '<p class="dg-p-actions"><a class="hire" href="mailto:potter@trydemigod.com?subject=Talent%20referrer%20link%20request">Request referral link →</a></p>' +
-      '<h2 class="dg-p-h3">How it works</h2>' +
-      '<ol class="dg-p-list">' +
-      '<li><strong>Request one approved link.</strong> We agree simple written terms and provide one honest message.</li>' +
-      '<li><strong>Share it personally.</strong> Send it only to someone genuinely likely to benefit. They complete their own profile and can remove incorrect attribution; never upload a resume for them.</li>' +
-      '<li><strong>Demigod does the rest.</strong> A human reviews them, both sides approve any intro, and reward eligibility begins only after a hire completes 90 days and our related fee is paid and retained.</li>' +
-      '</ol>' +
-      '<p><strong>Approved individual talent referrers may receive 20% of Demigod\'s net placement fee.</strong> Demigod charges startups 10% of first-year base when a hire starts; a referrer share is 20% of that fee — never the candidate’s salary or offer. Candidates never pay and are reviewed the same either way. Self-referrals, contact uploads, and multi-level rewards are not allowed.</p>' +
-      '<p class="dg-p-note"><strong>Written terms control.</strong> Payout automation is not live; eligibility and observed payments are recorded in a private ledger. Approved hiring-partner rewards remain company credits and follow the same 90-day, fee-paid-and-retained condition. <a href="/pricing" data-dg-page="pricing">Pricing →</a></p>' +
-      '<h2 class="dg-p-h3">The message stays honest</h2>' +
-      '<p class="dg-p-note">"I may receive a referral reward if this leads to a successful Demigod hire. It comes from Demigod\'s fee, not your pay, and does not change how you are evaluated."</p>' +
-      '<h2 class="dg-p-h3">Request a referral link</h2>' +
-      '<p class="dg-p-note">This requests review; it does not create or approve a link. <a href="/legal" data-dg-page="legal">Privacy</a> · <a href="/private" data-dg-page="private">Why private</a>.</p>' +
-      '<div id="dg-referral-form-slot"><p id="dg-referral-form-fallback"><a href="mailto:potter@trydemigod.com?subject=Talent%20referrer%20link%20request">Email a referral-link request →</a></p></div>',
+      '<p class="dg-p-lead">Know someone who could thrive at an SF Bay startup? You may introduce them only with their permission. They should submit their own private profile; never upload or forward another person’s résumé or contact details without permission.</p>' +
+      '<p class="dg-p-actions"><a class="hire" href="mailto:potter@trydemigod.com?subject=Introduction">Email an introduction →</a></p>' +
+      '<p class="dg-p-note"><strong>No public reward program.</strong> Demigod does not currently operate or advertise a public referral-reward program. An introduction does not create any right to payment.</p>' +
+      '<p class="dg-p-note"><a href="/legal" data-dg-page="legal">Privacy</a> · <a href="/private" data-dg-page="private">Why private</a> · <a href="/pricing" data-dg-page="pricing">Pricing</a>.</p>',
   },
   about: {
     title: 'About',
@@ -5116,7 +5099,7 @@ else if(k==='jobseeker'||h===J||h==='#jobseeker-modal'){if(!q(J))return;e.preven
 document.addEventListener('input',function(e){if(OPEN&&e.target&&e.target.closest&&e.target.closest(S+','+J)){/*dg-wiz-err-clear*/try{var f=e.target.closest('form');var er=f&&f.querySelector('.dg-wiz-err,.dg-wiz-req-err'),eid=er&&er.id;if(er)er.remove();e.target.style.borderColor='';e.target.removeAttribute('aria-invalid');if(eid){var ids=(e.target.getAttribute('aria-describedby')||'').split(/\s+/).filter(function(id){return id&&id!==eid});if(ids.length)e.target.setAttribute('aria-describedby',ids.join(' '));else e.target.removeAttribute('aria-describedby')}}catch(err){}}},true);
 document.addEventListener('keydown',function(e){if(e.defaultPrevented)return;if(e.key==='Escape'&&q('#dg-page')){closePage();return}if(e.key==='Escape'&&OPEN){OPEN=null;hide(true)}});
 typeof window.addEventListener==='function'&&window.addEventListener('popstate',function(){/*dg-page-popstate*/ try{ if(!routePages()) closePage(); }catch(e){} });
-window.__dgFootVer='1108';console.log('Demigod v1108');
+window.__dgFootVer='1109';console.log('Demigod v1109');
 window.__dgDedupe = dedupeAll;
 window.__dgScrub = scrubStaticLabels;
 
