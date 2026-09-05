@@ -499,6 +499,29 @@ try {
    Buttons always clickable. Gold chrome via classes.
 */
 /* ==== SECTION: WIZ runtime (one-question stepper) ==== */
+function wizCancelChoiceAdvance(form) {
+  if (!form) return;
+  clearTimeout(form._dgChoiceAdvance);
+  delete form._dgChoiceAdvance;
+}
+function wizScheduleChoiceAdvance(form, select, nextBtn) {
+  wizCancelChoiceAdvance(form);
+  var key = form.dataset.dgWizKey;
+  var value = select.value;
+  if (!key || key === 'welcome' || key === '__submit__' || key === '__thanks__') return;
+  var timer = setTimeout(function(){
+    // A choice owns only its current question, never a later review or send action.
+    if (form._dgChoiceAdvance !== timer) return;
+    delete form._dgChoiceAdvance;
+    var modal = form.closest('#startup-modal,#jobseeker-modal');
+    if (!form.isConnected || !modal || OPEN !== '#' + modal.id ||
+        modal.getAttribute('aria-hidden') === 'true' || modal.inert ||
+        form.dataset.dgWizKey !== key || select.value !== value ||
+        form.dataset.dgSubmitting === '1' || nextBtn.disabled) return;
+    nextBtn.click();
+  }, 200);
+  form._dgChoiceAdvance = timer;
+}
 /* === WIZ BUILD & OWNERSHIP — create chrome once; one active wrapper; reopen is idempotent === */
 function wizBuild(form, kind) {
   if (!form || form.dataset.dgWizBuilt) return;
@@ -710,6 +733,7 @@ function wizBuild(form, kind) {
   }
   /* === WIZ STEP STATE — show/validate exactly one question; preserve values across back/reopen/resize === */
   function showStep(idx) {
+    wizCancelChoiceAdvance(form);
     current = Math.max(0, Math.min(idx, steps.length - 1));
     collect();
     try {
@@ -1099,8 +1123,7 @@ function wizBuild(form, kind) {
                 x.classList.toggle('is-on', on);
                 x.setAttribute('aria-selected', on ? 'true' : 'false');
               });
-              if (form._dgChoiceAdvance) clearTimeout(form._dgChoiceAdvance);
-              form._dgChoiceAdvance = setTimeout(function(){ try { nextBtn.click(); } catch (e3) {} }, 200);
+              wizScheduleChoiceAdvance(form, stepSelect, nextBtn);
             });
             box.appendChild(b);
           });
@@ -1120,6 +1143,7 @@ function wizBuild(form, kind) {
     }
   }
   nextBtn.onclick = function(ev) {
+    wizCancelChoiceAdvance(form);
     if (form.dataset.dgSubmitting === '1') return;
     ev && ev.preventDefault();
     var key = (steps[current] || [])[0];
@@ -1303,7 +1327,7 @@ function wizBuild(form, kind) {
       showStep(current + 1);
     }
   };
-  backBtn.onclick = function(ev){ ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
+  backBtn.onclick = function(ev){ wizCancelChoiceAdvance(form); ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
   // keyboard advance on visible inputs + arrows for nav (Typeform polish)
   form.addEventListener('keydown', function(e) {
     if (form.dataset.dgSwallowKey === '1') { e.preventDefault(); e.stopPropagation(); return; }
@@ -1793,7 +1817,7 @@ function rmOrphanForms(){qa('form.w-form').forEach(function(f){if(f.closest('#st
 var MODAL_BG=[];
 function restoreModalBackground(){MODAL_BG.forEach(function(x){try{x.el.inert=x.inert;if(x.inertAttr===null)x.el.removeAttribute('inert');else x.el.setAttribute('inert',x.inertAttr);if(x.ariaHidden===null)x.el.removeAttribute('aria-hidden');else x.el.setAttribute('aria-hidden',x.ariaHidden)}catch(e){}});MODAL_BG=[]}
 function isolateModalBackground(modal){restoreModalBackground();for(var child=modal;child&&child!==document.body;child=child.parentElement){var parent=child.parentElement;if(!parent)break;[].slice.call(parent.children).forEach(function(el){if(el===child||/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName))return;MODAL_BG.push({el:el,inert:!!el.inert,inertAttr:el.getAttribute('inert'),ariaHidden:el.getAttribute('aria-hidden')});try{el.inert=true}catch(e){el.setAttribute('inert','')}el.setAttribute('aria-hidden','true')})}}
-function hide(f){restoreModalBackground();[S,J].forEach(function(id){if(!f&&OPEN===id)return;var m=q(id);if(m){m.style.setProperty('display','none','important');m.style.setProperty('visibility','hidden','important');m.setAttribute('aria-hidden','true');try{m.inert=true}catch(e){m.setAttribute('inert','')}}}); if(document.body){ var prev = document.body.dataset.prevOverflow || ''; var sy = parseInt(document.body.dataset.prevScrollY || '0', 10); document.body.style.overflow = prev; document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; delete document.body.dataset.prevOverflow; delete document.body.dataset.prevScrollY; try { window.scrollTo(0, sy); } catch(e){} } if(document.documentElement){document.documentElement.style.overflow='';document.documentElement.style.scrollbarGutter=document.documentElement.dataset.prevScrollbarGutter||'';delete document.documentElement.dataset.prevScrollbarGutter;} try{var bar=q('#dg-bar');if(bar){bar.style.removeProperty('display');bar.removeAttribute('aria-hidden');}}catch(e){} try{detachTrap(true)}catch(e){} }
+function hide(f){restoreModalBackground();[S,J].forEach(function(id){if(!f&&OPEN===id)return;var m=q(id);if(m){qa('form',m).forEach(wizCancelChoiceAdvance);m.style.setProperty('display','none','important');m.style.setProperty('visibility','hidden','important');m.setAttribute('aria-hidden','true');try{m.inert=true}catch(e){m.setAttribute('inert','')}}}); if(document.body){ var prev = document.body.dataset.prevOverflow || ''; var sy = parseInt(document.body.dataset.prevScrollY || '0', 10); document.body.style.overflow = prev; document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; delete document.body.dataset.prevOverflow; delete document.body.dataset.prevScrollY; try { window.scrollTo(0, sy); } catch(e){} } if(document.documentElement){document.documentElement.style.overflow='';document.documentElement.style.scrollbarGutter=document.documentElement.dataset.prevScrollbarGutter||'';delete document.documentElement.dataset.prevScrollbarGutter;} try{var bar=q('#dg-bar');if(bar){bar.style.removeProperty('display');bar.removeAttribute('aria-hidden');}}catch(e){} try{detachTrap(true)}catch(e){} }
 var busy=false,LAST_FOCUS=null,TRAP_H=null;
 function focusables(root){if(!root)return[];return qa('a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',root).filter(function(el){try{var s=getComputedStyle(el);return s.display!=='none'&&s.visibility!=='hidden'&&!el.disabled&&!el.closest('[inert],[aria-hidden="true"]')&&(!el.getClientRects||el.getClientRects().length>0)}catch(e){return false}})}
 /* v847: opener must be captured before isolateModalBackground (inert blurs activeElement → body). */
