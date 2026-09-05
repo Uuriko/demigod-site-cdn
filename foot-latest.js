@@ -522,6 +522,64 @@ function wizScheduleChoiceAdvance(form, select, nextBtn) {
   }, 200);
   form._dgChoiceAdvance = timer;
 }
+function wizSubmitForm(form, submitter, handlers) {
+  if (form.dataset.dgSubmitting === '1') return;
+  var invalid = qa('input,select,textarea', form).find(function(el){ return el.willValidate && !el.validity.valid; });
+  if (invalid) { handlers.invalid(invalid); return; }
+  if (!submitter || typeof submitter.click !== 'function' || submitter.disabled) {
+    handlers.failure('The form is not ready to send. Wait for any upload to finish, then try again.');
+    return;
+  }
+  var scope = form.closest('#startup-modal,#jobseeker-modal') || form.parentElement || form;
+  qa('.w-form-done,.w-form-fail', scope).forEach(function(el){ el.style.display = 'none'; });
+  var settled = false, timer, observer, started = Date.now(), unconfirmed = false;
+  form.dataset.dgSubmitting = '1';
+  form.dataset.dgSubmitState = 'pending';
+  form.setAttribute('aria-busy', 'true');
+  handlers.pending();
+  function finish(state, el) {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timer);
+    if (observer) observer.disconnect();
+    delete form.dataset.dgSubmitting;
+    form.dataset.dgSubmitState = state;
+    form.removeAttribute('aria-busy');
+    if (state === 'success') handlers.success(el);
+    else handlers.failure('Your submission failed. Your answers are still here. Please try again or email potter@trydemigod.com.');
+  }
+  function visible(el) {
+    if (!el) return false;
+    var style = getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  }
+  function checkResult() {
+    if (settled) return;
+    var ok = scope.querySelector('.w-form-done'), bad = scope.querySelector('.w-form-fail');
+    if (visible(bad)) { finish('failed'); return; }
+    if (visible(ok)) { finish('success', ok); return; }
+    if (!unconfirmed && Date.now() - started >= 30000) {
+      unconfirmed = true;
+      form.dataset.dgSubmitState = 'unconfirmed';
+      handlers.unconfirmed('We are still waiting for confirmation. Your answers are kept in this tab. Contact potter@trydemigod.com before sending again.');
+    }
+  }
+  // Keep observing after the waiting message: a late response still owns this send.
+  // Only a confirmed result releases the send lock; a clock cannot prove failure.
+  try {
+    observer = new MutationObserver(checkResult);
+    observer.observe(scope, { subtree: true, childList: true, attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+  } catch (e) { observer = null; }
+  try { submitter.click(); }
+  catch (e) {
+    finish('failed');
+    return;
+  }
+  (function poll(){
+    checkResult();
+    if (!settled && (!unconfirmed || !observer)) timer = setTimeout(poll, unconfirmed ? 1000 : 250);
+  })();
+}
 /* === WIZ BUILD & OWNERSHIP — create chrome once; one active wrapper; reopen is idempotent === */
 function wizBuild(form, kind) {
   if (!form || form.dataset.dgWizBuilt) return;
@@ -697,7 +755,7 @@ function wizBuild(form, kind) {
   qa('.dg-wiz-next', nav).forEach(function(b){ b.style.setProperty('display','inline-block','important'); b.style.cursor='pointer'; });
   // .dg-wiz-back display is owned by showStep (must hide on welcome) — do not blanket-force it here.
   qa('.dg-wiz-back', nav).forEach(function(b){ b.style.cursor='pointer'; });
-  var nativeSub = form.querySelector('[type="submit"], .w-button');
+  var nativeSub = form.querySelector('input[type="submit"], button[type="submit"], button:not([type])');
   if (nativeSub) nativeSub.style.display = 'none';
   if (typeof forceWizVisible === 'function') forceWizVisible(form, form.closest && form.closest('#startup-modal,#jobseeker-modal'));
 
@@ -733,6 +791,7 @@ function wizBuild(form, kind) {
   }
   /* === WIZ STEP STATE — show/validate exactly one question; preserve values across back/reopen/resize === */
   function showStep(idx) {
+    if (form.dataset.dgSubmitting === '1') return;
     wizCancelChoiceAdvance(form);
     current = Math.max(0, Math.min(idx, steps.length - 1));
     collect();
@@ -930,6 +989,7 @@ function wizBuild(form, kind) {
       rev.innerHTML = html || '<div>No answers captured — use Back to fill in your brief.</div>';
       qa('.dg-wiz-edit', rev).forEach(function(btn){
         btn.onclick = function(){
+          if (form.dataset.dgSubmitting === '1') return;
           var idx = Number(btn.getAttribute('data-dg-edit-step'));
           if (idx >= 0 && idx < steps.length) { reviewReturn = current; reviewEditStep = idx; showStep(idx); }
         };
@@ -1215,11 +1275,7 @@ function wizBuild(form, kind) {
       showStep(returnStep);
       setTimeout(function(){var target=form.querySelector('.dg-wiz-edit[data-dg-edit-step="'+editedStep+'"]')||nextBtn;try{target.focus()}catch(e){}},0);
     } else if (key === '__submit__') {
-      var oldStatusRoot = form.closest('#startup-modal,#jobseeker-modal') || form.parentElement || form;
-      qa('.w-form-done,.w-form-fail', oldStatusRoot).forEach(function(el){ el.style.display='none'; });
       var oldSubmitErr = form.querySelector('.dg-wiz-err'); if (oldSubmitErr) oldSubmitErr.remove();
-      form.dataset.dgSubmitting='1';
-      setTimeout(function(){ try{ delete form.dataset.dgSubmitting; }catch(e){} }, 12000);
       // ensure review is visible and populated before submit
       var rev = form.querySelector('.dg-wiz-review');
       if (!rev) { rev = document.createElement('div'); rev.className = 'dg-wiz-review'; form.insertBefore(rev, nav); }
@@ -1241,93 +1297,64 @@ function wizBuild(form, kind) {
           }
         } catch (eProof) {}
       }
-      if (nativeSub) {
-        nativeSub.style.display = '';
-        setTimeout(function(){ try { nativeSub.click(); } catch(e){ form.submit && form.submit(); } }, 10);
-        // only advance to thanks after Webflow done/fail (no silent success)
-        // forms() adds .w-form to <form> itself, so form.closest('.w-form') === form and
-        // sibling .w-form-done/.w-form-fail under the outer wrapper were never found (Codex P1).
-        /* === FORM RESULT CONTRACT — pending → confirmed Webflow success|failure; never synthesize success === */
-        function dgWfStatusRoot(f){
-          var modal = f.closest && f.closest('#startup-modal,#jobseeker-modal');
-          if (modal) {
-            var d = modal.querySelector('.w-form-done');
-            if (d && d.parentElement) return d.parentElement;
-          }
-          var p = f.parentElement;
-          if (p) {
-            var sib = p.querySelector(':scope > .w-form-done, :scope > .w-form-fail');
-            if (sib) return p;
-            if (p.classList && p.classList.contains('w-form') && p !== f) return p;
-          }
-          var outer = f.parentElement && f.parentElement.closest && f.parentElement.closest('.w-form');
-          if (outer && outer !== f) return outer;
-          return p || f;
-        }
-        var wfWrap = dgWfStatusRoot(form), t0 = Date.now();
-        (function waitPost(){
-          var scope = wfWrap || form.parentElement || form;
-          var okEl = scope.querySelector('.w-form-done');
-          var badEl = scope.querySelector('.w-form-fail');
-          // also check siblings of form (Webflow classic: form + done + fail as siblings)
-          if (!okEl && form.parentElement) {
-            var kids = form.parentElement.children;
-            for (var i=0;i<kids.length;i++){
-              if (kids[i].classList && kids[i].classList.contains('w-form-done')) okEl = kids[i];
-              if (kids[i].classList && kids[i].classList.contains('w-form-fail')) badEl = kids[i];
-            }
-          }
-          var okVis = okEl && getComputedStyle(okEl).display !== 'none' && getComputedStyle(okEl).visibility !== 'hidden';
-          var badVis = badEl && getComputedStyle(badEl).display !== 'none' && getComputedStyle(badEl).visibility !== 'hidden';
-          if (okVis) {
-            try{scrubTimeClaims()}catch(e){}
-            successCta();
-            showStep(current + 1);
-            okEl.setAttribute('role','status');
-            okEl.setAttribute('aria-live','polite');
-            okEl.setAttribute('aria-atomic','true');
-            okEl.setAttribute('tabindex','-1');
-            var doneLive=form.querySelector('.dg-wiz-live');if(doneLive)doneLive.textContent='';
-            try{okEl.focus()}catch(e){}
-            return;
-          }
-          if (badVis) {
-            try { delete form.dataset.dgSubmitting; } catch(e){}
-            var eEl = form.querySelector('.dg-wiz-err');
-            if (!eEl) {
-              eEl = document.createElement('p');
-              eEl.className = 'dg-wiz-err';
-              eEl.setAttribute('role','alert');
-              eEl.style.cssText = 'color:#f87171;font-size:.9rem;margin:.5rem 0';
-              if (nav && nav.parentNode) nav.parentNode.insertBefore(eEl, nav);
-              else form.appendChild(eEl);
-            }
-            eEl.textContent = 'Submission failed — email potter@trydemigod.com and we will take it from there.';
-            return;
-          }
-          if (Date.now() - t0 < 6000) { setTimeout(waitPost, 250); return; }
-          var eEl2 = form.querySelector('.dg-wiz-err');
-          if (!eEl2) {
-            eEl2 = document.createElement('p');
-            eEl2.className = 'dg-wiz-err';
-            eEl2.setAttribute('role','alert');
-            eEl2.style.cssText = 'color:#f87171;font-size:.9rem;margin:.5rem 0';
-            if (nav && nav.parentNode) nav.parentNode.insertBefore(eEl2, nav);
-            else form.appendChild(eEl2);
-          }
-          try { delete form.dataset.dgSubmitting; } catch(e){}
-          eEl2.textContent = 'Could not confirm submit — email potter@trydemigod.com and we will take it from there.';
-          return;
-        })();
-      } else {
-        form.submit && form.submit();
-        showStep(current + 1);
+      var sendLabel = kind === 'startup' ? 'Send brief' : 'Send privately';
+      function sendControls(pending, label) {
+        nextBtn.disabled = pending;
+        nextBtn.textContent = label;
+        backBtn.disabled = pending;
+        qa('.dg-wiz-edit', form).forEach(function(btn){ btn.disabled = pending; });
       }
+      function sendFeedback(message, pending) {
+        var node = form.querySelector('.dg-wiz-err');
+        if (!node) {
+          node = document.createElement('p');
+          node.className = 'dg-wiz-err';
+          form.insertBefore(node, nav);
+        }
+        node.setAttribute('role', pending ? 'status' : 'alert');
+        node.style.cssText = 'color:' + (pending ? 'var(--dg-phosphor,#a6ffcb)' : '#f87171') + ';font-size:.9rem;margin:.5rem 0;line-height:1.4';
+        node.textContent = message;
+      }
+      wizSubmitForm(form, nativeSub, {
+        invalid: function(field) {
+          var name = field.name || field.id || '';
+          var idx = steps.findIndex(function(step){ return step[0] === name || step[0] === name.replace(/-url$/, ''); });
+          if (idx < 0) { sendFeedback('A required answer needs attention. Review your answers or email potter@trydemigod.com.', false); return; }
+          reviewReturn = current;
+          reviewEditStep = idx;
+          showStep(idx);
+          wizInlineInvalid(field, field.validationMessage || 'Please check this answer before sending.', name);
+        },
+        pending: function() {
+          sendControls(true, 'Sending…');
+          sendFeedback('Sending your answers…', true);
+        },
+        unconfirmed: function(message) {
+          sendControls(true, 'Awaiting confirmation');
+          sendFeedback(message, true);
+        },
+        failure: function(message) {
+          sendControls(false, sendLabel);
+          sendFeedback(message, false);
+        },
+        success: function(okEl) {
+          sendControls(false, sendLabel);
+          try { scrubTimeClaims(); } catch (e) {}
+          successCta();
+          showStep(steps.findIndex(function(step){ return step[0] === '__thanks__'; }));
+          okEl.setAttribute('role', 'status');
+          okEl.setAttribute('aria-live', 'polite');
+          okEl.setAttribute('aria-atomic', 'true');
+          okEl.setAttribute('tabindex', '-1');
+          var doneLive = form.querySelector('.dg-wiz-live'); if (doneLive) doneLive.textContent = '';
+          try { okEl.focus(); } catch (e) {}
+        }
+      });
     } else if (current < steps.length - 1) {
       showStep(current + 1);
     }
   };
-  backBtn.onclick = function(ev){ wizCancelChoiceAdvance(form); ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
+  backBtn.onclick = function(ev){ if (form.dataset.dgSubmitting === '1') return; wizCancelChoiceAdvance(form); ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
   // keyboard advance on visible inputs + arrows for nav (Typeform polish)
   form.addEventListener('keydown', function(e) {
     if (form.dataset.dgSwallowKey === '1') { e.preventDefault(); e.stopPropagation(); return; }
@@ -3487,7 +3514,7 @@ try {
       if (hd) { hd.style.setProperty('display','block','important'); hd.style.setProperty('visibility','visible','important'); }
       var nv = m.querySelector('.dg-wiz-nav');
       if (nv) { nv.style.setProperty('display','flex','important'); nv.style.setProperty('visibility','visible','important'); }
-      var n = m.querySelector('.dg-wiz-next'); if(n){ n.style.display='inline-block'; n.style.visibility='visible'; n.disabled=false; }
+      var n = m.querySelector('.dg-wiz-next'); if(n){ n.style.display='inline-block'; n.style.visibility='visible'; n.disabled=mf.dataset.dgSubmitting==='1'; }
     } catch(e){}
     forceWizVisible(mf, m);
     var forceCount=0; var fr = setInterval(function(){
