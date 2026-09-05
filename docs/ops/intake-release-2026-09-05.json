@@ -1,0 +1,45 @@
+{
+  "schema": "demigod.intake-release/1",
+  "releaseCommit": "9de30598841ac20848e26ec68317f26045fedb3e",
+  "sourceMainCommit": "d3a29c1313323ad72f3be7d4ebefd64b5024ffac",
+  "runtimeVersion": "v1109",
+  "status": "prepared; Worker URL/integrity correction required before coordinated publish",
+  "assets": {
+    "foot-latest.js": {
+      "bytes": 433851,
+      "gitBlob": "b808f55a8db567177b3fbce33cc754c0f282e02f",
+      "sha256": "251c4614c916d58a8a58f2a5b013a98ff89fdab0052faad6a02d26e7164ee700",
+      "integrity": "sha384-2sReNAg4qhfZGOpv3pcmI7DoBsd/0WtYjeSwoDAS+8BbsPhTZ9oHTEvG8g9TTMQ2"
+    },
+    "head-latest.css": {
+      "bytes": 126978,
+      "gitBlob": "7e90210b458a30dd564b1e96db427e1480cf141b",
+      "sha256": "db3e15e6653eabab1c595f7f880d2f559533151c7cbde888ebe84c7a92b50ff4",
+      "integrity": "sha384-DVJvIlODKqEw2alxHLe65wLzssFAGRkg2Xeu8Rc9C4Mqw9x+WoW4h5tQE9BOdVxm"
+    },
+    "startup-map-latest.js": {
+      "bytes": 51357,
+      "gitBlob": "ccbe111aebd0426c4f624565095ff99af31bcb4f",
+      "sha256": "0f82f213ea9fa843e87dd665471a8537835a713a0afa2a90797dab2eb29a3287",
+      "integrity": "sha384-QIHj9wsGPXOATUbv8CsPhqi9nHz/Z1Om/5bYTUihGOTdcTpg9OSlcpUFesgMddLk"
+    },
+    "sf-startup-map.json": {
+      "bytes": 2221536,
+      "gitBlob": "57e90532d68499d274e2ed6e32d77ae4a35f1882",
+      "sha256": "980444df84eaca3d2d1d8d4d7704437047acfc6ced6519ac72ce3cc88b3f39d8",
+      "integrity": "sha384-lnzLvVviVK1CiuyM7jplclfVidXDqhXpV4wUbkl2n4QRkGJWCUaL8BXDNPkMFu8j"
+    },
+    "roles-feed.json": {
+      "bytes": 39252,
+      "gitBlob": "774ada0275784fd2bf47ccd7d778faa6f071a35a",
+      "sha256": "6fa5e9e9c00b4f4ec37a6dd67d268ca4b45d6fd6baddc00bf4da78af27582021",
+      "integrity": "sha384-g9DC2lJRIweqjn/Ck3dRGCXsw9kO31jH7ZZIDmSgVWsJZpQ7v/w0f0QeuFnFfm30"
+    },
+    "bounties-feed.json": {
+      "bytes": 294,
+      "gitBlob": "c657a8abffcb7ca2bea3f74841d9769d8f886b5f",
+      "sha256": "e9a542f5c8668db5a2e411a2388afd6f781df0490d9493d39c458d0a5c322454",
+      "integrity": "sha384-B5taFMdZaBRKqbZkOrB08aFPhOXA+abfg/fDkG/wp2+y0/C5cIOvPbovdBn1/jzX"
+    }
+  }
+}
