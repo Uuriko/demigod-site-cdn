@@ -499,6 +499,92 @@ try {
    Buttons always clickable. Gold chrome via classes.
 */
 /* ==== SECTION: WIZ runtime (one-question stepper) ==== */
+function wizClearDraft(key) {
+  // A blocked storage backend must not prevent clearing the other one.
+  try { sessionStorage.removeItem(key); } catch (e) {}
+  try { localStorage.removeItem(key); } catch (e) {}
+}
+function wizCancelChoiceAdvance(form) {
+  if (!form) return;
+  clearTimeout(form._dgChoiceAdvance);
+  delete form._dgChoiceAdvance;
+}
+function wizScheduleChoiceAdvance(form, select, nextBtn) {
+  wizCancelChoiceAdvance(form);
+  var key = form.dataset.dgWizKey;
+  var value = select.value;
+  if (!key || key === 'welcome' || key === '__submit__' || key === '__thanks__') return;
+  var timer = setTimeout(function(){
+    // A choice owns only its current question, never a later review or send action.
+    if (form._dgChoiceAdvance !== timer) return;
+    delete form._dgChoiceAdvance;
+    var modal = form.closest('#startup-modal,#jobseeker-modal');
+    if (!form.isConnected || !modal || OPEN !== '#' + modal.id ||
+        modal.getAttribute('aria-hidden') === 'true' || modal.inert ||
+        form.dataset.dgWizKey !== key || select.value !== value ||
+        form.dataset.dgSubmitting === '1' || nextBtn.disabled) return;
+    nextBtn.click();
+  }, 200);
+  form._dgChoiceAdvance = timer;
+}
+function wizSubmitForm(form, submitter, handlers) {
+  if (form.dataset.dgSubmitting === '1') return;
+  var invalid = qa('input,select,textarea', form).find(function(el){ return el.willValidate && !el.validity.valid; });
+  if (invalid) { handlers.invalid(invalid); return; }
+  if (!submitter || typeof submitter.click !== 'function' || submitter.disabled) {
+    handlers.failure('The form is not ready to send. Wait for any upload to finish, then try again.');
+    return;
+  }
+  var scope = form.closest('#startup-modal,#jobseeker-modal') || form.parentElement || form;
+  qa('.w-form-done,.w-form-fail', scope).forEach(function(el){ el.style.display = 'none'; });
+  var settled = false, timer, observer, started = Date.now(), unconfirmed = false;
+  form.dataset.dgSubmitting = '1';
+  form.dataset.dgSubmitState = 'pending';
+  form.setAttribute('aria-busy', 'true');
+  handlers.pending();
+  function finish(state, el) {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timer);
+    if (observer) observer.disconnect();
+    delete form.dataset.dgSubmitting;
+    form.dataset.dgSubmitState = state;
+    form.removeAttribute('aria-busy');
+    if (state === 'success') handlers.success(el);
+    else handlers.failure('Your submission failed. Your answers are still here. Please try again or email potter@trydemigod.com.');
+  }
+  function visible(el) {
+    if (!el) return false;
+    var style = getComputedStyle(el);
+    return style.display !== 'none' && style.visibility !== 'hidden';
+  }
+  function checkResult() {
+    if (settled) return;
+    var ok = scope.querySelector('.w-form-done'), bad = scope.querySelector('.w-form-fail');
+    if (visible(bad)) { finish('failed'); return; }
+    if (visible(ok)) { finish('success', ok); return; }
+    if (!unconfirmed && Date.now() - started >= 30000) {
+      unconfirmed = true;
+      form.dataset.dgSubmitState = 'unconfirmed';
+      handlers.unconfirmed('We are still waiting for confirmation. Your answers are kept in this tab. Contact potter@trydemigod.com before sending again.');
+    }
+  }
+  // Keep observing after the waiting message: a late response still owns this send.
+  // Only a confirmed result releases the send lock; a clock cannot prove failure.
+  try {
+    observer = new MutationObserver(checkResult);
+    observer.observe(scope, { subtree: true, childList: true, attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+  } catch (e) { observer = null; }
+  try { submitter.click(); }
+  catch (e) {
+    finish('failed');
+    return;
+  }
+  (function poll(){
+    checkResult();
+    if (!settled && (!unconfirmed || !observer)) timer = setTimeout(poll, unconfirmed ? 1000 : 250);
+  })();
+}
 /* === WIZ BUILD & OWNERSHIP — create chrome once; one active wrapper; reopen is idempotent === */
 function wizBuild(form, kind) {
   if (!form || form.dataset.dgWizBuilt) return;
@@ -544,6 +630,7 @@ function wizBuild(form, kind) {
   var reviewEditStep = -1;
   var SAVE_KEY = 'dgWizSave_' + kind;
   var answers = {};
+  var resumeFiles = [];
   // v597: no draft-save UI / no 7-day localStorage (less is more; privacy)
   /* v646: __dgWizStore removed — it was assigned false here and compared !==true in
      wizResumeToast, so the toast could never fire. The draft lives in sessionStorage (see collect). */
@@ -558,19 +645,31 @@ function wizBuild(form, kind) {
   var resumeStep = 0;
   try {
     var draft = JSON.parse(sessionStorage.getItem(SAVE_KEY) || 'null');
-    if (draft && draft.answers) {
-      answers = draft.answers;
+    if (draft && draft.answers && typeof draft.answers === 'object' && !Array.isArray(draft.answers)) {
       resumeStep = Math.max(0, Math.min(draft.step | 0, (cfg.steps || []).length - 1));
-      if (resumeStep > 0) form.dataset.dgWizResumed = '1';
+      if ((steps[resumeStep] || [])[0] === '__thanks__') {
+        wizClearDraft(SAVE_KEY);
+        resumeStep = 0;
+        draft = null;
+      } else {
+        answers = draft.answers;
+        resumeFiles = Array.isArray(draft.filesNeedingUpload) ? draft.filesNeedingUpload : [];
+        if (resumeStep > 0) form.dataset.dgWizResumed = '1';
+      }
     }
   } catch (e) {}
   /* Browsers cannot restore File objects. Never let a saved filename impersonate an upload at
      review; remove it and return to the required file step. Restorable resume URLs are untouched. */
+  var restoredFiles = [];
   qa('input[type="file"]', form).forEach(function(input){
     var name=input.name||input.id||'', fileStep=steps.findIndex(function(step){return step[0]===name;});
-    if(name&&Object.prototype.hasOwnProperty.call(answers,name)){delete answers[name];if(fileStep>=0&&resumeStep>fileStep)resumeStep=fileStep;}
+    if(name&&(Object.prototype.hasOwnProperty.call(answers,name)||resumeFiles.indexOf(name)>=0)){
+      delete answers[name];
+      if(fileStep>=0){restoredFiles.push(name);if(resumeStep>fileStep)resumeStep=fileStep;}
+    }
   });
-  try { if (draft && draft.answers) sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: answers, step: resumeStep })); } catch (e) {}
+  resumeFiles = restoredFiles;
+  try { if (draft && draft.answers) sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: answers, step: resumeStep, filesNeedingUpload: resumeFiles })); } catch (e) {}
   var head = document.createElement('div');
   head.className = 'dg-wiz-head';
   var __dgWizTotal = steps.filter(function(s){var k=s[0]||'';return k!=='__thanks__' && k!=='__submit__' && k!=='welcome';}).length || Math.max(1, steps.length-3);
@@ -674,13 +773,14 @@ function wizBuild(form, kind) {
   qa('.dg-wiz-next', nav).forEach(function(b){ b.style.setProperty('display','inline-block','important'); b.style.cursor='pointer'; });
   // .dg-wiz-back display is owned by showStep (must hide on welcome) — do not blanket-force it here.
   qa('.dg-wiz-back', nav).forEach(function(b){ b.style.cursor='pointer'; });
-  var nativeSub = form.querySelector('[type="submit"], .w-button');
+  var nativeSub = form.querySelector('input[type="submit"], button[type="submit"], button:not([type])');
   if (nativeSub) nativeSub.style.display = 'none';
   if (typeof forceWizVisible === 'function') forceWizVisible(form, form.closest && form.closest('#startup-modal,#jobseeker-modal'));
 
   // broad force children to ensure inputs show (from final user tests)
   qa('input,select,textarea,label,.w-input,.w-select,.w-file-upload,.form-field-group,.dg-field-wrap', form).forEach(function(c){ if(c.classList.contains('w-file-upload-input'))return; c.style.setProperty('display','block','important'); c.style.setProperty('visibility','visible','important'); });
   function collect() {
+    if (form.dataset.dgSubmitState === 'success') { wizClearDraft(SAVE_KEY); return; }
     qa('input,select,textarea', form).forEach(function(i) {
       var nm = i.name || i.id || '';
       if (!nm) return;
@@ -688,12 +788,13 @@ function wizBuild(form, kind) {
       // "save this draft" consent would otherwise persist for 7 days; also clears it from
       // drafts saved before this fix. Restore never wrote it back (Turnstile re-issues), so
       // this is hygiene, not a behaviour change.
-      if (i.type === 'hidden') { delete answers[nm]; return; }
+      if (/^(hidden|submit|button|reset|image)$/.test(i.type)) { delete answers[nm]; return; }
       if (i.type === 'file') {
         /* A selected local File is not proof Webflow persisted it. Its upload widget sets
            data-value only after upload succeeds; never review/submit a filename-only answer. */
         if (i.files && i.files[0] && String(i.getAttribute('data-value') || '').trim()) answers[nm] = i.files[0].name;
         else delete answers[nm];
+        if (i.files && i.files.length && resumeFiles.indexOf(nm) < 0) resumeFiles.push(nm);
       } else if (i.type === 'checkbox' || i.type === 'radio') {
         if (i.checked) answers[nm] = i.value || 'yes';
         else if (i.type === 'checkbox') delete answers[nm];
@@ -705,11 +806,13 @@ function wizBuild(form, kind) {
     try {
       var draftAnswers = Object.assign({}, answers);
       qa('input[type="file"]', form).forEach(function(input){ delete draftAnswers[input.name || input.id || '']; });
-      sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: draftAnswers, step: current }));
+      sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: draftAnswers, step: current, filesNeedingUpload: resumeFiles }));
     } catch (e) {}
   }
   /* === WIZ STEP STATE — show/validate exactly one question; preserve values across back/reopen/resize === */
   function showStep(idx) {
+    if (form.dataset.dgSubmitting === '1') return;
+    wizCancelChoiceAdvance(form);
     current = Math.max(0, Math.min(idx, steps.length - 1));
     collect();
     try {
@@ -906,13 +1009,14 @@ function wizBuild(form, kind) {
       rev.innerHTML = html || '<div>No answers captured — use Back to fill in your brief.</div>';
       qa('.dg-wiz-edit', rev).forEach(function(btn){
         btn.onclick = function(){
+          if (form.dataset.dgSubmitting === '1') return;
           var idx = Number(btn.getAttribute('data-dg-edit-step'));
           if (idx >= 0 && idx < steps.length) { reviewReturn = current; reviewEditStep = idx; showStep(idx); }
         };
       });
     } else if (key === '__thanks__') {
       /* v604: clear the sessionStorage draft too — submitted work must not resume. */
-      try { localStorage.removeItem(SAVE_KEY); sessionStorage.removeItem(SAVE_KEY); } catch(e){}
+      wizClearDraft(SAVE_KEY);
       nextBtn.style.display = 'none'; backBtn.style.display = 'none';
       return;
     } else {
@@ -936,6 +1040,8 @@ function wizBuild(form, kind) {
       if(kind==='engineer'&&key==='resume'){
         var proof=talentProofPrompt(answers['skills-stack']||(form.querySelector('[name="skills-stack"]')||{}).value,!!fileStep);
         qd={q:proof.q,h:proof.h};
+        var resumeInput=form.querySelector('input[type="file"][name="resume"]');
+        if(resumeFiles.indexOf('resume')>=0&&!(resumeInput&&resumeInput.files&&resumeInput.files.length))qd.h='Your previous upload could not be restored. Choose the file again, add a link, or skip.';
       }
       qEl.textContent = qd.q;
       /* almost-done beat on the last real question (Typeform completion psychology) */
@@ -1099,8 +1205,7 @@ function wizBuild(form, kind) {
                 x.classList.toggle('is-on', on);
                 x.setAttribute('aria-selected', on ? 'true' : 'false');
               });
-              if (form._dgChoiceAdvance) clearTimeout(form._dgChoiceAdvance);
-              form._dgChoiceAdvance = setTimeout(function(){ try { nextBtn.click(); } catch (e3) {} }, 200);
+              wizScheduleChoiceAdvance(form, stepSelect, nextBtn);
             });
             box.appendChild(b);
           });
@@ -1120,6 +1225,7 @@ function wizBuild(form, kind) {
     }
   }
   nextBtn.onclick = function(ev) {
+    wizCancelChoiceAdvance(form);
     if (form.dataset.dgSubmitting === '1') return;
     ev && ev.preventDefault();
     var key = (steps[current] || [])[0];
@@ -1183,6 +1289,10 @@ function wizBuild(form, kind) {
         }
       }
     }
+    // Continuing an empty optional upload step explicitly acknowledges skipping it.
+    if (stepEl && stepEl.type === 'file' && !(stepEl.files && stepEl.files.length)) {
+      resumeFiles = resumeFiles.filter(function(name){ return name !== (stepEl.name || stepEl.id); });
+    }
     if (reviewReturn >= 0) {
       var returnStep = reviewReturn;
       var editedStep = reviewEditStep;
@@ -1191,11 +1301,7 @@ function wizBuild(form, kind) {
       showStep(returnStep);
       setTimeout(function(){var target=form.querySelector('.dg-wiz-edit[data-dg-edit-step="'+editedStep+'"]')||nextBtn;try{target.focus()}catch(e){}},0);
     } else if (key === '__submit__') {
-      var oldStatusRoot = form.closest('#startup-modal,#jobseeker-modal') || form.parentElement || form;
-      qa('.w-form-done,.w-form-fail', oldStatusRoot).forEach(function(el){ el.style.display='none'; });
       var oldSubmitErr = form.querySelector('.dg-wiz-err'); if (oldSubmitErr) oldSubmitErr.remove();
-      form.dataset.dgSubmitting='1';
-      setTimeout(function(){ try{ delete form.dataset.dgSubmitting; }catch(e){} }, 12000);
       // ensure review is visible and populated before submit
       var rev = form.querySelector('.dg-wiz-review');
       if (!rev) { rev = document.createElement('div'); rev.className = 'dg-wiz-review'; form.insertBefore(rev, nav); }
@@ -1217,93 +1323,64 @@ function wizBuild(form, kind) {
           }
         } catch (eProof) {}
       }
-      if (nativeSub) {
-        nativeSub.style.display = '';
-        setTimeout(function(){ try { nativeSub.click(); } catch(e){ form.submit && form.submit(); } }, 10);
-        // only advance to thanks after Webflow done/fail (no silent success)
-        // forms() adds .w-form to <form> itself, so form.closest('.w-form') === form and
-        // sibling .w-form-done/.w-form-fail under the outer wrapper were never found (Codex P1).
-        /* === FORM RESULT CONTRACT — pending → confirmed Webflow success|failure; never synthesize success === */
-        function dgWfStatusRoot(f){
-          var modal = f.closest && f.closest('#startup-modal,#jobseeker-modal');
-          if (modal) {
-            var d = modal.querySelector('.w-form-done');
-            if (d && d.parentElement) return d.parentElement;
-          }
-          var p = f.parentElement;
-          if (p) {
-            var sib = p.querySelector(':scope > .w-form-done, :scope > .w-form-fail');
-            if (sib) return p;
-            if (p.classList && p.classList.contains('w-form') && p !== f) return p;
-          }
-          var outer = f.parentElement && f.parentElement.closest && f.parentElement.closest('.w-form');
-          if (outer && outer !== f) return outer;
-          return p || f;
-        }
-        var wfWrap = dgWfStatusRoot(form), t0 = Date.now();
-        (function waitPost(){
-          var scope = wfWrap || form.parentElement || form;
-          var okEl = scope.querySelector('.w-form-done');
-          var badEl = scope.querySelector('.w-form-fail');
-          // also check siblings of form (Webflow classic: form + done + fail as siblings)
-          if (!okEl && form.parentElement) {
-            var kids = form.parentElement.children;
-            for (var i=0;i<kids.length;i++){
-              if (kids[i].classList && kids[i].classList.contains('w-form-done')) okEl = kids[i];
-              if (kids[i].classList && kids[i].classList.contains('w-form-fail')) badEl = kids[i];
-            }
-          }
-          var okVis = okEl && getComputedStyle(okEl).display !== 'none' && getComputedStyle(okEl).visibility !== 'hidden';
-          var badVis = badEl && getComputedStyle(badEl).display !== 'none' && getComputedStyle(badEl).visibility !== 'hidden';
-          if (okVis) {
-            try{scrubTimeClaims()}catch(e){}
-            successCta();
-            showStep(current + 1);
-            okEl.setAttribute('role','status');
-            okEl.setAttribute('aria-live','polite');
-            okEl.setAttribute('aria-atomic','true');
-            okEl.setAttribute('tabindex','-1');
-            var doneLive=form.querySelector('.dg-wiz-live');if(doneLive)doneLive.textContent='';
-            try{okEl.focus()}catch(e){}
-            return;
-          }
-          if (badVis) {
-            try { delete form.dataset.dgSubmitting; } catch(e){}
-            var eEl = form.querySelector('.dg-wiz-err');
-            if (!eEl) {
-              eEl = document.createElement('p');
-              eEl.className = 'dg-wiz-err';
-              eEl.setAttribute('role','alert');
-              eEl.style.cssText = 'color:#f87171;font-size:.9rem;margin:.5rem 0';
-              if (nav && nav.parentNode) nav.parentNode.insertBefore(eEl, nav);
-              else form.appendChild(eEl);
-            }
-            eEl.textContent = 'Submission failed — email potter@trydemigod.com and we will take it from there.';
-            return;
-          }
-          if (Date.now() - t0 < 6000) { setTimeout(waitPost, 250); return; }
-          var eEl2 = form.querySelector('.dg-wiz-err');
-          if (!eEl2) {
-            eEl2 = document.createElement('p');
-            eEl2.className = 'dg-wiz-err';
-            eEl2.setAttribute('role','alert');
-            eEl2.style.cssText = 'color:#f87171;font-size:.9rem;margin:.5rem 0';
-            if (nav && nav.parentNode) nav.parentNode.insertBefore(eEl2, nav);
-            else form.appendChild(eEl2);
-          }
-          try { delete form.dataset.dgSubmitting; } catch(e){}
-          eEl2.textContent = 'Could not confirm submit — email potter@trydemigod.com and we will take it from there.';
-          return;
-        })();
-      } else {
-        form.submit && form.submit();
-        showStep(current + 1);
+      var sendLabel = kind === 'startup' ? 'Send brief' : 'Send privately';
+      function sendControls(pending, label) {
+        nextBtn.disabled = pending;
+        nextBtn.textContent = label;
+        backBtn.disabled = pending;
+        qa('.dg-wiz-edit', form).forEach(function(btn){ btn.disabled = pending; });
       }
+      function sendFeedback(message, pending) {
+        var node = form.querySelector('.dg-wiz-err');
+        if (!node) {
+          node = document.createElement('p');
+          node.className = 'dg-wiz-err';
+          form.insertBefore(node, nav);
+        }
+        node.setAttribute('role', pending ? 'status' : 'alert');
+        node.style.cssText = 'color:' + (pending ? 'var(--dg-phosphor,#a6ffcb)' : '#f87171') + ';font-size:.9rem;margin:.5rem 0;line-height:1.4';
+        node.textContent = message;
+      }
+      wizSubmitForm(form, nativeSub, {
+        invalid: function(field) {
+          var name = field.name || field.id || '';
+          var idx = steps.findIndex(function(step){ return step[0] === name || step[0] === name.replace(/-url$/, ''); });
+          if (idx < 0) { sendFeedback('A required answer needs attention. Review your answers or email potter@trydemigod.com.', false); return; }
+          reviewReturn = current;
+          reviewEditStep = idx;
+          showStep(idx);
+          wizInlineInvalid(field, field.validationMessage || 'Please check this answer before sending.', name);
+        },
+        pending: function() {
+          sendControls(true, 'Sending…');
+          sendFeedback('Sending your answers…', true);
+        },
+        unconfirmed: function(message) {
+          sendControls(true, 'Awaiting confirmation');
+          sendFeedback(message, true);
+        },
+        failure: function(message) {
+          sendControls(false, sendLabel);
+          sendFeedback(message, false);
+        },
+        success: function(okEl) {
+          sendControls(false, sendLabel);
+          try { scrubTimeClaims(); } catch (e) {}
+          successCta();
+          showStep(steps.findIndex(function(step){ return step[0] === '__thanks__'; }));
+          okEl.setAttribute('role', 'status');
+          okEl.setAttribute('aria-live', 'polite');
+          okEl.setAttribute('aria-atomic', 'true');
+          okEl.setAttribute('tabindex', '-1');
+          var doneLive = form.querySelector('.dg-wiz-live'); if (doneLive) doneLive.textContent = '';
+          try { okEl.focus(); } catch (e) {}
+        }
+      });
     } else if (current < steps.length - 1) {
       showStep(current + 1);
     }
   };
-  backBtn.onclick = function(ev){ ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
+  backBtn.onclick = function(ev){ if (form.dataset.dgSubmitting === '1') return; wizCancelChoiceAdvance(form); ev&&ev.preventDefault(); reviewReturn = -1; reviewEditStep = -1; if (current > 0) showStep(current - 1); };
   // keyboard advance on visible inputs + arrows for nav (Typeform polish)
   form.addEventListener('keydown', function(e) {
     if (form.dataset.dgSwallowKey === '1') { e.preventDefault(); e.stopPropagation(); return; }
@@ -1370,6 +1447,34 @@ function wizBuild(form, kind) {
 
     // v195: ensure configured required fields have required attr
     ['contact-email','company-name','company-stage','role-title','stack-needs','90day-outcome','salary-range','full-name','seeker-email','skills-stack','experience','sf-bay','availability','salary-expectation'].forEach(function(n){ var el=form.querySelector('[name="'+n+'"],[id="'+n+'"]'); if(el && (cfg.optional||[]).indexOf(n)<0){ el.required=true; if(el.type==='checkbox') el.setAttribute('required','required'); }});
+  form.__dgWizRestart = function(){
+    if (form.dataset.dgSubmitting === '1' || (nativeSub && nativeSub.disabled)) return false;
+    wizCancelChoiceAdvance(form);
+    wizClearDraft(SAVE_KEY);
+    answers = {};
+    resumeFiles = [];
+    reviewReturn = -1;
+    reviewEditStep = -1;
+    delete form.dataset.dgWizResumed;
+    delete form.dataset.dgSubmitState;
+    qa('input,select,textarea', form).forEach(function(el){
+      if (/^(hidden|submit|button|reset|image)$/.test(el.type)) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+      else if (el.type === 'file') {
+        var widget = el.closest('.w-file-upload');
+        var remove = widget && widget.querySelector('.w-file-remove-link');
+        if (remove) remove.click();
+        el.value = '';
+        el.removeAttribute('data-value');
+      } else el.value = '';
+      if (el.setCustomValidity) el.setCustomValidity('');
+    });
+    nextBtn.disabled = false;
+    backBtn.disabled = false;
+    // Keep one runtime and one set of keyboard/input handlers for this form.
+    showStep(0);
+    return true;
+  };
   form.__dgWizShow = function(){ try{ showStep(current); enhanceWIZ(); forceWizVisible(form, form.closest('#startup-modal,#jobseeker-modal')); }catch(e){} };
 }
 
@@ -1793,7 +1898,7 @@ function rmOrphanForms(){qa('form.w-form').forEach(function(f){if(f.closest('#st
 var MODAL_BG=[];
 function restoreModalBackground(){MODAL_BG.forEach(function(x){try{x.el.inert=x.inert;if(x.inertAttr===null)x.el.removeAttribute('inert');else x.el.setAttribute('inert',x.inertAttr);if(x.ariaHidden===null)x.el.removeAttribute('aria-hidden');else x.el.setAttribute('aria-hidden',x.ariaHidden)}catch(e){}});MODAL_BG=[]}
 function isolateModalBackground(modal){restoreModalBackground();for(var child=modal;child&&child!==document.body;child=child.parentElement){var parent=child.parentElement;if(!parent)break;[].slice.call(parent.children).forEach(function(el){if(el===child||/^(SCRIPT|STYLE|NOSCRIPT|TEMPLATE)$/.test(el.tagName))return;MODAL_BG.push({el:el,inert:!!el.inert,inertAttr:el.getAttribute('inert'),ariaHidden:el.getAttribute('aria-hidden')});try{el.inert=true}catch(e){el.setAttribute('inert','')}el.setAttribute('aria-hidden','true')})}}
-function hide(f){restoreModalBackground();[S,J].forEach(function(id){if(!f&&OPEN===id)return;var m=q(id);if(m){m.style.setProperty('display','none','important');m.style.setProperty('visibility','hidden','important');m.setAttribute('aria-hidden','true');try{m.inert=true}catch(e){m.setAttribute('inert','')}}}); if(document.body){ var prev = document.body.dataset.prevOverflow || ''; var sy = parseInt(document.body.dataset.prevScrollY || '0', 10); document.body.style.overflow = prev; document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; delete document.body.dataset.prevOverflow; delete document.body.dataset.prevScrollY; try { window.scrollTo(0, sy); } catch(e){} } if(document.documentElement){document.documentElement.style.overflow='';document.documentElement.style.scrollbarGutter=document.documentElement.dataset.prevScrollbarGutter||'';delete document.documentElement.dataset.prevScrollbarGutter;} try{var bar=q('#dg-bar');if(bar){bar.style.removeProperty('display');bar.removeAttribute('aria-hidden');}}catch(e){} try{detachTrap(true)}catch(e){} }
+function hide(f){restoreModalBackground();[S,J].forEach(function(id){if(!f&&OPEN===id)return;var m=q(id);if(m){qa('form',m).forEach(wizCancelChoiceAdvance);m.style.setProperty('display','none','important');m.style.setProperty('visibility','hidden','important');m.setAttribute('aria-hidden','true');try{m.inert=true}catch(e){m.setAttribute('inert','')}}}); if(document.body){ var prev = document.body.dataset.prevOverflow || ''; var sy = parseInt(document.body.dataset.prevScrollY || '0', 10); document.body.style.overflow = prev; document.body.style.position = ''; document.body.style.top = ''; document.body.style.width = ''; delete document.body.dataset.prevOverflow; delete document.body.dataset.prevScrollY; try { window.scrollTo(0, sy); } catch(e){} } if(document.documentElement){document.documentElement.style.overflow='';document.documentElement.style.scrollbarGutter=document.documentElement.dataset.prevScrollbarGutter||'';delete document.documentElement.dataset.prevScrollbarGutter;} try{var bar=q('#dg-bar');if(bar){bar.style.removeProperty('display');bar.removeAttribute('aria-hidden');}}catch(e){} try{detachTrap(true)}catch(e){} }
 var busy=false,LAST_FOCUS=null,TRAP_H=null;
 function focusables(root){if(!root)return[];return qa('a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',root).filter(function(el){try{var s=getComputedStyle(el);return s.display!=='none'&&s.visibility!=='hidden'&&!el.disabled&&!el.closest('[inert],[aria-hidden="true"]')&&(!el.getClientRects||el.getClientRects().length>0)}catch(e){return false}})}
 /* v847: opener must be captured before isolateModalBackground (inert blurs activeElement → body). */
@@ -3463,7 +3568,7 @@ try {
       if (hd) { hd.style.setProperty('display','block','important'); hd.style.setProperty('visibility','visible','important'); }
       var nv = m.querySelector('.dg-wiz-nav');
       if (nv) { nv.style.setProperty('display','flex','important'); nv.style.setProperty('visibility','visible','important'); }
-      var n = m.querySelector('.dg-wiz-next'); if(n){ n.style.display='inline-block'; n.style.visibility='visible'; n.disabled=false; }
+      var n = m.querySelector('.dg-wiz-next'); if(n){ n.style.display='inline-block'; n.style.visibility='visible'; n.disabled=mf.dataset.dgSubmitting==='1'; }
     } catch(e){}
     forceWizVisible(mf, m);
     var forceCount=0; var fr = setInterval(function(){
@@ -5036,36 +5141,19 @@ function wizResumeToast(modal){
     t.setAttribute('role','status');
     t.style.cssText='margin:0 0 .65rem;padding:.5rem .7rem;border-radius:10px;background:rgba(16,198,116,.10);border:1px solid rgba(166,255,203,.32);color:var(--dg-paper,#f3f0e7);font-size:.85rem;line-height:1.35;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem';
     var msg=document.createElement('span');
-    msg.textContent='Draft restored — continue where you left off.';
+    msg.textContent='Draft restored.';
     var restart=document.createElement('button');
     restart.type='button';
     restart.className='dg-wiz-restart';
     restart.textContent='Start over';
     restart.style.cssText='margin-left:auto;min-height:36px;padding:.25rem .65rem;border-radius:8px;border:1px solid rgba(166,255,203,.4);background:transparent;color:var(--dg-phosphor,#a6ffcb);cursor:pointer;font:600 .78rem/1 var(--wiz-sans,system-ui,sans-serif)';
     restart.addEventListener('click',function(){
-      try{
-        sessionStorage.removeItem('dgWizSave_startup');
-        sessionStorage.removeItem('dgWizSave_engineer');
-        localStorage.removeItem('dgWizSave_startup');
-        localStorage.removeItem('dgWizSave_engineer');
-      }catch(e0){}
-      try{
-        rf.querySelectorAll('input,select,textarea').forEach(function(el){
-          if(el.type==='hidden'||el.name==='form_version'||el.name==='cf-turnstile-response')return;
-          if(el.type==='checkbox'||el.type==='radio')el.checked=false;
-          else if(el.type==='file'){try{el.value='';}catch(e1){}}
-          else el.value='';
-        });
-      }catch(e2){}
+      if(typeof rf.__dgWizRestart !== 'function')return;
+      if(!rf.__dgWizRestart()){
+        msg.textContent=rf.dataset.dgSubmitting==='1'?'Wait for your submission to finish before starting over.':'Wait for the upload to finish before starting over.';
+        return;
+      }
       t.remove();
-      try{
-        /* rebuild stepper from step 0 with empty answers */
-        delete rf.dataset.dgWizBuilt;
-        delete rf.dataset.dgWizResumed;
-        var kind=rf.id==='engineer-join'||rf.closest('#jobseeker-modal')?'engineer':'startup';
-        qa('.dg-wiz-head,.dg-wiz-nav,.dg-wiz-review,.dg-wiz-choices',rf).forEach(function(n){n.remove();});
-        wizBuild(rf,kind);
-      }catch(e3){}
     });
     t.appendChild(msg);
     t.appendChild(restart);
