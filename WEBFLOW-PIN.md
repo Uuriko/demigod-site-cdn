@@ -4,7 +4,7 @@ Prepared on 2026-09-05 from [PR #19](https://github.com/Uuriko/demigod-site-cdn/
 
 **Release pin: `9de30598841ac20848e26ec68317f26045fedb3e`**
 
-Status: reviewed and merged; Webflow publication is pending. Publishing needs access to the `talentlink-sf` Webflow workspace, which is not connected in the preparing session. A merge alone does not update the site.
+Status: reviewed and merged, but **not live**. Webflow was connected and the release was published on 2026-09-05. Production verification found that the existing Cloudflare Worker overwrote the script integrity value with the previous release's fingerprint. The original Webflow settings were immediately restored and republished; both public intake pages again serve the prior matching script and integrity value. Cloudflare access is needed to correct the rewrite before retrying this release.
 
 ## Scope and checks
 
@@ -16,7 +16,22 @@ The founder and candidate intake changes prevent delayed choices from skipping r
 - Compared with the previously observed live pin, only `foot-latest.js` changes among production assets; the other changed files are regression tests.
 - Browser and live submission testing have not been performed. Duplicate-send protection is confined to the current page session.
 
-## Apply in Webflow
+## Production verification and rollback receipt
+
+- Webflow accepted the release; its published timestamp was `2026-09-05T03:12:13.632Z`.
+- The Webflow subdomain served the new `9de30598841ac20848e26ec68317f26045fedb3e` script with the correct `sha384-2sRe…` integrity value.
+- Both public `www` intake routes served that new script URL but the old `sha384-JCYP…` integrity value. The response identified the existing Worker surface as `X-Demigod-Edge: home-wiz`; the mismatched fingerprint would prevent execution.
+- The original head and footer were restored verbatim. Webflow confirmed the rollback at `2026-09-05T03:13:38.847Z`.
+- Fresh HTTP 200 responses from `/?wiz=startup` and `/?wiz=engineer` then served the previous `3b0761f2eb93641bd60b90945429b96b4b847413` script and its matching `sha384-JCYP…` integrity value, with cache status `MISS`.
+- The active site's instructions name Worker `demigod-html` as the owner of public `www`. Preserve its routing and first paint; keep `www` proxied and the apex DNS-only. No Worker or DNS changes were made.
+
+### Required correction before retry
+
+Update the existing Worker's script URL/integrity handling so a recognized immutable release always receives its matching fingerprint. Preserve the old release mapping for rollback. Do not disable integrity verification or add a second loader. Verify both old and new URL/fingerprint pairs before deploying the Worker change, then apply the Webflow release below and verify the actual public HTML and asset bytes again.
+
+The relevant Worker source was not present in the accessible Demigod CDN/ops repositories. Use the existing Cloudflare deployment and its current source; do not reconstruct or overwrite the Worker from the Webflow HTML.
+
+## Apply in Webflow after the Worker correction
 
 1. Open the existing `talentlink-sf` site settings and record its current head/footer custom code before editing. Check for newer unpublished work before saving.
 2. Update the existing script preload, startup map/data/feed, stylesheet, and executing footer script URLs to the release pin below. Update any existing `dg-bounties-feed` meta tag to the same pin. Preserve all other custom code, the form integration, and the separate hero-image pin.
@@ -58,9 +73,16 @@ https://cdn.jsdelivr.net/gh/Uuriko/demigod-site-cdn@9de30598841ac20848e26ec68317
 
 ## Rollback
 
-The last successfully captured live intake used `3b0761f2eb93641bd60b90945429b96b4b847413` (v1109). A fresh live read was blocked in the preparation environment, so recheck the current settings before publishing and use the captured pre-release head/footer as the authoritative rollback.
+The verified rollback serves `3b0761f2eb93641bd60b90945429b96b4b847413` (v1109) on both public intake routes. The Webflow origin uses older asset references that the Worker rewrites. Capture fresh head/footer blocks before retrying and restore those exact blocks for a rollback; do not assume origin and edge pins are identical.
 
-To restore that observed version, restore the prior pin in the same asset URLs and restore the prior script integrity value below, then save and republish. Restore the matching pre-release preload settings as well.
+| Restored Webflow setting | Pin / fingerprint |
+| --- | --- |
+| Head preload, stylesheet, startup map and feeds | `b100a610ad40` |
+| Footer script | `26de647f7000` |
+| Footer script integrity at origin | `sha384-QOz+1a+0qQt0RzcVTXG7PKDkCmPMSNy2KU4NqrW0m7dqaBzP/b8D3khuyeVkbc2c` |
+| Public Worker script | `3b0761f2eb93641bd60b90945429b96b4b847413` |
+
+For the public Worker mapping, the previous fingerprints are below. Restore the captured Webflow head/footer and the matching Worker mapping together if a future coordinated release needs rollback.
 
 - Script integrity: `sha384-JCYPWA7daMN2ly4P5z6HohsyyGs1cwIKVSQMwqLj+92GJYMz0kUrVi92WT+xO2XS`
 - Stylesheet integrity: `sha384-DVJvIlODKqEw2alxHLe65wLzssFAGRkg2Xeu8Rc9C4Mqw9x+WoW4h5tQE9BOdVxm`
