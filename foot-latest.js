@@ -499,6 +499,11 @@ try {
    Buttons always clickable. Gold chrome via classes.
 */
 /* ==== SECTION: WIZ runtime (one-question stepper) ==== */
+function wizClearDraft(key) {
+  // A blocked storage backend must not prevent clearing the other one.
+  try { sessionStorage.removeItem(key); } catch (e) {}
+  try { localStorage.removeItem(key); } catch (e) {}
+}
 function wizCancelChoiceAdvance(form) {
   if (!form) return;
   clearTimeout(form._dgChoiceAdvance);
@@ -625,6 +630,7 @@ function wizBuild(form, kind) {
   var reviewEditStep = -1;
   var SAVE_KEY = 'dgWizSave_' + kind;
   var answers = {};
+  var resumeFiles = [];
   // v597: no draft-save UI / no 7-day localStorage (less is more; privacy)
   /* v646: __dgWizStore removed — it was assigned false here and compared !==true in
      wizResumeToast, so the toast could never fire. The draft lives in sessionStorage (see collect). */
@@ -639,19 +645,31 @@ function wizBuild(form, kind) {
   var resumeStep = 0;
   try {
     var draft = JSON.parse(sessionStorage.getItem(SAVE_KEY) || 'null');
-    if (draft && draft.answers) {
-      answers = draft.answers;
+    if (draft && draft.answers && typeof draft.answers === 'object' && !Array.isArray(draft.answers)) {
       resumeStep = Math.max(0, Math.min(draft.step | 0, (cfg.steps || []).length - 1));
-      if (resumeStep > 0) form.dataset.dgWizResumed = '1';
+      if ((steps[resumeStep] || [])[0] === '__thanks__') {
+        wizClearDraft(SAVE_KEY);
+        resumeStep = 0;
+        draft = null;
+      } else {
+        answers = draft.answers;
+        resumeFiles = Array.isArray(draft.filesNeedingUpload) ? draft.filesNeedingUpload : [];
+        if (resumeStep > 0) form.dataset.dgWizResumed = '1';
+      }
     }
   } catch (e) {}
   /* Browsers cannot restore File objects. Never let a saved filename impersonate an upload at
      review; remove it and return to the required file step. Restorable resume URLs are untouched. */
+  var restoredFiles = [];
   qa('input[type="file"]', form).forEach(function(input){
     var name=input.name||input.id||'', fileStep=steps.findIndex(function(step){return step[0]===name;});
-    if(name&&Object.prototype.hasOwnProperty.call(answers,name)){delete answers[name];if(fileStep>=0&&resumeStep>fileStep)resumeStep=fileStep;}
+    if(name&&(Object.prototype.hasOwnProperty.call(answers,name)||resumeFiles.indexOf(name)>=0)){
+      delete answers[name];
+      if(fileStep>=0){restoredFiles.push(name);if(resumeStep>fileStep)resumeStep=fileStep;}
+    }
   });
-  try { if (draft && draft.answers) sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: answers, step: resumeStep })); } catch (e) {}
+  resumeFiles = restoredFiles;
+  try { if (draft && draft.answers) sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: answers, step: resumeStep, filesNeedingUpload: resumeFiles })); } catch (e) {}
   var head = document.createElement('div');
   head.className = 'dg-wiz-head';
   var __dgWizTotal = steps.filter(function(s){var k=s[0]||'';return k!=='__thanks__' && k!=='__submit__' && k!=='welcome';}).length || Math.max(1, steps.length-3);
@@ -762,6 +780,7 @@ function wizBuild(form, kind) {
   // broad force children to ensure inputs show (from final user tests)
   qa('input,select,textarea,label,.w-input,.w-select,.w-file-upload,.form-field-group,.dg-field-wrap', form).forEach(function(c){ if(c.classList.contains('w-file-upload-input'))return; c.style.setProperty('display','block','important'); c.style.setProperty('visibility','visible','important'); });
   function collect() {
+    if (form.dataset.dgSubmitState === 'success') { wizClearDraft(SAVE_KEY); return; }
     qa('input,select,textarea', form).forEach(function(i) {
       var nm = i.name || i.id || '';
       if (!nm) return;
@@ -769,12 +788,13 @@ function wizBuild(form, kind) {
       // "save this draft" consent would otherwise persist for 7 days; also clears it from
       // drafts saved before this fix. Restore never wrote it back (Turnstile re-issues), so
       // this is hygiene, not a behaviour change.
-      if (i.type === 'hidden') { delete answers[nm]; return; }
+      if (/^(hidden|submit|button|reset|image)$/.test(i.type)) { delete answers[nm]; return; }
       if (i.type === 'file') {
         /* A selected local File is not proof Webflow persisted it. Its upload widget sets
            data-value only after upload succeeds; never review/submit a filename-only answer. */
         if (i.files && i.files[0] && String(i.getAttribute('data-value') || '').trim()) answers[nm] = i.files[0].name;
         else delete answers[nm];
+        if (i.files && i.files.length && resumeFiles.indexOf(nm) < 0) resumeFiles.push(nm);
       } else if (i.type === 'checkbox' || i.type === 'radio') {
         if (i.checked) answers[nm] = i.value || 'yes';
         else if (i.type === 'checkbox') delete answers[nm];
@@ -786,7 +806,7 @@ function wizBuild(form, kind) {
     try {
       var draftAnswers = Object.assign({}, answers);
       qa('input[type="file"]', form).forEach(function(input){ delete draftAnswers[input.name || input.id || '']; });
-      sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: draftAnswers, step: current }));
+      sessionStorage.setItem(SAVE_KEY, JSON.stringify({ answers: draftAnswers, step: current, filesNeedingUpload: resumeFiles }));
     } catch (e) {}
   }
   /* === WIZ STEP STATE — show/validate exactly one question; preserve values across back/reopen/resize === */
@@ -996,7 +1016,7 @@ function wizBuild(form, kind) {
       });
     } else if (key === '__thanks__') {
       /* v604: clear the sessionStorage draft too — submitted work must not resume. */
-      try { localStorage.removeItem(SAVE_KEY); sessionStorage.removeItem(SAVE_KEY); } catch(e){}
+      wizClearDraft(SAVE_KEY);
       nextBtn.style.display = 'none'; backBtn.style.display = 'none';
       return;
     } else {
@@ -1020,6 +1040,8 @@ function wizBuild(form, kind) {
       if(kind==='engineer'&&key==='resume'){
         var proof=talentProofPrompt(answers['skills-stack']||(form.querySelector('[name="skills-stack"]')||{}).value,!!fileStep);
         qd={q:proof.q,h:proof.h};
+        var resumeInput=form.querySelector('input[type="file"][name="resume"]');
+        if(resumeFiles.indexOf('resume')>=0&&!(resumeInput&&resumeInput.files&&resumeInput.files.length))qd.h='Your previous upload could not be restored. Choose the file again, add a link, or skip.';
       }
       qEl.textContent = qd.q;
       /* almost-done beat on the last real question (Typeform completion psychology) */
@@ -1267,6 +1289,10 @@ function wizBuild(form, kind) {
         }
       }
     }
+    // Continuing an empty optional upload step explicitly acknowledges skipping it.
+    if (stepEl && stepEl.type === 'file' && !(stepEl.files && stepEl.files.length)) {
+      resumeFiles = resumeFiles.filter(function(name){ return name !== (stepEl.name || stepEl.id); });
+    }
     if (reviewReturn >= 0) {
       var returnStep = reviewReturn;
       var editedStep = reviewEditStep;
@@ -1421,6 +1447,34 @@ function wizBuild(form, kind) {
 
     // v195: ensure configured required fields have required attr
     ['contact-email','company-name','company-stage','role-title','stack-needs','90day-outcome','salary-range','full-name','seeker-email','skills-stack','experience','sf-bay','availability','salary-expectation'].forEach(function(n){ var el=form.querySelector('[name="'+n+'"],[id="'+n+'"]'); if(el && (cfg.optional||[]).indexOf(n)<0){ el.required=true; if(el.type==='checkbox') el.setAttribute('required','required'); }});
+  form.__dgWizRestart = function(){
+    if (form.dataset.dgSubmitting === '1' || (nativeSub && nativeSub.disabled)) return false;
+    wizCancelChoiceAdvance(form);
+    wizClearDraft(SAVE_KEY);
+    answers = {};
+    resumeFiles = [];
+    reviewReturn = -1;
+    reviewEditStep = -1;
+    delete form.dataset.dgWizResumed;
+    delete form.dataset.dgSubmitState;
+    qa('input,select,textarea', form).forEach(function(el){
+      if (/^(hidden|submit|button|reset|image)$/.test(el.type)) return;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+      else if (el.type === 'file') {
+        var widget = el.closest('.w-file-upload');
+        var remove = widget && widget.querySelector('.w-file-remove-link');
+        if (remove) remove.click();
+        el.value = '';
+        el.removeAttribute('data-value');
+      } else el.value = '';
+      if (el.setCustomValidity) el.setCustomValidity('');
+    });
+    nextBtn.disabled = false;
+    backBtn.disabled = false;
+    // Keep one runtime and one set of keyboard/input handlers for this form.
+    showStep(0);
+    return true;
+  };
   form.__dgWizShow = function(){ try{ showStep(current); enhanceWIZ(); forceWizVisible(form, form.closest('#startup-modal,#jobseeker-modal')); }catch(e){} };
 }
 
@@ -5087,36 +5141,19 @@ function wizResumeToast(modal){
     t.setAttribute('role','status');
     t.style.cssText='margin:0 0 .65rem;padding:.5rem .7rem;border-radius:10px;background:rgba(16,198,116,.10);border:1px solid rgba(166,255,203,.32);color:var(--dg-paper,#f3f0e7);font-size:.85rem;line-height:1.35;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .75rem';
     var msg=document.createElement('span');
-    msg.textContent='Draft restored — continue where you left off.';
+    msg.textContent='Draft restored.';
     var restart=document.createElement('button');
     restart.type='button';
     restart.className='dg-wiz-restart';
     restart.textContent='Start over';
     restart.style.cssText='margin-left:auto;min-height:36px;padding:.25rem .65rem;border-radius:8px;border:1px solid rgba(166,255,203,.4);background:transparent;color:var(--dg-phosphor,#a6ffcb);cursor:pointer;font:600 .78rem/1 var(--wiz-sans,system-ui,sans-serif)';
     restart.addEventListener('click',function(){
-      try{
-        sessionStorage.removeItem('dgWizSave_startup');
-        sessionStorage.removeItem('dgWizSave_engineer');
-        localStorage.removeItem('dgWizSave_startup');
-        localStorage.removeItem('dgWizSave_engineer');
-      }catch(e0){}
-      try{
-        rf.querySelectorAll('input,select,textarea').forEach(function(el){
-          if(el.type==='hidden'||el.name==='form_version'||el.name==='cf-turnstile-response')return;
-          if(el.type==='checkbox'||el.type==='radio')el.checked=false;
-          else if(el.type==='file'){try{el.value='';}catch(e1){}}
-          else el.value='';
-        });
-      }catch(e2){}
+      if(typeof rf.__dgWizRestart !== 'function')return;
+      if(!rf.__dgWizRestart()){
+        msg.textContent=rf.dataset.dgSubmitting==='1'?'Wait for your submission to finish before starting over.':'Wait for the upload to finish before starting over.';
+        return;
+      }
       t.remove();
-      try{
-        /* rebuild stepper from step 0 with empty answers */
-        delete rf.dataset.dgWizBuilt;
-        delete rf.dataset.dgWizResumed;
-        var kind=rf.id==='engineer-join'||rf.closest('#jobseeker-modal')?'engineer':'startup';
-        qa('.dg-wiz-head,.dg-wiz-nav,.dg-wiz-review,.dg-wiz-choices',rf).forEach(function(n){n.remove();});
-        wizBuild(rf,kind);
-      }catch(e3){}
     });
     t.appendChild(msg);
     t.appendChild(restart);
