@@ -1,0 +1,89 @@
+{
+  "schema": "demigod.nextplay-map-ingest/1",
+  "ingestedAt": "2026-09-10T23:09:23.034Z",
+  "source": "Next Play $100m+ hiring (2026-09-10) tweet https://x.com/nextplayso/status/2098172390786384036",
+  "sourceUrl": "https://x.com/nextplayso/status/2098172390786384036",
+  "mapSchema": "demigod.sf-startup-map/3",
+  "rolesSchema": "demigod.roles-feed/1",
+  "peopleData": false,
+  "addedCompanyIds": [
+    "hn:jobs.ashbyhq.com/modal",
+    "hn:jobs.ashbyhq.com/standardbots",
+    "hn:jobs.ashbyhq.com/fonoa",
+    "hn:boards.greenhouse.io/mercury",
+    "hn:boards.greenhouse.io/psiquantum",
+    "hn:mythic.ai"
+  ],
+  "updatedCompanyIds": [
+    "wd:Q116413452",
+    "hn:browserbase.com",
+    "hn:jobs.ashbyhq.com/parallel"
+  ],
+  "rolesAdded": 60,
+  "rolesAddedByCompany": {
+    "Modal": 8,
+    "Standard Bots": 8,
+    "Fonoa": 8,
+    "Mercury": 8,
+    "PsiQuantum": 8,
+    "Anyscale": 8,
+    "Browserbase": 4,
+    "Parallel": 8
+  },
+  "liveBoards": {
+    "hn:jobs.ashbyhq.com/modal": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 31
+    },
+    "hn:jobs.ashbyhq.com/standardbots": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 37
+    },
+    "hn:jobs.ashbyhq.com/fonoa": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 26
+    },
+    "hn:boards.greenhouse.io/mercury": {
+      "provider": "Greenhouse",
+      "http": 200,
+      "listedJobs": 59
+    },
+    "hn:boards.greenhouse.io/psiquantum": {
+      "provider": "Greenhouse",
+      "http": 200,
+      "listedJobs": 74
+    },
+    "hn:mythic.ai": {
+      "provider": "Ashby",
+      "http": 404,
+      "listedJobs": 0,
+      "note": "Ashby posting-api slug unknown; company stub only. HTML board at jobs.ashbyhq.com/mythic returned 200."
+    },
+    "wd:Q116413452": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 20
+    },
+    "hn:browserbase.com": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 6
+    },
+    "hn:jobs.ashbyhq.com/parallel": {
+      "provider": "Ashby",
+      "http": 200,
+      "listedJobs": 22
+    }
+  },
+  "publicPinNote": "Live trydemigod.com still pins startup-map-latest.js / sf-startup-map.json / roles-feed.json at an older jsDelivr SHA (see WEBFLOW-PIN.md). Instinct/Codex must bump the overlay pin after merge for the public /startups map to see this ingest. Relative sf-startup-map.json / roles-feed.json fetch beside that SHA also stays stale until the pin moves.",
+  "notes": [
+    "No people-data: roles are public ATS title/location/url/department only.",
+    "hn:jobs.ashbyhq.com/parallel jobsUrl was Greenhouse Parallel Systems (LA vehicles); refreshed to Ashby Parallel Web Systems.",
+    "hn:mythic.ai is a stub: posting-api slug unknown (404 on mythic/mythicai/mythic-ai/mythic.ai).",
+    "startup-map-latest.js valid() contract: schema demigod.sf-startup-map/3, companies array, coverage object.",
+    "foot-latest.js, docs/ops/*, and the overlay pin were not edited."
+  ]
+}
