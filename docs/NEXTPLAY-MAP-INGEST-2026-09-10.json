@@ -19,16 +19,16 @@
     "hn:browserbase.com",
     "hn:jobs.ashbyhq.com/parallel"
   ],
-  "rolesAdded": 60,
+  "rolesAdded": 52,
   "rolesAddedByCompany": {
-    "Modal": 8,
+    "Modal": 6,
     "Standard Bots": 8,
-    "Fonoa": 8,
-    "Mercury": 8,
+    "Fonoa": 7,
+    "Mercury": 5,
     "PsiQuantum": 8,
     "Anyscale": 8,
-    "Browserbase": 4,
-    "Parallel": 8
+    "Browserbase": 3,
+    "Parallel": 7
   },
   "liveBoards": {
     "hn:jobs.ashbyhq.com/modal": {
@@ -81,6 +81,7 @@
   "publicPinNote": "Live trydemigod.com still pins startup-map-latest.js / sf-startup-map.json / roles-feed.json at an older jsDelivr SHA (see WEBFLOW-PIN.md). Instinct/Codex must bump the overlay pin after merge for the public /startups map to see this ingest. Relative sf-startup-map.json / roles-feed.json fetch beside that SHA also stays stale until the pin moves.",
   "notes": [
     "No people-data: roles are public ATS title/location/url/department only.",
+    "roles-feed append is ~52 eng/product roles (design and non-eng GTM titles omitted).",
     "hn:jobs.ashbyhq.com/parallel jobsUrl was Greenhouse Parallel Systems (LA vehicles); refreshed to Ashby Parallel Web Systems.",
     "hn:mythic.ai is a stub: posting-api slug unknown (404 on mythic/mythicai/mythic-ai/mythic.ai).",
     "startup-map-latest.js valid() contract: schema demigod.sf-startup-map/3, companies array, coverage object.",
