@@ -1,5 +1,5 @@
-/*dg-foot-v1109-core*/
-window.dgFootVersion = 'v1109'; console.log('[demigod] foot v1109-core loaded');
+/*dg-foot-v1110-core*/
+window.dgFootVersion = 'v1110'; console.log('[demigod] foot v1110-core loaded');
 (function(){
 var S='#startup-modal',J='#jobseeker-modal',OPEN=null;
 /* Use product route (same-origin /?p=) — never raw catbox .html (text/plain MIME) */
@@ -23,8 +23,8 @@ startupH2:'Hiring brief',
 startupBody:'One role, real constraints, and one concrete first result. '+MATCH_DISCLOSURE,
 engineerH2:'Private candidate details',
 engineerBody:'Your details stay private — this is not a public profile. '+MATCH_DISCLOSURE,
-feeNote:'10% of first-year base salary when a hire starts. Free for talent. Nothing until then.',
-pricingNote:'10% of first-year base salary when a hire starts — nothing until then',
+feeNote:'10% of first-year cash when a hire starts. Free for talent. Nothing until then.',
+pricingNote:'10% of first-year cash when a hire starts — nothing until then',
 trustKicker:'How it works',
 trustSteps:['Send a brief','A person picks','You both say yes'],
 
@@ -58,7 +58,7 @@ var WIZ_CFG={
   startup:{
     /* First result before logistics: define “strong” before salary (intake research). */
     steps:[['welcome'],['role-title'],['company-name'],['company-stage'],['stack-needs'],['90day-outcome'],['work-location'],['salary-range'],['contact-email'],['__submit__'],['__thanks__']],
-    welcome:{t:'Hiring brief',b:'~2 min · 8 short answers. One SF Bay permanent role, one concrete first result, mutual yes before intro. 10% of first-year base only when a hire starts. Press Enter to continue.',btn:'Start the brief'},
+    welcome:{t:'Hiring brief',b:'~2 min · 8 short answers. One SF Bay permanent role, one concrete first result, mutual yes before intro. 10% of first-year cash only when a hire starts. Press Enter to continue.',btn:'Start the brief'},
     thanks:STARTUP_OK,
     optional:[]
   },
@@ -1017,6 +1017,8 @@ function wizBuild(form, kind) {
     } else if (key === '__thanks__') {
       /* v604: clear the sessionStorage draft too — submitted work must not resume. */
       wizClearDraft(SAVE_KEY);
+      /* v1110: must override the build-time display:inline-block !important, else Send stays live after success */
+      if (nextBtn.style.setProperty) { nextBtn.style.setProperty('display','none','important'); backBtn.style.setProperty('display','none','important'); }
       nextBtn.style.display = 'none'; backBtn.style.display = 'none';
       return;
     } else {
@@ -1364,7 +1366,8 @@ function wizBuild(form, kind) {
           sendFeedback(message, false);
         },
         success: function(okEl) {
-          sendControls(false, sendLabel);
+          /* v1110: stay disabled after a confirmed send - no live Send on the thanks step */
+          sendControls(true, sendLabel);
           try { scrubTimeClaims(); } catch (e) {}
           successCta();
           showStep(steps.findIndex(function(step){ return step[0] === '__thanks__'; }));
@@ -1471,6 +1474,10 @@ function wizBuild(form, kind) {
     });
     nextBtn.disabled = false;
     backBtn.disabled = false;
+    /* v1110: undo the !important thanks-hide so a fresh brief shows Continue */
+    if (nextBtn.style.setProperty) nextBtn.style.setProperty('display','inline-block','important');
+    nextBtn.style.display = 'inline-block';
+    nextBtn.style.visibility = 'visible';
     // Keep one runtime and one set of keyboard/input handlers for this form.
     showStep(0);
     return true;
@@ -1750,7 +1757,7 @@ function hero(){
         el.classList.add('pricing-amount');
         el.textContent='10%';
       }
-      if(/^OF FIRST-YEAR/i.test(tx)||/PLACEMENT FEE/i.test(tx)) el.textContent='of first-year base salary (USD)';
+      if(/^OF FIRST-YEAR/i.test(tx)||/PLACEMENT FEE/i.test(tx)) el.textContent='of first-year cash (USD)';
       /* pass34: match Webflow leaf strings — prior regexes missed Human-reviewed thrash */
       if(/^Human-reviewed talent profiles$/i.test(tx)||/^Access to pre-vetted/i.test(tx)||/pre-vetted SF/i.test(tx))
         el.textContent='Human-reviewed SF Bay fits — no volume promise';
@@ -1831,7 +1838,7 @@ function nav(){
   }
   if(!q('#dg-nav-directory-style')){var ns=document.createElement('style');ns.id='dg-nav-directory-style';ns.textContent='.nav_mobile-menu-button.w-nav-button{display:none!important}#dg-nav-directory{position:relative;margin:0!important;padding:0!important;color:var(--dg-paper,#f3f0e7)}#dg-nav-directory summary{display:flex;align-items:center;min-height:48px;padding:.45rem .75rem;border:1px solid rgba(166,255,203,.35);border-radius:9px;cursor:pointer;font:600 .88rem var(--dg-sans,system-ui,sans-serif);list-style:none}#dg-nav-directory summary::-webkit-details-marker{display:none}#dg-nav-directory summary::after{content:"⌄";margin-left:.45rem;color:var(--dg-phosphor,#a6ffcb)}#dg-nav-directory[open] summary::after{content:"⌃"}#dg-page summary::after{content:"⌄";margin-left:.45rem;color:var(--dg-phosphor,#a6ffcb)}#dg-page details[open] summary::after{content:"⌃"}#dg-nav-directory>div{position:absolute;right:0;top:calc(100% + .45rem);z-index:9999;display:grid;grid-template-columns:repeat(2,minmax(8.5rem,1fr));gap:.15rem;width:min(20rem,calc(100vw - 2rem));padding:.55rem;background:#062219;border:1px solid rgba(166,255,203,.35);border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.45)}#dg-nav-directory .dg-nav-group{grid-column:1/-1;margin:.55rem 0 .15rem;padding:.2rem .55rem 0;font:700 .65rem/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#10c674;opacity:.95}#dg-nav-directory .dg-nav-group:first-child{margin-top:0}#dg-nav-directory a{display:flex!important;visibility:visible!important;opacity:1!important;align-items:center;min-height:48px;padding:.55rem .7rem;border-radius:7px;color:var(--dg-paper,#f3f0e7)!important;text-decoration:none!important}#dg-nav-directory a:hover,#dg-nav-directory a:focus-visible{background:rgba(166,255,203,.1);color:var(--dg-phosphor,#a6ffcb)!important;outline:2px solid var(--dg-signal,#10c674);outline-offset:-2px}@media(max-width:420px){#dg-nav-directory>div{grid-template-columns:1fr;width:min(15rem,calc(100vw - 2rem));max-height:calc(100svh - 6rem);overflow:auto}}';document.head.appendChild(ns)}
 }
-function trust(){/* v210: no visual wall — sr-only one-liner for a11y */ var old=q('#demigod-trust-block'); if(old)old.remove(); var f=q('footer,.footer'); if(!f||q('#demigod-trust-block'))return; var el=document.createElement('section'); el.id='demigod-trust-block'; el.setAttribute('aria-label','How it works'); el.style.cssText='position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0'; el.innerHTML='<p>Brief or preferences → human review → both sides approve → intro. 10% of first-year base salary when a hire starts.</p>'; if(f.parentNode)f.parentNode.insertBefore(el,f); else document.body.appendChild(el); }
+function trust(){/* v210: no visual wall — sr-only one-liner for a11y */ var old=q('#demigod-trust-block'); if(old)old.remove(); var f=q('footer,.footer'); if(!f||q('#demigod-trust-block'))return; var el=document.createElement('section'); el.id='demigod-trust-block'; el.setAttribute('aria-label','How it works'); el.style.cssText='position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0'; el.innerHTML='<p>Brief or preferences → human review → both sides approve → intro. 10% of first-year cash when a hire starts.</p>'; if(f.parentNode)f.parentNode.insertBefore(el,f); else document.body.appendChild(el); }
 function mob(){var b=q('#dg-bar');if(!b){b=document.createElement('nav');b.id='dg-bar';b.setAttribute('aria-label','Mobile actions');b.innerHTML='<a class="dg-h" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire"></a><a class="dg-j" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent"></a>';document.body.appendChild(b)}var h=b.querySelector('.dg-h,[data-dg-cta="hire"]'),t=b.querySelector('.dg-j,[data-dg-cta="talent"]');if(h){h.innerHTML='<span class="dg-bar-label">'+COPY.ctaFounder+'</span><span class="dg-bar-hint">'+COPY.ctaHireHint+'</span>';h.setAttribute('href','/?wiz=startup');h.removeAttribute('aria-label')}if(t){t.innerHTML='<span class="dg-bar-label">'+COPY.ctaEngineer+'</span><span class="dg-bar-hint">'+COPY.ctaTalentHint+'</span>';t.setAttribute('href','/?wiz=engineer');t.removeAttribute('aria-label')}}
 function foot(){
   var f=q('footer,.footer');
@@ -1874,7 +1881,7 @@ function foot(){
         '</div>'+
       '</nav>'+
       '<div class="dg-footer-bottom">'+
-        '<p class="dg-footer-fee">Startups pay 10% of first-year base salary when a hire starts. Nothing upfront. Talent is always free.</p>'+
+        '<p class="dg-footer-fee">Startups pay 10% of first-year cash when a hire starts. Nothing upfront. Talent is always free.</p>'+
         '<p id="dg-copyright">© 2026 Demigod</p>'+
       '</div>';
     f.appendChild(panel);
@@ -2877,7 +2884,7 @@ function scrubTimeClaims(){
       return;
     }
     if (bareGuarantee.test(txt) && txt.length < 200) {
-      el.textContent = '10% of first-year base salary when a hire starts · better candidates';
+      el.textContent = '10% of first-year cash when a hire starts · better candidates';
       return;
     }
     if (/pre-vetted|Dedicated talent partner|90-?\s*day replacement/i.test(txt) && txt.length < 160 && !el.closest('#startup-modal,#jobseeker-modal')) {
@@ -3626,7 +3633,7 @@ var DG_PAGES = {
   how: {
     title: 'How it works',
     doc: 'How it works · Demigod',
-    desc: 'Software compares facts, a human decides what to propose, and both sides say yes before an intro. 10% of first-year base when a hire starts; talent is free.',
+    desc: 'Software compares facts, a human decides what to propose, and both sides say yes before an intro. 10% of first-year cash when a hire starts; talent is free.',
     html:
       '<p class="dg-p-lead"><strong>Software compares. A human proposes. Mutual yes.</strong> No application pile, no cold intro, no auto-send.</p>' +
       '<div class="dg-how-flow" style="margin:.6rem 0 1rem"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 214" width="100%" role="img" aria-label="Three steps: software compares the facts and nothing is messaged yet; a human decides what to propose and never auto-introduces; both sides approve privately before any introduction."><title>How a Demigod match works — three steps, gated on mutual yes</title><defs><marker id="dg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#7f978c"/></marker></defs><g font-family="ui-sans-serif, system-ui, sans-serif"><rect x="1" y="14" width="338" height="52" rx="9" fill="#0d1f17" stroke="#1e3428"/><circle cx="24" cy="34" r="9" fill="#a6ffcb"/><text x="24" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#07150f">1</text><text x="41" y="38" font-size="13" font-weight="600" fill="#a6ffcb">Software compares</text><text x="41" y="56" font-size="11.5" fill="#c9d6cf">Ranks role goals, skills, location, pay.</text><line x1="24" y1="70" x2="24" y2="82" stroke="#7f978c" stroke-width="1.5" marker-end="url(#dg-arrow)"/><rect x="1" y="88" width="338" height="52" rx="9" fill="#0d1f17" stroke="#1e3428"/><circle cx="24" cy="108" r="9" fill="#a6ffcb"/><text x="24" y="112" text-anchor="middle" font-size="11" font-weight="700" fill="#07150f">2</text><text x="41" y="112" font-size="13" font-weight="600" fill="#a6ffcb">A human decides</text><text x="41" y="130" font-size="11.5" fill="#c9d6cf">A person picks what to propose.</text><line x1="24" y1="144" x2="24" y2="156" stroke="#7f978c" stroke-width="1.5" marker-end="url(#dg-arrow)"/><rect x="1" y="162" width="338" height="52" rx="9" fill="#0d1f17" stroke="#a6ffcb"/><circle cx="24" cy="182" r="9" fill="#a6ffcb"/><text x="24" y="186" text-anchor="middle" font-size="11" font-weight="700" fill="#07150f">3</text><text x="41" y="186" font-size="13" font-weight="600" fill="#a6ffcb">Mutual yes</text><text x="41" y="204" font-size="11.5" fill="#c9d6cf">Both approve before any intro.</text><text x="1" y="9" font-size="10.5" fill="#7f978c">nothing is sent until step 3</text><text x="339" y="9" text-anchor="end" font-size="10.5" fill="#a6ffcb">identity private until both say yes</text></g></svg></div>' +
@@ -3636,16 +3643,16 @@ var DG_PAGES = {
       '<li><strong>A human decides what to propose.</strong> A person reviews the comparison, confirms the interview path, and chooses whether to propose — and can explain why. Software never auto-intros.</li>' +
       '<li><strong>Mutual yes before intro.</strong> The candidate sees the company, exact role receipt, and base cash band, then approves or passes privately. Identity stays private until both sides say yes. After yes, the startup interviews; Demigod tracks a dated next checkpoint through hire or a clear pass.</li>' +
       '</ol>' +
-      '<p class="dg-p-note"><strong>Fee.</strong> Startups pay 10% of first-year base salary when a hire starts. Nothing upfront. Talent is always free.</p>' +
+      '<p class="dg-p-note"><strong>Fee.</strong> Startups pay 10% of first-year cash when a hire starts. Nothing upfront. Talent is always free.</p>' +
       '<p class="dg-p-note"><strong>Better candidates.</strong> A person reads the brief and only proposes a real fit.</p>' +
       '<p class="dg-p-note">Public hiring data: <a href="/companies">SF tech company directory</a>. Matching stays private. <a href="/sample" data-dg-page="sample">Fictional match note →</a> · <a href="/pricing" data-dg-page="pricing">Pricing →</a> · <a href="/faq" data-dg-page="faq">FAQ →</a></p>',
   },
   pricing: {
     title: 'Pricing',
     doc: 'Pricing · Demigod',
-    desc: 'Nothing until a hire starts. Startups pay 10% of first-year base salary in USD; talent is always free. No retainer or subscription.',
+    desc: 'Nothing until a hire starts. Startups pay 10% of first-year cash in USD; talent is always free. No retainer or subscription.',
     html:
-      '<p class="dg-p-lead"><strong>Nothing until a hire starts.</strong> Startups pay <strong>10%</strong> of first-year base salary in United States dollars (USD) when someone starts — not to post a role. Talent is always free.</p>' +
+      '<p class="dg-p-lead"><strong>Nothing until a hire starts.</strong> Startups pay <strong>10%</strong> of first-year cash in United States dollars (USD) when someone starts — not to post a role. Talent is always free.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
       '<ul class="dg-p-list">' +
       '<li><strong>No subscription or retainer.</strong> Submitting a role brief is free. Nothing is due while we review or introduce.</li>' +
@@ -3660,15 +3667,15 @@ var DG_PAGES = {
   faq: {
     title: 'FAQ',
     doc: 'FAQ · Demigod',
-    desc: 'Answers about Demigod\'s SF matching, submissions, 10% of first-year base fee, free talent profiles, privacy, human review, and mutual intros.',
+    desc: 'Answers about Demigod\'s SF matching, submissions, 10% of first-year cash fee, free talent profiles, privacy, human review, and mutual intros.',
     /* 17 Q&A must match served FAQPage schema exactly (seo-audit faqPairsMatch; ASCII hyphens). */
     html:
       '<p class="dg-p-lead">Short answers on matching, fee, privacy, and mutual intros. Prefer a brief or private profile when ready.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
-      '<details class="dg-p-det"><summary>What is Demigod?</summary><p>Demigod matches SF Bay startups and talent. Software compares role and talent evidence; a human decides what to propose and can explain why; both sides approve before every intro. Startups pay 10% of first-year base salary when a hire starts. Talent is free.</p></details>' +
+      '<details class="dg-p-det"><summary>What is Demigod?</summary><p>Demigod matches SF Bay startups and talent. Software compares role and talent evidence; a human decides what to propose and can explain why; both sides approve before every intro. Startups pay 10% of first-year cash when a hire starts. Talent is free.</p></details>' +
       '<details class="dg-p-det"><summary>What happens after I submit?</summary><p>A human reads every submission. Software compares role goals, skills, location, and compensation; a human decides what to propose and can explain why; both sides approve before any intro. potter@trydemigod.com follows up only on real fits - not a spam sequence.</p></details>' +
       '<details class="dg-p-det"><summary>How is matching different from open listing sites?</summary><p>There is no public application pile, profile feed, or blast. Software compares facts; a human proposes fits and can explain the evidence. Candidate identity stays private until both sides approve the exact company, role, and base cash band.</p></details>' +
-      '<details class="dg-p-det"><summary>How much does it cost?</summary><p>Startups pay 10% of first-year base salary when someone starts — typically below the 15-25% contingency range. Nothing upfront, no retainer, no fill-day SLA. Talent is always free.</p></details>' +
+      '<details class="dg-p-det"><summary>How much does it cost?</summary><p>Startups pay 10% of first-year cash when someone starts — typically below the 15-25% contingency range. Nothing upfront, no retainer, no fill-day SLA. Talent is always free.</p></details>' +
       '<details class="dg-p-det"><summary>Is my profile private?</summary><p>Yes. You privately see the company, exact role, and base cash band before deciding. Your identity and contact details move only after both sides approve. You can ask us to update or delete data anytime.</p></details>' +
       '<details class="dg-p-det"><summary>What is a concrete first result?</summary><p>One measurable result the hire should own first. We match against that, not a keyword soup or generic JD.</p></details>' +
       '<details class="dg-p-det"><summary>Who do you work with?</summary><p>SF Bay Area startups (and builders open to those companies). Seed through growth, product and eng-heavy roles first. Remote talent is fine when the company is Bay-focused.</p></details>' +
@@ -3721,21 +3728,21 @@ var DG_PAGES = {
       '<li><strong>Mutual yes only.</strong> Candidate identifying details move only after both sides approve.</li>' +
       '<li><strong>Company evidence, not personal brand.</strong> Public company/role facts can inform a match; we do not sell people dossiers.</li>' +
       '<li><strong>No networking pings.</strong> Talent hears from us only when a human has a real mutual-fit note.</li>' +
-      '<li><strong>Free for talent.</strong> Sharing is free; resume optional. Startups pay 10% of first-year base only when a hire starts — nothing until then.</li>' +
+      '<li><strong>Free for talent.</strong> Sharing is free; resume optional. Startups pay 10% of first-year cash only when a hire starts — nothing until then.</li>' +
       '</ul>' +
       '<p class="dg-p-note"><a href="/?wiz=startup" data-demigod-modal="startup">Send a hiring brief →</a> · <a href="/?wiz=engineer" data-demigod-modal="jobseeker">Share privately →</a> · <a href="/sample" data-dg-page="sample">Sample match →</a> · <a href="/how" data-dg-page="how">How it works →</a> · <a href="/legal" data-dg-page="legal">Privacy →</a></p>',
   },
   hire: {
     title: 'Hire talent',
     doc: 'Hire · Demigod',
-    desc: 'One role brief. Software compares facts; a human proposes fits and can explain why; both sides approve every intro. Startups pay 10% of first-year base when a hire starts.',
+    desc: 'One role brief. Software compares facts; a human proposes fits and can explain why; both sides approve every intro. Startups pay 10% of first-year cash when a hire starts.',
     html:
       '<p class="dg-p-lead"><strong>Nothing until a hire starts.</strong> One role, real constraints, and a concrete first result. <strong>Software compares · a human proposes · mutual yes</strong> — nothing is auto-sent.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
       '<ol class="dg-p-list">' +
       '<li><strong>Software compares the facts.</strong> ~2-min brief: role, must-haves, work mode, cash band, and one first result. Software compares against private talent profiles.</li>' +
       '<li><strong>A human decides what to propose.</strong> A person reviews the comparison and interview path — and can explain why. Software never auto-intros.</li>' +
-      '<li><strong>Mutual yes before intro.</strong> The candidate sees your company, exact role, and base cash band, then approves or passes privately. After yes, you interview; pay 10% of first-year base only when the hire starts.</li>' +
+      '<li><strong>Mutual yes before intro.</strong> The candidate sees your company, exact role, and base cash band, then approves or passes privately. After yes, you interview; pay 10% of first-year cash only when the hire starts.</li>' +
       '</ol>' +
       '<p class="dg-p-note"><strong>Not for:</strong> volume headcount fills, agency-style blast shortlists, or self-serve résumé fishing — one role at a time, human-reviewed.</p>' +
       '<p class="dg-p-note">No application blast, no résumé black hole. Follow-ups from potter@trydemigod.com. <a href="/how" data-dg-page="how">How it works →</a> · <a href="/sample" data-dg-page="sample">Sample match →</a> · <a href="/pricing" data-dg-page="pricing">Pricing →</a> · <a href="/legal" data-dg-page="legal">Privacy →</a></p>',
@@ -3785,7 +3792,7 @@ var DG_PAGES = {
       '<p>Information submitted to Demigod must be accurate, lawful, and yours to provide. Do not submit another person\'s résumé, contact details, or other personal information without permission. Do not use the service to scrape information, build contact lists, send unsolicited messages, impersonate someone, interfere with the site, or violate another person\'s privacy or legal rights.</p></section>' +
       '<section id="payments"><h2 class="dg-p-h3">Pricing and payment</h2>' +
       '<p>Submitting a role brief is free. There is no upfront fee, retainer, subscription, job-posting fee, or charge for an introduction. Candidates never pay Demigod.</p>' +
-      '<p>If a hiring company hires a candidate introduced through Demigod and that person starts work, the company\'s placement fee is <strong>10% of the hire\'s first-year base salary in United States dollars (USD)</strong>, excluding equity, bonuses, benefits, and other compensation, unless Demigod and the company agree otherwise in writing.</p>' +
+      '<p>If a hiring company hires a candidate introduced through Demigod and that person starts work, the company\'s placement fee is <strong>10% of the hire\'s first-year cash compensation in United States dollars (USD)</strong>, excluding equity, benefits, and other non-cash compensation, unless Demigod and the company agree otherwise in writing.</p>' +
       '<p>Commercial details are confirmed in writing before a fee is owed. Demigod invoices the hiring company after the start is verified. The invoice states its due date, amount, currency, and available payment methods.</p>' +
       '<p>When Demigod uses a Stripe-hosted invoice, payment credentials are submitted directly to Stripe. Demigod receives transaction and payment-status information but does not receive or store complete card or bank-account credentials.</p></section>' +
       '<section id="cancellation"><h2 class="dg-p-h3">Cancellation</h2>' +
@@ -3826,12 +3833,12 @@ var DG_PAGES = {
   about: {
     title: 'About',
     doc: 'About · Demigod',
-    desc: 'SF Bay permanent hires only — private brief, human proposal, mutual yes, 10% of first-year base when a hire starts. Not a job board.',
+    desc: 'SF Bay permanent hires only — private brief, human proposal, mutual yes, 10% of first-year cash when a hire starts. Not a job board.',
     html:
       '<p class="dg-p-lead">Demigod is private matching for <strong>SF Bay permanent hires</strong>. A person picks better candidates. Both sides approve before every intro.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="/?wiz=startup" data-demigod-modal="startup" data-dg-cta="hire">Start brief →</a><a class="talent dg-p-actions-sec" href="/?wiz=engineer" data-demigod-modal="jobseeker" data-dg-cta="talent">Share privately →</a></p>' +
       '<ul class="dg-p-list">' +
-      '<li><strong>What we are:</strong> selective search — one concrete first result, mutual yes, talent free, 10% of first-year base when a hire starts (nothing upfront)</li>' +
+      '<li><strong>What we are:</strong> selective search — one concrete first result, mutual yes, talent free, 10% of first-year cash when a hire starts (nothing upfront)</li>' +
       '<li><strong>What we are not:</strong> a public job board, SLA clock, volume blast shop, or self-serve marketplace of résumés</li>' +
       '<li><strong>What we take:</strong> real employer searches we can run well · <strong>What we park:</strong> work we cannot staff honestly</li>' +
       '<li>Open roles on the homepage are public ATS listings — not our matching inventory</li>' +
@@ -3867,7 +3874,7 @@ var DG_PAGES = {
       '<li><strong>Why not:</strong> the role needs hands-on event instrumentation now; the evidence shows strategy and rollout ownership, not implementation.</li>' +
       '<li><strong>Decision:</strong> do not force an intro. Keep both profiles private and reconsider only if the role or evidence changes.</li>' +
       '</ul>' +
-      '<p class="dg-p-note">Real activity appears only when it happens; Demigod never invents placements or candidate volume. A person picks better candidates. Startups pay 10% of first-year base when a hire starts; talent is free.</p>',
+      '<p class="dg-p-note">Real activity appears only when it happens; Demigod never invents placements or candidate volume. A person picks better candidates. Startups pay 10% of first-year cash when a hire starts; talent is free.</p>',
   },
   event: {
     title: 'Event invite',
@@ -3923,10 +3930,10 @@ var DG_PAGES = {
     doc: 'Press kit · Demigod',
     desc: 'One-liner, brand mark, and media contact for Demigod — private, human-reviewed SF startup talent matching.',
     html:
-      '<p class="dg-p-lead"><strong>Demigod</strong> compares role and talent evidence; a human decides what to propose and can explain why. One concrete first result per role. 10% of first-year base salary when a hire starts.</p>' +
+      '<p class="dg-p-lead"><strong>Demigod</strong> compares role and talent evidence; a human decides what to propose and can explain why. One concrete first result per role. 10% of first-year cash when a hire starts.</p>' +
       '<p class="dg-p-actions"><a class="hire" href="mailto:potter@trydemigod.com?subject=Press%20inquiry">Email press →</a><a class="talent dg-p-actions-sec" href="/how" data-dg-page="how">How it works →</a></p>' +
       '<ul class="dg-p-list">' +
-      '<li><strong>One-liner:</strong> SF startup talent matching — private profiles, mutual yes, human-reviewed (explainable) fits, one concrete first result, 10% of first-year base when a hire starts.</li>' +
+      '<li><strong>One-liner:</strong> SF startup talent matching — private profiles, mutual yes, human-reviewed (explainable) fits, one concrete first result, 10% of first-year cash when a hire starts.</li>' +
       '<li><strong>Site:</strong> <a href="https://www.trydemigod.com">trydemigod.com</a></li>' +
       '<li><strong>Contact:</strong> <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a></li>' +
       '<li><strong>Mark:</strong> gold geometric D on dark — same favicon/hero brand on the site.</li>' +
@@ -5124,7 +5131,7 @@ function deepLink(){
 
 /* Intent-named submit labels (forms/WIZ already use these; never demote to generic Submit). */
 function finalButtonLabels(){var a=q('#startup-hire [type=submit],#startup-modal form [type=submit]');if(a){a.value='Send brief';a.textContent='Send brief'}var b=q('#engineer-join [type=submit],#jobseeker-modal form [type=submit]');if(b){b.value='Send privately';b.textContent='Send privately'}var o=q('#startup-hire [name="90day-outcome"],#startup-modal [name="90day-outcome"]');if(o){o.placeholder='One concrete first result';var l=o.id&&q('label[for="'+o.id+'"]');if(l)l.textContent='What should this person accomplish first? *'}var av=q('#engineer-join [name=availability],#jobseeker-modal [name=availability]');if(av){var al=av.id&&q('label[for="'+av.id+'"]')||(av.closest('.form-field-group,.dg-field-wrap')||{}).querySelector?.('label');if(al)al.textContent='When could you start? *'}var rt=q('#startup-hire [name=role-title],#startup-modal [name=role-title]');if(rt){var rl=rt.id&&q('label[for="'+rt.id+'"]')||(rt.closest('.form-field-group,.dg-field-wrap')||{}).querySelector?.('label');if(rl)rl.textContent='What role are you hiring? *'}}
-function orgJsonLd(){if(q('#dg-org-jsonld'))return;var ld=document.createElement('script');ld.type='application/ld+json';ld.id='dg-org-jsonld';ld.textContent=JSON.stringify({'@context':'https://schema.org','@graph':[{'@type':'Organization','@id':'https://www.trydemigod.com/#org',name:'Demigod',url:'https://www.trydemigod.com',email:'potter@trydemigod.com',description:'Software compares role and talent evidence; a human decides what to propose. 10% of first-year base salary when a hire starts.',areaServed:{'@type':'AdministrativeArea',name:'San Francisco Bay Area'}},{'@type':'WebSite','@id':'https://www.trydemigod.com/#website',url:'https://www.trydemigod.com',name:'Demigod',publisher:{'@id':'https://www.trydemigod.com/#org'},description:'SF startup talent matching — private profiles, mutual yes, 10% of first-year base salary when a hire starts.'}]});document.head.appendChild(ld)}
+function orgJsonLd(){if(q('#dg-org-jsonld'))return;var ld=document.createElement('script');ld.type='application/ld+json';ld.id='dg-org-jsonld';ld.textContent=JSON.stringify({'@context':'https://schema.org','@graph':[{'@type':'Organization','@id':'https://www.trydemigod.com/#org',name:'Demigod',url:'https://www.trydemigod.com',email:'potter@trydemigod.com',description:'Software compares role and talent evidence; a human decides what to propose. 10% of first-year cash when a hire starts.',areaServed:{'@type':'AdministrativeArea',name:'San Francisco Bay Area'}},{'@type':'WebSite','@id':'https://www.trydemigod.com/#website',url:'https://www.trydemigod.com',name:'Demigod',publisher:{'@id':'https://www.trydemigod.com/#org'},description:'SF startup talent matching — private profiles, mutual yes, 10% of first-year cash when a hire starts.'}]});document.head.appendChild(ld)}
 
 
 function wizResumeToast(modal){
@@ -5187,7 +5194,7 @@ else if(k==='jobseeker'||h===J||h==='#jobseeker-modal'){if(!q(J))return;e.preven
 document.addEventListener('input',function(e){if(OPEN&&e.target&&e.target.closest&&e.target.closest(S+','+J)){/*dg-wiz-err-clear*/try{var f=e.target.closest('form');var er=f&&f.querySelector('.dg-wiz-err,.dg-wiz-req-err'),eid=er&&er.id;if(er)er.remove();e.target.style.borderColor='';e.target.removeAttribute('aria-invalid');if(eid){var ids=(e.target.getAttribute('aria-describedby')||'').split(/\s+/).filter(function(id){return id&&id!==eid});if(ids.length)e.target.setAttribute('aria-describedby',ids.join(' '));else e.target.removeAttribute('aria-describedby')}}catch(err){}}},true);
 document.addEventListener('keydown',function(e){if(e.defaultPrevented)return;if(e.key==='Escape'&&q('#dg-page')){closePage();return}if(e.key==='Escape'&&OPEN){OPEN=null;hide(true)}});
 typeof window.addEventListener==='function'&&window.addEventListener('popstate',function(){/*dg-page-popstate*/ try{ if(!routePages()) closePage(); }catch(e){} });
-window.__dgFootVer='1109';console.log('Demigod v1109');
+window.__dgFootVer='1110';console.log('Demigod v1110');
 window.__dgDedupe = dedupeAll;
 window.__dgScrub = scrubStaticLabels;
 
