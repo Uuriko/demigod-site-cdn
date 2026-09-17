@@ -1,0 +1,21 @@
+/* TEAM */
+Desk: Demigod
+Contact: potter@trydemigod.com
+Site: https://www.trydemigod.com/
+From: San Francisco Bay Area
+
+/* SITE */
+Last update: 2026-09-17
+Language: English
+Standards: HTML5
+
+Demigod is an SF Bay Area recruiting desk. Seed and Series A. First engineering seats.
+A person picks better candidates. Names move after mutual yes.
+10% of first-year base after a verified start. Stripe-hosted invoice to the hiring company. Talent pays nothing.
+
+Contact: https://www.trydemigod.com/contact
+Room: https://www.trydemigod.com/room
+Legal: https://www.trydemigod.com/legal
+Agents: https://www.trydemigod.com/llms.txt
+
+This host is Demigod. Not Dasha.
