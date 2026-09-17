@@ -1,0 +1,47 @@
+{
+  "schema": "demigod.motley-leftover/1",
+  "host": "www.trydemigod.com",
+  "note": "Live leftover-redirects that leak to getdasha.com must serve these Demigod-owned faces instead. Worker leftover-redirect stays 308 only when Location is same-host.",
+  "faces": {
+    "/humans.txt": {
+      "file": "humans.txt",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "edge": "humans"
+    },
+    "/contribute": {
+      "file": "contribute.txt",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "edge": "contribute"
+    },
+    "/.well-known/ai-plugin.json": {
+      "file": ".well-known/ai-plugin.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "edge": "ai-plugin"
+    }
+  },
+  "aliases": {
+    "/humans.txt/": "/humans.txt",
+    "/contribute/": "/contribute",
+    "/ai-plugin.json": "/.well-known/ai-plugin.json",
+    "/.well-known/ai-plugin.json/": "/.well-known/ai-plugin.json"
+  },
+  "leftoverSameHost": {
+    "/.well-known/mcp.json": "/room/.well-known/agent.json",
+    "/mcp.json": "/room/.well-known/agent.json",
+    "/openapi": "/compute",
+    "/openapi.json": "/compute",
+    "/openapi.yaml": "/compute",
+    "/compute/openapi.json": "/compute",
+    "/compute/openapi.yaml": "/compute",
+    "/compute/mcp.json": "/compute",
+    "/compute/skill.md": "/room/llms.txt"
+  },
+  "neverLocationHosts": [
+    "getdasha.com",
+    "www.getdasha.com",
+    "lobby.getdasha.com"
+  ]
+}
