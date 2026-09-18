@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Demigod talent opt-in</title>
+<style>
+  :root { --bg: #0a0a0a; --fg: #e8e8e8; --muted: #8a8a8a; --line: #222; --danger: #b85c5c; --ok: #7a9a7a; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 system-ui, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+  h1 { font-size: 1.25rem; font-weight: 500; margin: 0 0 0.5rem; }
+  .banner { border: 1px solid var(--danger); color: var(--danger); padding: 0.75rem; margin: 1rem 0; font-size: 0.9rem; }
+  .banner.live { border-color: var(--ok); color: var(--ok); }
+  label { display: block; margin: 0.85rem 0 0.25rem; color: var(--muted); font-size: 0.85rem; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%; background: #111; border: 1px solid var(--line); color: var(--fg); padding: 0.5rem; box-sizing: border-box;
+  }
+  input[type="checkbox"] { margin-right: 0.4rem; }
+  button {
+    margin-top: 1.25rem; background: transparent; border: 1px solid var(--line); color: var(--fg);
+    padding: 0.55rem 0.9rem; cursor: pointer;
+  }
+  button:disabled { color: var(--muted); cursor: not-allowed; opacity: 0.6; }
+  .meta { color: var(--muted); font-size: 0.8rem; margin-top: 1.5rem; }
+  code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; }
+  .path { border: 1px solid var(--line); padding: 0.65rem 0.75rem; margin: 1rem 0; font-size: 0.8rem; color: var(--muted); }
+  .path strong { color: var(--fg); font-weight: 500; }
+  #status { margin-top: 1rem; font-size: 0.9rem; color: var(--muted); min-height: 1.25em; }
+  #status.err { color: var(--danger); }
+  #status.ok { color: var(--ok); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Talent opt-in</h1>
+  <div id="stub-banner" class="banner">
+    <strong>STUB / NOT LIVE.</strong> Company-free talent fields only. No LinkedIn scrape.
+    <code>FIRST_PARTY</code> stays empty until a real form is live on trydemigod.
+    Enable controls only after Worker mounts with <code>OPT_IN_LIVE=1</code>.
+  </div>
+  <div class="path">
+    <strong>Routes</strong><br />
+    Static: <code>GET /opt-in</code> → 200<br />
+    Health: <code>GET /api/opt-in/healthz</code><br />
+    Submit: <code>POST /api/opt-in</code> (talent fields only; no people scrape)
+  </div>
+  <form id="opt-in" action="/api/opt-in" method="post">
+    <label for="roles">Roles interested (comma-separated)</label>
+    <input id="roles" name="rolesInterested" type="text" placeholder="Founding Engineer, Platform Engineer" required disabled />
+
+    <label for="auth"><input id="auth" name="workAuthUS" type="checkbox" value="true" disabled /> I attest US work authorization</label>
+
+    <label for="loc">Location preference</label>
+    <input id="loc" name="locationPref" type="text" placeholder="SF Bay / remote-US" required disabled />
+
+    <label for="cheap">Cheap-talk expectations</label>
+    <textarea id="cheap" name="cheapTalkExpectations" rows="3" placeholder="Comp band, pace, constraints" required disabled></textarea>
+
+    <label for="handleType">Contact handle type</label>
+    <select id="handleType" name="contactHandleType" required disabled>
+      <option value="email">email</option>
+      <option value="x">x</option>
+      <option value="telegram">telegram</option>
+    </select>
+
+    <label for="handle">Contact handle value (private until dual-yes)</label>
+    <input id="handle" name="contactHandleValue" type="text" placeholder="you@example.com" required disabled />
+
+    <label for="consent"><input id="consent" name="consent" type="checkbox" value="true" required disabled /> I agree to the matching consent</label>
+    <input type="hidden" name="consentVersion" value="opt-in-v1" />
+
+    <button id="submit" type="submit" disabled aria-disabled="true">Submit — DISABLED (stub)</button>
+  </form>
+  <p id="status" role="status"></p>
+  <p class="meta">
+    Schema: <code>opt-in/opt-in-talent.schema.json</code> · Routes: <code>opt-in-routes.json</code> ·
+    Mount: <code>opt-in/</code>. Rejects LinkedIn / people-broker fields. <code>OPT_IN_LIVE=0</code> — FIRST_PARTY empty.
+  </p>
+</main>
+<script>
+(function () {
+  // Live mount sets window.__DEMIGOD_OPT_IN_LIVE__ = true from Worker-injected snippet.
+  var live = window.__DEMIGOD_OPT_IN_LIVE__ === true;
+  var form = document.getElementById("opt-in");
+  var statusEl = document.getElementById("status");
+  var banner = document.getElementById("stub-banner");
+  var controls = form.querySelectorAll("input, select, textarea, button");
+
+  if (live) {
+    banner.classList.add("live");
+    banner.innerHTML = "<strong>LIVE.</strong> First-party talent opt-in. No LinkedIn scrape. Handle private until dual-yes.";
+    controls.forEach(function (el) {
+      el.disabled = false;
+      el.removeAttribute("aria-disabled");
+    });
+    document.getElementById("submit").textContent = "Submit opt-in";
+  }
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (!live) {
+      statusEl.className = "err";
+      statusEl.textContent = "Stub refuses submit — FIRST_PARTY empty until live Worker mount.";
+      return;
+    }
+    var rolesRaw = document.getElementById("roles").value || "";
+    var rolesInterested = rolesRaw.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+    var body = {
+      rolesInterested: rolesInterested,
+      workAuthUS: document.getElementById("auth").checked,
+      locationPref: document.getElementById("loc").value.trim(),
+      cheapTalkExpectations: document.getElementById("cheap").value.trim(),
+      contactHandleType: document.getElementById("handleType").value,
+      contactHandleValue: document.getElementById("handle").value.trim(),
+      consentVersion: form.querySelector('[name="consentVersion"]').value,
+      consent: document.getElementById("consent").checked
+    };
+    statusEl.className = "";
+    statusEl.textContent = "Submitting…";
+    fetch("/api/opt-in", {
+      method: "POST",
+      headers: { "content-type": "application/json", accept: "application/json" },
+      body: JSON.stringify(body)
+    })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, body: j }; }); })
+      .then(function (res) {
+        if (!res.ok) {
+          statusEl.className = "err";
+          statusEl.textContent = (res.body && res.body.error) || ("HTTP " + res.status);
+          return;
+        }
+        statusEl.className = "ok";
+        statusEl.textContent = "Opt-in recorded: " + (res.body.optInId || "ok") + " (FIRST_PARTY). Handle not echoed.";
+        form.reset();
+      })
+      .catch(function (err) {
+        statusEl.className = "err";
+        statusEl.textContent = String(err && err.message ? err.message : err);
+      });
+  });
+})();
+</script>
+</body>
+</html>

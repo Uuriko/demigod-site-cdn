@@ -1,0 +1,47 @@
+{
+  "schema": "demigod.opt-in-routes/1",
+  "host": "www.trydemigod.com",
+  "service": "demigod-opt-in",
+  "live": false,
+  "OPT_IN_LIVE": "0",
+  "note": "FIRST_PARTY stays empty. OPT_IN_LIVE=0. No persist. No people-data / LinkedIn / Apollo. No email send. Not production matching E2E.",
+  "faces": {
+    "/opt-in": {
+      "file": "opt-in/public/opt-in.html",
+      "method": "GET",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "edge": "opt-in"
+    },
+    "/api/opt-in/healthz": {
+      "file": "opt-in/healthz.json",
+      "method": "GET",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "edge": "opt-in-healthz"
+    }
+  },
+  "aliases": {
+    "/opt-in/": "/opt-in",
+    "/api/opt-in/healthz/": "/api/opt-in/healthz"
+  },
+  "post": {
+    "/api/opt-in": {
+      "handler": "opt-in/src/worker.mjs",
+      "method": "POST",
+      "validate": "talent-only",
+      "OPT_IN_LIVE": "0",
+      "whenNotLive": {
+        "status": 503,
+        "wouldPersist": false
+      },
+      "peopleScrapeKeys": 400
+    }
+  },
+  "firstParty": {
+    "file": "opt-in/FIRST_PARTY.empty.json",
+    "live": false,
+    "count": 0,
+    "items": []
+  }
+}
