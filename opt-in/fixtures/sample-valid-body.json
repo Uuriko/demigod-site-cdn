@@ -1,0 +1,13 @@
+{
+  "rolesInterested": [
+    "Founding Engineer",
+    "Platform Engineer"
+  ],
+  "workAuthUS": true,
+  "locationPref": "SF Bay / remote-US",
+  "cheapTalkExpectations": "comp band stub \u2014 cheap talk only",
+  "contactHandleType": "email",
+  "contactHandleValue": "talent@example.invalid",
+  "consentVersion": "opt-in-v1",
+  "consent": true
+}

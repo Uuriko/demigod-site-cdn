@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "opt-in-talent.schema.json",
+  "title": "First-party talent opt-in (Demigod)",
+  "description": "Schema for talent who opt in via a first-party form (e.g. trydemigod). Never populated by LinkedIn scrape or people-data brokers. Fixtures must set dataMarker=SYNTHETIC; live intake uses FIRST_PARTY after the form ships.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "optInId",
+    "consentedAt",
+    "consentVersion",
+    "rolesInterested",
+    "workAuthUS",
+    "locationPref",
+    "cheapTalkExpectations",
+    "contactHandleType",
+    "status",
+    "dataMarker"
+  ],
+  "properties": {
+    "optInId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Stable id for this opt-in row (UUID)."
+    },
+    "consentedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the talent consented to first-party matching."
+    },
+    "consentVersion": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Version string of the consent copy the talent accepted."
+    },
+    "rolesInterested": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Role titles or families the talent wants to be considered for."
+    },
+    "workAuthUS": {
+      "type": "boolean",
+      "description": "Whether the talent self-attests US work authorization."
+    },
+    "locationPref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Location preference (e.g. SF Bay, remote-US)."
+    },
+    "cheapTalkExpectations": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Self-reported expectations (comp band, pace, constraints) — cheap talk, not verified."
+    },
+    "contactHandleType": {
+      "type": "string",
+      "enum": ["email", "x", "telegram"],
+      "description": "Channel type for later mutual-yes contact. Identity stays private until dual yes."
+    },
+    "contactHandleValue": {
+      "type": "string",
+      "description": "OPTIONAL. Placeholder-only in fixtures (.invalid). Real values never written by scrape; only from first-party form after live intake."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "revoked"],
+      "description": "active = eligible for dry-run/live rank; revoked = must not rank."
+    },
+    "dataMarker": {
+      "type": "string",
+      "enum": ["SYNTHETIC", "FIRST_PARTY"],
+      "description": "REQUIRED provenance. SYNTHETIC = dry-run fixtures only. FIRST_PARTY = real opt-in from Demigod form (never scrape)."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Optional dry-run / operator label. Fixtures must include SYNTHETIC in the string. Not required for live FIRST_PARTY (identity private until mutual yes)."
+    },
+    "scorecardNotes": {
+      "type": "object",
+      "description": "Optional operator/dry-run enrichment for ranking heuristics. Not collected by the public opt-in form.",
+      "additionalProperties": true
+    }
+  }
+}

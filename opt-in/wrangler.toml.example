@@ -1,0 +1,22 @@
+# EXAMPLE ONLY — do not wrangler publish from this PR.
+# Production stays OPT_IN_LIVE=0. FIRST_PARTY stays empty.
+# Instinct / existing CDN leftover-face path takes GET /opt-in.
+name = "demigod-opt-in"
+main = "src/worker.mjs"
+compatibility_date = "2026-09-18"
+workers_dev = false
+
+# Suggested routes (adjust zone) — not published from this agent:
+# routes = [
+#   { pattern = "trydemigod.com/opt-in*", zone_name = "trydemigod.com" },
+#   { pattern = "www.trydemigod.com/opt-in*", zone_name = "trydemigod.com" },
+#   { pattern = "trydemigod.com/api/opt-in*", zone_name = "trydemigod.com" },
+#   { pattern = "www.trydemigod.com/api/opt-in*", zone_name = "trydemigod.com" },
+# ]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[vars]
+OPT_IN_LIVE = "0"

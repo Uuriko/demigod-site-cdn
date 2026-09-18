@@ -13,3 +13,5 @@ jobs:
           node-version: '22'
       - name: Motley leftover honesty
         run: node motley-honesty.test.mjs
+      - name: Opt-in mount honesty
+        run: node opt-in.test.mjs

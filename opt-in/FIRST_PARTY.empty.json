@@ -1,0 +1,13 @@
+{
+  "schema": "demigod.opt-in-pool/1",
+  "dataMarker": "FIRST_PARTY",
+  "status": "empty",
+  "policy": "Empty until live first-party form ships on trydemigod. Do not invent talent rows. Do not mark SYNTHETIC fixtures as FIRST_PARTY.",
+  "items": [],
+  "count": 0,
+  "source": "opt-in/FIRST_PARTY.empty.json",
+  "formStub": "opt-in/public/opt-in.html",
+  "live": false,
+  "shipPackage": "opt-in/",
+  "OPT_IN_LIVE": "0"
+}
