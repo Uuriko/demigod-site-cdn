@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 256" width="1024" height="256">
+  <!-- Stripe Dashboard Logo: Mutual Signal + Demigod wordmark. Night ground, not Dasha. -->
+  <rect width="1024" height="256" fill="#03140d"/>
+  <g transform="translate(32 32) scale(0.375)">
+    <rect width="512" height="512" rx="128" fill="#03140d"/>
+    <circle cx="256" cy="256" r="176" fill="none" stroke="#a6ffcb" stroke-width="20" opacity="0.55"/>
+    <path d="M168 256a88 88 0 0 1 88-88" fill="none" stroke="#a6ffcb" stroke-width="36" stroke-linecap="round"/>
+    <path d="M344 256a88 88 0 0 1-88 88" fill="none" stroke="#10c674" stroke-width="36" stroke-linecap="round"/>
+    <circle cx="256" cy="256" r="38" fill="#a6ffcb"/>
+  </g>
+  <text x="248" y="168" font-family="ui-sans-serif, system-ui, Helvetica, sans-serif" font-size="108" font-weight="700" fill="#f3f0e7">Demigod</text>
+</svg>

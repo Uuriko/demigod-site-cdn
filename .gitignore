@@ -1,0 +1,3 @@
+# Private operator packets (EIN, Stripe, KYC, grants) never belong in this public repo.
+# They are still in local history until the relocation in ~/src/CODEX-HANDOFF-2026-09-02.md is done.
+docs/ops/
