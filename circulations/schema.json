@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "demigod-circulations/v0",
+  "title": "Demigod circulations feed v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "schema", "url", "kill_switches", "circulations"],
+  "properties": {
+    "name": { "type": "string" },
+    "schema": { "const": "demigod-circulations/v0" },
+    "note": { "type": "string" },
+    "url": { "type": "string" },
+    "kill_switches": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["ticket_send", "consent", "intro", "invoice_send"]
+      },
+      "minItems": 4,
+      "uniqueItems": true
+    },
+    "circulations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/circulation" }
+    }
+  },
+  "$defs": {
+    "circulation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "example", "circulator_id", "circulator", "title", "sealed", "sealed_at", "entries"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "example": { "type": "boolean" },
+        "circulator_id": { "type": "string", "minLength": 1 },
+        "circulator": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "sealed": { "const": true },
+        "sealed_at": { "type": "string", "format": "date-time" },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/entry" }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "vouch", "open_to_work"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "vouch": { "type": "string", "minLength": 1, "description": "One-line personal vouch." },
+        "open_to_work": { "type": "boolean" },
+        "network_gap": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Optional. High competence, low Silicon Valley exposure."
+        },
+        "linkedin": {
+          "type": ["string", "null"],
+          "description": "Optional LinkedIn-shaped URL. Null when the circulator did not attach one. Do not omit the field from this schema."
+        }
+      }
+    }
+  }
+}

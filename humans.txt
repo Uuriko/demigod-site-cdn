@@ -17,5 +17,6 @@ Contact: https://www.trydemigod.com/contact
 Room: https://www.trydemigod.com/room
 Legal: https://www.trydemigod.com/legal
 Agents: https://www.trydemigod.com/llms.txt
+Circulations: https://www.trydemigod.com/circulations
 
 This host is Demigod. Not Dasha.
