@@ -15,3 +15,5 @@ jobs:
         run: node motley-honesty.test.mjs
       - name: Opt-in mount honesty
         run: node opt-in.test.mjs
+      - name: Circulations v0 honesty
+        run: node circulations.test.mjs

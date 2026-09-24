@@ -1,0 +1,44 @@
+{
+  "name": "demigod circulations",
+  "schema": "demigod-circulations/v0",
+  "note": "Sealed lists. A vouch is a person, not a resume. v0 rows are examples (example: true) — placeholder names, not live people.",
+  "url": "https://www.trydemigod.com/circulations",
+  "kill_switches": ["ticket_send", "consent", "intro", "invoice_send"],
+  "circulations": [
+    {
+      "id": "example-a",
+      "example": true,
+      "circulator_id": "circulator-a",
+      "circulator": "Circulator A",
+      "title": "Example circle",
+      "sealed": true,
+      "sealed_at": "2026-09-23T00:00:00Z",
+      "entries": [
+        {
+          "name": "Engineer Example",
+          "vouch": "Shipped the example with me at Example Co.",
+          "open_to_work": true,
+          "network_gap": "high competence, low SV exposure",
+          "linkedin": null
+        }
+      ]
+    },
+    {
+      "id": "example-b",
+      "example": true,
+      "circulator_id": "circulator-b",
+      "circulator": "Circulator B",
+      "title": "Second example circle",
+      "sealed": true,
+      "sealed_at": "2026-09-23T00:00:00Z",
+      "entries": [
+        {
+          "name": "Operator Example",
+          "vouch": "Ran the example desk with me at Example Co.",
+          "open_to_work": false,
+          "linkedin": null
+        }
+      ]
+    }
+  ]
+}

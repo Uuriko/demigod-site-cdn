@@ -1,7 +1,7 @@
 {
   "schema": "demigod.motley-leftover/1",
   "host": "www.trydemigod.com",
-  "note": "Live leftover-redirects that leak to getdasha.com must serve these Demigod-owned faces instead. Worker leftover-redirect stays 308 only when Location is same-host. /opt-in and /api/opt-in/healthz are first-party talent-opt-in faces (OPT_IN_LIVE=0, FIRST_PARTY empty) — not Dasha leftovers.",
+  "note": "Live leftover-redirects that leak to getdasha.com must serve these Demigod-owned faces instead. Worker leftover-redirect stays 308 only when Location is same-host. /opt-in and /api/opt-in/healthz are first-party talent-opt-in faces (OPT_IN_LIVE=0, FIRST_PARTY empty) — not Dasha leftovers. /circulations and /circulations.json are the public Circulations v0 faces (example rows only).",
   "faces": {
     "/humans.txt": {
       "file": "humans.txt",
@@ -32,6 +32,18 @@
       "status": 200,
       "contentType": "application/json; charset=utf-8",
       "edge": "opt-in-healthz"
+    },
+    "/circulations": {
+      "file": "circulations.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "edge": "circulations"
+    },
+    "/circulations.json": {
+      "file": "circulations.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "edge": "circulations-feed"
     }
   },
   "aliases": {
@@ -40,7 +52,8 @@
     "/ai-plugin.json": "/.well-known/ai-plugin.json",
     "/.well-known/ai-plugin.json/": "/.well-known/ai-plugin.json",
     "/opt-in/": "/opt-in",
-    "/api/opt-in/healthz/": "/api/opt-in/healthz"
+    "/api/opt-in/healthz/": "/api/opt-in/healthz",
+    "/circulations/": "/circulations"
   },
   "leftoverSameHost": {
     "/.well-known/mcp.json": "/room/.well-known/agent.json",

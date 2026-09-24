@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Circulations · Demigod</title>
+  <meta name="description" content="A Circulation is a sealed vouch. Talent arrives on a name, not a resume. v0 examples only.">
+  <link rel="alternate" type="application/json" href="/circulations.json" title="Demigod circulations">
+  <style>
+    :root {
+      --dg-night: #03140d;
+      --dg-phosphor: #a6ffcb;
+      --dg-signal: #10c674;
+      --dg-paper: #f3f0e7;
+      --dg-muted: #8a9a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 0, rgba(16, 198, 116, .08), transparent 28rem),
+        var(--dg-night);
+      color: var(--dg-paper);
+      font: 17px/1.5 Manrope, system-ui, sans-serif;
+    }
+    main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    .kicker {
+      margin: 0 0 .4rem;
+      color: var(--dg-signal);
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 .75rem;
+      color: var(--dg-phosphor);
+      font-weight: 700;
+      font-size: 2.1rem;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+    }
+    h2 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: var(--dg-paper);
+    }
+    p { margin: 0 0 .85rem; }
+    .lead { font-size: 1.15rem; }
+    a { color: var(--dg-signal); }
+    a:hover { color: var(--dg-phosphor); }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: .86em; color: var(--dg-phosphor); }
+    .kill { color: var(--dg-muted); font-size: .92rem; }
+    article {
+      margin: 1.25rem 0 0;
+      padding: 1rem 0 0;
+      border-top: 1px solid rgba(166, 255, 203, .22);
+    }
+    .who { display: flex; flex-wrap: wrap; gap: .45rem .6rem; align-items: baseline; margin: .35rem 0 .85rem; }
+    .badge, .flag {
+      font-size: .72rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      border: 1px solid rgba(166, 255, 203, .45);
+      color: var(--dg-phosphor);
+      border-radius: 999px;
+      padding: .1rem .45rem;
+    }
+    .entry { margin: 0 0 1rem; }
+    .entry h3 { margin: 0; font-size: 1rem; font-weight: 650; }
+    .vouch { margin: .2rem 0 .35rem; }
+    .meta { margin: 0; color: var(--dg-muted); font-size: .9rem; }
+    .foot { margin-top: 1.75rem; color: var(--dg-muted); font-size: .92rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="kicker">Demigod</p>
+    <h1>Circulations</h1>
+    <p class="lead">Talent does not apply. They arrive on someone’s Circulation.</p>
+    <p>A sealed list. The circulator’s name is on the line. One vouch — a sentence they will stand behind. A resume is not that.</p>
+    <p>These two lists are examples. <code>example: true</code>. Not people.</p>
+    <p class="kill">Human kill-switch before ticket send, consent, intro, and invoice.</p>
+
+    <article>
+      <h2>Example circle</h2>
+      <p class="who"><span>Circulator A</span> <span class="badge">Example</span> <span class="badge">Sealed</span></p>
+      <div class="entry">
+        <h3>Engineer Example</h3>
+        <p class="vouch">Shipped the example with me at Example Co.</p>
+        <p class="meta">Open to work · Network gap: high competence, low SV exposure · LinkedIn —</p>
+      </div>
+    </article>
+
+    <article>
+      <h2>Second example circle</h2>
+      <p class="who"><span>Circulator B</span> <span class="badge">Example</span> <span class="badge">Sealed</span></p>
+      <div class="entry">
+        <h3>Operator Example</h3>
+        <p class="vouch">Ran the example desk with me at Example Co.</p>
+        <p class="meta">Not open · LinkedIn —</p>
+      </div>
+    </article>
+
+    <p class="foot">Feed: <a href="/circulations.json">/circulations.json</a> · <a href="mailto:potter@trydemigod.com">potter@trydemigod.com</a></p>
+  </main>
+</body>
+</html>
